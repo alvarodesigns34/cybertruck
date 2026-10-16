@@ -117,7 +117,7 @@ techo coincide con la planta medida (0,722 m frente a 0,728 m en el vértice; 0,
 
 ### 5.2 Puertas, portones y cristales
 - **Verificado:** existencia y denominación de piezas (puertas con cristal móvil, sellos, tonneau por lamas,
-  portón «Powergate», frunk motorizado) según el manual de servicio.
+  portón trasero, frunk motorizado —denominado «Powergate» en el manual de servicio—) según el manual de servicio.
 - **Reconstruido:** contornos de puertas y cristales, pilar B negro, punta delantera del cristal, frunk con
   bisagra trasera, portón con bisagras inferiores, 22 lamas de la cubierta.
 - **Aproximado:** estructura interior de las puertas (prisma de chapa interior), bisagras, mecanismos del tonneau,
@@ -179,7 +179,7 @@ Datos completos en [`validation-results.json`](validation-results.json).
 | Voladizo delantero / trasero | 880,5 / 1.169,4 mm | 878,3 / 1.169,6 mm | +2,2 / −0,2 mm |
 | Altura libre | 256,6 mm | 257,0 mm | −0,4 mm |
 | Diámetro del neumático | 878,4 mm | 878,5 mm | −0,1 mm |
-| Anchura con espejos | 2.411,1 mm | 2.413,3 mm | −2,2 mm |
+| Anchura con espejos (retrovisores v2) | 2.413,3 mm | 2.413,3 mm | 0,0 mm |
 | Anchura sin espejos (sobre aletas) | 2.081,7 mm | 2.031,6 mm | +50,1 mm (ver §5.1) |
 
 Comparación de siluetas por trazado de rayos frente a los perfiles medidos en la vista oficial
@@ -188,10 +188,10 @@ Comparación de siluetas por trazado de rayos frente a los perfiles medidos en l
 | Perfil | Muestras | Error medio | P95 | Máximo |
 |---|---|---|---|---|
 | Superior | 125 | 2,9 mm | 6,8 mm | 10,2 mm |
-| Semianchura en planta | 49 | 6,7 mm | 19,2 mm | 28,6 mm |
+| Semianchura en planta | 49 | 6,8 mm (v1: 6,7; +0,02 mm por las inscripciones del neumático) | 19,2 mm | 29,3 mm |
 | Trasero | 22 | 9,8 mm | 21,9 mm | 65,1 mm |
-| Inferior | 31 | 12,8 mm | 40,3 mm | 121,1 mm |
-| Frontal | 34 | 16,2 mm | 51,3 mm | 151,3 mm |
+| Inferior | 31 | 12,5 mm | 40,3 mm | 121,1 mm |
+| Frontal | 34 | 16,0 mm | 51,3 mm | 151,3 mm |
 
 Los máximos del perfil inferior y frontal corresponden al labio inferior de la fascia delantera, que se ha
 elevado deliberadamente a 0,266 m para respetar la altura libre oficial (el diagrama muestra 0,252 m).
@@ -200,7 +200,63 @@ elevado deliberadamente a 0,266 m para respetar la altura libre oficial (el diag
 
 1. La sección transversal depende de dos inclinaciones deducidas (6° y 19°); una vista frontal ortográfica a
    escala o un escaneo permitiría verificarlas directamente.
-2. El interior, la mecánica y la batería son reconstrucciones plausibles, no geometría OEM.
-3. Dibujo del neumático e inscripciones del flanco sin verificar.
-4. No se han modelado elementos internos de faros, motores ni electrónica.
-5. Los materiales procedurales de Blender se reinterpretan en el visor web (no existe equivalencia exacta en glTF).
+2. Mecánica, batería, piezas fundidas e interior se han detallado (v2) con la denominación, el número de
+   fijaciones y las cotas de control de los manuales, pero sus **formas** siguen siendo reconstrucciones: no
+   existen planos CAD públicos.
+3. El dibujo del neumático reproduce la arquitectura de un «all-terrain» de 5 hileras, no el molde exacto del
+   Pirelli Scorpion ATR; las inscripciones usan una tipografía genérica.
+4. Los interiores de faros, motores, inversores y electrónica son representativos (carcasas, disipadores,
+   conectores), sin bobinados ni placas reales.
+5. Las texturas son sintéticas (ruido filtrado), físicamente plausibles pero no medidas sobre muestras reales.
+
+## 8. Investigación de la versión 2 (16-10-2026)
+
+### 8.1 Nuevas fuentes consultadas
+
+| Fuente | Contenido aprovechado | Categoría |
+|---|---|---|
+| [Manual de servicio — índice](https://service.tesla.com/docs/Cybertruck/ServiceManual/en-us/index.html) (980 procedimientos) | Inventario de piezas reales: fascias, soporte frontal, persianas activas, absorbedores de impacto, bisagras, cierres, presentadores, tirantes, burletes primario y secundario, juntas de cintura, frunk «Powergate», portón (barra de torsión, cierres con acercamiento, amortiguador, correas), cubierta (raíles «horizon», motores, casete plano, eslabones), subchasis tri-motor, brazos, módulos de muelle neumático, compresor, depósito y bloque de válvulas, actuadores de dirección, HCU, servofreno electromecánico, unidades motrices, inversores, intercambiadores, bahía auxiliar (ACJB, PCS, clúster de dispositivos, barra «last mile»), pirofusibles, Supermanifold/Octovalve, CFM, Megabeam, mazos de cables, asientos, salpicadero, consola, guarnecidos y altavoces | V (existencia y denominación) |
+| Manual de servicio — procedimientos individuales (≈120 leídos) | Número, tipo y par de las fijaciones (p. ej. retrovisor 3 × T40 a 18 N·m; faro 2 tornillos; módulo de muelle 3 tuercas a 105 N·m + 2 tornillos a 140 N·m; brazo superior 4 tuercas a 50 N·m; brazo inferior trasero 4 tornillos a 185 N·m; pinza delantera 2 × 24 mm a 315 N·m; trasera 2 × 21 mm a 150 N·m; buje 4 × 105 N·m; actuador trasero 4 × 120 N·m; tapacubos 8 grapas; deflector delantero 11 tornillos; difusor 14 tornillos; panel de puerta 14 grapas + 3 tornillos; burlete secundario 26 grapas) | V |
+| [Manual de servicio — Wheel Alignment](https://service.tesla.com/docs/Cybertruck/ServiceManual/en-us/GUID-AD49F177-08D6-4B6E-BE24-4361D52F44C4.html) y fichas «Brakes», «Wheels», «Paint Codes» | Alineación (caída −0,50° / −1,00°, avance 3,60°), vía 1.777 / 1.772 mm, altura de chasis 265 mm (Medium), pastillas 10 / 11 mm, límites de disco 30 / 21 mm, llanta y tapacubos «Stealth Black» NEU-208E | V |
+| [Manual de reparación de carrocería](https://service.tesla.com/docs/Cybertruck/BodyRepair/BodyRepairProcedures/en-us/index.html) | Materiales (aluminio 6xxx, extruido y fundido; aceros dulce, HSS, UHSS e inoxidable), uniones (adhesivo estructural, soldadura por puntos, remaches flow-form Ø 8 mm), refinado del inoxidable por planos con abrasivo no tejido, piezas fundidas delantera y trasera (la trasera sustituible por mitades), «Mast Assembly» y torres del portón fundidos, y **cotas de control**: largueros delanteros 1.025 mm, torretas 930 / 938 mm y 1.577 mm exteriores, largueros traseros 1.050 mm, base de pilares B 1.549 mm, pared trasera 1.463 / 1.406 mm | V |
+| [Manual del propietario — Wheel and Tire Specifications](https://www.tesla.com/ownersmanual/cybertruck/en_us/GUID-9284C9F2-A2F2-4604-83BF-6599F47766B7.html) | Pirelli Scorpion ATR como neumático de serie y Goodyear Wrangler Territory RT LT285/65R20 como opción «all-terrain» | V |
+| [The Autopian — desmontaje de la batería (Munro)](https://www.theautopian.com/experts-teardown-a-cybertruck-and-show-how-tesla-made-it-fire-and-water-resistant/) | 4 bloques de 7 × 48 celdas (≈1.344), «cell-to-pack», espuma estructural verde, lámina de mica, refrigerador en serpentín, canal de desgasificación de ~33 mm, respiradero de un solo uso, puertos de inundación, modo «Scuba» | R (fuente secundaria) |
+| [The Autopian — motores (Munro)](https://www.theautopian.com/heres-what-manufacturing-experts-found-when-they-tore-into-the-tesla-cybertrucks-motors/) | Delantero de imanes permanentes con inversor integrado al final de la reductora y bloqueo electromagnético; traseros de inducción idénticos con su inversor en la parte posterior | R |
+| [The Autopian — cuna trasera (Munro)](https://theautopian.com/latest-cybertruck-teardown-reveals-teslas-odd-sway-bar-decisions-clever-packaging) | Dos refrigeradores de placa sobre los motores, reductoras desplazadas hacia atrás, brazo inferior trasero soldado, brazos superiores a la pieza fundida, estabilizadora con abrazaderas de banda | R |
+| [Munro — prospecto del informe 2024](https://leandesign.com/wp-content/uploads/2024/11/Munro-2024-Cybertruck-Report-Prospectus-Oct-2024.pdf), [Basenor — 48 V y steer-by-wire](https://www.basenor.com/blogs/news/cybertrucks-engineering-firsts-48v-steer-by-wire-explained) | 48 V con anillo Ethernet redundante, dirección por cable con dos motores en la cremallera, frenado por cable | R |
+| [InsideEVs — Giga Press de 9.000 t](https://insideevs.com/news/589457/elon-musk-confirms-tesla-cybertruck-massive-giga-press/) | Fundición de gran formato para la parte trasera | R |
+
+Las imágenes de los manuales se consultaron únicamente como referencia temporal y **no se han copiado al
+repositorio**.
+
+### 8.2 Fabricación y ensamblaje (síntesis aplicada al modelo)
+
+- **Exoesqueleto de acero inoxidable**: chapa gruesa laminada en frío, plegada en líneas rectas (no embutida),
+  sin pintura, con acabado satinado direccional; los arañazos se reparan refinando planos completos. En el
+  modelo: facetas planas con biseles de 1,5-2 mm y tres variantes del material por panel.
+- **Carrocería en blanco mixta**: piezas fundidas de aluminio en los extremos, anillos de puertas y umbrales de
+  acero de ultra alta resistencia con insertos de aluminio extruido, adhesivo estructural y remaches flow-form.
+- **Batería estructural**: celdas 4680 «cell-to-pack» en una bandeja que forma el suelo; los asientos
+  delanteros se atornillan a la tapa; brida perimetral atornillada a los umbrales.
+- **48 V y Ethernet**: mazos más finos y controladores zonales (izquierdo, derecho y trasero).
+- **Dirección por cable**: actuador de realimentación en el volante y actuadores delantero y trasero.
+
+### 8.3 Fidelidad de los conjuntos añadidos en la versión 2
+
+| Conjunto | Verificado | Reconstruido | Aproximado |
+|---|---|---|---|
+| Estructura | Existencia, materiales, uniones y cotas de control | Piezas fundidas, umbrales, anillos de puerta, «mast», torres | Nervaduras, bosses, espesores |
+| Suspensión y dirección | Arquitectura, fijaciones y pares, alineación | Puntos duros, brazos, portamanguetas, muelles | Secciones y radios |
+| Tren motriz | Tipo de motores, inversores, intercambiadores, bombas | Disposición de carcasas y refrigeradores | Formas exteriores, aletas |
+| Batería | 1.344 celdas, 4 × 7 × 48, espuma, mica, serpentín, pirofusibles, respiradero | Bandeja, tapa, vigas, bahía auxiliar | Barras colectoras, conductos |
+| Exterior | Piezas y fijaciones (faro, retrovisor, bisagras, cierres, juntas, tonneau, portón, difusor) | Retrovisor, faros, soportes, raíles, lamas | Interiores de faros y mecanismos |
+| Ruedas | Medidas, fijaciones, grapas del tapacubos, pastillas | Tapacubos Core, arquitectura del dibujo | Inscripciones del flanco |
+| Interior | Piezas, botoneras, altavoces, cinturones, airbags, RCM | Consola, paneles, guarnecidos | Trazado de las costuras |
+
+### 8.4 Materiales y texturas
+
+Las texturas se generan en `blender/scripts/ct_textures.py` filtrando ruido blanco en el dominio de la
+frecuencia (periódicas por construcción) y se guardan en WebP en `blender/textures/`. Densidad de texel:
+UV de 1 unidad = 1 m y una repetición por material (acero 0,40 m → 0,39 mm/px; caucho 0,08 m; plástico
+granulado 0,05 m; piel 0,08 m; tejido 0,012 m; fundición 0,20 m). El mapa de rugosidad codifica la
+metalicidad en el canal B (convención glTF), de modo que Blender y el visor usan los mismos datos.

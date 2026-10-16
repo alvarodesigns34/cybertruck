@@ -176,6 +176,70 @@ def render_settings(engine="CYCLES", samples=128):
         sc.cycles.glossy_bounces = 6
 
 
+def world_sky(sun_elev_deg=35.0, sun_rot_deg=-140.0, strength=0.35):
+    """Cielo físico procedural (dispersión atmosférica) visible para la cámara: iluminación exterior."""
+    w = bpy.data.worlds.get("CT_World_Sky") or bpy.data.worlds.new("CT_World_Sky")
+    bpy.context.scene.world = w
+    w.use_nodes = True
+    nt = w.node_tree
+    nt.nodes.clear()
+    out = nt.nodes.new("ShaderNodeOutputWorld")
+    bg = nt.nodes.new("ShaderNodeBackground")
+    sky = nt.nodes.new("ShaderNodeTexSky")
+    for kind in ("MULTIPLE_SCATTERING", "NISHITA", "SINGLE_SCATTERING", "HOSEK_WILKIE"):
+        try:
+            sky.sky_type = kind
+            break
+        except Exception:
+            continue
+    for attr, val in (("sun_elevation", math.radians(sun_elev_deg)), ("sun_rotation", math.radians(sun_rot_deg)),
+                      ("altitude", 300.0), ("air_density", 1.0), ("dust_density", 1.5)):
+        try:
+            setattr(sky, attr, val)
+        except Exception:
+            pass
+    bg.inputs["Strength"].default_value = strength
+    nt.links.new(sky.outputs["Color"], bg.inputs["Color"])
+    nt.links.new(bg.outputs["Background"], out.inputs["Surface"])
+    return w
+
+
+def lighting(preset="studio"):
+    """Preajustes de iluminación para los renders de validación.
+
+    * studio:  estudio fotográfico (HDRI de estudio + cajas de luz), fondo oscuro.
+    * exterior: cielo físico con sol a 35° (mediodía de primavera), fondo de cielo visible.
+    * sunset:  HDRI de atardecer con sol rasante cálido (reflejos dorados en el acero).
+    * overcast: cielo cubierto (HDRI «courtyard» difuso), sin sombras duras.
+    """
+    col = studio_collection()
+    if preset == "studio":
+        world("studio.exr", 0.55)
+        lights(col, "studio")
+    elif preset == "exterior":
+        world_sky(35.0, -140.0, 0.30)
+        lights(col, "none")
+        sun = bpy.data.lights.get("LGT_STUDIO_Sun") or bpy.data.lights.new("LGT_STUDIO_Sun", "SUN")
+        sun.energy = 4.5
+        sun.angle = math.radians(0.6)
+        sun.color = (1.0, 0.97, 0.92)
+        o = _obj("LGT_STUDIO_Sun", sun, col)
+        o.rotation_euler = (math.radians(55), 0, math.radians(-140))
+    elif preset == "sunset":
+        world("sunset.exr", 1.0, rotation=math.radians(110))
+        lights(col, "none")
+        sun = bpy.data.lights.get("LGT_STUDIO_Sun") or bpy.data.lights.new("LGT_STUDIO_Sun", "SUN")
+        sun.energy = 2.2
+        sun.angle = math.radians(1.0)
+        sun.color = (1.0, 0.72, 0.45)
+        o = _obj("LGT_STUDIO_Sun", sun, col)
+        o.rotation_euler = (math.radians(80), 0, math.radians(120))
+    elif preset == "overcast":
+        world("courtyard.exr", 1.2)
+        lights(col, "none")
+    return preset
+
+
 def build_all(M, preset="studio", hdri="studio.exr"):
     col = studio_collection()
     world(hdri)

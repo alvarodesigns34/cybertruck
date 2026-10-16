@@ -14,8 +14,9 @@ import importlib
 import sys
 import bpy
 
-MODULES = ["ct_specs", "ct_lib", "ct_materials", "build_body", "build_wheels", "build_lights",
-           "build_details", "build_interior", "build_chassis", "build_scene", "build_explode"]
+MODULES = ["ct_specs", "ct_lib", "ct_parts", "ct_textures", "ct_materials", "build_body", "build_wheels",
+           "build_lights", "build_details", "build_exterior", "build_structure", "build_interior",
+           "build_interior_detail", "build_mechanics", "build_chassis", "build_scene", "build_explode"]
 
 
 def reload_modules():
@@ -99,6 +100,7 @@ def run(parts=("body",), clear=True):
     if "body" in parts:
         import build_body
         build_body.build_all(M)
+        ct_materials.assign_steel_variants(M)
     if "wheels" in parts:
         import build_wheels
         build_wheels.build_all(M)
@@ -108,9 +110,13 @@ def run(parts=("body",), clear=True):
     if "details" in parts:
         import build_details
         build_details.build_all(M)
+        import build_exterior
+        build_exterior.build_all(M)
     if "interior" in parts:
         import build_interior
         build_interior.build_all(M)
+        import build_interior_detail
+        build_interior_detail.build_all(M)
     if "chassis" in parts:
         import build_chassis
         build_chassis.build_all(M)

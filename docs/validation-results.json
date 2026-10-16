@@ -1,9 +1,4 @@
 {
- "reversibilidad_explosion": {
-  "objects": 309,
-  "max_deviation": 0.0,
-  "ok": true
- },
  "dimensiones": {
   "longitud": {
    "modelo": 5.6849,
@@ -16,9 +11,9 @@
    "desviacion_mm": 50.1
   },
   "anchura_con_espejos": {
-   "modelo": 2.4111,
+   "modelo": 2.4133,
    "oficial": 2.4133,
-   "desviacion_mm": -2.2
+   "desviacion_mm": 0.0
   },
   "altura_medium": {
    "modelo": 1.7967,
@@ -51,9 +46,9 @@
    "desviacion_mm": -0.4
   },
   "diametro_neumatico": {
-   "modelo": 0.8784,
+   "modelo": 0.8785,
    "oficial": 0.8785,
-   "desviacion_mm": -0.1
+   "desviacion_mm": -0.0
   },
   "z_minimo_neumatico": {
    "modelo": -0.0022,
@@ -70,13 +65,13 @@
   },
   "perfil_inferior": {
    "muestras": 31,
-   "media_mm": 12.8,
+   "media_mm": 12.5,
    "p95_mm": 40.3,
    "max_mm": 121.1
   },
   "perfil_frontal": {
    "muestras": 34,
-   "media_mm": 16.2,
+   "media_mm": 16.0,
    "p95_mm": 51.3,
    "max_mm": 151.3
   },
@@ -88,9 +83,9 @@
   },
   "planta_semianchura": {
    "muestras": 49,
-   "media_mm": 6.7,
+   "media_mm": 6.8,
    "p95_mm": 19.2,
-   "max_mm": 28.6
+   "max_mm": 29.3
   }
  }
 }

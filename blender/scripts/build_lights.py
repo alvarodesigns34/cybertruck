@@ -63,7 +63,7 @@ def build_front(M):
     objs.append(lens)
     # Carcasa negra (embellecedor de la barra de luz)
     mb = L.MeshBuilder()
-    _strip_on_face(mb, hws, lightbar_center_z, 0.016, 0.003, 0, depth=0.040)
+    _strip_on_face(mb, hws, lightbar_center_z, 0.016, -0.004, 0, depth=0.036)
     hous = mb.build("LGT_Front_Lightbar_Housing", "LIGHTING", M["plastic_black"])
     L.explode(hous, (0, 1, 0.2), 0.20, 6, "Iluminación", "Embellecedor y soporte de la barra de luz", "R")
     objs.append(hous)

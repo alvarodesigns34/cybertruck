@@ -44,8 +44,14 @@
 
 ## Estado y puntos de continuación
 
-* Estado al 16-10-2026: modelo completo (309 objetos), validado, exportado y publicado en
-  https://alvarodesigns34.github.io/cybertruck/. Detalle en `README.md` y `docs/`.
-* Mejoras pendientes más valiosas: dibujo real del Scorpion ATR e inscripciones; forma exacta de faros,
-  retrovisores y paragolpes inferior; detalle del interior (costuras, mandos, paneles de puerta) y de la
-  mecánica (piezas fundidas, brazos); verificación de la sección transversal con una vista frontal a escala.
+* Estado al 16-10-2026 (versión 2): 561 objetos (522 mallas), ~498 mil triángulos, 61 materiales con texturas
+  físicas generadas (`ct_textures.py`, WebP en `blender/textures/`), GLB de 5,3 MB; validado (cotas sin cambios,
+  explosión con desviación 0), exportado y publicado en https://alvarodesigns34.github.io/cybertruck/.
+  Módulos nuevos: `ct_parts.py`, `build_structure.py`, `build_mechanics.py`, `build_exterior.py`,
+  `build_interior_detail.py`. Renders de validación: `preview.render_shot` (21 planos, 4 iluminaciones).
+* Criterio de fidelidad: «Verificado» solo si la geometría procede de medidas o planos; las piezas cuya
+  existencia y fijaciones constan en el manual pero cuya forma es reconstruida se marcan «Reconstruido»
+  (`ct_parts.make` lo aplica automáticamente).
+* Mejoras pendientes más valiosas: forma exacta de faros, retrovisores, paragolpes y piezas fundidas (requiere
+  escaneo o fotografías ortogonales); molde real del Scorpion ATR; carga progresiva del GLB por sistemas si sigue
+  creciendo; verificación de la sección transversal con una vista frontal a escala.

@@ -10,24 +10,51 @@ ortográficas, con **vista explosionada reversible** y un **visor web interactiv
 
 | | |
 |---|---|
-| ![Perfil](docs/renders/03_perfil_lateral.jpg) | ![Tres cuartos trasera](docs/renders/02_tres_cuartos_trasera.jpg) |
-| ![Interior](docs/renders/07_interior.jpg) | ![Vista explosionada](docs/renders/10_vista_explosionada.jpg) |
-| ![Rueda y freno](docs/renders/08_rueda_y_freno.jpg) | ![Frontal](docs/renders/04_frontal.jpg) |
+| ![Exterior de día](docs/renders/11_exterior_dia.jpg) | ![Atardecer](docs/renders/12_atardecer.jpg) |
+| ![Chasis y tren motriz](docs/renders/14_chasis_y_tren_motriz.jpg) | ![Vista explosionada](docs/renders/10_vista_explosionada.jpg) |
+| ![Batería 4680](docs/renders/16_bateria.jpg) | ![Suspensión delantera](docs/renders/17_suspension_delantera.jpg) |
+| ![Unidad trasera tri-motor](docs/renders/18_unidad_trasera_trimotor.jpg) | ![Estructura de carrocería](docs/renders/15_estructura_carroceria.jpg) |
+| ![Asientos y costuras](docs/renders/19_asientos_y_costuras.jpg) | ![Caja, tonneau y portón](docs/renders/21_caja_tonneau_y_porton.jpg) |
+| ![Rueda y freno](docs/renders/08_rueda_y_freno.jpg) | ![Faro y barra de luz](docs/renders/20_faro_y_barra_de_luz.jpg) |
 
-## Qué contiene
+Los 21 planos de `docs/renders/` se renderizan con Cycles bajo cuatro iluminaciones (estudio, cielo físico de
+día, atardecer y cielo cubierto).
 
-- **309 objetos organizados** en 20 colecciones de sistema: paneles exteriores, puertas y portones, cristales,
-  iluminación, ruedas y frenos, suspensión de doble horquilla con muelle neumático, dirección por cable
-  delantera y trasera, batería con 1.344 celdas 4680, unidad motriz delantera y unidad trasera con dos motores,
-  bajos y subchasis, caja de carga con tonneau de 22 lamas, y habitáculo completo de cinco plazas con pantallas
-  de 18,5" y 9,4".
-- **Cotas oficiales respetadas** (validadas sobre la geometría final): longitud +2,0 mm, batalla y vía exactas,
-  altura libre −0,4 mm, altura total +2,9 mm. Perfil superior con error medio de 2,9 mm frente a la vista oficial.
-  Detalles en [`docs/research-and-fidelity.md`](docs/research-and-fidelity.md).
-- **Cada componente lleva metadatos** (sistema, descripción, nivel de fidelidad *Verificado / Reconstruido /
-  Aproximado*, dirección y etapa de explosión).
-- **Vista explosionada en 6 etapas lógicas**, implementada con controladores en Blender y reproducida en el visor:
-  el ensamblado se recupera exactamente (desviación 0 verificada tras ciclos repetidos).
+## Qué contiene (versión 2)
+
+- **561 objetos** (522 mallas y 38 conjuntos) en 20 colecciones de sistema, frente a 309 en la versión 1. Muchas
+  mallas agrupan piezas repetidas (1.344 celdas, tornillería, grapas, remaches), por lo que el número de piezas
+  físicas representadas es muy superior.
+- **Estructura de carrocería** con las cotas de control del manual de reparación: piezas fundidas delantera y
+  trasera (esta por mitades), umbrales de acero UHSS con inserto extruido, refuerzos del suelo, anillos de
+  puertas, «mast» y torres del portón fundidos, vigas de impacto, Megabeam, viga del salpicadero y remaches
+  flow-form.
+- **Mecánica**: suspensión de doble horquilla con portamanguetas, brazos con casquillos y rótulas, módulos de
+  muelle neumático desglosados (amortiguador, vástago, fuelle, pistón, copela), estabilizadoras, actuadores de
+  dirección por cable con dos motores, unidades motrices con carcasas aleteadas, inversores, intercambiadores,
+  bombas de aceite y soportes, semiejes con juntas y fuelles, subchasis, Supermanifold/Octovalve, compresor de
+  A/C, módulo de ventiladores, persianas activas, servofreno electromecánico, HCU, tubos de freno, compresor,
+  depósito y bloque de válvulas de la suspensión, batería de 48 V, controladores zonales, mazos de cables y
+  deflectores inferiores.
+- **Batería** de 4 bloques de 7 × 48 celdas 4680 con espuma estructural, refrigeradores en serpentín, mica,
+  colectores, pirofusibles, respiradero térmico y bahía auxiliar (ACJB, PCS, clúster de dispositivos).
+- **Exterior**: faros con proyectores y disipadores, fila de 64 LED en la barra de luz, retrovisores facetados con
+  cristal electrocrómico, limpiaparabrisas completo con motor y lavaparabrisas, bisagras, cierres, presentadores,
+  elevalunas, controladores y burletes de las puertas, herrajes del frunk y del portón, cubierta con raíles,
+  motores, casete y lamas extruidas, toma NACS con contactos, faldillas, difusor y soporte frontal.
+- **Ruedas**: neumático con dibujo «all-terrain» de 5 hileras, tacos de flanco e inscripciones en relieve,
+  tapacubos Core facetado, válvula con TPMS, buje con espárragos, pinzas detalladas y pastillas.
+- **Interior**: volante con botonera y rodillos, actuador de realimentación, consola esculpida con cargadores
+  inalámbricos y USB-C, guantera, desempañado, guarnecidos de pilares con altavoces, paneles de puerta completos con
+  luz ambiental, asientos con guías, mandos y costuras proyectadas, cinturones con enrolladores y hebillas,
+  climatización, ordenador, airbags y alfombrillas.
+- **Materiales con texturas físicas** generadas (acero satinado anisótropo, caucho, granulado, piel, tejido,
+  moqueta, fundición) que viajan al GLB (WebP + KHR_texture_transform), por lo que el visor web muestra el
+  mismo aspecto que Blender.
+- **Cotas oficiales intactas**: longitud +2,0 mm, batalla y vía exactas, altura libre −0,4 mm, altura +2,9 mm,
+  anchura con espejos exacta (0,0 mm). Detalles en [`docs/research-and-fidelity.md`](docs/research-and-fidelity.md).
+- **Metadatos y vista explosionada** en 6 etapas para cada pieza; desviación 0 tras ciclos repetidos en Blender
+  y en el navegador.
 
 ## Estructura del repositorio
 
@@ -36,6 +63,7 @@ CLAUDE.md                       Normas permanentes del proyecto (idioma español
 blender/Cybertruck.blend        Escena maestra de Blender (no se elimina nunca)
 blender/scripts/                Scripts de construcción, validación y exportación (Python/bpy)
 blender/reference_data/         Perfiles medidos sobre la vista oficial (datos derivados)
+blender/textures/               Texturas físicas generadas por script (WebP)
 web/                            Visor web estático (GitHub Pages)
 web/models/                     cybertruck.glb (Draco) y manifiesto de componentes
 docs/                           Investigación, especificación, inventario, validación y renders
@@ -106,11 +134,13 @@ modifique el visor (también se puede lanzar manualmente). Requiere que Pages es
 
 - La carrocería exterior está reconstruida con gran precisión dimensional, pero la sección transversal depende de
   dos inclinaciones deducidas (6° y 19°) que no se han podido medir en una vista frontal a escala.
-- Interior, mecánica, batería y piezas fundidas son reconstrucciones plausibles a escala, no geometría OEM.
-- El dibujo de la banda de rodadura es genérico y no hay inscripciones en los flancos.
+- Mecánica, batería, piezas fundidas e interior respetan la denominación, las fijaciones y las cotas de control
+  de los manuales, pero sus formas son reconstrucciones (no hay planos CAD públicos).
+- El dibujo del neumático sigue la arquitectura de un «all-terrain» de 5 hileras, no el molde exacto del Scorpion
+  ATR; las inscripciones usan una tipografía genérica.
 - La anchura «sin espejos» oficial (2.031,6 mm) no es compatible con la anchura de los neumáticos; el modelo
   sigue la planta oficial, con aletas a ±1,04 m (2.081,7 mm).
-- Los materiales procedurales de Blender se aproximan en el navegador con `MeshPhysicalMaterial`.
+- Las texturas son sintéticas (no escaneadas); el GLB pesa 5,3 MB y se carga de una vez.
 
 ## Créditos y derechos
 

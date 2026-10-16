@@ -277,6 +277,33 @@ def _section(half_w, bolster, depth, front_bulge=0.0):
     return ring + back
 
 
+def _loft_closed(mb, rings):
+    """Solevado cerrado con orientación coherente.
+
+    Las caras se generan con el orden de los anillos (sin reorientación por cara, que invertía
+    las caras de las laderas interiores de los laterales y creaba pliegues al subdividir) y las
+    tapas en abanico desde el centroide (sin n-gonos cóncavos). Si el volumen resulta negativo se
+    invierten todas las caras para que las normales apunten hacia fuera.
+    """
+    start = len(mb.faces)
+    for i in range(len(rings) - 1):
+        mb.quad_strip(rings[i], rings[i + 1], closed=True)
+    for ring, fwd in ((rings[0], False), (rings[-1], True)):
+        c = tuple(sum((Vector(p) for p in ring), Vector()) / len(ring))
+        n = len(ring)
+        for i in range(n):
+            a, b = ring[i], ring[(i + 1) % n]
+            mb.face([c, a, b] if fwd else [c, b, a], 0)
+    vol = 0.0
+    for f in mb.faces[start:]:
+        p0 = Vector(mb.verts[f[0]])
+        for k in range(1, len(f) - 1):
+            vol += p0.dot(Vector(mb.verts[f[k]]).cross(Vector(mb.verts[f[k + 1]])))
+    if vol < 0:
+        for i in range(start, len(mb.faces)):
+            mb.faces[i] = list(reversed(mb.faces[i]))
+
+
 def sculpted_back(name, system, mat, base, width, levels, depth, tilt_deg, parent, label, edir, dist):
     """Respaldo: `levels` = [(altura, escala_anchura, factor_lateral, abombado)]."""
     mb = L.MeshBuilder(merge=1e-7)
@@ -286,11 +313,7 @@ def sculpted_back(name, system, mat, base, width, levels, depth, tilt_deg, paren
     for (h, sc, bol, bulge) in levels:
         sec = _section(width / 2 * sc, bol, depth, bulge)
         rings.append([tuple(b + rot @ Vector((x, d, h))) for (x, d) in sec])
-    ctr = b + rot @ Vector((0, -depth / 2, levels[len(levels) // 2][0]))
-    for i in range(len(rings) - 1):
-        mb.quad_strip(rings[i], rings[i + 1], closed=True, want_fn=lambda c: c - ctr)
-    mb.face(rings[0], 0, want=tuple(rot @ Vector((0, 0, -1))))
-    mb.face(rings[-1], 0, want=tuple(rot @ Vector((0, 0, 1))))
+    _loft_closed(mb, rings)
     obj = mb.build(name, system, mat, parent=parent)
     for p in obj.data.polygons:
         p.use_smooth = True
@@ -310,11 +333,7 @@ def sculpted_cushion(name, system, mat, center, width, length, thick, parent, la
         sec = _section(width / 2 * sc, b * bol, thick, 0.0)
         # en el cojín la «profundidad» de la sección es la altura (Z) y la posición en Y es t·longitud
         rings.append([tuple(c + Vector((x, t * length, d + dz))) for (x, d) in sec])
-    ctr = c + Vector((0, 0, -thick / 2))
-    for i in range(len(rings) - 1):
-        mb.quad_strip(rings[i], rings[i + 1], closed=True, want_fn=lambda q: q - ctr)
-    mb.face(rings[0], 0, want=(0, -1, 0))
-    mb.face(rings[-1], 0, want=(0, 1, 0))
+    _loft_closed(mb, rings)
     obj = mb.build(name, system, mat, parent=parent)
     for p in obj.data.polygons:
         p.use_smooth = True

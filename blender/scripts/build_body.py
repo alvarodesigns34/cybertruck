@@ -672,7 +672,7 @@ def build_tailgate(M):
     hinge = (0.0, yb + 0.03, zb + 0.01)
     obj = mb.build("EXT_Tailgate", "DOORS_AND_HATCHES", M["steel"], origin=hinge)
     finish_panel(obj, 0.0, 0.002)
-    L.explode(obj, (0, -1, -0.15), 0.95, 1, "Portón trasero", "Portón trasero (Powergate)", "R")
+    L.explode(obj, (0, -1, -0.15), 0.95, 1, "Portón trasero", "Portón trasero con bisagras laterales y luz superior", "R")
     obj["pivot_es"] = "Bisagras inferiores, apertura hacia abajo"
     return obj
 

@@ -79,7 +79,11 @@ def render(view, path, engine="BLENDER_WORKBENCH", res=(1600, 900), samples=16, 
         except Exception:
             pass
     sc.render.filepath = path
-    sc.render.image_settings.file_format = "PNG"
+    if path.lower().endswith(".jpg"):
+        sc.render.image_settings.file_format = "JPEG"
+        sc.render.image_settings.quality = 82
+    else:
+        sc.render.image_settings.file_format = "PNG"
     bpy.ops.render.render(write_still=True)
     return path
 
@@ -105,6 +109,91 @@ def set_excluded(names, value):
 
 EXTERIOR = ["EXTERIOR_PANELS", "DOORS_AND_HATCHES", "GLASS_AND_MIRRORS", "BODY_STRUCTURE", "LIGHTING",
             "CARGO_BED", "INTERIOR_TRIM", "BODY_FASTENERS"]
+
+
+BODY_COLS = ["EXTERIOR_PANELS", "DOORS_AND_HATCHES", "GLASS_AND_MIRRORS", "LIGHTING", "CARGO_BED",
+             "INTERIOR_DASHBOARD", "INTERIOR_CONTROLS", "INTERIOR_SEATS", "INTERIOR_DOORS", "INTERIOR_TRIM",
+             "BODY_FASTENERS"]
+
+# Planos de documentación: (iluminación, cámara (pos, objetivo, lente | 'CAM_*'), exposición EV,
+#                           colecciones excluidas, prefijos ocultos, factor de explosión)
+SHOTS = {
+    "01_tres_cuartos_delantera": ("studio", "CAM_3Q_Front", 0.0, [], [], 0.0),
+    "02_tres_cuartos_trasera": ("studio", "CAM_3Q_Rear", 0.0, [], [], 0.0),
+    "03_perfil_lateral": ("studio", "CAM_Side_Profile", 0.0, [], [], 0.0),
+    "04_frontal": ("studio", "CAM_Front", 0.0, [], [], 0.0),
+    "05_trasera": ("studio", "CAM_Rear", 0.0, [], [], 0.0),
+    "06_superior": ("studio", "CAM_Top", 0.0, [], [], 0.0),
+    "07_interior": ("studio", ((0.40, 0.36, 1.22), (-0.34, 1.05, 1.00), 17), 1.6, [], [], 0.0),
+    "08_rueda_y_freno": ("studio", ((-2.2, 2.45, 0.55), (-0.9, 1.82, 0.44), 50), 0.3, [], [], 0.0),
+    "09_bajos": ("studio", ((-3.4, 4.6, -0.55), (0.0, 0.3, 0.38), 30), 0.8, [], ["STUDIO_Cyclorama"], 0.0),
+    "10_vista_explosionada": ("studio", "CAM_Exploded", 0.0, [], [], 1.0),
+    "11_exterior_dia": ("exterior", ((-6.6, 6.9, 1.6), (0.0, 0.1, 0.80), 50), 0.0, [], [], 0.0),
+    "12_atardecer": ("sunset", ((6.0, -7.4, 1.5), (0.0, -0.4, 0.85), 50), 0.0, [], [], 0.0),
+    "13_cielo_cubierto": ("overcast", ((-8.5, -2.5, 1.3), (0.0, -0.2, 0.85), 50), 0.0, [], [], 0.0),
+    "14_chasis_y_tren_motriz": ("studio", ((-4.4, 4.2, 2.9), (0.0, 0.0, 0.55), 30), 0.3, BODY_COLS,
+                                ["BODY_Cabin", "BODY_Firewall", "BODY_Frunk", "BODY_WheelLiner", "EXT_Roof",
+                                 "BODY_Casting", "BODY_Sill", "BODY_DoorRing", "BODY_Mast", "BODY_Tailgate",
+                                 "BODY_Floor", "BODY_Seat", "BODY_RearWall", "BODY_IP", "BODY_Megabeam",
+                                 "BODY_Rivets", "BODY_Front_Bumper", "BODY_Rear_Energy"], 0.0),
+    "15_estructura_carroceria": ("studio", ((-4.6, 4.4, 3.3), (0.0, -0.1, 0.70), 30), 0.3, BODY_COLS + [
+        "BATTERY_ASSEMBLY", "DRIVE_UNITS", "FRONT_SUSPENSION", "REAR_SUSPENSION", "STEERING", "UNDERBODY",
+        "FRONT_WHEELS_AND_BRAKES", "REAR_WHEELS_AND_BRAKES"], ["BODY_Cabin", "BODY_Firewall", "BODY_Frunk",
+                                                               "BODY_WheelLiner", "EXT_Roof"], 0.0),
+    "16_bateria": ("studio", ((-1.7, 1.5, 1.6), (0.0, 0.0, 0.40), 32), 0.4, BODY_COLS,
+                   ["BAT_Enclosure_Lid", "HV_Ancillary_Cover", "BODY_", "EXT_Roof", "INT_", "LV_Harness", "BAT_Block_1_Mica", "BAT_Block_2_Mica", "BAT_Block_3_Mica", "BAT_Block_4_Mica", "BAT_Block_3_Busbars", "BAT_Block_4_Busbars"], 0.0),
+    "17_suspension_delantera": ("studio", ((-1.85, 2.55, 0.95), (-0.62, 1.82, 0.55), 35), 0.5, BODY_COLS,
+                                ["WHL_FL", "BODY_", "EXT_Roof"], 0.0),
+    "18_unidad_trasera_trimotor": ("studio", ((-1.1, -3.2, 1.3), (0.0, -1.95, 0.50), 30), 0.5, BODY_COLS,
+                                   ["BODY_", "EXT_Roof", "WHL_RL", "WHL_RR", "CARGO_", "CHS_Aeroshield_Rear"], 0.0),
+    "19_asientos_y_costuras": ("studio", ((-0.05, 0.95, 1.30), (-0.42, 0.40, 0.85), 24), 1.6, [], [], 0.0),
+    "20_faro_y_barra_de_luz": ("studio", ((-1.9, 3.6, 1.45), (-0.55, 2.45, 1.0), 40), 0.0, [], [], 0.0),
+    "21_caja_tonneau_y_porton": ("studio", ((2.6, -5.2, 2.7), (0.0, -2.0, 1.1), 35), 0.0, [], [], 0.0),
+}
+
+
+def render_shot(name, folder, samples=128, res=(1600, 900)):
+    """Renderiza un plano de documentación con Cycles y lo guarda como JPEG."""
+    import build_scene
+    import build_explode
+    light, cam, ev, excl, hide, explode = SHOTS[name]
+    build_scene.lighting(light)
+    sc = bpy.context.scene
+    sc.view_settings.view_transform = "AgX"
+    sc.view_settings.exposure = -0.6 + ev
+    set_excluded(excl, True)
+    hidden = []
+    for o in bpy.data.objects:
+        if hide and o.name.startswith(tuple(hide)) and not o.hide_render:
+            o.hide_render = True
+            hidden.append(o)
+    build_explode.set_explode(explode)
+    os.makedirs(folder, exist_ok=True)
+    path = os.path.join(folder, name + ".jpg")
+    try:
+        if isinstance(cam, str):
+            c = bpy.data.objects[cam]
+            sc.camera = c
+            sc.render.engine = "CYCLES"
+            sc.render.resolution_x, sc.render.resolution_y = res
+            sc.render.resolution_percentage = 100
+            sc.cycles.samples = samples
+            sc.cycles.use_denoising = True
+            sc.cycles.device = "GPU"
+            sc.render.filepath = path
+            sc.render.image_settings.file_format = "JPEG"
+            sc.render.image_settings.quality = 82
+            bpy.ops.render.render(write_still=True)
+        else:
+            loc, tgt, lens = cam
+            render("x", path, engine="CYCLES", res=res, samples=samples, cam_loc=loc, cam_target=tgt, lens=lens)
+    finally:
+        for o in hidden:
+            o.hide_render = False
+        set_excluded(excl, False)
+        build_explode.set_explode(0.0)
+        sc.view_settings.exposure = -0.6
+    return path
 
 
 def render_set(folder, views, **kw):
