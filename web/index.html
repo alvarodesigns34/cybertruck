@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cybertruck · Vista explosionada</title>
+  <meta name="description" content="Reconstrucción 3D documentada del Tesla Cybertruck Cyberbeast con vista explosionada interactiva.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/style.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <canvas id="viewport" aria-label="Vista 3D del Cybertruck"></canvas>
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">CT</span>
+        <div>
+          <h1>Cybertruck <span class="muted">Cyberbeast</span></h1>
+          <p class="sub">Reconstrucción 3D documentada · escala 1:1</p>
+        </div>
+      </div>
+      <nav class="views" aria-label="Vistas de cámara">
+        <button data-view="front34" class="chip">3/4 delantera</button>
+        <button data-view="rear34" class="chip">3/4 trasera</button>
+        <button data-view="side" class="chip">Perfil</button>
+        <button data-view="top" class="chip">Superior</button>
+        <button data-view="interior" class="chip">Interior</button>
+        <button data-view="under" class="chip">Bajos</button>
+        <button id="btn-reset-view" class="chip chip-strong" title="Restablecer la cámara">Restablecer vista</button>
+      </nav>
+      <button id="btn-panel" class="icon-btn" aria-label="Mostrar u ocultar el panel">☰</button>
+    </header>
+
+    <aside id="panel" class="panel">
+      <section class="block">
+        <div class="block-head">
+          <h2>Sistemas</h2>
+          <button id="btn-show-all" class="link">Mostrar todo</button>
+        </div>
+        <div id="systems" class="systems"></div>
+      </section>
+      <section class="block grow">
+        <div class="block-head">
+          <h2>Componentes</h2>
+          <span id="count" class="mono muted"></span>
+        </div>
+        <input id="search" class="search" type="search" placeholder="Buscar componente…" autocomplete="off">
+        <div id="tree" class="tree" role="tree"></div>
+      </section>
+    </aside>
+
+    <section id="info" class="info hidden" aria-live="polite">
+      <div class="info-head">
+        <span id="info-fid" class="badge"></span>
+        <button id="info-close" class="icon-btn small" aria-label="Cerrar">✕</button>
+      </div>
+      <h3 id="info-title"></h3>
+      <p id="info-name" class="mono muted"></p>
+      <dl class="meta">
+        <dt>Sistema</dt><dd id="info-system"></dd>
+        <dt>Conjunto</dt><dd id="info-group"></dd>
+        <dt>Etapa</dt><dd id="info-stage"></dd>
+      </dl>
+      <p id="info-note" class="note"></p>
+      <div class="info-actions">
+        <button id="btn-isolate" class="btn">Aislar</button>
+        <button id="btn-hide" class="btn">Ocultar</button>
+        <button id="btn-focus" class="btn">Encuadrar</button>
+      </div>
+    </section>
+
+    <footer class="dock">
+      <div class="slider-wrap">
+        <div class="slider-head">
+          <label for="explode">Vista explosionada</label>
+          <output id="explode-out" class="mono">0 %</output>
+        </div>
+        <input id="explode" type="range" min="0" max="100" step="0.1" value="0" aria-label="Factor de explosión">
+        <div class="stages" id="stages"></div>
+      </div>
+      <div class="dock-controls">
+        <label class="mini">Amplitud
+          <input id="amp" type="range" min="0.6" max="2.4" step="0.05" value="1.5">
+        </label>
+        <button id="btn-play" class="btn">▶ Animar</button>
+        <button id="btn-assemble" class="btn btn-primary">Ensamblar</button>
+      </div>
+      <div class="status mono" id="status">Cargando modelo…</div>
+    </footer>
+
+    <div id="loader" class="loader">
+      <div class="loader-box">
+        <div class="loader-title">Cargando Cybertruck</div>
+        <div class="bar"><div id="bar-fill" class="bar-fill"></div></div>
+        <div id="loader-text" class="mono muted">0 %</div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

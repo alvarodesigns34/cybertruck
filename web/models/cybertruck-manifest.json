@@ -1,0 +1,5705 @@
+{
+ "vehicle": "Tesla Cybertruck Cyberbeast (EE. UU., gama 2026)",
+ "units": "metros",
+ "axes": {
+  "blender": "+X derecha, +Y delante, +Z arriba",
+  "gltf": "+X derecha, +Y arriba, -Z delante"
+ },
+ "stage_windows": {
+  "1": [
+   0.0,
+   0.4
+  ],
+  "2": [
+   0.12,
+   0.52
+  ],
+  "3": [
+   0.24,
+   0.64
+  ],
+  "4": [
+   0.36,
+   0.76
+  ],
+  "5": [
+   0.48,
+   0.88
+  ],
+  "6": [
+   0.6,
+   1.0
+  ]
+ },
+ "stages": {
+  "1": "Paneles exteriores y elementos de apertura",
+  "2": "Conjuntos interiores",
+  "3": "Estructura de carrocería y bajos",
+  "4": "Suspensión, ruedas y frenos",
+  "5": "Batería y tren motriz",
+  "6": "Componentes pequeños y herrajes"
+ },
+ "dimensions": {
+  "length": 5.6829,
+  "width_body": 2.0316,
+  "width_mirrors": 2.4133,
+  "height_medium": 1.7938,
+  "wheelbase": 3.635,
+  "track": 1.772,
+  "ground_clearance_medium": 0.257
+ },
+ "components": [
+  {
+   "name": "BATTERY_PACK",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Batería de alta tensión (~123 kWh, 1.344 celdas 4680, ~700 V)",
+   "group": "Batería",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 1.35,
+   "faces": 0
+  },
+  {
+   "name": "BAT_Enclosure_Lid",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Tapa superior de la batería",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.55,
+   "faces": 44
+  },
+  {
+   "name": "BAT_Enclosure_Tray",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Bandeja estructural de la batería",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 44
+  },
+  {
+   "name": "BAT_HV_Junction",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Caja de conexiones de alta tensión de la batería",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.45,
+   "faces": 44
+  },
+  {
+   "name": "BAT_Internal_Beams",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Vigas internas entre módulos",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 24
+  },
+  {
+   "name": "BAT_Module_1_Busbars",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Barras colectoras del módulo",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.33923,
+    0.40707,
+    0.84807
+   ],
+   "explode_dist": 0.42,
+   "faces": 42
+  },
+  {
+   "name": "BAT_Module_1_Cells",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Módulo 1: 336 celdas cilíndricas 4680 (Ø46 x 80 mm)",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recuento total verificado (1.344); disposición en módulos aproximada",
+   "explode_dir_blender": [
+    -0.53916,
+    0.647,
+    0.53916
+   ],
+   "explode_dist": 0.3,
+   "faces": 5376
+  },
+  {
+   "name": "BAT_Module_2_Busbars",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Barras colectoras del módulo",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.33923,
+    0.40707,
+    0.84807
+   ],
+   "explode_dist": 0.42,
+   "faces": 42
+  },
+  {
+   "name": "BAT_Module_2_Cells",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Módulo 2: 336 celdas cilíndricas 4680 (Ø46 x 80 mm)",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recuento total verificado (1.344); disposición en módulos aproximada",
+   "explode_dir_blender": [
+    0.53916,
+    0.647,
+    0.53916
+   ],
+   "explode_dist": 0.3,
+   "faces": 5376
+  },
+  {
+   "name": "BAT_Module_3_Busbars",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Barras colectoras del módulo",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.33923,
+    -0.40707,
+    0.84807
+   ],
+   "explode_dist": 0.42,
+   "faces": 42
+  },
+  {
+   "name": "BAT_Module_3_Cells",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Módulo 3: 336 celdas cilíndricas 4680 (Ø46 x 80 mm)",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recuento total verificado (1.344); disposición en módulos aproximada",
+   "explode_dir_blender": [
+    -0.53916,
+    -0.647,
+    0.53916
+   ],
+   "explode_dist": 0.3,
+   "faces": 5376
+  },
+  {
+   "name": "BAT_Module_4_Busbars",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Barras colectoras del módulo",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.33923,
+    -0.40707,
+    0.84807
+   ],
+   "explode_dist": 0.42,
+   "faces": 42
+  },
+  {
+   "name": "BAT_Module_4_Cells",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Módulo 4: 336 celdas cilíndricas 4680 (Ø46 x 80 mm)",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recuento total verificado (1.344); disposición en módulos aproximada",
+   "explode_dir_blender": [
+    0.53916,
+    -0.647,
+    0.53916
+   ],
+   "explode_dist": 0.3,
+   "faces": 5376
+  },
+  {
+   "name": "BODY_Cabin_Floor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Suelo de la cabina",
+   "group": "Estructura de la cabina",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1
+  },
+  {
+   "name": "BODY_Cabin_RearWall",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Pared trasera de la cabina",
+   "group": "Estructura de la cabina",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1
+  },
+  {
+   "name": "BODY_Casting_F",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Pieza fundida delantera (largueros y torretas)",
+   "group": "Estructura de la carrocería",
+   "stage": 3,
+   "fidelity": "A",
+   "note": "Arquitectura de piezas fundidas documentada públicamente; forma aproximada",
+   "explode_dir_blender": [
+    0.0,
+    0.78087,
+    0.6247
+   ],
+   "explode_dist": 1.25,
+   "faces": 106
+  },
+  {
+   "name": "BODY_Casting_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Pieza fundida trasera (largueros y torretas)",
+   "group": "Estructura de la carrocería",
+   "stage": 3,
+   "fidelity": "A",
+   "note": "Arquitectura de piezas fundidas documentada públicamente; forma aproximada",
+   "explode_dir_blender": [
+    0.0,
+    -0.78087,
+    0.6247
+   ],
+   "explode_dist": 1.25,
+   "faces": 106
+  },
+  {
+   "name": "BODY_Firewall",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Mamparo delantero (salpicadero)",
+   "group": "Estructura de la cabina",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 4
+  },
+  {
+   "name": "BODY_Frunk_Tub",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Cubeta del maletero delantero (200 l)",
+   "group": "Maletero delantero",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.44721,
+    0.89443
+   ],
+   "explode_dist": 1.05,
+   "faces": 5
+  },
+  {
+   "name": "BODY_WheelLiner_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Paso de rueda interior (cubre-ruedas de plástico)",
+   "group": "Pasos de rueda interiores",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.35,
+   "faces": 4
+  },
+  {
+   "name": "BODY_WheelLiner_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Paso de rueda interior (cubre-ruedas de plástico)",
+   "group": "Pasos de rueda interiores",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.35,
+   "faces": 4
+  },
+  {
+   "name": "BODY_WheelLiner_RL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Paso de rueda interior (cubre-ruedas de plástico)",
+   "group": "Pasos de rueda interiores",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.35,
+   "faces": 4
+  },
+  {
+   "name": "BODY_WheelLiner_RR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Paso de rueda interior (cubre-ruedas de plástico)",
+   "group": "Pasos de rueda interiores",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.35,
+   "faces": 4
+  },
+  {
+   "name": "BRAKE_FL",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Freno delantero izquierdo",
+   "group": "Frenos",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 0
+  },
+  {
+   "name": "BRAKE_FR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Freno delantero derecho",
+   "group": "Frenos",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 0
+  },
+  {
+   "name": "BRAKE_RL",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Freno trasero izquierdo",
+   "group": "Frenos",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 0
+  },
+  {
+   "name": "BRAKE_RR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Freno trasero derecho",
+   "group": "Frenos",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 0
+  },
+  {
+   "name": "BRK_FL_Caliper",
+   "type": "MESH",
+   "parent": "BRAKE_FL",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Pinza fija de 4 pistones",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    -0.4264,
+    -0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.22,
+   "faces": 182
+  },
+  {
+   "name": "BRK_FL_Rotor",
+   "type": "MESH",
+   "parent": "BRAKE_FL",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Disco ventilado Ø351 mm",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.12,
+   "faces": 1584
+  },
+  {
+   "name": "BRK_FL_Shield",
+   "type": "MESH",
+   "parent": "BRAKE_FL",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Protector de polvo del disco",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 320
+  },
+  {
+   "name": "BRK_FR_Caliper",
+   "type": "MESH",
+   "parent": "BRAKE_FR",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Pinza fija de 4 pistones",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.4264,
+    -0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.22,
+   "faces": 182
+  },
+  {
+   "name": "BRK_FR_Rotor",
+   "type": "MESH",
+   "parent": "BRAKE_FR",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Disco ventilado Ø351 mm",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.12,
+   "faces": 1584
+  },
+  {
+   "name": "BRK_FR_Shield",
+   "type": "MESH",
+   "parent": "BRAKE_FR",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Protector de polvo del disco",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 320
+  },
+  {
+   "name": "BRK_RL_Caliper",
+   "type": "MESH",
+   "parent": "BRAKE_RL",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Pinza flotante de 1 pistón con EPB",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    -0.4264,
+    0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.22,
+   "faces": 214
+  },
+  {
+   "name": "BRK_RL_Rotor",
+   "type": "MESH",
+   "parent": "BRAKE_RL",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Disco ventilado Ø356 mm",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.12,
+   "faces": 1584
+  },
+  {
+   "name": "BRK_RL_Shield",
+   "type": "MESH",
+   "parent": "BRAKE_RL",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Protector de polvo del disco",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 320
+  },
+  {
+   "name": "BRK_RR_Caliper",
+   "type": "MESH",
+   "parent": "BRAKE_RR",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Pinza flotante de 1 pistón con EPB",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.4264,
+    0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.22,
+   "faces": 214
+  },
+  {
+   "name": "BRK_RR_Rotor",
+   "type": "MESH",
+   "parent": "BRAKE_RR",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Disco ventilado Ø356 mm",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.12,
+   "faces": 1584
+  },
+  {
+   "name": "BRK_RR_Shield",
+   "type": "MESH",
+   "parent": "BRAKE_RR",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Protector de polvo del disco",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 320
+  },
+  {
+   "name": "CAM_BPillar_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Cámara del pilar B",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 6
+  },
+  {
+   "name": "CAM_BPillar_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Cámara del pilar B",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 6
+  },
+  {
+   "name": "CAM_FenderFlare_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Cámara de la aleta (repetidor lateral)",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 6
+  },
+  {
+   "name": "CAM_FenderFlare_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Cámara de la aleta (repetidor lateral)",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 6
+  },
+  {
+   "name": "CAM_Front_Fascia",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Cámara frontal (fascia delantera)",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 6
+  },
+  {
+   "name": "CAM_Windshield_Module",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Módulo de cámaras del parabrisas",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 6
+  },
+  {
+   "name": "CARGO_BED_TUB",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Caja de carga compuesta (6' x 4')",
+   "group": "Caja de carga",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    0.98058
+   ],
+   "explode_dist": 1.55,
+   "faces": 0
+  },
+  {
+   "name": "CARGO_Bed_Tub",
+   "type": "MESH",
+   "parent": "CARGO_BED_TUB",
+   "system": "CARGO_BED",
+   "label": "Cubeta compuesta de la caja (sin necesidad de protector)",
+   "group": "Caja de carga",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.05,
+   "faces": 74
+  },
+  {
+   "name": "CARGO_Gear_Locker",
+   "type": "MESH",
+   "parent": "CARGO_BED_TUB",
+   "system": "CARGO_BED",
+   "label": "Compartimento inferior Gear Locker (97 l)",
+   "group": "Caja de carga",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 6
+  },
+  {
+   "name": "CARGO_Tonneau_Rail_L",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Carril lateral de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.25,
+   "faces": 3
+  },
+  {
+   "name": "CARGO_Tonneau_Rail_R",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Carril lateral de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.25,
+   "faces": 3
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_01",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 1 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.06,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_02",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 2 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.074,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_03",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 3 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.088,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_04",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 4 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.10200000000000001,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_05",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 5 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.11599999999999999,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_06",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 6 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.13,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_07",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 7 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.14400000000000002,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_08",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 8 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.158,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_09",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 9 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.172,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_10",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 10 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.186,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_11",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 11 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.2,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_12",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 12 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.214,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_13",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 13 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.228,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_14",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 14 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.242,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_15",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 15 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.256,
+   "faces": 2
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_16",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 16 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.27,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_17",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 17 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.28400000000000003,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_18",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 18 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.29800000000000004,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_19",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 19 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.312,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_20",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 20 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.326,
+   "faces": 2
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_21",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 21 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.34,
+   "faces": 1
+  },
+  {
+   "name": "CARGO_Tonneau_Slat_22",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Lama 22 de la cubierta",
+   "group": "Cubierta de la caja",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.354,
+   "faces": 1
+  },
+  {
+   "name": "CHS_Aeroshield_Front",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Deflector aerodinámico delantero",
+   "group": "Bajos",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.6,
+   "faces": 6
+  },
+  {
+   "name": "CHS_Aeroshield_Rear",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Deflector aerodinámico trasero",
+   "group": "Bajos",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.6,
+   "faces": 6
+  },
+  {
+   "name": "CHS_AirSuspension_Compressor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Compresor de la suspensión neumática",
+   "group": "Suspensión",
+   "stage": 4,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.89443,
+    0.44721,
+    0.0
+   ],
+   "explode_dist": 0.6,
+   "faces": 66
+  },
+  {
+   "name": "CHS_Battery_Skid_Plate",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Placa de protección inferior de la batería",
+   "group": "Bajos",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 1.75,
+   "faces": 6
+  },
+  {
+   "name": "CHS_Coolant_Hoses",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Tubos de refrigerante (batería, inversores e intercambiador)",
+   "group": "Refrigeración",
+   "stage": 5,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.7,
+   "faces": 76
+  },
+  {
+   "name": "CHS_Heat_Exchanger_Front",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Intercambiador de calor delantero",
+   "group": "Refrigeración",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.8,
+   "faces": 6
+  },
+  {
+   "name": "CHS_Subframe_F",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Subchasis delantero",
+   "group": "Subchasis",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    -0.95783
+   ],
+   "explode_dist": 0.95,
+   "faces": 30
+  },
+  {
+   "name": "CHS_Subframe_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Subchasis trasero",
+   "group": "Subchasis",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    -0.95783
+   ],
+   "explode_dist": 0.95,
+   "faces": 30
+  },
+  {
+   "name": "CHS_Tow_Hitch_Receiver",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Receptor del enganche de remolque (clase IV)",
+   "group": "Enganche",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    -0.28735
+   ],
+   "explode_dist": 0.5,
+   "faces": 12
+  },
+  {
+   "name": "CONSOLE_ASSEMBLY",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Consola central",
+   "group": "Consola central",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.7,
+   "faces": 0
+  },
+  {
+   "name": "DISPLAY_CENTER",
+   "type": "EMPTY",
+   "parent": "IP_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Pantalla táctil central de 18,5\"",
+   "group": "Pantallas",
+   "stage": 2,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.45,
+   "faces": 0
+  },
+  {
+   "name": "DOOR_FL",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Puerta delantera izquierda",
+   "group": "Puertas",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99268,
+    0.11912,
+    0.01985
+   ],
+   "explode_dist": 0.95,
+   "faces": 0
+  },
+  {
+   "name": "DOOR_FL_InnerStructure",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Estructura interior de la puerta (chapa interior y refuerzos)",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.2,
+   "faces": 5
+  },
+  {
+   "name": "DOOR_FR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Puerta delantera derecha",
+   "group": "Puertas",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.99268,
+    0.11912,
+    0.01985
+   ],
+   "explode_dist": 0.95,
+   "faces": 0
+  },
+  {
+   "name": "DOOR_FR_InnerStructure",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Estructura interior de la puerta (chapa interior y refuerzos)",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.2,
+   "faces": 5
+  },
+  {
+   "name": "DOOR_RL",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Puerta trasera izquierda",
+   "group": "Puertas",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99268,
+    0.11912,
+    0.01985
+   ],
+   "explode_dist": 0.95,
+   "faces": 0
+  },
+  {
+   "name": "DOOR_RL_InnerStructure",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Estructura interior de la puerta (chapa interior y refuerzos)",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.2,
+   "faces": 5
+  },
+  {
+   "name": "DOOR_RR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Puerta trasera derecha",
+   "group": "Puertas",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.99268,
+    0.11912,
+    0.01985
+   ],
+   "explode_dist": 0.95,
+   "faces": 0
+  },
+  {
+   "name": "DOOR_RR_InnerStructure",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Estructura interior de la puerta (chapa interior y refuerzos)",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.2,
+   "faces": 5
+  },
+  {
+   "name": "DRIVE_UNIT_FRONT",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Unidad motriz delantera (motor síncrono de imanes permanentes)",
+   "group": "Unidades motrices",
+   "stage": 5,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.5145,
+    -0.85749
+   ],
+   "explode_dist": 1.1,
+   "faces": 0
+  },
+  {
+   "name": "DRIVE_UNIT_REAR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Unidad motriz trasera con dos motores de inducción",
+   "group": "Unidades motrices",
+   "stage": 5,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.5145,
+    -0.85749
+   ],
+   "explode_dist": 1.15,
+   "faces": 0
+  },
+  {
+   "name": "DU_F_Gearbox",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Reductora de una velocidad (15,02:1) y diferencial",
+   "group": "Unidades motrices",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 44
+  },
+  {
+   "name": "DU_F_Inverter",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Inversor de la unidad delantera",
+   "group": "Unidades motrices",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "DU_F_Motor_Housing",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Carcasa del motor delantero",
+   "group": "Unidades motrices",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.28735,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 34
+  },
+  {
+   "name": "DU_Halfshaft_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Semieje delantero con juntas homocinéticas",
+   "group": "Semiejes",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.55,
+   "faces": 258
+  },
+  {
+   "name": "DU_Halfshaft_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Semieje delantero con juntas homocinéticas",
+   "group": "Semiejes",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.55,
+   "faces": 258
+  },
+  {
+   "name": "DU_Halfshaft_RL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Semieje trasero con juntas homocinéticas",
+   "group": "Semiejes",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.55,
+   "faces": 258
+  },
+  {
+   "name": "DU_Halfshaft_RR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Semieje trasero con juntas homocinéticas",
+   "group": "Semiejes",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.55,
+   "faces": 258
+  },
+  {
+   "name": "DU_R_Gearset_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Engranaje reductor independiente (15,02:1)",
+   "group": "Unidades motrices",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.19612,
+    0.0
+   ],
+   "explode_dist": 0.28,
+   "faces": 44
+  },
+  {
+   "name": "DU_R_Gearset_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Engranaje reductor independiente (15,02:1)",
+   "group": "Unidades motrices",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.19612,
+    0.0
+   ],
+   "explode_dist": 0.28,
+   "faces": 44
+  },
+  {
+   "name": "DU_R_Inverter_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Inversor de motor trasero",
+   "group": "Unidades motrices",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.36,
+   "faces": 44
+  },
+  {
+   "name": "DU_R_Inverter_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Inversor de motor trasero",
+   "group": "Unidades motrices",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.36,
+   "faces": 44
+  },
+  {
+   "name": "DU_R_Motor_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Motor de inducción trasero izquierdo",
+   "group": "Unidades motrices",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    -0.19612,
+    0.0
+   ],
+   "explode_dist": 0.32,
+   "faces": 34
+  },
+  {
+   "name": "DU_R_Motor_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Motor de inducción trasero derecho",
+   "group": "Unidades motrices",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    -0.19612,
+    0.0
+   ],
+   "explode_dist": 0.32,
+   "faces": 34
+  },
+  {
+   "name": "EXT_BedSide_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Lateral de la caja con vela (izquierda)",
+   "group": "Laterales de la caja",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98414,
+    -0.09841,
+    0.14762
+   ],
+   "explode_dist": 0.85,
+   "faces": 15
+  },
+  {
+   "name": "EXT_BedSide_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Lateral de la caja con vela (derecha)",
+   "group": "Laterales de la caja",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98414,
+    -0.09841,
+    0.14762
+   ],
+   "explode_dist": 0.85,
+   "faces": 15
+  },
+  {
+   "name": "EXT_ChargePort_Door",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Puerta de la toma de carga (NACS)",
+   "group": "Toma de carga",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 5
+  },
+  {
+   "name": "EXT_ChargePort_Inlet",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Receptáculo de carga",
+   "group": "Toma de carga",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.2,
+   "faces": 72
+  },
+  {
+   "name": "EXT_Cowl_Wiper_Applique",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aplique del limpiaparabrisas",
+   "group": "Limpiaparabrisas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.5145,
+    0.85749
+   ],
+   "explode_dist": 0.55,
+   "faces": 1
+  },
+  {
+   "name": "EXT_Door_FL_GlassFrame",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Marco y aplique negro del cristal",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.16,
+   "faces": 2
+  },
+  {
+   "name": "EXT_Door_FL_Skin",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Piel exterior de acero de la puerta",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22,
+   "faces": 2
+  },
+  {
+   "name": "EXT_Door_FR_GlassFrame",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Marco y aplique negro del cristal",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.16,
+   "faces": 2
+  },
+  {
+   "name": "EXT_Door_FR_Skin",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Piel exterior de acero de la puerta",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22,
+   "faces": 2
+  },
+  {
+   "name": "EXT_Door_RL_GlassFrame",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Marco y aplique negro del cristal",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.16,
+   "faces": 3
+  },
+  {
+   "name": "EXT_Door_RL_Skin",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Piel exterior de acero de la puerta",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22,
+   "faces": 2
+  },
+  {
+   "name": "EXT_Door_RR_GlassFrame",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Marco y aplique negro del cristal",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.16,
+   "faces": 3
+  },
+  {
+   "name": "EXT_Door_RR_Skin",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Piel exterior de acero de la puerta",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22,
+   "faces": 2
+  },
+  {
+   "name": "EXT_Fender_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aleta delantera izquierda",
+   "group": "Aletas delanteras",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.96561,
+    0.2414,
+    0.09656
+   ],
+   "explode_dist": 0.7,
+   "faces": 3
+  },
+  {
+   "name": "EXT_Fender_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aleta delantera derecha",
+   "group": "Aletas delanteras",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.96561,
+    0.2414,
+    0.09656
+   ],
+   "explode_dist": 0.7,
+   "faces": 3
+  },
+  {
+   "name": "EXT_Flare_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aleta del paso de rueda delantero (izquierda)",
+   "group": "Aletas de pasos de rueda",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.97014,
+    0.0,
+    0.24254
+   ],
+   "explode_dist": 0.6,
+   "faces": 11
+  },
+  {
+   "name": "EXT_Flare_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aleta del paso de rueda delantero (derecha)",
+   "group": "Aletas de pasos de rueda",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.97014,
+    0.0,
+    0.24254
+   ],
+   "explode_dist": 0.6,
+   "faces": 11
+  },
+  {
+   "name": "EXT_Flare_RL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aleta del paso de rueda trasero (izquierda)",
+   "group": "Aletas de pasos de rueda",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.97014,
+    0.0,
+    0.24254
+   ],
+   "explode_dist": 0.6,
+   "faces": 11
+  },
+  {
+   "name": "EXT_Flare_RR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aleta del paso de rueda trasero (derecha)",
+   "group": "Aletas de pasos de rueda",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.97014,
+    0.0,
+    0.24254
+   ],
+   "explode_dist": 0.6,
+   "faces": 11
+  },
+  {
+   "name": "EXT_Front_Bumper",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Fascia inferior delantera (paragolpes)",
+   "group": "Paragolpes",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.8,
+   "faces": 170
+  },
+  {
+   "name": "EXT_Front_Fascia_Upper",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Frontal superior de acero inoxidable",
+   "group": "Frontal",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.99504,
+    0.0995
+   ],
+   "explode_dist": 0.75,
+   "faces": 6
+  },
+  {
+   "name": "EXT_Front_Lower_Grille",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Rejilla inferior con persianas activas",
+   "group": "Rejilla",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.99504,
+    -0.0995
+   ],
+   "explode_dist": 0.45,
+   "faces": 114
+  },
+  {
+   "name": "EXT_Frunk_Lid",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Tapa del maletero delantero (frunk)",
+   "group": "Tapa del frunk",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.33035,
+    0.94386
+   ],
+   "explode_dist": 0.9,
+   "faces": 7
+  },
+  {
+   "name": "EXT_License_Plate_Rear",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Placa de matrícula trasera (genérica, sin texto)",
+   "group": "Matrícula",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 6
+  },
+  {
+   "name": "EXT_Mirror_L_Arm",
+   "type": "MESH",
+   "parent": "MIRROR_L",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Brazo del retrovisor",
+   "group": "Retrovisores",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "EXT_Mirror_L_Housing",
+   "type": "MESH",
+   "parent": "MIRROR_L",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Carcasa del retrovisor",
+   "group": "Retrovisores",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.91287,
+    0.36515,
+    0.18257
+   ],
+   "explode_dist": 0.12,
+   "faces": 6
+  },
+  {
+   "name": "EXT_Mirror_R_Arm",
+   "type": "MESH",
+   "parent": "MIRROR_R",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Brazo del retrovisor",
+   "group": "Retrovisores",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "EXT_Mirror_R_Housing",
+   "type": "MESH",
+   "parent": "MIRROR_R",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Carcasa del retrovisor",
+   "group": "Retrovisores",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.91287,
+    0.36515,
+    0.18257
+   ],
+   "explode_dist": 0.12,
+   "faces": 6
+  },
+  {
+   "name": "EXT_Rear_Bumper",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Fascia trasera con escalón integrado",
+   "group": "Paragolpes",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.8,
+   "faces": 64
+  },
+  {
+   "name": "EXT_Rocker_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Faldón lateral (izquierda)",
+   "group": "Faldones",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.94386,
+    0.0,
+    -0.33035
+   ],
+   "explode_dist": 0.5,
+   "faces": 6
+  },
+  {
+   "name": "EXT_Rocker_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Faldón lateral (derecha)",
+   "group": "Faldones",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.94386,
+    0.0,
+    -0.33035
+   ],
+   "explode_dist": 0.5,
+   "faces": 6
+  },
+  {
+   "name": "EXT_RoofRail_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Pilar A y larguero de techo (izquierda)",
+   "group": "Estructura del techo",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.55,
+   "faces": 1
+  },
+  {
+   "name": "EXT_RoofRail_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Pilar A y larguero de techo (derecha)",
+   "group": "Estructura del techo",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.55,
+   "faces": 1
+  },
+  {
+   "name": "EXT_Roof_Header_Front",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Travesaño delantero del techo",
+   "group": "Estructura del techo",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.75,
+   "faces": 1
+  },
+  {
+   "name": "EXT_Roof_Header_Rear",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Travesaño trasero del techo",
+   "group": "Estructura del techo",
+   "stage": 3,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.75,
+   "faces": 2
+  },
+  {
+   "name": "EXT_Tailgate",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Portón trasero (Powergate)",
+   "group": "Portón trasero",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.98894,
+    -0.14834
+   ],
+   "explode_dist": 0.95,
+   "faces": 8
+  },
+  {
+   "name": "EXT_TowEye_Cap_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Tapa del gancho de remolque delantero",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 6
+  },
+  {
+   "name": "EXT_TowEye_Cap_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Tapa del gancho de remolque delantero",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 6
+  },
+  {
+   "name": "EXT_Wiper_Arm",
+   "type": "MESH",
+   "parent": "WIPER_ASSEMBLY",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Brazo y eje del limpiaparabrisas",
+   "group": "Limpiaparabrisas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.05,
+   "faces": 46
+  },
+  {
+   "name": "EXT_Wiper_Blade",
+   "type": "MESH",
+   "parent": "WIPER_ASSEMBLY",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Escobilla de ~1,26 m",
+   "group": "Limpiaparabrisas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 12
+  },
+  {
+   "name": "GLS_Door_FL",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Cristal móvil de la puerta",
+   "group": "Cristales",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.35,
+   "faces": 1
+  },
+  {
+   "name": "GLS_Door_FR",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Cristal móvil de la puerta",
+   "group": "Cristales",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.35,
+   "faces": 1
+  },
+  {
+   "name": "GLS_Door_RL",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Cristal móvil de la puerta",
+   "group": "Cristales",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.35,
+   "faces": 1
+  },
+  {
+   "name": "GLS_Door_RR",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Cristal móvil de la puerta",
+   "group": "Cristales",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.35,
+   "faces": 1
+  },
+  {
+   "name": "GLS_Mirror_L",
+   "type": "MESH",
+   "parent": "MIRROR_L",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Espejo plano electrocrómico",
+   "group": "Retrovisores",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 1
+  },
+  {
+   "name": "GLS_Mirror_R",
+   "type": "MESH",
+   "parent": "MIRROR_R",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Espejo plano electrocrómico",
+   "group": "Retrovisores",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 1
+  },
+  {
+   "name": "GLS_Rear_Window",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Ventana trasera eléctrica de la cabina",
+   "group": "Cristales",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 6
+  },
+  {
+   "name": "GLS_Roof",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Techo de cristal fijo",
+   "group": "Cristales",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.0995,
+    0.99504
+   ],
+   "explode_dist": 0.95,
+   "faces": 30
+  },
+  {
+   "name": "GLS_Windshield",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Parabrisas laminado",
+   "group": "Cristales",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.41036,
+    0.91192
+   ],
+   "explode_dist": 0.95,
+   "faces": 21
+  },
+  {
+   "name": "HV_Cables",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Cables de alta tensión entre batería e inversores",
+   "group": "Alta tensión",
+   "stage": 5,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 1.0,
+   "faces": 107
+  },
+  {
+   "name": "INT_Cantrail_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Guarnecido del larguero del techo",
+   "group": "Guarnecidos",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.35,
+   "faces": 5
+  },
+  {
+   "name": "INT_Cantrail_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Guarnecido del larguero del techo",
+   "group": "Guarnecidos",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.35,
+   "faces": 5
+  },
+  {
+   "name": "INT_Carpet",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Moqueta del habitáculo",
+   "group": "Guarnecidos",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.15,
+   "faces": 6
+  },
+  {
+   "name": "INT_Console_Armrest",
+   "type": "MESH",
+   "parent": "CONSOLE_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Reposabrazos (tapa del compartimento)",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 6
+  },
+  {
+   "name": "INT_Console_Body",
+   "type": "MESH",
+   "parent": "CONSOLE_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Cuerpo de la consola central",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.05,
+   "faces": 6
+  },
+  {
+   "name": "INT_Console_Cupholder_1",
+   "type": "MESH",
+   "parent": "CONSOLE_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Portavasos",
+   "group": "Consola central",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 72
+  },
+  {
+   "name": "INT_Console_Cupholder_2",
+   "type": "MESH",
+   "parent": "CONSOLE_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Portavasos",
+   "group": "Consola central",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 72
+  },
+  {
+   "name": "INT_Console_Tray",
+   "type": "MESH",
+   "parent": "CONSOLE_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Bandeja de cargadores inalámbricos",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.12,
+   "faces": 6
+  },
+  {
+   "name": "INT_Display_Center_Housing",
+   "type": "MESH",
+   "parent": "DISPLAY_CENTER",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Carcasa de la pantalla central",
+   "group": "Pantallas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.06,
+   "faces": 6
+  },
+  {
+   "name": "INT_Display_Center_Mount",
+   "type": "MESH",
+   "parent": "DISPLAY_CENTER",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Soporte de la pantalla",
+   "group": "Pantallas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.89443,
+    -0.44721
+   ],
+   "explode_dist": 0.05,
+   "faces": 6
+  },
+  {
+   "name": "INT_Display_Center_Screen",
+   "type": "MESH",
+   "parent": "DISPLAY_CENTER",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Panel de 18,5\" (409,6 x 230,4 mm)",
+   "group": "Pantallas",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.05,
+   "faces": 6
+  },
+  {
+   "name": "INT_Display_Rear_Housing",
+   "type": "MESH",
+   "parent": "CONSOLE_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Carcasa de la pantalla trasera",
+   "group": "Pantallas",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.25,
+   "faces": 6
+  },
+  {
+   "name": "INT_Display_Rear_Screen",
+   "type": "MESH",
+   "parent": "CONSOLE_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Pantalla trasera de 9,4\"",
+   "group": "Pantallas",
+   "stage": 2,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorArmrest_FL",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "INTERIOR_DOORS",
+   "label": "Reposabrazos de la puerta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorArmrest_FR",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "INTERIOR_DOORS",
+   "label": "Reposabrazos de la puerta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorArmrest_RL",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "INTERIOR_DOORS",
+   "label": "Reposabrazos de la puerta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorArmrest_RR",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "INTERIOR_DOORS",
+   "label": "Reposabrazos de la puerta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorButton_FL",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "INTERIOR_DOORS",
+   "label": "Pulsador interior de apertura",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.45,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorButton_FR",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "INTERIOR_DOORS",
+   "label": "Pulsador interior de apertura",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.45,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorButton_RL",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "INTERIOR_DOORS",
+   "label": "Pulsador interior de apertura",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.45,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorButton_RR",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "INTERIOR_DOORS",
+   "label": "Pulsador interior de apertura",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.45,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorPocket_FL",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "INTERIOR_DOORS",
+   "label": "Bolsillo de la puerta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.38,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorPocket_FR",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "INTERIOR_DOORS",
+   "label": "Bolsillo de la puerta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.38,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorPocket_RL",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "INTERIOR_DOORS",
+   "label": "Bolsillo de la puerta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.38,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorPocket_RR",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "INTERIOR_DOORS",
+   "label": "Bolsillo de la puerta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.38,
+   "faces": 6
+  },
+  {
+   "name": "INT_DoorSpeaker_FL",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "INTERIOR_DOORS",
+   "label": "Rejilla del altavoz",
+   "group": "Paneles de puerta",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.42,
+   "faces": 96
+  },
+  {
+   "name": "INT_DoorSpeaker_FR",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "INTERIOR_DOORS",
+   "label": "Rejilla del altavoz",
+   "group": "Paneles de puerta",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.42,
+   "faces": 96
+  },
+  {
+   "name": "INT_DoorSpeaker_RL",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "INTERIOR_DOORS",
+   "label": "Rejilla del altavoz",
+   "group": "Paneles de puerta",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.42,
+   "faces": 96
+  },
+  {
+   "name": "INT_DoorSpeaker_RR",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "INTERIOR_DOORS",
+   "label": "Rejilla del altavoz",
+   "group": "Paneles de puerta",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.42,
+   "faces": 96
+  },
+  {
+   "name": "INT_DoorTrim_FL",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "INTERIOR_DOORS",
+   "label": "Guarnecido interior de la puerta",
+   "group": "Paneles de puerta",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1
+  },
+  {
+   "name": "INT_DoorTrim_FR",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "INTERIOR_DOORS",
+   "label": "Guarnecido interior de la puerta",
+   "group": "Paneles de puerta",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1
+  },
+  {
+   "name": "INT_DoorTrim_RL",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "INTERIOR_DOORS",
+   "label": "Guarnecido interior de la puerta",
+   "group": "Paneles de puerta",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1
+  },
+  {
+   "name": "INT_DoorTrim_RR",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "INTERIOR_DOORS",
+   "label": "Guarnecido interior de la puerta",
+   "group": "Paneles de puerta",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1
+  },
+  {
+   "name": "INT_FloorMat_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Alfombrilla para todo tipo de clima",
+   "group": "Guarnecidos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.12,
+   "faces": 6
+  },
+  {
+   "name": "INT_FloorMat_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Alfombrilla para todo tipo de clima",
+   "group": "Guarnecidos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.12,
+   "faces": 6
+  },
+  {
+   "name": "INT_FloorMat_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Alfombrilla para todo tipo de clima",
+   "group": "Guarnecidos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.12,
+   "faces": 6
+  },
+  {
+   "name": "INT_IP_Airwave_Vent",
+   "type": "MESH",
+   "parent": "IP_ASSEMBLY",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Salida de aire continua (Airwave)",
+   "group": "Salpicadero",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.12,
+   "faces": 18
+  },
+  {
+   "name": "INT_IP_Ambient_Light",
+   "type": "MESH",
+   "parent": "IP_ASSEMBLY",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Tira de luz ambiental",
+   "group": "Salpicadero",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 6
+  },
+  {
+   "name": "INT_IP_Glovebox",
+   "type": "MESH",
+   "parent": "IP_ASSEMBLY",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Guantera",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.95783,
+    -0.28735
+   ],
+   "explode_dist": 0.2,
+   "faces": 6
+  },
+  {
+   "name": "INT_IP_Lower_Driver",
+   "type": "MESH",
+   "parent": "IP_ASSEMBLY",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Panel inferior del conductor",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.95783,
+    -0.28735
+   ],
+   "explode_dist": 0.2,
+   "faces": 6
+  },
+  {
+   "name": "INT_IP_TopPad",
+   "type": "MESH",
+   "parent": "IP_ASSEMBLY",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Panel superior del salpicadero (Tactical Grey)",
+   "group": "Salpicadero",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.5145,
+    0.85749
+   ],
+   "explode_dist": 0.25,
+   "faces": 10
+  },
+  {
+   "name": "INT_Overhead_Console",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Consola de techo delantera (luces de lectura)",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 6
+  },
+  {
+   "name": "INT_Pedal_Accelerator",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Pedal del acelerador",
+   "group": "Mandos",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 12
+  },
+  {
+   "name": "INT_Pedal_Brake",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Pedal de freno",
+   "group": "Mandos",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.25,
+   "faces": 12
+  },
+  {
+   "name": "INT_Rearview_Mirror",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Retrovisor interior",
+   "group": "Guarnecidos",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 12
+  },
+  {
+   "name": "INT_SeatF_L_Back",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Respaldo",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.1,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_L_Base",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Base y guías del asiento",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_L_Bolster_L",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Refuerzo lateral del cojín",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.06,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_L_Bolster_R",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Refuerzo lateral del cojín",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.06,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_L_Cushion",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Cojín del asiento",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_L_Headrest",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Reposacabezas integrado",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.16,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_R_Back",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Respaldo",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.1,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_R_Base",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Base y guías del asiento",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_R_Bolster_L",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Refuerzo lateral del cojín",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.06,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_R_Bolster_R",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Refuerzo lateral del cojín",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.06,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_R_Cushion",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Cojín del asiento",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatF_R_Headrest",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Reposacabezas integrado",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.16,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_Base",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Estructura de la banqueta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_C_Back",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Respaldo de la banqueta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.1,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_C_Cushion",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Cojín abatible de la banqueta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_C_Headrest",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Reposacabezas trasero",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.15,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_L_Back",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Respaldo de la banqueta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.1,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_L_Cushion",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Cojín abatible de la banqueta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_L_Headrest",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Reposacabezas trasero",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.15,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_R_Back",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Respaldo de la banqueta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.1,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_R_Cushion",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Cojín abatible de la banqueta",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.08,
+   "faces": 6
+  },
+  {
+   "name": "INT_SeatR_R_Headrest",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Reposacabezas trasero",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.15,
+   "faces": 6
+  },
+  {
+   "name": "INT_Seatbelt_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Cinturón de seguridad de tres puntos",
+   "group": "Cinturones",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 18
+  },
+  {
+   "name": "INT_Seatbelt_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Cinturón de seguridad de tres puntos",
+   "group": "Cinturones",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 18
+  },
+  {
+   "name": "INT_Seatbelt_RL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Cinturón de seguridad de tres puntos",
+   "group": "Cinturones",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 18
+  },
+  {
+   "name": "INT_Seatbelt_RR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Cinturón de seguridad de tres puntos",
+   "group": "Cinturones",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 18
+  },
+  {
+   "name": "INT_SteeringWheel_Hub",
+   "type": "MESH",
+   "parent": "STEERING_WHEEL",
+   "system": "STEERING",
+   "label": "Buje y radios con controles",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.05,
+   "faces": 12
+  },
+  {
+   "name": "INT_SteeringWheel_Rim",
+   "type": "MESH",
+   "parent": "STEERING_WHEEL",
+   "system": "STEERING",
+   "label": "Aro del volante",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.1,
+   "faces": 720
+  },
+  {
+   "name": "INT_Steering_Column_Shroud",
+   "type": "MESH",
+   "parent": "STEERING_WHEEL",
+   "system": "STEERING",
+   "label": "Cubierta de la columna y actuador de realimentación",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.92848,
+    -0.37139
+   ],
+   "explode_dist": 0.15,
+   "faces": 60
+  },
+  {
+   "name": "INT_SunVisor_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Parasol con cortinilla",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 6
+  },
+  {
+   "name": "INT_SunVisor_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Parasol con cortinilla",
+   "group": "Interior",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 6
+  },
+  {
+   "name": "IP_ASSEMBLY",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Conjunto del salpicadero",
+   "group": "Salpicadero",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.97014,
+    0.24254
+   ],
+   "explode_dist": 0.75,
+   "faces": 0
+  },
+  {
+   "name": "LGT_Bed_Strip_L",
+   "type": "MESH",
+   "parent": "CARGO_BED_TUB",
+   "system": "LIGHTING",
+   "label": "Luz lateral de la caja a lo largo",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.25,
+   "faces": 6
+  },
+  {
+   "name": "LGT_Bed_Strip_R",
+   "type": "MESH",
+   "parent": "CARGO_BED_TUB",
+   "system": "LIGHTING",
+   "label": "Luz lateral de la caja a lo largo",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.25,
+   "faces": 6
+  },
+  {
+   "name": "LGT_Front_Lightbar_Housing",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Embellecedor y soporte de la barra de luz",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.2,
+   "faces": 38
+  },
+  {
+   "name": "LGT_Front_Lightbar_LED",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Barra de luz delantera (DRL LED)",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 38
+  },
+  {
+   "name": "LGT_Front_Lightbar_Lens",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Lente de la barra de luz delantera",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 38
+  },
+  {
+   "name": "LGT_Headlamp_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Faro izquierdo (tras la barra de luz)",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Ubicación según el procedimiento de servicio; geometría interna aproximada",
+   "explode_dir_blender": [
+    -0.25916,
+    0.86387,
+    0.43193
+   ],
+   "explode_dist": 0.55,
+   "faces": 246
+  },
+  {
+   "name": "LGT_Headlamp_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Faro derecho (tras la barra de luz)",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Ubicación según el procedimiento de servicio; geometría interna aproximada",
+   "explode_dir_blender": [
+    0.25916,
+    0.86387,
+    0.43193
+   ],
+   "explode_dist": 0.55,
+   "faces": 246
+  },
+  {
+   "name": "LGT_License_Plate_Lamp",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Luz de matrícula",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.99504,
+    0.0995
+   ],
+   "explode_dist": 0.45,
+   "faces": 6
+  },
+  {
+   "name": "LGT_RearMarker_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Catadióptrico / luz de posición lateral trasera",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    -0.19612,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 6
+  },
+  {
+   "name": "LGT_RearMarker_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Catadióptrico / luz de posición lateral trasera",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    -0.19612,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 6
+  },
+  {
+   "name": "LGT_Rear_Lightbar_LED",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Barra de luz trasera (LED rojo)",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 14
+  },
+  {
+   "name": "LGT_Rear_Lightbar_Lens",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Lente de la barra de luz trasera",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.45,
+   "faces": 14
+  },
+  {
+   "name": "LGT_Reverse_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Luz de marcha atrás",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 6
+  },
+  {
+   "name": "LGT_Reverse_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Luz de marcha atrás",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 6
+  },
+  {
+   "name": "LGT_TailLamp_BodySide_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Piloto lateral de la carrocería (izquierdo)",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.91287,
+    -0.36515,
+    0.18257
+   ],
+   "explode_dist": 0.35,
+   "faces": 5
+  },
+  {
+   "name": "LGT_TailLamp_BodySide_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Piloto lateral de la carrocería (derecho)",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.91287,
+    -0.36515,
+    0.18257
+   ],
+   "explode_dist": 0.35,
+   "faces": 5
+  },
+  {
+   "name": "LV_Battery_48V",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Batería de baja tensión de 48 V",
+   "group": "Baja tensión",
+   "stage": 5,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.92057,
+    0.27617,
+    0.27617
+   ],
+   "explode_dist": 0.6,
+   "faces": 44
+  },
+  {
+   "name": "MIRROR_L",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Retrovisor exterior electromecánico (izquierdo)",
+   "group": "Retrovisores",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.94072,
+    0.18814,
+    0.28222
+   ],
+   "explode_dist": 0.55,
+   "faces": 0
+  },
+  {
+   "name": "MIRROR_R",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Retrovisor exterior electromecánico (derecho)",
+   "group": "Retrovisores",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.94072,
+    0.18814,
+    0.28222
+   ],
+   "explode_dist": 0.55,
+   "faces": 0
+  },
+  {
+   "name": "SEAT_FRONT_L",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Asiento delantero del conductor",
+   "group": "Asientos",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.51261,
+    0.08544,
+    0.85436
+   ],
+   "explode_dist": 0.95,
+   "faces": 0
+  },
+  {
+   "name": "SEAT_FRONT_R",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Asiento delantero del acompañante",
+   "group": "Asientos",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.51261,
+    0.08544,
+    0.85436
+   ],
+   "explode_dist": 0.95,
+   "faces": 0
+  },
+  {
+   "name": "SEAT_REAR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Banqueta trasera de tres plazas",
+   "group": "Asientos",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    0.95783
+   ],
+   "explode_dist": 1.05,
+   "faces": 0
+  },
+  {
+   "name": "STEERING_WHEEL",
+   "type": "EMPTY",
+   "parent": "IP_ASSEMBLY",
+   "system": "STEERING",
+   "label": "Volante «squircle» (dirección por cable)",
+   "group": "Dirección",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 0
+  },
+  {
+   "name": "STR_FL_TieRod",
+   "type": "MESH",
+   "parent": "SUSP_FL",
+   "system": "STEERING",
+   "label": "Bieleta de dirección",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    -0.28735,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 50
+  },
+  {
+   "name": "STR_FR_TieRod",
+   "type": "MESH",
+   "parent": "SUSP_FR",
+   "system": "STEERING",
+   "label": "Bieleta de dirección",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    -0.28735,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 50
+  },
+  {
+   "name": "STR_F_Actuator",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Actuador de dirección delantero (steer-by-wire)",
+   "group": "Dirección",
+   "stage": 4,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.89443,
+    -0.44721
+   ],
+   "explode_dist": 0.75,
+   "faces": 198
+  },
+  {
+   "name": "STR_RL_TieRod",
+   "type": "MESH",
+   "parent": "SUSP_RL",
+   "system": "STEERING",
+   "label": "Bieleta de convergencia (dirección trasera)",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.28735,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 50
+  },
+  {
+   "name": "STR_RR_TieRod",
+   "type": "MESH",
+   "parent": "SUSP_RR",
+   "system": "STEERING",
+   "label": "Bieleta de convergencia (dirección trasera)",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.28735,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 50
+  },
+  {
+   "name": "STR_R_Actuator",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Actuador de dirección trasero (convergencia de las ruedas traseras)",
+   "group": "Dirección",
+   "stage": 4,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.89443,
+    -0.44721
+   ],
+   "explode_dist": 0.75,
+   "faces": 198
+  },
+  {
+   "name": "SUSP_FL",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Suspensión delantera izquierda",
+   "group": "Suspensión",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.55,
+   "faces": 0
+  },
+  {
+   "name": "SUSP_FR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Suspensión delantera derecha",
+   "group": "Suspensión",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.55,
+   "faces": 0
+  },
+  {
+   "name": "SUSP_RL",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Suspensión trasera izquierda",
+   "group": "Suspensión",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.55,
+   "faces": 0
+  },
+  {
+   "name": "SUSP_RR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Suspensión trasera derecha",
+   "group": "Suspensión",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.55,
+   "faces": 0
+  },
+  {
+   "name": "SUS_FL_AirSpring_Module",
+   "type": "MESH",
+   "parent": "SUSP_FL",
+   "system": "FRONT_SUSPENSION",
+   "label": "Módulo de muelle neumático con amortiguador adaptativo",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.55,
+   "faces": 269
+  },
+  {
+   "name": "SUS_FL_Knuckle",
+   "type": "MESH",
+   "parent": "SUSP_FL",
+   "system": "FRONT_SUSPENSION",
+   "label": "Portamangueta de aluminio con buje y rodamiento",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 42
+  },
+  {
+   "name": "SUS_FL_LowerArm",
+   "type": "MESH",
+   "parent": "SUSP_FL",
+   "system": "FRONT_SUSPENSION",
+   "label": "Brazo inferior (horquilla) de aluminio",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.85749,
+    0.0,
+    -0.5145
+   ],
+   "explode_dist": 0.32,
+   "faces": 54
+  },
+  {
+   "name": "SUS_FL_StabLink",
+   "type": "MESH",
+   "parent": "SUSP_FL",
+   "system": "FRONT_SUSPENSION",
+   "label": "Bieleta de la barra estabilizadora",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.35,
+   "faces": 12
+  },
+  {
+   "name": "SUS_FL_UpperArm",
+   "type": "MESH",
+   "parent": "SUSP_FL",
+   "system": "FRONT_SUSPENSION",
+   "label": "Brazo superior (horquilla)",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.81923,
+    0.0,
+    0.57346
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "SUS_FR_AirSpring_Module",
+   "type": "MESH",
+   "parent": "SUSP_FR",
+   "system": "FRONT_SUSPENSION",
+   "label": "Módulo de muelle neumático con amortiguador adaptativo",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.55,
+   "faces": 269
+  },
+  {
+   "name": "SUS_FR_Knuckle",
+   "type": "MESH",
+   "parent": "SUSP_FR",
+   "system": "FRONT_SUSPENSION",
+   "label": "Portamangueta de aluminio con buje y rodamiento",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 42
+  },
+  {
+   "name": "SUS_FR_LowerArm",
+   "type": "MESH",
+   "parent": "SUSP_FR",
+   "system": "FRONT_SUSPENSION",
+   "label": "Brazo inferior (horquilla) de aluminio",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.85749,
+    0.0,
+    -0.5145
+   ],
+   "explode_dist": 0.32,
+   "faces": 54
+  },
+  {
+   "name": "SUS_FR_StabLink",
+   "type": "MESH",
+   "parent": "SUSP_FR",
+   "system": "FRONT_SUSPENSION",
+   "label": "Bieleta de la barra estabilizadora",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.35,
+   "faces": 12
+  },
+  {
+   "name": "SUS_FR_UpperArm",
+   "type": "MESH",
+   "parent": "SUSP_FR",
+   "system": "FRONT_SUSPENSION",
+   "label": "Brazo superior (horquilla)",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.81923,
+    0.0,
+    0.57346
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "SUS_F_StabilizerBar",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Barra estabilizadora",
+   "group": "Suspensión",
+   "stage": 4,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.8,
+    0.6
+   ],
+   "explode_dist": 0.6,
+   "faces": 62
+  },
+  {
+   "name": "SUS_RL_AirSpring_Module",
+   "type": "MESH",
+   "parent": "SUSP_RL",
+   "system": "REAR_SUSPENSION",
+   "label": "Módulo de muelle neumático con amortiguador adaptativo",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.55,
+   "faces": 269
+  },
+  {
+   "name": "SUS_RL_Knuckle",
+   "type": "MESH",
+   "parent": "SUSP_RL",
+   "system": "REAR_SUSPENSION",
+   "label": "Portamangueta de aluminio con buje y rodamiento",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 42
+  },
+  {
+   "name": "SUS_RL_LowerArm",
+   "type": "MESH",
+   "parent": "SUSP_RL",
+   "system": "REAR_SUSPENSION",
+   "label": "Brazo inferior (horquilla) de aluminio",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.85749,
+    0.0,
+    -0.5145
+   ],
+   "explode_dist": 0.32,
+   "faces": 54
+  },
+  {
+   "name": "SUS_RL_StabLink",
+   "type": "MESH",
+   "parent": "SUSP_RL",
+   "system": "REAR_SUSPENSION",
+   "label": "Bieleta de la barra estabilizadora",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.35,
+   "faces": 12
+  },
+  {
+   "name": "SUS_RL_UpperArm",
+   "type": "MESH",
+   "parent": "SUSP_RL",
+   "system": "REAR_SUSPENSION",
+   "label": "Brazo superior (horquilla)",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.81923,
+    0.0,
+    0.57346
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "SUS_RR_AirSpring_Module",
+   "type": "MESH",
+   "parent": "SUSP_RR",
+   "system": "REAR_SUSPENSION",
+   "label": "Módulo de muelle neumático con amortiguador adaptativo",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.55,
+   "faces": 269
+  },
+  {
+   "name": "SUS_RR_Knuckle",
+   "type": "MESH",
+   "parent": "SUSP_RR",
+   "system": "REAR_SUSPENSION",
+   "label": "Portamangueta de aluminio con buje y rodamiento",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 42
+  },
+  {
+   "name": "SUS_RR_LowerArm",
+   "type": "MESH",
+   "parent": "SUSP_RR",
+   "system": "REAR_SUSPENSION",
+   "label": "Brazo inferior (horquilla) de aluminio",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.85749,
+    0.0,
+    -0.5145
+   ],
+   "explode_dist": 0.32,
+   "faces": 54
+  },
+  {
+   "name": "SUS_RR_StabLink",
+   "type": "MESH",
+   "parent": "SUSP_RR",
+   "system": "REAR_SUSPENSION",
+   "label": "Bieleta de la barra estabilizadora",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.35,
+   "faces": 12
+  },
+  {
+   "name": "SUS_RR_UpperArm",
+   "type": "MESH",
+   "parent": "SUSP_RR",
+   "system": "REAR_SUSPENSION",
+   "label": "Brazo superior (horquilla)",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.81923,
+    0.0,
+    0.57346
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "SUS_R_StabilizerBar",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Barra estabilizadora",
+   "group": "Suspensión",
+   "stage": 4,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.8,
+    0.6
+   ],
+   "explode_dist": 0.6,
+   "faces": 62
+  },
+  {
+   "name": "SW_Door_Front_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Interruptor de apertura de la puerta delantera (pilar B)",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22,
+   "faces": 6
+  },
+  {
+   "name": "SW_Door_Front_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Interruptor de apertura de la puerta delantera (pilar B)",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22,
+   "faces": 6
+  },
+  {
+   "name": "SW_Door_Rear_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Interruptor de apertura de la puerta trasera (pilar C)",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22,
+   "faces": 6
+  },
+  {
+   "name": "SW_Door_Rear_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Interruptor de apertura de la puerta trasera (pilar C)",
+   "group": "Detalles",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22,
+   "faces": 6
+  },
+  {
+   "name": "TONNEAU_ASSEMBLY",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Cubierta rígida motorizada (tonneau)",
+   "group": "Cubierta de la caja",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.7,
+   "faces": 0
+  },
+  {
+   "name": "WHEEL_FL",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Conjunto de rueda delantera izquierda",
+   "group": "Ruedas",
+   "stage": 4,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.9,
+   "faces": 0
+  },
+  {
+   "name": "WHEEL_FR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Conjunto de rueda delantera derecha",
+   "group": "Ruedas",
+   "stage": 4,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.9,
+   "faces": 0
+  },
+  {
+   "name": "WHEEL_RL",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Conjunto de rueda trasera izquierda",
+   "group": "Ruedas",
+   "stage": 4,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.9,
+   "faces": 0
+  },
+  {
+   "name": "WHEEL_RR",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Conjunto de rueda trasera derecha",
+   "group": "Ruedas",
+   "stage": 4,
+   "fidelity": "V",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.9,
+   "faces": 0
+  },
+  {
+   "name": "WHL_FL_Cover_Core",
+   "type": "MESH",
+   "parent": "WHEEL_FL",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Tapacubos aerodinámico «Core» 20\"",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.55,
+   "faces": 704
+  },
+  {
+   "name": "WHL_FL_LugNuts",
+   "type": "MESH",
+   "parent": "WHEEL_FL",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Tuercas de rueda (6), par 205 N·m",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 108
+  },
+  {
+   "name": "WHL_FL_Rim",
+   "type": "MESH",
+   "parent": "WHEEL_FL",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Llanta de aleación 20 x 9.0J ET58.5",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 1956
+  },
+  {
+   "name": "WHL_FL_Tire",
+   "type": "MESH",
+   "parent": "WHEEL_FL",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Neumático Pirelli Scorpion ATR 285/65R20",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": "Medidas verificadas; dibujo de la banda aproximado",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 4188
+  },
+  {
+   "name": "WHL_FR_Cover_Core",
+   "type": "MESH",
+   "parent": "WHEEL_FR",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Tapacubos aerodinámico «Core» 20\"",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.55,
+   "faces": 704
+  },
+  {
+   "name": "WHL_FR_LugNuts",
+   "type": "MESH",
+   "parent": "WHEEL_FR",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Tuercas de rueda (6), par 205 N·m",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 108
+  },
+  {
+   "name": "WHL_FR_Rim",
+   "type": "MESH",
+   "parent": "WHEEL_FR",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Llanta de aleación 20 x 9.0J ET58.5",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 1956
+  },
+  {
+   "name": "WHL_FR_Tire",
+   "type": "MESH",
+   "parent": "WHEEL_FR",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Neumático Pirelli Scorpion ATR 285/65R20",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": "Medidas verificadas; dibujo de la banda aproximado",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 4188
+  },
+  {
+   "name": "WHL_RL_Cover_Core",
+   "type": "MESH",
+   "parent": "WHEEL_RL",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Tapacubos aerodinámico «Core» 20\"",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.55,
+   "faces": 704
+  },
+  {
+   "name": "WHL_RL_LugNuts",
+   "type": "MESH",
+   "parent": "WHEEL_RL",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Tuercas de rueda (6), par 205 N·m",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 108
+  },
+  {
+   "name": "WHL_RL_Rim",
+   "type": "MESH",
+   "parent": "WHEEL_RL",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Llanta de aleación 20 x 9.0J ET58.5",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 1956
+  },
+  {
+   "name": "WHL_RL_Tire",
+   "type": "MESH",
+   "parent": "WHEEL_RL",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Neumático Pirelli Scorpion ATR 285/65R20",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": "Medidas verificadas; dibujo de la banda aproximado",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 4188
+  },
+  {
+   "name": "WHL_RR_Cover_Core",
+   "type": "MESH",
+   "parent": "WHEEL_RR",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Tapacubos aerodinámico «Core» 20\"",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.55,
+   "faces": 704
+  },
+  {
+   "name": "WHL_RR_LugNuts",
+   "type": "MESH",
+   "parent": "WHEEL_RR",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Tuercas de rueda (6), par 205 N·m",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 108
+  },
+  {
+   "name": "WHL_RR_Rim",
+   "type": "MESH",
+   "parent": "WHEEL_RR",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Llanta de aleación 20 x 9.0J ET58.5",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 1956
+  },
+  {
+   "name": "WHL_RR_Tire",
+   "type": "MESH",
+   "parent": "WHEEL_RR",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Neumático Pirelli Scorpion ATR 285/65R20",
+   "group": "Ruedas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": "Medidas verificadas; dibujo de la banda aproximado",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 4188
+  },
+  {
+   "name": "WIPER_ASSEMBLY",
+   "type": "EMPTY",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Limpiaparabrisas (brazo y escobilla)",
+   "group": "Limpiaparabrisas",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.65,
+   "faces": 0
+  }
+ ]
+}

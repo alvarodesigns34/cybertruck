@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "visor-cybertruck",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["tools/serve.mjs", "web", "8080"],
+      "port": 8080
+    }
+  ]
+}

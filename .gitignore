@@ -1,0 +1,21 @@
+# Copias de seguridad y temporales de Blender
+*.blend1
+*.blend2
+*.blend@
+blender/backups/
+
+# Renders temporales y referencias con derechos de autor (no se distribuyen)
+renders/tmp/
+reference/
+*.tmp
+
+# Dependencias y compilaciones web
+node_modules/
+web/dist/
+.vite/
+
+# Sistema
+Thumbs.db
+.DS_Store
+__pycache__/
+*.pyc
