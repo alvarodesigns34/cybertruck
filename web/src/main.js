@@ -206,6 +206,10 @@ function flyTo(view, ms = 900) {
   if (!v) return;
   const p0 = camera.position.clone(), t0 = controls.target.clone();
   const p1 = new THREE.Vector3(...v.pos), t1 = new THREE.Vector3(...v.target);
+  // En pantallas verticales (tabletas, móviles) se aleja la cámara para encuadrar el vehículo
+  if (!v.fov && camera.aspect < 1.3) {
+    p1.sub(t1).multiplyScalar(Math.pow(1.3 / camera.aspect, 0.85)).add(t1);
+  }
   const f0 = camera.fov, f1 = v.fov || 38;
   const start = performance.now();
   state.anim = (now) => {
