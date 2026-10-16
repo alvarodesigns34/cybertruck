@@ -59,7 +59,7 @@ TIRE_ASPECT = 0.65
 TIRE_SIDEWALL = TIRE_WIDTH * TIRE_ASPECT            # 0.18525
 RIM_RADIUS = RIM_DIAM_IN * 0.0254 / 2.0             # 0.254
 TIRE_RADIUS = RIM_RADIUS + TIRE_SIDEWALL            # 0.43925 (Ø 878,5 mm)
-WHEEL_CENTER_Z = 0.430                              # radio estático bajo carga [A]
+WHEEL_CENTER_Z = 0.437                              # radio estático bajo carga (aplastamiento ~2 mm) [A]
 LUG_COUNT = 6                                       # [A] 6 tuercas, llave de 21 mm [V]
 LUG_TORQUE_NM = 205
 
@@ -102,7 +102,7 @@ FRONT_BUMPER = {
     "lip_y": 2.640, "lip_z": (0.398, 0.420),
 }
 # Rampa de ataque (Y, Z) del borde inferior delantero [R]
-FRONT_UNDER = [(2.640, 0.398), (2.559, 0.350), (2.484, 0.318), (2.386, 0.285), (2.367, 0.252)]
+FRONT_UNDER = [(2.640, 0.398), (2.559, 0.350), (2.484, 0.318), (2.386, 0.290), (2.367, 0.266)]
 
 # Perfil trasero [R]
 REAR_TOP = (-2.945, 1.345)

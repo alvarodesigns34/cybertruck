@@ -153,7 +153,7 @@ def build_library():
     M = {}
     M["steel"] = stainless_steel()
 
-    m, nt, b = base_material("CT_Plastic_Textured", (0.032, 0.033, 0.035), 0.0, 0.62)
+    m, nt, b = base_material("CT_Plastic_Textured", (0.020, 0.021, 0.023), 0.0, 0.58)
     add_bump_noise(nt, b, scale=900.0, strength=0.12, distance=0.0003, rough_mix=(0.55, 0.70))
     m["web_preset"] = "plastic_textured"
     M["plastic_textured"] = m
@@ -201,11 +201,11 @@ def build_library():
     M["reflector"] = m
 
     # Ruedas y frenos
-    m, nt, b = base_material("CT_Tire_Rubber", (0.022, 0.022, 0.023), 0.0, 0.82)
+    m, nt, b = base_material("CT_Tire_Rubber", (0.014, 0.014, 0.015), 0.0, 0.86)
     add_bump_noise(nt, b, scale=1500.0, strength=0.15, distance=0.0002, rough_mix=(0.75, 0.9))
     m["web_preset"] = "rubber"
     M["rubber"] = m
-    m, nt, b = base_material("CT_Tire_Sidewall", (0.028, 0.028, 0.03), 0.0, 0.72)
+    m, nt, b = base_material("CT_Tire_Sidewall", (0.018, 0.018, 0.019), 0.0, 0.70)
     add_bump_noise(nt, b, scale=2500.0, strength=0.08, distance=0.0001)
     m["web_preset"] = "rubber_sidewall"
     M["rubber_side"] = m

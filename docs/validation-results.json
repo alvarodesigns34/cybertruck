@@ -1,0 +1,96 @@
+{
+ "reversibilidad_explosion": {
+  "objects": 309,
+  "max_deviation": 0.0,
+  "ok": true
+ },
+ "dimensiones": {
+  "longitud": {
+   "modelo": 5.6849,
+   "oficial": 5.6829,
+   "desviacion_mm": 2.0
+  },
+  "anchura_sin_espejos": {
+   "modelo": 2.0817,
+   "oficial": 2.0316,
+   "desviacion_mm": 50.1
+  },
+  "anchura_con_espejos": {
+   "modelo": 2.4111,
+   "oficial": 2.4133,
+   "desviacion_mm": -2.2
+  },
+  "altura_medium": {
+   "modelo": 1.7967,
+   "oficial": 1.7938,
+   "desviacion_mm": 2.9
+  },
+  "batalla": {
+   "modelo": 3.635,
+   "oficial": 3.635,
+   "desviacion_mm": -0.0
+  },
+  "via": {
+   "modelo": 1.772,
+   "oficial": 1.772,
+   "desviacion_mm": -0.0
+  },
+  "voladizo_delantero": {
+   "modelo": 0.8805,
+   "oficial": 0.8783,
+   "desviacion_mm": 2.2
+  },
+  "voladizo_trasero": {
+   "modelo": 1.1694,
+   "oficial": 1.1696,
+   "desviacion_mm": -0.2
+  },
+  "altura_libre_medium": {
+   "modelo": 0.2566,
+   "oficial": 0.257,
+   "desviacion_mm": -0.4
+  },
+  "diametro_neumatico": {
+   "modelo": 0.8784,
+   "oficial": 0.8785,
+   "desviacion_mm": -0.1
+  },
+  "z_minimo_neumatico": {
+   "modelo": -0.0022,
+   "oficial": 0.0,
+   "desviacion_mm": -2.2
+  }
+ },
+ "silueta": {
+  "perfil_superior": {
+   "muestras": 125,
+   "media_mm": 2.9,
+   "p95_mm": 6.8,
+   "max_mm": 10.2
+  },
+  "perfil_inferior": {
+   "muestras": 31,
+   "media_mm": 12.8,
+   "p95_mm": 40.3,
+   "max_mm": 121.1
+  },
+  "perfil_frontal": {
+   "muestras": 34,
+   "media_mm": 16.2,
+   "p95_mm": 51.3,
+   "max_mm": 151.3
+  },
+  "perfil_trasero": {
+   "muestras": 22,
+   "media_mm": 9.8,
+   "p95_mm": 21.9,
+   "max_mm": 65.1
+  },
+  "planta_semianchura": {
+   "muestras": 49,
+   "media_mm": 6.7,
+   "p95_mm": 19.2,
+   "max_mm": 28.6
+  }
+ }
+}

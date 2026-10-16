@@ -14,11 +14,11 @@ CAMERAS = {
     # nombre: (posición, objetivo, lente mm, tipo, escala_orto)
     "CAM_3Q_Front": ((-6.6, 6.9, 2.0), (0.0, 0.1, 0.80), 50, "PERSP", 0),
     "CAM_3Q_Rear": ((6.4, -7.6, 2.4), (0.0, -0.5, 0.85), 50, "PERSP", 0),
-    "CAM_Side_Profile": ((-26.0, -0.15, 0.90), (0.0, -0.15, 0.90), 135, "PERSP", 0),
+    "CAM_Side_Profile": ((26.0, -0.15, 0.90), (0.0, -0.15, 0.90), 135, "PERSP", 0),
     "CAM_Front": ((0.0, 16.0, 0.95), (0.0, 0.0, 0.95), 85, "PERSP", 0),
     "CAM_Rear": ((0.0, -16.0, 0.95), (0.0, 0.0, 0.95), 85, "PERSP", 0),
     "CAM_Top": ((0.0, -0.15, 20.0), (0.0, -0.15, 0.0), 50, "ORTHO", 6.6),
-    "CAM_Interior": ((-0.38, -0.55, 1.42), (0.05, 1.3, 1.02), 18, "PERSP", 0),
+    "CAM_Interior": ((0.40, 0.36, 1.22), (-0.34, 1.05, 1.00), 17, "PERSP", 0),
     "CAM_Wheel_Detail": ((-2.6, 2.95, 0.62), (-0.95, 1.82, 0.45), 50, "PERSP", 0),
     "CAM_Underbody": ((-3.6, 5.2, -0.9), (0.0, 0.2, 0.35), 32, "PERSP", 0),
     "CAM_Exploded": ((-9.5, 9.0, 5.5), (0.0, -0.2, 0.9), 40, "PERSP", 0),
@@ -42,7 +42,7 @@ def _obj(name, data, col):
     return o
 
 
-def world(hdri="studio.exr", strength=0.9, rotation=0.0):
+def world(hdri="studio.exr", strength=0.55, rotation=0.0):
     w = bpy.data.worlds.get("CT_World") or bpy.data.worlds.new("CT_World")
     bpy.context.scene.world = w
     w.use_nodes = True
@@ -64,7 +64,16 @@ def world(hdri="studio.exr", strength=0.9, rotation=0.0):
         nt.links.new(tex.outputs["Color"], bg.inputs["Color"])
     else:
         bg.inputs["Color"].default_value = (0.05, 0.05, 0.055, 1)
-    nt.links.new(bg.outputs["Background"], out.inputs["Surface"])
+    # La cámara ve un fondo neutro oscuro; reflejos e iluminación proceden del HDRI
+    cam_bg = nt.nodes.new("ShaderNodeBackground")
+    cam_bg.inputs["Color"].default_value = (0.020, 0.021, 0.024, 1)
+    cam_bg.inputs["Strength"].default_value = 1.0
+    lp = nt.nodes.new("ShaderNodeLightPath")
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(lp.outputs["Is Camera Ray"], mix.inputs["Fac"])
+    nt.links.new(bg.outputs["Background"], mix.inputs[1])
+    nt.links.new(cam_bg.outputs["Background"], mix.inputs[2])
+    nt.links.new(mix.outputs["Shader"], out.inputs["Surface"])
     return w
 
 
@@ -153,6 +162,7 @@ def render_settings(engine="CYCLES", samples=128):
     sc.render.engine = engine
     sc.render.resolution_x, sc.render.resolution_y = 1920, 1080
     sc.view_settings.view_transform = "AgX"
+    sc.view_settings.exposure = -0.6
     try:
         sc.view_settings.look = "AgX - Medium High Contrast"
     except Exception:

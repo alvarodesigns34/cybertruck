@@ -206,11 +206,14 @@ function flyTo(view, ms = 900) {
   if (!v) return;
   const p0 = camera.position.clone(), t0 = controls.target.clone();
   const p1 = new THREE.Vector3(...v.pos), t1 = new THREE.Vector3(...v.target);
+  const f0 = camera.fov, f1 = v.fov || 38;
   const start = performance.now();
   state.anim = (now) => {
     const k = smoothstep(0, 1, (now - start) / ms);
     camera.position.lerpVectors(p0, p1, k);
     controls.target.lerpVectors(t0, t1, k);
+    camera.fov = f0 + (f1 - f0) * k;
+    camera.updateProjectionMatrix();
     if (k >= 1) state.anim = null;
   };
   document.querySelectorAll('.views .chip').forEach((b) => b.classList.toggle('active', b.dataset.view === view));

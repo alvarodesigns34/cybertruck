@@ -53,7 +53,7 @@ export const VIEWS = {
   rear34: { pos: [6.2, 2.4, 7.4], target: [0, 0.8, 0.5] },
   side: { pos: [-10.5, 0.95, 0.15], target: [0, 0.85, 0.15] },
   top: { pos: [0.001, 11.5, 0.15], target: [0, 0, 0.15] },
-  interior: { pos: [-0.36, 1.40, 0.52], target: [0.02, 1.05, -1.2] },
+  interior: { pos: [0.40, 1.22, -0.36], target: [-0.34, 1.00, -1.05], fov: 72 },
   under: { pos: [-3.4, -1.1, -4.8], target: [0, 0.35, -0.2] },
   exploded: { pos: [-9.0, 5.2, -8.6], target: [0, 0.8, 0.2] },
 };

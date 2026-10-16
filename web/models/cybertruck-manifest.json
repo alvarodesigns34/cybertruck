@@ -2855,7 +2855,7 @@
     -1.0
    ],
    "explode_dist": 1.0,
-   "faces": 107
+   "faces": 127
   },
   {
    "name": "INT_Cantrail_L",
@@ -3672,9 +3672,9 @@
    "type": "MESH",
    "parent": "SEAT_FRONT_L",
    "system": "INTERIOR_SEATS",
-   "label": "Respaldo",
-   "group": "Interior",
-   "stage": 2,
+   "label": "Respaldo con reposacabezas integrado",
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -3683,14 +3683,14 @@
     0.28735
    ],
    "explode_dist": 0.1,
-   "faces": 6
+   "faces": 114
   },
   {
    "name": "INT_SeatF_L_Base",
    "type": "MESH",
    "parent": "SEAT_FRONT_L",
    "system": "INTERIOR_SEATS",
-   "label": "Base y guías del asiento",
+   "label": "Base, guías y carcasas laterales del asiento",
    "group": "Interior",
    "stage": 2,
    "fidelity": "A",
@@ -3701,42 +3701,6 @@
     -1.0
    ],
    "explode_dist": 0.08,
-   "faces": 6
-  },
-  {
-   "name": "INT_SeatF_L_Bolster_L",
-   "type": "MESH",
-   "parent": "SEAT_FRONT_L",
-   "system": "INTERIOR_SEATS",
-   "label": "Refuerzo lateral del cojín",
-   "group": "Interior",
-   "stage": 2,
-   "fidelity": "R",
-   "note": null,
-   "explode_dir_blender": [
-    -0.89443,
-    0.0,
-    0.44721
-   ],
-   "explode_dist": 0.06,
-   "faces": 6
-  },
-  {
-   "name": "INT_SeatF_L_Bolster_R",
-   "type": "MESH",
-   "parent": "SEAT_FRONT_L",
-   "system": "INTERIOR_SEATS",
-   "label": "Refuerzo lateral del cojín",
-   "group": "Interior",
-   "stage": 2,
-   "fidelity": "R",
-   "note": null,
-   "explode_dir_blender": [
-    0.89443,
-    0.0,
-    0.44721
-   ],
-   "explode_dist": 0.06,
    "faces": 6
   },
   {
@@ -3744,9 +3708,9 @@
    "type": "MESH",
    "parent": "SEAT_FRONT_L",
    "system": "INTERIOR_SEATS",
-   "label": "Cojín del asiento",
-   "group": "Interior",
-   "stage": 2,
+   "label": "Cojín con refuerzos laterales",
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -3755,34 +3719,16 @@
     0.95783
    ],
    "explode_dist": 0.08,
-   "faces": 6
-  },
-  {
-   "name": "INT_SeatF_L_Headrest",
-   "type": "MESH",
-   "parent": "SEAT_FRONT_L",
-   "system": "INTERIOR_SEATS",
-   "label": "Reposacabezas integrado",
-   "group": "Interior",
-   "stage": 2,
-   "fidelity": "R",
-   "note": null,
-   "explode_dir_blender": [
-    0.0,
-    -0.37139,
-    0.92848
-   ],
-   "explode_dist": 0.16,
-   "faces": 6
+   "faces": 82
   },
   {
    "name": "INT_SeatF_R_Back",
    "type": "MESH",
    "parent": "SEAT_FRONT_R",
    "system": "INTERIOR_SEATS",
-   "label": "Respaldo",
-   "group": "Interior",
-   "stage": 2,
+   "label": "Respaldo con reposacabezas integrado",
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -3791,14 +3737,14 @@
     0.28735
    ],
    "explode_dist": 0.1,
-   "faces": 6
+   "faces": 114
   },
   {
    "name": "INT_SeatF_R_Base",
    "type": "MESH",
    "parent": "SEAT_FRONT_R",
    "system": "INTERIOR_SEATS",
-   "label": "Base y guías del asiento",
+   "label": "Base, guías y carcasas laterales del asiento",
    "group": "Interior",
    "stage": 2,
    "fidelity": "A",
@@ -3812,49 +3758,13 @@
    "faces": 6
   },
   {
-   "name": "INT_SeatF_R_Bolster_L",
-   "type": "MESH",
-   "parent": "SEAT_FRONT_R",
-   "system": "INTERIOR_SEATS",
-   "label": "Refuerzo lateral del cojín",
-   "group": "Interior",
-   "stage": 2,
-   "fidelity": "R",
-   "note": null,
-   "explode_dir_blender": [
-    -0.89443,
-    0.0,
-    0.44721
-   ],
-   "explode_dist": 0.06,
-   "faces": 6
-  },
-  {
-   "name": "INT_SeatF_R_Bolster_R",
-   "type": "MESH",
-   "parent": "SEAT_FRONT_R",
-   "system": "INTERIOR_SEATS",
-   "label": "Refuerzo lateral del cojín",
-   "group": "Interior",
-   "stage": 2,
-   "fidelity": "R",
-   "note": null,
-   "explode_dir_blender": [
-    0.89443,
-    0.0,
-    0.44721
-   ],
-   "explode_dist": 0.06,
-   "faces": 6
-  },
-  {
    "name": "INT_SeatF_R_Cushion",
    "type": "MESH",
    "parent": "SEAT_FRONT_R",
    "system": "INTERIOR_SEATS",
-   "label": "Cojín del asiento",
-   "group": "Interior",
-   "stage": 2,
+   "label": "Cojín con refuerzos laterales",
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -3863,25 +3773,7 @@
     0.95783
    ],
    "explode_dist": 0.08,
-   "faces": 6
-  },
-  {
-   "name": "INT_SeatF_R_Headrest",
-   "type": "MESH",
-   "parent": "SEAT_FRONT_R",
-   "system": "INTERIOR_SEATS",
-   "label": "Reposacabezas integrado",
-   "group": "Interior",
-   "stage": 2,
-   "fidelity": "R",
-   "note": null,
-   "explode_dir_blender": [
-    0.0,
-    -0.37139,
-    0.92848
-   ],
-   "explode_dist": 0.16,
-   "faces": 6
+   "faces": 82
   },
   {
    "name": "INT_SeatR_Base",
@@ -3907,8 +3799,8 @@
    "parent": "SEAT_REAR",
    "system": "INTERIOR_SEATS",
    "label": "Respaldo de la banqueta",
-   "group": "Interior",
-   "stage": 2,
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -3917,7 +3809,7 @@
     0.28735
    ],
    "explode_dist": 0.1,
-   "faces": 6
+   "faces": 50
   },
   {
    "name": "INT_SeatR_C_Cushion",
@@ -3925,8 +3817,8 @@
    "parent": "SEAT_REAR",
    "system": "INTERIOR_SEATS",
    "label": "Cojín abatible de la banqueta",
-   "group": "Interior",
-   "stage": 2,
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -3935,7 +3827,7 @@
     0.95783
    ],
    "explode_dist": 0.08,
-   "faces": 6
+   "faces": 82
   },
   {
    "name": "INT_SeatR_C_Headrest",
@@ -3961,8 +3853,8 @@
    "parent": "SEAT_REAR",
    "system": "INTERIOR_SEATS",
    "label": "Respaldo de la banqueta",
-   "group": "Interior",
-   "stage": 2,
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -3971,7 +3863,7 @@
     0.28735
    ],
    "explode_dist": 0.1,
-   "faces": 6
+   "faces": 50
   },
   {
    "name": "INT_SeatR_L_Cushion",
@@ -3979,8 +3871,8 @@
    "parent": "SEAT_REAR",
    "system": "INTERIOR_SEATS",
    "label": "Cojín abatible de la banqueta",
-   "group": "Interior",
-   "stage": 2,
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -3989,7 +3881,7 @@
     0.95783
    ],
    "explode_dist": 0.08,
-   "faces": 6
+   "faces": 82
   },
   {
    "name": "INT_SeatR_L_Headrest",
@@ -4015,8 +3907,8 @@
    "parent": "SEAT_REAR",
    "system": "INTERIOR_SEATS",
    "label": "Respaldo de la banqueta",
-   "group": "Interior",
-   "stage": 2,
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -4025,7 +3917,7 @@
     0.28735
    ],
    "explode_dist": 0.1,
-   "faces": 6
+   "faces": 50
   },
   {
    "name": "INT_SeatR_R_Cushion",
@@ -4033,8 +3925,8 @@
    "parent": "SEAT_REAR",
    "system": "INTERIOR_SEATS",
    "label": "Cojín abatible de la banqueta",
-   "group": "Interior",
-   "stage": 2,
+   "group": "Asientos",
+   "stage": 6,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -4043,7 +3935,7 @@
     0.95783
    ],
    "explode_dist": 0.08,
-   "faces": 6
+   "faces": 82
   },
   {
    "name": "INT_SeatR_R_Headrest",

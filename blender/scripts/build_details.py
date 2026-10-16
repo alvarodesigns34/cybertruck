@@ -208,7 +208,7 @@ def build_tow_and_grille(M):
     objs.append(grille)
     # Enganche de remolque trasero (receptor de 2") y tapa
     mb = L.MeshBuilder()
-    L.box(mb, (0.0, -2.86, 0.44), (0.0508, 0.30, 0.0508), 0)
+    L.box(mb, (0.0, -2.83, 0.44), (0.0508, 0.29, 0.0508), 0)
     L.box(mb, (0.0, -2.73, 0.44), (0.30, 0.04, 0.06), 0)
     hitch = mb.build("CHS_Tow_Hitch_Receiver", "UNDERBODY", M["steel_black"])
     L.explode(hitch, (0, -1, -0.3), 0.5, 3, "Enganche", "Receptor del enganche de remolque (clase IV)", "R")

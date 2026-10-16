@@ -246,11 +246,11 @@ def build_console(M):
         objs.append(o)
     # Pantalla trasera de 9,4" (16:9 aprox. 208 x 117 mm) en la parte posterior de la consola
     mb = L.MeshBuilder()
-    L.box(mb, (0.0, -0.152, 0.74), (0.225, 0.016, 0.135), 0, rot=rot_x(12))
+    L.box(mb, (0.0, -0.152, 0.74), (0.225, 0.016, 0.135), 0, rot=rot_x(-12))
     rs_h = mb.build("INT_Display_Rear_Housing", "INTERIOR_CONTROLS", M["int_plastic"], parent=asm)
     L.bevel(rs_h, 0.006, 2, 60)
     mb = L.MeshBuilder()
-    L.box(mb, (0.0, -0.161, 0.742), (0.208, 0.002, 0.117), 0, rot=rot_x(12))
+    L.box(mb, (0.0, -0.161, 0.742), (0.208, 0.002, 0.117), 0, rot=rot_x(-12))
     rs = mb.build("INT_Display_Rear_Screen", "INTERIOR_CONTROLS", M["screen"], parent=asm)
     L.explode(rs_h, (0, -1, 0.2), 0.25, 2, "Pantallas", "Carcasa de la pantalla trasera", "R")
     L.explode(rs, (0, -1, 0.2), 0.30, 2, "Pantallas", "Pantalla trasera de 9,4\"", "V")
@@ -259,38 +259,94 @@ def build_console(M):
 
 
 # ---------------------------------------------------------------------------
-# Asientos
+# Asientos esculpidos (secciones solevadas + subdivisión)
 # ---------------------------------------------------------------------------
+def _section(half_w, bolster, depth, front_bulge=0.0):
+    """Sección cerrada del respaldo/cojín: cara delantera con laterales y cara trasera."""
+    xs = [0.0, 0.45, 0.62, 0.78, 0.92, 1.0]
+    ds = [front_bulge, front_bulge * 0.8 + 0.004, 0.028, 0.058, 0.040, 0.0]
+    front = []
+    for x, d in zip(xs, ds):
+        dd = d * bolster if x >= 0.6 else d
+        front.append((x * half_w, dd))
+    right = front[1:]
+    ring = [(-x, d) for (x, d) in reversed(right)] + front + []
+    ring = [(-p[0], p[1]) for p in reversed(right)] + [front[0]] + right
+    back = [(half_w * 0.98, -depth), (half_w * 0.5, -depth - 0.006), (0.0, -depth - 0.008),
+            (-half_w * 0.5, -depth - 0.006), (-half_w * 0.98, -depth)]
+    return ring + back
+
+
+def sculpted_back(name, system, mat, base, width, levels, depth, tilt_deg, parent, label, edir, dist):
+    """Respaldo: `levels` = [(altura, escala_anchura, factor_lateral, abombado)]."""
+    mb = L.MeshBuilder(merge=1e-7)
+    rot = rot_x(tilt_deg)          # reclinado hacia atrás (-Y)
+    b = Vector(base)
+    rings = []
+    for (h, sc, bol, bulge) in levels:
+        sec = _section(width / 2 * sc, bol, depth, bulge)
+        rings.append([tuple(b + rot @ Vector((x, d, h))) for (x, d) in sec])
+    ctr = b + rot @ Vector((0, -depth / 2, levels[len(levels) // 2][0]))
+    for i in range(len(rings) - 1):
+        mb.quad_strip(rings[i], rings[i + 1], closed=True, want_fn=lambda c: c - ctr)
+    mb.face(rings[0], 0, want=tuple(rot @ Vector((0, 0, -1))))
+    mb.face(rings[-1], 0, want=tuple(rot @ Vector((0, 0, 1))))
+    obj = mb.build(name, system, mat, parent=parent)
+    for p in obj.data.polygons:
+        p.use_smooth = True
+    L.subsurf(obj, 2, 2)
+    L.explode(obj, edir, dist, 6, "Asientos", label, "R")
+    return obj
+
+
+def sculpted_cushion(name, system, mat, center, width, length, thick, parent, label, edir, dist, bol=1.0):
+    """Cojín: secciones a lo largo de la profundidad con laterales elevados y morro redondeado."""
+    mb = L.MeshBuilder(merge=1e-7)
+    c = Vector(center)
+    rings = []
+    steps = [(-0.50, 0.97, 0.7, 0.00), (-0.42, 1.0, 1.0, 0.0), (0.0, 1.0, 1.0, 0.0), (0.38, 0.98, 0.8, -0.006),
+             (0.47, 0.95, 0.4, -0.02), (0.50, 0.90, 0.2, -0.04)]
+    for (t, sc, b, dz) in steps:
+        sec = _section(width / 2 * sc, b * bol, thick, 0.0)
+        # en el cojín la «profundidad» de la sección es la altura (Z) y la posición en Y es t·longitud
+        rings.append([tuple(c + Vector((x, t * length, d + dz))) for (x, d) in sec])
+    ctr = c + Vector((0, 0, -thick / 2))
+    for i in range(len(rings) - 1):
+        mb.quad_strip(rings[i], rings[i + 1], closed=True, want_fn=lambda q: q - ctr)
+    mb.face(rings[0], 0, want=(0, -1, 0))
+    mb.face(rings[-1], 0, want=(0, 1, 0))
+    obj = mb.build(name, system, mat, parent=parent)
+    for p in obj.data.polygons:
+        p.use_smooth = True
+    L.subsurf(obj, 2, 2)
+    L.explode(obj, edir, dist, 6, "Asientos", label, "R")
+    return obj
+
+
+FRONT_BACK_LEVELS = [(0.00, 1.00, 0.6, 0.010), (0.22, 1.00, 1.0, 0.018), (0.42, 0.97, 1.0, 0.012),
+                     (0.54, 0.88, 0.5, 0.006), (0.60, 0.60, 0.1, 0.004), (0.645, 0.54, 0.25, 0.008),
+                     (0.78, 0.56, 0.3, 0.010), (0.845, 0.50, 0.2, 0.004)]
+REAR_BACK_LEVELS = [(0.00, 1.00, 0.4, 0.006), (0.20, 1.00, 0.6, 0.012), (0.42, 0.98, 0.5, 0.008),
+                    (0.52, 0.90, 0.3, 0.004)]
+
+
 def front_seat(M, side):
     s = 1 if side == "R" else -1
-    hx, hz = H_FRONT[0], H_FRONT[1]
+    hx, hz = H_FRONT
     x = s * SEAT_X
     asm = L.assembly(f"SEAT_FRONT_{side}", "INTERIOR_SEATS", (x, hx, hz))
     L.explode(asm, (s * 0.6, 0.1, 1), 0.95, 2, "Asientos",
               f"Asiento delantero {'del acompañante' if s > 0 else 'del conductor'}", "R")
-    objs = []
-    back_tilt = rot_x(-22)
-    # Cojín con laterales
-    objs.append(soft_box(f"INT_SeatF_{side}_Cushion", "INTERIOR_SEATS", M["leather"], (x, hx + 0.20, hz - 0.03),
-                         (0.50, 0.50, 0.11), 0.035, 3, parent=asm, edir=(0, 0.3, 1), dist=0.08,
-                         label="Cojín del asiento"))
-    for k in (-1, 1):
-        objs.append(soft_box(f"INT_SeatF_{side}_Bolster_{'L' if k < 0 else 'R'}", "INTERIOR_SEATS", M["leather"],
-                             (x + k * 0.235, hx + 0.20, hz + 0.0), (0.07, 0.48, 0.12), 0.03, 3, parent=asm,
-                             edir=(k, 0, 0.5), dist=0.06, label="Refuerzo lateral del cojín"))
-    # Respaldo con reposacabezas integrado
-    cb = Vector((x, hx - 0.06, hz + 0.33))
-    objs.append(soft_box(f"INT_SeatF_{side}_Back", "INTERIOR_SEATS", M["leather"], tuple(cb),
-                         (0.52, 0.12, 0.60), 0.04, 3, rot=back_tilt, parent=asm, edir=(0, -1, 0.3), dist=0.10,
-                         label="Respaldo"))
-    ch = cb + back_tilt @ Vector((0, 0.005, 0.40))
-    objs.append(soft_box(f"INT_SeatF_{side}_Headrest", "INTERIOR_SEATS", M["leather"], tuple(ch),
-                         (0.30, 0.11, 0.20), 0.045, 3, rot=back_tilt, parent=asm, edir=(0, -0.4, 1), dist=0.16,
-                         label="Reposacabezas integrado"))
-    # Base, guías y carcasa lateral
-    objs.append(soft_box(f"INT_SeatF_{side}_Base", "INTERIOR_SEATS", M["int_plastic"], (x, hx + 0.16, FLOOR_Z + 0.11),
-                         (0.46, 0.52, 0.17), 0.015, 2, parent=asm, edir=(0, 0, -1), dist=0.08,
-                         label="Base y guías del asiento", fid="A"))
+    objs = [
+        sculpted_cushion(f"INT_SeatF_{side}_Cushion", "INTERIOR_SEATS", M["leather"], (x, hx + 0.21, hz + 0.03),
+                         0.52, 0.50, 0.11, asm, "Cojín con refuerzos laterales", (0, 0.3, 1), 0.08),
+        sculpted_back(f"INT_SeatF_{side}_Back", "INTERIOR_SEATS", M["leather"], (x, hx - 0.04, hz - 0.02),
+                      0.54, FRONT_BACK_LEVELS, 0.09, 22, asm, "Respaldo con reposacabezas integrado",
+                      (0, -1, 0.3), 0.10),
+        soft_box(f"INT_SeatF_{side}_Base", "INTERIOR_SEATS", M["int_plastic"], (x, hx + 0.16, FLOOR_Z + 0.11),
+                 (0.46, 0.52, 0.17), 0.015, 2, parent=asm, edir=(0, 0, -1), dist=0.08,
+                 label="Base, guías y carcasas laterales del asiento", fid="A"),
+    ]
     return objs
 
 
@@ -299,20 +355,18 @@ def rear_bench(M):
     asm = L.assembly("SEAT_REAR", "INTERIOR_SEATS", (0.0, hy, hz))
     L.explode(asm, (0, -0.3, 1), 1.05, 2, "Asientos", "Banqueta trasera de tres plazas", "R")
     objs = []
-    tilt = rot_x(-25)
     for k, nm in ((-1, "L"), (0, "C"), (1, "R")):
-        w = 0.44 if k else 0.40
+        w = 0.46 if k else 0.42
         x = k * 0.45
-        objs.append(soft_box(f"INT_SeatR_{nm}_Cushion", "INTERIOR_SEATS", M["leather"], (x, hy + 0.20, hz - 0.03),
-                             (w, 0.48, 0.11), 0.035, 3, parent=asm, edir=(0, 0.3, 1), dist=0.08,
-                             label="Cojín abatible de la banqueta"))
-        cb = Vector((x, hy - 0.08, hz + 0.31))
-        objs.append(soft_box(f"INT_SeatR_{nm}_Back", "INTERIOR_SEATS", M["leather"], tuple(cb),
-                             (w, 0.12, 0.56), 0.04, 3, rot=tilt, parent=asm, edir=(0, -1, 0.3), dist=0.10,
-                             label="Respaldo de la banqueta"))
-        ch = cb + tilt @ Vector((0, 0.01, 0.37))
+        objs.append(sculpted_cushion(f"INT_SeatR_{nm}_Cushion", "INTERIOR_SEATS", M["leather"],
+                                     (x, hy + 0.21, hz + 0.02), w, 0.48, 0.10, asm,
+                                     "Cojín abatible de la banqueta", (0, 0.3, 1), 0.08, bol=0.5))
+        objs.append(sculpted_back(f"INT_SeatR_{nm}_Back", "INTERIOR_SEATS", M["leather"], (x, hy - 0.06, hz - 0.02),
+                                  w, REAR_BACK_LEVELS, 0.10, 25, asm, "Respaldo de la banqueta", (0, -1, 0.3), 0.10))
+        tilt = rot_x(25)
+        ch = Vector((x, hy - 0.06, hz - 0.02)) + tilt @ Vector((0, -0.03, 0.62))
         objs.append(soft_box(f"INT_SeatR_{nm}_Headrest", "INTERIOR_SEATS", M["leather"], tuple(ch),
-                             (0.24, 0.09, 0.16), 0.04, 3, rot=tilt, parent=asm, edir=(0, -0.3, 1), dist=0.15,
+                             (0.25, 0.09, 0.15), 0.04, 3, rot=tilt, parent=asm, edir=(0, -0.3, 1), dist=0.15,
                              label="Reposacabezas trasero"))
     objs.append(soft_box("INT_SeatR_Base", "INTERIOR_SEATS", M["int_plastic"], (0.0, hy + 0.15, FLOOR_Z + 0.10),
                          (1.38, 0.50, 0.15), 0.015, 2, parent=asm, edir=(0, 0, -1), dist=0.08,

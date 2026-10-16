@@ -141,7 +141,7 @@ def build_rear(M):
     # Luces de marcha atrás y catadióptricos en el paragolpes trasero
     for s, sd in ((1, "R"), (-1, "L")):
         mb = L.MeshBuilder()
-        L.box(mb, (s * 0.70, S.Y_REAR_END - 0.004, 0.648), (0.16, 0.012, 0.016), 0)
+        L.box(mb, (s * 0.70, S.Y_REAR_END + 0.007, 0.648), (0.16, 0.012, 0.016), 0)
         obj = mb.build(f"LGT_Reverse_{sd}", "LIGHTING", M["glass_lens"])
         L.explode(obj, (0, -1, -0.2), 0.40, 6, "Iluminación", "Luz de marcha atrás", "A")
         objs.append(obj)
