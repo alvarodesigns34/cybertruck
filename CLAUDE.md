@@ -28,3 +28,24 @@
 * Cada objeto desplazable guarda propiedades personalizadas para la vista explosionada (`explode_group`, `explode_stage`, `explode_dir`, `explode_dist`, `system`, `fidelity`). Ver `docs/model-specification.md`.
 * Niveles de fidelidad en la documentación: **Verificado**, **Reconstruido**, **Aproximado**.
 * No se versionan fotografías de referencia con derechos de autor ni renders temporales.
+* Los conjuntos padre (vacíos `DOOR_*`, `WHEEL_*`, `*_ASSEMBLY`…) deben tener rotación nula: la dirección de
+  explosión se expresa en el espacio del padre y debe coincidir con la de mundo.
+* Las caras de láminas abiertas se orientan con `MeshBuilder.face(..., want=dirección)`; no usar
+  `recalc_normals` en superficies abiertas.
+* Los perfiles se validan por trazado de rayos (`validate.py`), no por muestreo de vértices.
+
+## Flujo de trabajo
+
+1. Editar la ficha (`ct_specs.py`) o el constructor correspondiente en `blender/scripts/`.
+2. En Blender (MCP): `build_all.run(parts=("body","wheels","lights","details","interior","chassis","explode","scene"))`.
+3. Validar: `validate.run()` y `build_explode.verify_roundtrip()`; inspeccionar con `preview.py` o las cámaras `CAM_*`.
+4. Exportar con `export_web.export(...)`, guardar `blender/Cybertruck.blend` y ejecutar `node tools/gen_inventory.mjs`.
+5. Probar el visor con `node tools/serve.mjs web 8080` y publicar con *push* a `main` (GitHub Actions → Pages).
+
+## Estado y puntos de continuación
+
+* Estado al 16-10-2026: modelo completo (309 objetos), validado, exportado y publicado en
+  https://alvarodesigns34.github.io/cybertruck/. Detalle en `README.md` y `docs/`.
+* Mejoras pendientes más valiosas: dibujo real del Scorpion ATR e inscripciones; forma exacta de faros,
+  retrovisores y paragolpes inferior; detalle del interior (costuras, mandos, paneles de puerta) y de la
+  mecánica (piezas fundidas, brazos); verificación de la sección transversal con una vista frontal a escala.
