@@ -139,6 +139,15 @@ modifique el visor (también se puede lanzar manualmente). Requiere que Pages es
 - [Inventario de componentes](docs/component-inventory.md) — generado a partir de los objetos reales.
 - [Resultados de validación](docs/validation-results.json).
 
+## Próximos pasos
+
+- **Más piezas:** añadir bastantes más piezas, todas las posibles de forma realista (tornillería individual,
+  opciones fuera de serie, espumas, tapicerías, mazos, conectores, soportes…).
+- **Hiperrealismo:** mejorar el modelo en general con el hiperrealismo como objetivo: formas exactas de las piezas
+  críticas, materiales, texturas e iluminación.
+- **HUD del visor:** rediseñar la interfaz con una estética más cercana a Apple (liquid glass, translucidez y
+  desenfoque), además del suelo de cristal semitransparente descrito en las limitaciones.
+
 ## Limitaciones principales
 
 - La carrocería exterior está reconstruida con gran precisión dimensional, pero la sección transversal depende de

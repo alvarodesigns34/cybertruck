@@ -65,6 +65,15 @@
 * Criterio de fidelidad: «Verificado» solo si la geometría procede de medidas o planos; las piezas cuya
   existencia y fijaciones constan en el manual pero cuya forma es reconstruida se marcan «Reconstruido»
   (`ct_parts.make` lo aplica automáticamente).
+* Hoja de ruta (acordada con el usuario el 17-10-2026, aún sin empezar):
+  1. **Más piezas**: añadir bastantes más piezas, todas las posibles de forma realista (sin inventar datos que las
+     fuentes no publican): tornillería individual por pieza, opciones fuera de serie, espumas y tapicerías, mazos,
+     conectores, soportes y todo lo pendiente de `docs/ficha-tecnica-piezas.md`.
+  2. **Hiperrealismo del modelo**: mejorar el modelo en general con el hiperrealismo como eje (formas exactas de
+     faros, retrovisores, paragolpes y fundiciones, molde del neumático, materiales y texturas físicas, biseles,
+     holguras y desgaste creíbles, iluminación y renders), siempre dentro de las cotas oficiales.
+  3. **HUD del visor**: rediseñar bastante más la interfaz con estética tipo Apple (liquid glass, translucidez y
+     desenfoque, tipografía y microinteracciones cuidadas), manteniendo el texto en español y la accesibilidad.
 * Hallazgo pendiente del visor (17-10-2026, aún sin implementar): al explosionar, muchas piezas de la parte baja
   (suspensión, tren motriz, batería, bajos) descienden por debajo del suelo (`web/src/main.js`: círculo opaco de
   radio 26 m en y = −0,002 y rejilla en y = 0) y solo se ven si la cámara atraviesa el suelo. Es coherente con la
