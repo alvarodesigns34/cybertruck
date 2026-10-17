@@ -119,7 +119,7 @@
     0.95783
    ],
    "explode_dist": 0.7,
-   "faces": 396
+   "faces": 258
   },
   {
    "name": "BAT_Block_1_BMB",
@@ -569,7 +569,7 @@
     0.0
    ],
    "explode_dist": 0.3,
-   "faces": 504
+   "faces": 464
   },
   {
    "name": "BAT_Coolant_Manifolds",
@@ -641,7 +641,7 @@
     0.92848
    ],
    "explode_dist": 0.45,
-   "faces": 196
+   "faces": 153
   },
   {
    "name": "BAT_Internal_Beams",
@@ -1163,7 +1163,7 @@
     0.14834
    ],
    "explode_dist": 0.55,
-   "faces": 280
+   "faces": 2069
   },
   {
    "name": "BODY_DoorRing_R",
@@ -1181,7 +1181,7 @@
     0.14834
    ],
    "explode_dist": 0.55,
-   "faces": 280
+   "faces": 9881
   },
   {
    "name": "BODY_FDU_Mount_L",
@@ -1649,7 +1649,7 @@
     0.83205
    ],
    "explode_dist": 0.55,
-   "faces": 358
+   "faces": 938
   },
   {
    "name": "BODY_IP_Display_Bracket_L",
@@ -1757,7 +1757,7 @@
     0.70711
    ],
    "explode_dist": 0.4,
-   "faces": 176
+   "faces": 178
   },
   {
    "name": "BODY_Mast_L",
@@ -1847,7 +1847,7 @@
     0.5547
    ],
    "explode_dist": 0.35,
-   "faces": 132
+   "faces": 559
   },
   {
    "name": "BODY_Ramp_Bracket_CPillar_L",
@@ -2297,7 +2297,7 @@
     0.49827
    ],
    "explode_dist": 0.4,
-   "faces": 164
+   "faces": 158
   },
   {
    "name": "BODY_Sail_Datum_Bracket_R",
@@ -2315,7 +2315,7 @@
     0.49827
    ],
    "explode_dist": 0.4,
-   "faces": 164
+   "faces": 155
   },
   {
    "name": "BODY_Sail_Panel_Bracket_L",
@@ -2909,7 +2909,7 @@
     0.53916
    ],
    "explode_dist": 0.55,
-   "faces": 5346
+   "faces": 5304
   },
   {
    "name": "BRK_FL_Caliper",
@@ -3035,7 +3035,7 @@
     0.0
    ],
    "explode_dist": 0.1,
-   "faces": 320
+   "faces": 518
   },
   {
    "name": "BRK_FR_Caliper",
@@ -3161,7 +3161,7 @@
     0.0
    ],
    "explode_dist": 0.1,
-   "faces": 320
+   "faces": 518
   },
   {
    "name": "BRK_HCU_Bracket",
@@ -3197,7 +3197,7 @@
     0.647
    ],
    "explode_dist": 0.5,
-   "faces": 3036
+   "faces": 4675
   },
   {
    "name": "BRK_Hydraulic_Control_Unit",
@@ -3366,7 +3366,7 @@
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
    "system": "REAR_WHEELS_AND_BRAKES",
-   "label": "Motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera izquierda",
+   "label": "Conector y mazo del motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera izquierda",
    "group": "Rear Wheels And Brakes",
    "stage": 4,
    "fidelity": "R",
@@ -3377,7 +3377,7 @@
     0.44721
    ],
    "explode_dist": 0.45,
-   "faces": 114
+   "faces": 118
   },
   {
    "name": "BRK_RL_Pad_Shims",
@@ -3449,7 +3449,7 @@
     0.0
    ],
    "explode_dist": 0.1,
-   "faces": 320
+   "faces": 598
   },
   {
    "name": "BRK_RR_Caliper",
@@ -3510,7 +3510,7 @@
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
    "system": "REAR_WHEELS_AND_BRAKES",
-   "label": "Motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera derecha",
+   "label": "Conector y mazo del motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera derecha",
    "group": "Rear Wheels And Brakes",
    "stage": 4,
    "fidelity": "R",
@@ -3521,7 +3521,7 @@
     0.44721
    ],
    "explode_dist": 0.45,
-   "faces": 114
+   "faces": 118
   },
   {
    "name": "BRK_RR_Pad_Shims",
@@ -3593,7 +3593,7 @@
     0.0
    ],
    "explode_dist": 0.1,
-   "faces": 320
+   "faces": 598
   },
   {
    "name": "BRK_Remote_Reservoir",
@@ -3755,7 +3755,7 @@
     0.0
    ],
    "explode_dist": 0.15,
-   "faces": 50
+   "faces": 12
   },
   {
    "name": "CAM_Front_Fascia",
@@ -3791,7 +3791,7 @@
     0.0
    ],
    "explode_dist": 0.18,
-   "faces": 18
+   "faces": 30
   },
   {
    "name": "CAM_Windshield_Fan",
@@ -3845,7 +3845,7 @@
     -1.0
    ],
    "explode_dist": 0.21,
-   "faces": 486
+   "faces": 228
   },
   {
    "name": "CARGO_BED_TUB",
@@ -3899,7 +3899,7 @@
     0.0
    ],
    "explode_dist": 0.4,
-   "faces": 284
+   "faces": 467
   },
   {
    "name": "CARGO_Bed_Closeout_Rear_R",
@@ -3917,7 +3917,7 @@
     0.0
    ],
    "explode_dist": 0.4,
-   "faces": 284
+   "faces": 478
   },
   {
    "name": "CARGO_Bed_False_Wall",
@@ -4007,7 +4007,7 @@
     0.0
    ],
    "explode_dist": 0.45,
-   "faces": 440
+   "faces": 1202
   },
   {
    "name": "CARGO_Bed_Side_Wall_Lower_R",
@@ -4025,7 +4025,7 @@
     0.0
    ],
    "explode_dist": 0.45,
-   "faces": 440
+   "faces": 940
   },
   {
    "name": "CARGO_Bed_Side_Wall_Upper_L",
@@ -4043,7 +4043,7 @@
     0.44721
    ],
    "explode_dist": 0.45,
-   "faces": 524
+   "faces": 724
   },
   {
    "name": "CARGO_Bed_Side_Wall_Upper_R",
@@ -4061,7 +4061,7 @@
     0.44721
    ],
    "explode_dist": 0.45,
-   "faces": 524
+   "faces": 682
   },
   {
    "name": "CARGO_Bed_Tub",
@@ -4439,7 +4439,7 @@
     0.70711
    ],
    "explode_dist": 0.4,
-   "faces": 3354
+   "faces": 3141
   },
   {
    "name": "CARGO_Tonneau_Motor_R",
@@ -4475,7 +4475,7 @@
     0.70711
    ],
    "explode_dist": 0.4,
-   "faces": 3354
+   "faces": 3141
   },
   {
    "name": "CARGO_Tonneau_NVH_Barrier",
@@ -4511,7 +4511,7 @@
     0.19612
    ],
    "explode_dist": 0.25,
-   "faces": 90
+   "faces": 404
   },
   {
    "name": "CARGO_Tonneau_Rail_L_Fasteners",
@@ -4547,7 +4547,7 @@
     0.19612
    ],
    "explode_dist": 0.25,
-   "faces": 90
+   "faces": 411
   },
   {
    "name": "CARGO_Tonneau_Rail_R_Fasteners",
@@ -5105,7 +5105,7 @@
     -1.0
    ],
    "explode_dist": 0.3,
-   "faces": 642
+   "faces": 828
   },
   {
    "name": "CHS_AirSuspension_Reservoir",
@@ -5195,7 +5195,7 @@
     0.95783
    ],
    "explode_dist": 0.35,
-   "faces": 2712
+   "faces": 2688
   },
   {
    "name": "CHS_Air_Fill_Port",
@@ -5249,7 +5249,7 @@
     -1.0
    ],
    "explode_dist": 0.3,
-   "faces": 290
+   "faces": 690
   },
   {
    "name": "CHS_Air_Line_Bundle_R",
@@ -5267,7 +5267,7 @@
     -1.0
    ],
    "explode_dist": 0.3,
-   "faces": 290
+   "faces": 610
   },
   {
    "name": "CHS_Air_Line_Bundle_Rear",
@@ -5285,14 +5285,14 @@
     -1.0
    ],
    "explode_dist": 0.3,
-   "faces": 170
+   "faces": 210
   },
   {
    "name": "CHS_Cooling_Fan_Module",
    "type": "MESH",
    "parent": "THERMAL_FRONT",
    "system": "UNDERBODY",
-   "label": "Módulo de ventiladores (CFM, 6 tornillos de 10 Nm) con dos rotores",
+   "label": "Carcasa del módulo de ventiladores (CFM, 6 tornillos de 10 Nm)",
    "group": "Refrigeración",
    "stage": 6,
    "fidelity": "R",
@@ -5303,7 +5303,7 @@
     0.98058
    ],
    "explode_dist": 0.45,
-   "faces": 272
+   "faces": 44
   },
   {
    "name": "CHS_Cooling_Fans",
@@ -5825,7 +5825,7 @@
     -0.36515
    ],
    "explode_dist": 0.36,
-   "faces": 5148
+   "faces": 4902
   },
   {
    "name": "DU_F_Gearbox",
@@ -5843,7 +5843,7 @@
     0.04994
    ],
    "explode_dist": 0.55,
-   "faces": 1276
+   "faces": 1280
   },
   {
    "name": "DU_F_Gearbox_Cover_Bolts",
@@ -5951,7 +5951,7 @@
     1.0
    ],
    "explode_dist": 0.1,
-   "faces": 204
+   "faces": 211
   },
   {
    "name": "DU_F_Inverter_Control_PCB",
@@ -6023,7 +6023,7 @@
     1.0
    ],
    "explode_dist": 0.34,
-   "faces": 856
+   "faces": 890
   },
   {
    "name": "DU_F_Inverter_Power_Modules",
@@ -6779,7 +6779,7 @@
     -0.89443
    ],
    "explode_dist": 0.34,
-   "faces": 9662
+   "faces": 9556
   },
   {
    "name": "DU_R_Gear_Train_R",
@@ -6797,7 +6797,7 @@
     -0.89443
    ],
    "explode_dist": 0.34,
-   "faces": 9662
+   "faces": 9640
   },
   {
    "name": "DU_R_Gearbox",
@@ -6815,7 +6815,7 @@
     -0.95783
    ],
    "explode_dist": 0.5,
-   "faces": 704
+   "faces": 708
   },
   {
    "name": "DU_R_Inverter_Internals_L",
@@ -6833,7 +6833,7 @@
     0.44544
    ],
    "explode_dist": 0.3,
-   "faces": 1138
+   "faces": 790
   },
   {
    "name": "DU_R_Inverter_Internals_R",
@@ -6851,7 +6851,7 @@
     0.44544
    ],
    "explode_dist": 0.3,
-   "faces": 1138
+   "faces": 792
   },
   {
    "name": "DU_R_Inverter_L",
@@ -7032,6 +7032,42 @@
    ],
    "explode_dist": 0.3,
    "faces": 96
+  },
+  {
+   "name": "DU_R_Output_Shaft_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Eje de salida estriado izquierdo (atraviesa la carcasa por su retén hacia el semieje)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.70711,
+    0.0,
+    -0.70711
+   ],
+   "explode_dist": 0.36,
+   "faces": 130
+  },
+  {
+   "name": "DU_R_Output_Shaft_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Eje de salida estriado derecho (atraviesa la carcasa por su retén hacia el semieje)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.70711,
+    0.0,
+    -0.70711
+   ],
+   "explode_dist": 0.36,
+   "faces": 130
   },
   {
    "name": "DU_R_PlateCooler_L",
@@ -7283,7 +7319,7 @@
     1.0
    ],
    "explode_dist": 0.18,
-   "faces": 62
+   "faces": 12
   },
   {
    "name": "ELE_Powershare_48V_Outlets",
@@ -7463,7 +7499,7 @@
     0.26726
    ],
    "explode_dist": 0.4,
-   "faces": 160
+   "faces": 334
   },
   {
    "name": "EXT_Bed_Side_Corner_Brackets_R",
@@ -7481,7 +7517,7 @@
     0.26726
    ],
    "explode_dist": 0.4,
-   "faces": 160
+   "faces": 331
   },
   {
    "name": "EXT_Camera_Cover_Lower_Fascia",
@@ -7553,7 +7589,7 @@
     0.28222
    ],
    "explode_dist": 0.21,
-   "faces": 230
+   "faces": 86
   },
   {
    "name": "EXT_ChargePort_Inlet",
@@ -7584,9 +7620,9 @@
    "fidelity": "A",
    "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
    "explode_dir_blender": [
-    0.95783,
+    -0.85749,
     0.0,
-    0.28735
+    0.5145
    ],
    "explode_dist": 0.35,
    "faces": 2588
@@ -7715,7 +7751,7 @@
     0.31623
    ],
    "explode_dist": 0.216,
-   "faces": 272
+   "faces": 98
   },
   {
    "name": "EXT_Door_FL_GlassFrame",
@@ -7913,7 +7949,7 @@
     0.31623
    ],
    "explode_dist": 0.216,
-   "faces": 266
+   "faces": 238
   },
   {
    "name": "EXT_Door_FR_GlassFrame",
@@ -8291,7 +8327,7 @@
     0.31623
    ],
    "explode_dist": 0.216,
-   "faces": 342
+   "faces": 274
   },
   {
    "name": "EXT_Door_RL_GlassFrame",
@@ -8489,7 +8525,7 @@
     0.31623
    ],
    "explode_dist": 0.216,
-   "faces": 420
+   "faces": 434
   },
   {
    "name": "EXT_Door_RR_GlassFrame",
@@ -10613,7 +10649,7 @@
     0.52981
    ],
    "explode_dist": 0.4,
-   "faces": 324
+   "faces": 384
   },
   {
    "name": "EXT_Washer_Tank",
@@ -10667,7 +10703,7 @@
     -1.0
    ],
    "explode_dist": 0.3,
-   "faces": 208
+   "faces": 304
   },
   {
    "name": "EXT_Wiper_Arm",
@@ -10757,7 +10793,7 @@
     0.92058
    ],
    "explode_dist": 0.21,
-   "faces": 36
+   "faces": 18
   },
   {
    "name": "EXT_Wiper_Motor_Fasteners",
@@ -10793,7 +10829,7 @@
     0.92057
    ],
    "explode_dist": 0.65,
-   "faces": 3354
+   "faces": 2098
   },
   {
    "name": "GLS_Door_FL",
@@ -11063,7 +11099,7 @@
     0.92057
    ],
    "explode_dist": 0.55,
-   "faces": 588
+   "faces": 418
   },
   {
    "name": "HV_AC_Junction_Box",
@@ -11135,7 +11171,7 @@
     -1.0
    ],
    "explode_dist": 1.0,
-   "faces": 1194
+   "faces": 1484
   },
   {
    "name": "HV_Charge_Port_Busbar",
@@ -11261,7 +11297,7 @@
     0.76626
    ],
    "explode_dist": 0.45,
-   "faces": 298
+   "faces": 358
   },
   {
    "name": "HV_Harness_RDU_R",
@@ -11279,7 +11315,7 @@
     0.76626
    ],
    "explode_dist": 0.45,
-   "faces": 298
+   "faces": 358
   },
   {
    "name": "HV_Last_Mile_Busbar",
@@ -11315,7 +11351,7 @@
     0.92057
    ],
    "explode_dist": 0.55,
-   "faces": 1362
+   "faces": 1450
   },
   {
    "name": "HV_Power_Conversion_System",
@@ -11531,7 +11567,7 @@
     1.0
    ],
    "explode_dist": 0.18,
-   "faces": 48
+   "faces": 54
   },
   {
    "name": "INT_Cantrail_L",
@@ -11549,7 +11585,7 @@
     0.95783
    ],
    "explode_dist": 0.35,
-   "faces": 5
+   "faces": 265
   },
   {
    "name": "INT_Cantrail_R",
@@ -11567,7 +11603,7 @@
     0.95783
    ],
    "explode_dist": 0.35,
-   "faces": 5
+   "faces": 263
   },
   {
    "name": "INT_Car_Computer",
@@ -11603,7 +11639,7 @@
     0.95783
    ],
    "explode_dist": 0.45,
-   "faces": 1194
+   "faces": 943
   },
   {
    "name": "INT_Carpet",
@@ -11621,7 +11657,7 @@
     -1.0
    ],
    "explode_dist": 0.15,
-   "faces": 6
+   "faces": 1047
   },
   {
    "name": "INT_Carpet_Clips_RH",
@@ -11657,7 +11693,7 @@
     -1.0
    ],
    "explode_dist": 0.3,
-   "faces": 132
+   "faces": 233
   },
   {
    "name": "INT_Coathook_Maplight_L",
@@ -11765,7 +11801,7 @@
     1.0
    ],
    "explode_dist": 0.05,
-   "faces": 24
+   "faces": 436
   },
   {
    "name": "INT_Console_Cupholder_1",
@@ -11945,7 +11981,7 @@
     0.85749
    ],
    "explode_dist": 0.21,
-   "faces": 142
+   "faces": 68
   },
   {
    "name": "INT_Console_USB_Ports",
@@ -12107,7 +12143,7 @@
     0.89443
    ],
    "explode_dist": 0.22,
-   "faces": 686
+   "faces": 410
   },
   {
    "name": "INT_Display_Center_Mount",
@@ -12179,7 +12215,7 @@
     0.89443
    ],
    "explode_dist": 0.22,
-   "faces": 466
+   "faces": 322
   },
   {
    "name": "INT_Display_Rear_Screen",
@@ -12665,7 +12701,7 @@
     0.0
    ],
    "explode_dist": 0.3,
-   "faces": 16
+   "faces": 209
   },
   {
    "name": "INT_DoorTrim_FR",
@@ -12683,7 +12719,7 @@
     0.0
    ],
    "explode_dist": 0.3,
-   "faces": 16
+   "faces": 212
   },
   {
    "name": "INT_DoorTrim_RL",
@@ -12701,7 +12737,7 @@
     0.0
    ],
    "explode_dist": 0.3,
-   "faces": 16
+   "faces": 187
   },
   {
    "name": "INT_DoorTrim_RR",
@@ -12719,7 +12755,7 @@
     0.0
    ],
    "explode_dist": 0.3,
-   "faces": 16
+   "faces": 187
   },
   {
    "name": "INT_Door_Beltline_FL",
@@ -13169,7 +13205,7 @@
     1.0
    ],
    "explode_dist": 0.12,
-   "faces": 606
+   "faces": 562
   },
   {
    "name": "INT_FloorMat_FR",
@@ -13187,7 +13223,7 @@
     1.0
    ],
    "explode_dist": 0.12,
-   "faces": 606
+   "faces": 562
   },
   {
    "name": "INT_FloorMat_R",
@@ -13205,7 +13241,7 @@
     1.0
    ],
    "explode_dist": 0.12,
-   "faces": 1442
+   "faces": 1256
   },
   {
    "name": "INT_Floor_Duct_L",
@@ -13259,7 +13295,7 @@
     0.0
    ],
    "explode_dist": 0.25,
-   "faces": 108
+   "faces": 67
   },
   {
    "name": "INT_Footwell_Cover",
@@ -13601,7 +13637,7 @@
     0.0
    ],
    "explode_dist": 0.25,
-   "faces": 56
+   "faces": 568
   },
   {
    "name": "INT_IP_Quarter_Panel_R",
@@ -13619,7 +13655,7 @@
     0.0
    ],
    "explode_dist": 0.25,
-   "faces": 56
+   "faces": 530
   },
   {
    "name": "INT_IP_TopPad",
@@ -13637,7 +13673,7 @@
     0.85749
    ],
    "explode_dist": 0.25,
-   "faces": 10
+   "faces": 2194
   },
   {
    "name": "INT_Impact_Sensor_BPillar_L",
@@ -13817,7 +13853,7 @@
     0.0
    ],
    "explode_dist": 0.18,
-   "faces": 50
+   "faces": 23
   },
   {
    "name": "INT_Impact_Sensor_FrontEnd_R",
@@ -13853,7 +13889,7 @@
     0.0
    ],
    "explode_dist": 0.18,
-   "faces": 50
+   "faces": 23
   },
   {
    "name": "INT_Interior_Camera",
@@ -13889,7 +13925,7 @@
     1.0
    ],
    "explode_dist": 0.35,
-   "faces": 6
+   "faces": 393
   },
   {
    "name": "INT_Pedal_Accelerator",
@@ -14105,14 +14141,14 @@
     1.0
    ],
    "explode_dist": 0.39,
-   "faces": 462
+   "faces": 294
   },
   {
    "name": "INT_SeatF_Frame_L",
    "type": "MESH",
    "parent": "SEAT_FRONT_L",
    "system": "INTERIOR_SEATS",
-   "label": "Armazón del asiento delantero izquierdo: largueros, travesaños, muelles en zigzag, herrajes de reclinado, armazón del respaldo con malla lumbar y 4 tornillos a las guías",
+   "label": "Armazón del asiento delantero izquierdo: largueros, travesaños, muelles sinuosos, herrajes de reclinado con barra de sincronización y armazón del respaldo con malla lumbar",
    "group": "Asientos",
    "stage": 6,
    "fidelity": "A",
@@ -14123,14 +14159,14 @@
     -0.98058
    ],
    "explode_dist": 0.1,
-   "faces": 3844
+   "faces": 1574
   },
   {
    "name": "INT_SeatF_Frame_R",
    "type": "MESH",
    "parent": "SEAT_FRONT_R",
    "system": "INTERIOR_SEATS",
-   "label": "Armazón del asiento delantero derecho: largueros, travesaños, muelles en zigzag, herrajes de reclinado, armazón del respaldo con malla lumbar y 4 tornillos a las guías",
+   "label": "Armazón del asiento delantero derecho: largueros, travesaños, muelles sinuosos, herrajes de reclinado con barra de sincronización y armazón del respaldo con malla lumbar",
    "group": "Asientos",
    "stage": 6,
    "fidelity": "A",
@@ -14141,7 +14177,7 @@
     -0.98058
    ],
    "explode_dist": 0.1,
-   "faces": 3844
+   "faces": 1574
   },
   {
    "name": "INT_SeatF_Heat_Vent_Mats_L",
@@ -14159,7 +14195,7 @@
     0.95783
    ],
    "explode_dist": 0.26,
-   "faces": 122
+   "faces": 78
   },
   {
    "name": "INT_SeatF_Heat_Vent_Mats_R",
@@ -14177,7 +14213,7 @@
     0.95783
    ],
    "explode_dist": 0.26,
-   "faces": 122
+   "faces": 78
   },
   {
    "name": "INT_SeatF_L_Back",
@@ -14213,7 +14249,7 @@
     0.28698
    ],
    "explode_dist": 0.18,
-   "faces": 144
+   "faces": 2176
   },
   {
    "name": "INT_SeatF_L_Back_Shell",
@@ -14238,7 +14274,7 @@
    "type": "MESH",
    "parent": "SEAT_FRONT_L",
    "system": "INTERIOR_SEATS",
-   "label": "Base, guías y carcasas laterales del asiento",
+   "label": "Bandeja del cojín del asiento",
    "group": "Interior",
    "stage": 2,
    "fidelity": "A",
@@ -14339,7 +14375,7 @@
     0.95794
    ],
    "explode_dist": 0.17,
-   "faces": 112
+   "faces": 1664
   },
   {
    "name": "INT_SeatF_L_Motors",
@@ -14465,7 +14501,7 @@
     0.28698
    ],
    "explode_dist": 0.18,
-   "faces": 144
+   "faces": 2176
   },
   {
    "name": "INT_SeatF_R_Back_Shell",
@@ -14490,7 +14526,7 @@
    "type": "MESH",
    "parent": "SEAT_FRONT_R",
    "system": "INTERIOR_SEATS",
-   "label": "Base, guías y carcasas laterales del asiento",
+   "label": "Bandeja del cojín del asiento",
    "group": "Interior",
    "stage": 2,
    "fidelity": "A",
@@ -14591,7 +14627,7 @@
     0.95794
    ],
    "explode_dist": 0.17,
-   "faces": 112
+   "faces": 1664
   },
   {
    "name": "INT_SeatF_R_Motors",
@@ -14724,7 +14760,7 @@
    "type": "MESH",
    "parent": "SEAT_REAR",
    "system": "INTERIOR_SEATS",
-   "label": "Estructura de la banqueta",
+   "label": "Bandeja de los cojines de la banqueta",
    "group": "Interior",
    "stage": 2,
    "fidelity": "A",
@@ -14771,7 +14807,7 @@
     0.28698
    ],
    "explode_dist": 0.18,
-   "faces": 80
+   "faces": 1152
   },
   {
    "name": "INT_SeatR_C_Cushion",
@@ -14807,7 +14843,7 @@
     0.95794
    ],
    "explode_dist": 0.17,
-   "faces": 112
+   "faces": 1664
   },
   {
    "name": "INT_SeatR_C_Headrest",
@@ -14832,7 +14868,7 @@
    "type": "MESH",
    "parent": "SEAT_REAR",
    "system": "INTERIOR_SEATS",
-   "label": "Armazón del banco trasero: travesaños, muelles en zigzag, armazones de respaldo 60/40 con bisagras, cierres y tornillos al suelo",
+   "label": "Armazón de la banqueta trasera: bastidor, muelles sinuosos y armazones de los respaldos con cierres",
    "group": "Asientos",
    "stage": 6,
    "fidelity": "A",
@@ -14843,7 +14879,7 @@
     -1.0
    ],
    "explode_dist": 0.1,
-   "faces": 3700
+   "faces": 1610
   },
   {
    "name": "INT_SeatR_L_Back",
@@ -14879,7 +14915,7 @@
     0.28698
    ],
    "explode_dist": 0.18,
-   "faces": 80
+   "faces": 1152
   },
   {
    "name": "INT_SeatR_L_Cushion",
@@ -14915,7 +14951,7 @@
     0.95794
    ],
    "explode_dist": 0.17,
-   "faces": 112
+   "faces": 1664
   },
   {
    "name": "INT_SeatR_L_Headrest",
@@ -14969,7 +15005,7 @@
     0.28698
    ],
    "explode_dist": 0.18,
-   "faces": 80
+   "faces": 1152
   },
   {
    "name": "INT_SeatR_R_Cushion",
@@ -15005,7 +15041,7 @@
     0.95794
    ],
    "explode_dist": 0.17,
-   "faces": 112
+   "faces": 1664
   },
   {
    "name": "INT_SeatR_R_Headrest",
@@ -15527,7 +15563,7 @@
     0.98058
    ],
    "explode_dist": 0.21,
-   "faces": 142
+   "faces": 128
   },
   {
    "name": "INT_Telephony_Mic_L",
@@ -15617,7 +15653,7 @@
     0.71714
    ],
    "explode_dist": 0.35,
-   "faces": 134
+   "faces": 244
   },
   {
    "name": "INT_Trim_APillar_R",
@@ -15635,7 +15671,7 @@
     0.71714
    ],
    "explode_dist": 0.35,
-   "faces": 134
+   "faces": 244
   },
   {
    "name": "INT_Trim_BPillar_Lower_L",
@@ -15653,7 +15689,7 @@
     0.0
    ],
    "explode_dist": 0.3,
-   "faces": 10
+   "faces": 12
   },
   {
    "name": "INT_Trim_BPillar_Lower_R",
@@ -15671,7 +15707,7 @@
     0.0
    ],
    "explode_dist": 0.3,
-   "faces": 10
+   "faces": 12
   },
   {
    "name": "INT_Trim_BPillar_Upper_L",
@@ -15725,7 +15761,7 @@
     0.0
    ],
    "explode_dist": 0.3,
-   "faces": 8
+   "faces": 12
   },
   {
    "name": "INT_Trim_CPillar_Lower_R",
@@ -15743,7 +15779,7 @@
     0.0
    ],
    "explode_dist": 0.3,
-   "faces": 8
+   "faces": 12
   },
   {
    "name": "INT_Trim_CPillar_Upper_L",
@@ -16733,7 +16769,7 @@
     1.0
    ],
    "explode_dist": 0.4,
-   "faces": 282
+   "faces": 346
   },
   {
    "name": "LV_Harness_Bed_R",
@@ -16751,7 +16787,7 @@
     1.0
    ],
    "explode_dist": 0.4,
-   "faces": 282
+   "faces": 346
   },
   {
    "name": "LV_Harness_Cowl_Speaker",
@@ -16859,7 +16895,7 @@
     1.0
    ],
    "explode_dist": 0.3,
-   "faces": 170
+   "faces": 210
   },
   {
    "name": "LV_Harness_Frunk",
@@ -16895,7 +16931,7 @@
     0.85749
    ],
    "explode_dist": 0.45,
-   "faces": 1268
+   "faces": 1428
   },
   {
    "name": "LV_Harness_MV_Backbone",
@@ -16913,7 +16949,7 @@
     0.37139
    ],
    "explode_dist": 0.5,
-   "faces": 724
+   "faces": 964
   },
   {
    "name": "LV_Harness_Rear_Subframe",
@@ -16931,7 +16967,7 @@
     1.0
    ],
    "explode_dist": 0.3,
-   "faces": 170
+   "faces": 210
   },
   {
    "name": "LV_Harness_Seat_L",
@@ -16967,7 +17003,7 @@
     1.0
    ],
    "explode_dist": 0.3,
-   "faces": 170
+   "faces": 250
   },
   {
    "name": "LV_Harness_Shunt_Jumper",
@@ -17093,7 +17129,7 @@
     0.71714
    ],
    "explode_dist": 0.24,
-   "faces": 154
+   "faces": 118
   },
   {
    "name": "LV_Trailer_ECU",
@@ -17129,7 +17165,7 @@
     0.37139
    ],
    "explode_dist": 0.65,
-   "faces": 174
+   "faces": 161
   },
   {
    "name": "MIRROR_L",
@@ -17363,7 +17399,7 @@
     0.98058
    ],
    "explode_dist": 0.27,
-   "faces": 974
+   "faces": 378
   },
   {
    "name": "STR_F_Actuator_ECU_PCB",
@@ -17417,7 +17453,7 @@
     -0.26833
    ],
    "explode_dist": 0.7,
-   "faces": 5772
+   "faces": 5722
   },
   {
    "name": "STR_F_Rack_BallNut",
@@ -17561,7 +17597,7 @@
     0.98058
    ],
    "explode_dist": 0.27,
-   "faces": 814
+   "faces": 266
   },
   {
    "name": "STR_R_Actuator_ECU_PCB",
@@ -17597,7 +17633,7 @@
     -0.36515
    ],
    "explode_dist": 0.62,
-   "faces": 208
+   "faces": 135
   },
   {
    "name": "STR_R_Motors_Internals",
@@ -17615,7 +17651,7 @@
     -0.26833
    ],
    "explode_dist": 0.7,
-   "faces": 5772
+   "faces": 5723
   },
   {
    "name": "STR_R_Rack_BallNut",
@@ -17687,7 +17723,7 @@
     0.5145
    ],
    "explode_dist": 0.21,
-   "faces": 106
+   "faces": 56
   },
   {
    "name": "STR_Steering_Feedback_Actuator",
@@ -17723,7 +17759,7 @@
     -0.37139
    ],
    "explode_dist": 0.18,
-   "faces": 708
+   "faces": 644
   },
   {
    "name": "STR_Steering_Jumper_Harness",
@@ -19613,7 +19649,7 @@
     -0.85749
    ],
    "explode_dist": 0.4,
-   "faces": 324
+   "faces": 424
   },
   {
    "name": "THM_Coolant_Bottle",
@@ -19757,7 +19793,7 @@
     -0.93633
    ],
    "explode_dist": 0.4,
-   "faces": 106
+   "faces": 146
   },
   {
    "name": "THM_Penta_HVAC_Line",
@@ -19793,7 +19829,7 @@
     -0.28735
    ],
    "explode_dist": 0.6,
-   "faces": 724
+   "faces": 1012
   },
   {
    "name": "THM_RDU_Coolant_Hoses",
@@ -19829,7 +19865,7 @@
     0.70711
    ],
    "explode_dist": 0.5,
-   "faces": 508
+   "faces": 928
   },
   {
    "name": "THM_Supermanifold",
@@ -19883,7 +19919,7 @@
     0.91287
    ],
    "explode_dist": 0.24,
-   "faces": 448
+   "faces": 18
   },
   {
    "name": "TONNEAU_ASSEMBLY",

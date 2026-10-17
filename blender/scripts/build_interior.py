@@ -18,7 +18,8 @@ import build_body as B
 
 FLOOR_Z = 0.505
 H_FRONT = (0.30, 0.80)
-H_REAR = (-0.70, 0.77)
+H_REAR = (-0.63, 0.77)       # adelantado 7 cm en la v4: ni atraviesa la pared trasera ni choca con la consola
+REAR_TILT = 15               # reclinado del respaldo trasero (grados)
 SEAT_X = 0.395            # semiseparación de los asientos delanteros
 WHEEL_C = (-0.395, 0.735, 1.02)
 
@@ -95,7 +96,7 @@ def build_dashboard(M):
     L.explode(asm, (0, 1, 0.25), 0.75, 2, "Salpicadero", "Conjunto del salpicadero", "R")
     # Parte superior plana: de la cara del salpicadero a la base del parabrisas
     mb = L.MeshBuilder()
-    hw = 0.80
+    hw = 0.70           # por dentro de los paneles de puerta (x 0,765); las tapas laterales cierran los extremos
     top = [(0.955, 1.092), (1.20, 1.110), (1.55, 1.150), (1.80, 1.215), (1.90, 1.262)]
     rows = [[(x, y, z) for (y, z) in top] for x in (-hw, hw)]
     for j in range(len(top) - 1):
@@ -118,7 +119,7 @@ def build_dashboard(M):
     # Rejilla de la salida de aire a lo ancho (Airwave)
     mb = L.MeshBuilder()
     for k in range(3):
-        L.box(mb, (0.0, 0.944, 1.067 - k * 0.010), (1.52, 0.006, 0.0025), 0)
+        L.box(mb, (0.0, 0.944, 1.067 - k * 0.010), (1.38, 0.006, 0.0025), 0)
     vent = mb.build("INT_IP_Airwave_Vent", "INTERIOR_DASHBOARD", M["int_plastic"], parent=asm)
     L.explode(vent, (0, -1, 0), 0.12, 6, "Salpicadero", "Salida de aire continua (Airwave)", "R")
     objs.append(vent)
@@ -214,7 +215,8 @@ def build_steering_wheel(M, parent):
     L.explode(hub, (0, -1, 0.3), 0.05, 6, "Dirección", "Buje y radios con controles", "R")
     # Columna y cubierta
     mb = L.MeshBuilder()
-    L.lathe(mb, [(0.045, 0.03), (0.055, 0.10), (0.060, 0.26), (0.0, 0.27)], tuple(c), tuple(col_dir), 20, 0)
+    # empieza detrás del buje del volante (que ocupa 0–0,05 m a lo largo de la columna)
+    L.lathe(mb, [(0.045, 0.055), (0.055, 0.10), (0.060, 0.26), (0.0, 0.27)], tuple(c), tuple(col_dir), 20, 0)
     col = mb.build("INT_Steering_Column_Shroud", "STEERING", M["int_plastic"], parent=asm)
     L.explode(col, (0, 1, -0.4), 0.15, 6, "Dirección", "Cubierta de la columna y actuador de realimentación", "R")
     objs += [rim, hub, col]
@@ -357,14 +359,16 @@ def front_seat(M, side):
     L.explode(asm, (s * 0.6, 0.1, 1), 0.95, 2, "Asientos",
               f"Asiento delantero {'del acompañante' if s > 0 else 'del conductor'}", "R")
     objs = [
-        sculpted_cushion(f"INT_SeatF_{side}_Cushion", "INTERIOR_SEATS", M["leather"], (x, hx + 0.21, hz + 0.03),
+        sculpted_cushion(f"INT_SeatF_{side}_Cushion", "INTERIOR_SEATS", M["leather"], (x, hx + 0.225, hz + 0.03),
                          0.52, 0.50, 0.11, asm, "Cojín con refuerzos laterales", (0, 0.3, 1), 0.08),
         sculpted_back(f"INT_SeatF_{side}_Back", "INTERIOR_SEATS", M["leather"], (x, hx - 0.04, hz - 0.02),
                       0.54, FRONT_BACK_LEVELS, 0.09, 22, asm, "Respaldo con reposacabezas integrado",
                       (0, -1, 0.3), 0.10),
-        soft_box(f"INT_SeatF_{side}_Base", "INTERIOR_SEATS", M["int_plastic"], (x, hx + 0.16, FLOOR_Z + 0.11),
-                 (0.46, 0.52, 0.17), 0.015, 2, parent=asm, edir=(0, 0, -1), dist=0.08,
-                 label="Base, guías y carcasas laterales del asiento", fid="A"),
+        # bandeja del cojín (chapa) entre los mecanismos de debajo y el cojín: no es un bloque macizo, para que
+        # guías, motores y soplador queden a la vista y sin atravesarse
+        soft_box(f"INT_SeatF_{side}_Base", "INTERIOR_SEATS", M["int_plastic"], (x, hx + 0.21, 0.655),
+                 (0.43, 0.48, 0.018), 0.006, 2, parent=asm, edir=(0, 0, -1), dist=0.08,
+                 label="Bandeja del cojín del asiento", fid="A"),
     ]
     return objs
 
@@ -381,15 +385,15 @@ def rear_bench(M):
                                      (x, hy + 0.21, hz + 0.02), w, 0.48, 0.10, asm,
                                      "Cojín abatible de la banqueta", (0, 0.3, 1), 0.08, bol=0.5))
         objs.append(sculpted_back(f"INT_SeatR_{nm}_Back", "INTERIOR_SEATS", M["leather"], (x, hy - 0.06, hz - 0.02),
-                                  w, REAR_BACK_LEVELS, 0.10, 25, asm, "Respaldo de la banqueta", (0, -1, 0.3), 0.10))
-        tilt = rot_x(25)
+                                  w, REAR_BACK_LEVELS, 0.10, REAR_TILT, asm, "Respaldo de la banqueta", (0, -1, 0.3), 0.10))
+        tilt = rot_x(REAR_TILT)
         ch = Vector((x, hy - 0.06, hz - 0.02)) + tilt @ Vector((0, -0.03, 0.62))
         objs.append(soft_box(f"INT_SeatR_{nm}_Headrest", "INTERIOR_SEATS", M["leather"], tuple(ch),
                              (0.25, 0.09, 0.15), 0.04, 3, rot=tilt, parent=asm, edir=(0, -0.3, 1), dist=0.15,
                              label="Reposacabezas trasero"))
-    objs.append(soft_box("INT_SeatR_Base", "INTERIOR_SEATS", M["int_plastic"], (0.0, hy + 0.15, FLOOR_Z + 0.10),
-                         (1.38, 0.50, 0.15), 0.015, 2, parent=asm, edir=(0, 0, -1), dist=0.08,
-                         label="Estructura de la banqueta", fid="A"))
+    objs.append(soft_box("INT_SeatR_Base", "INTERIOR_SEATS", M["int_plastic"], (0.0, hy + 0.21, 0.635),
+                         (1.38, 0.48, 0.018), 0.006, 2, parent=asm, edir=(0, 0, -1), dist=0.08,
+                         label="Bandeja de los cojines de la banqueta", fid="A"))
     return objs
 
 

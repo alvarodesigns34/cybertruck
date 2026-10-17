@@ -3,10 +3,10 @@
 > Generado automáticamente con `node tools/gen_inventory.mjs` a partir de `web/models/cybertruck-manifest.json`, que se exporta desde la escena real de Blender. Solo enumera objetos que existen en el modelo.
 
 - Vehículo: Tesla Cybertruck Cyberbeast (EE. UU., gama 2026)
-- Componentes (nodos con metadatos): **1136**
-- Mallas: **1098** · Conjuntos (vacíos con pivote): **38**
-- Caras de malla base (antes de modificadores): 612.753
-- Fidelidad: Verificado 20 · Reconstruido 881 · Aproximado 235
+- Componentes (nodos con metadatos): **1138**
+- Mallas: **1100** · Conjuntos (vacíos con pivote): **38**
+- Caras de malla base (antes de modificadores): 641.686
+- Fidelidad: Verificado 20 · Reconstruido 881 · Aproximado 237
 
 Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjuntos interiores · 3. Estructura de carrocería y bajos · 4. Suspensión, ruedas y frenos · 5. Batería y tren motriz · 6. Componentes pequeños y herrajes
 
@@ -512,7 +512,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `BRK_RL_Caliper` | Pinza flotante de 1 pistón con freno de estacionamiento eléctrico (EPB) | Malla | 6 | Verificado |
 | `BRK_RL_Caliper_Internals` | Interior de la pinza trasera izquierda: pistón Ø54 mm con junta y guardapolvos, husillo y tuerca del freno de estacionamiento eléctrico, clips de apoyo — _Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `BRK_RL_Caliper_Service_Parts` | Purgador con capuchón, botas y muelles de retorno de la pinza trasera izquierda | Malla | 6 | Reconstruido |
-| `BRK_RL_EPB_Motor` | Motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera izquierda | Malla | 4 | Reconstruido |
+| `BRK_RL_EPB_Motor` | Conector y mazo del motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera izquierda | Malla | 4 | Reconstruido |
 | `BRK_RL_Pad_Shims` | Láminas antirruido de las pastillas trasera izquierda y avisador acústico de desgaste — _Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `BRK_RL_Pads` | Pastillas de freno (11 mm de material nuevo) | Malla | 6 | Reconstruido |
 | `BRK_RL_Rotor` | Disco ventilado Ø356 mm | Malla | 6 | Verificado |
@@ -520,7 +520,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `BRK_RR_Caliper` | Pinza flotante de 1 pistón con freno de estacionamiento eléctrico (EPB) | Malla | 6 | Verificado |
 | `BRK_RR_Caliper_Internals` | Interior de la pinza trasera derecha: pistón Ø54 mm con junta y guardapolvos, husillo y tuerca del freno de estacionamiento eléctrico, clips de apoyo — _Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `BRK_RR_Caliper_Service_Parts` | Purgador con capuchón, botas y muelles de retorno de la pinza trasera derecha | Malla | 6 | Reconstruido |
-| `BRK_RR_EPB_Motor` | Motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera derecha | Malla | 4 | Reconstruido |
+| `BRK_RR_EPB_Motor` | Conector y mazo del motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera derecha | Malla | 4 | Reconstruido |
 | `BRK_RR_Pad_Shims` | Láminas antirruido de las pastillas trasera derecha y avisador acústico de desgaste — _Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `BRK_RR_Pads` | Pastillas de freno (11 mm de material nuevo) | Malla | 6 | Reconstruido |
 | `BRK_RR_Rotor` | Disco ventilado Ø356 mm | Malla | 6 | Verificado |
@@ -798,7 +798,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `LV_Trailer_ECU` | ECU de remolque tras la fascia trasera (2 tuercas 10 mm a 9 N·m, conector con palanca) | Malla | 5 | Reconstruido |
 | `LV_Trailer_ECU_PCB` | Placa de la ECU de remolque (salidas de luces y freno eléctrico) — _Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)_ | Malla | 6 | Aproximado |
 
-## Unidades motrices (`DRIVE_UNITS`) — 81
+## Unidades motrices (`DRIVE_UNITS`) — 83
 
 | Objeto | Descripción | Tipo | Etapa | Fidelidad |
 |---|---|---|---|---|
@@ -873,6 +873,8 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `DU_R_NVH_Cover_L` | Cubierta acústica (NVH) del motor trasero izquierdo (5 clips) | Malla | 5 | Reconstruido |
 | `DU_R_NVH_Cover_R` | Cubierta acústica (NVH) del motor trasero derecho (5 clips) | Malla | 5 | Reconstruido |
 | `DU_R_OilPump_Filter` | Bomba de aceite (LH, tri-motor) y filtro — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
+| `DU_R_Output_Shaft_L` | Eje de salida estriado izquierdo (atraviesa la carcasa por su retén hacia el semieje) — _Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)_ | Malla | 6 | Aproximado |
+| `DU_R_Output_Shaft_R` | Eje de salida estriado derecho (atraviesa la carcasa por su retén hacia el semieje) — _Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `DU_R_PlateCooler_L` | Refrigerador de placa aceite-refrigerante sobre el motor — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
 | `DU_R_PlateCooler_R` | Refrigerador de placa aceite-refrigerante sobre el motor — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
 | `DU_R_Rotor_L` | Rotor de jaula de ardilla de cobre izquierdo (barras, anillos de cortocircuito y aros de retención) — _Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)_ | Malla | 6 | Aproximado |
@@ -901,7 +903,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `CHS_Aeroshield_Front` | Deflector aerodinámico delantero (11 tornillos de 10 mm) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 3 | Reconstruido |
 | `CHS_Aeroshield_Mid` | Deflector central bajo la batería (6 grapas y 10 tornillos) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 3 | Reconstruido |
 | `CHS_Aeroshield_Rear` | Deflector aerodinámico trasero — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 3 | Reconstruido |
-| `CHS_Cooling_Fan_Module` | Módulo de ventiladores (CFM, 6 tornillos de 10 Nm) con dos rotores — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
+| `CHS_Cooling_Fan_Module` | Carcasa del módulo de ventiladores (CFM, 6 tornillos de 10 Nm) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
 | `CHS_Cooling_Fans` | Hélices de 7 palas, cubos y motores sin escobillas de los dos ventiladores del módulo de refrigeración — _Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)_ | Malla | 6 | Aproximado |
 | `CHS_Radiator` | Radiador de baja temperatura con depósitos laterales | Malla | 6 | Reconstruido |
 | `CHS_Recovery_Hooks_Front` | Ganchos de rescate delanteros (4 tornillos a 78 N·m cada uno) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 3 | Reconstruido |
@@ -1034,14 +1036,14 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `INT_Seatbelt_RL_Retractor` | Interior del enrollador del cinturón RL: carrete con cinta, rueda de bloqueo y pretensor pirotécnico — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_Seatbelt_RR` | Cinturón de tres puntos: cinta, guía, lengüeta, enrollador con pretensor y anclaje — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
 | `INT_Seatbelt_RR_Retractor` | Interior del enrollador del cinturón RR: carrete con cinta, rueda de bloqueo y pretensor pirotécnico — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
-| `INT_SeatF_Frame_L` | Armazón del asiento delantero izquierdo: largueros, travesaños, muelles en zigzag, herrajes de reclinado, armazón del respaldo con malla lumbar y 4 tornillos a las guías — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
-| `INT_SeatF_Frame_R` | Armazón del asiento delantero derecho: largueros, travesaños, muelles en zigzag, herrajes de reclinado, armazón del respaldo con malla lumbar y 4 tornillos a las guías — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
+| `INT_SeatF_Frame_L` | Armazón del asiento delantero izquierdo: largueros, travesaños, muelles sinuosos, herrajes de reclinado con barra de sincronización y armazón del respaldo con malla lumbar — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
+| `INT_SeatF_Frame_R` | Armazón del asiento delantero derecho: largueros, travesaños, muelles sinuosos, herrajes de reclinado con barra de sincronización y armazón del respaldo con malla lumbar — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_SeatF_Heat_Vent_Mats_L` | Esteras de calefacción (hilo resistivo) y de ventilación del asiento delantero izquierdo — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_SeatF_Heat_Vent_Mats_R` | Esteras de calefacción (hilo resistivo) y de ventilación del asiento delantero derecho — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_SeatF_L_Back` | Respaldo con reposacabezas integrado | Malla | 6 | Reconstruido |
 | `INT_SeatF_L_Back_Foam` | Espuma de poliuretano moldeada del respaldo delantero izquierdo — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_SeatF_L_Back_Shell` | Carcasa trasera del respaldo | Malla | 6 | Reconstruido |
-| `INT_SeatF_L_Base` | Base, guías y carcasas laterales del asiento | Malla | 2 | Aproximado |
+| `INT_SeatF_L_Base` | Bandeja del cojín del asiento | Malla | 2 | Aproximado |
 | `INT_SeatF_L_Blower` | Soplador de ventilación del cojín del asiento delantero izquierdo | Malla | 2 | Reconstruido |
 | `INT_SeatF_L_Buttons` | Mandos de ajuste del cojín, del reclinado y lumbar de 8 vías — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
 | `INT_SeatF_L_Covers` | Cubiertas de carril y de tornillos del asiento delantero izquierdo (4 pernos T45P a 34 N·m, desechables) | Malla | 6 | Reconstruido |
@@ -1055,7 +1057,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `INT_SeatF_R_Back` | Respaldo con reposacabezas integrado | Malla | 6 | Reconstruido |
 | `INT_SeatF_R_Back_Foam` | Espuma de poliuretano moldeada del respaldo delantero derecho — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_SeatF_R_Back_Shell` | Carcasa trasera del respaldo | Malla | 6 | Reconstruido |
-| `INT_SeatF_R_Base` | Base, guías y carcasas laterales del asiento | Malla | 2 | Aproximado |
+| `INT_SeatF_R_Base` | Bandeja del cojín del asiento | Malla | 2 | Aproximado |
 | `INT_SeatF_R_Blower` | Soplador de ventilación del cojín del asiento delantero derecho | Malla | 2 | Reconstruido |
 | `INT_SeatF_R_Buttons` | Mandos de ajuste del cojín, del reclinado y lumbar de 8 vías — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
 | `INT_SeatF_R_Covers` | Cubiertas de carril y de tornillos del asiento delantero derecho (4 pernos T45P a 34 N·m, desechables) | Malla | 6 | Reconstruido |
@@ -1068,13 +1070,13 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `INT_SeatF_R_Tracks` | Guías eléctricas y elevadores del asiento (4 tornillos T45P a 34 N·m) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
 | `INT_SeatR_Armrest` | Reposabrazos central trasero (abatible) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
 | `INT_SeatR_Armrest_Cupholders` | Portavasos del reposabrazos trasero (embellecedor) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
-| `INT_SeatR_Base` | Estructura de la banqueta | Malla | 2 | Aproximado |
+| `INT_SeatR_Base` | Bandeja de los cojines de la banqueta | Malla | 2 | Aproximado |
 | `INT_SeatR_C_Back` | Respaldo de la banqueta | Malla | 6 | Reconstruido |
 | `INT_SeatR_C_Back_Foam` | Espuma del respaldo trasero (central) — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_SeatR_C_Cushion` | Cojín abatible de la banqueta | Malla | 6 | Reconstruido |
 | `INT_SeatR_C_Cushion_Foam` | Espuma del cojín trasero (central) — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_SeatR_C_Headrest` | Reposacabezas trasero con varillas — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
-| `INT_SeatR_Frame` | Armazón del banco trasero: travesaños, muelles en zigzag, armazones de respaldo 60/40 con bisagras, cierres y tornillos al suelo — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
+| `INT_SeatR_Frame` | Armazón de la banqueta trasera: bastidor, muelles sinuosos y armazones de los respaldos con cierres — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_SeatR_L_Back` | Respaldo de la banqueta | Malla | 6 | Reconstruido |
 | `INT_SeatR_L_Back_Foam` | Espuma del respaldo trasero (izquierda) — _Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `INT_SeatR_L_Cushion` | Cojín abatible de la banqueta | Malla | 6 | Reconstruido |

@@ -63,8 +63,10 @@ def build(M):
                   (s * 0.80, -1.10, 0.40), (s * 0.95, -1.10, 0.40), (s * 0.80, -1.20, 0.40), (s * 0.95, -1.20, 0.40)]),
         ], f"Carenado trasero del faldón {side}", edir=(s, -0.3, -0.3), dist=0.4))
         A(V3.part(M, f"EXT_Rocker_Step_Reinforcement_{sd}", "EXTERIOR_PANELS", ["steel_black", "zinc"], [
-            box((s * 0.87, 1.02, 0.325), (0.10, 0.16, 0.05), 0.003), box((s * 0.87, -1.02, 0.325), (0.10, 0.16, 0.05), 0.003),
-            [bolt((s * 0.87, y + dy, 0.35), Z, 0.010, 1) for y in (1.02, -1.02) for dy in (-0.05, 0.0, 0.05)],
+            # alojados dentro del inserto extruido del umbral, entre sus nervios
+            box((s * 0.87, 1.02, 0.3315), (0.08, 0.16, 0.021), 0.002),
+            box((s * 0.87, -0.92, 0.3315), (0.08, 0.16, 0.021), 0.002),
+            [bolt((s * 0.87, y + dy, 0.342), Z, 0.010, 1) for y in (1.02, -0.92) for dy in (-0.05, 0.0, 0.05)],
         ], f"Refuerzos {side}s del escalón del faldón (delantero y trasero; 3 pernos 10 mm a 15 N·m cada uno)",
             edir=(s, 0, -0.6), dist=0.4))
 
@@ -240,20 +242,20 @@ def build(M):
         line(clip, (0.74, -1.40, 1.33), (0.74, -2.50, 1.33), 5, axis=Z, d=0.010, m=0),
     ], "Clips {lado}s del deflector de la cubierta", mirror=True, edir=(0.4, 0, 0.8), dist=0.3, stage=6))
     A(V3.part(M, "CARGO_Tonneau_NVH_Barrier", "CARGO_BED", ["rubber", "zinc"], [
-        box((0, -1.075, 1.30), (1.50, 0.020, 0.18), 0.003),
-        line(bolt, (-0.66, -1.087, 1.30), (0.66, -1.087, 1.30), 10, axis=(0, -1, 0), d=0.008),
+        box((0, -1.075, 1.27), (1.50, 0.020, 0.16), 0.003),
+        line(bolt, (-0.66, -1.087, 1.27), (0.66, -1.087, 1.27), 10, axis=(0, -1, 0), d=0.008),
     ], "Barrera NVH del casete (10 pernos de 8 mm a 5 N·m)", edir=(0, 1, 0.2), dist=0.4))
     A(V3.part(M, "CARGO_Tonneau_Water_Seal_Center", "CARGO_BED", ["rubber_seal", "plastic_black"], [
         sweep([(0.70, -1.15, 1.36), (0.70, -1.80, 1.34), (0.70, -2.45, 1.32)], 0.012, 0.010, 0.002, 4),
         clip((0.70, -1.80, 1.345), Z, 0.010, 1),
     ], "Junta {lado} de gestión de agua del tonneau (1 clip)", mirror=True, edir=(0.4, 0, 0.6), dist=0.3))
     A(V3.part(M, "CARGO_Tonneau_Closeout_Foam", "CARGO_BED", ["rubber"], [
-        box((0, -1.115, 1.40), (1.54, 0.010, 0.06), 0.002), box((0, -2.84, 1.35), (1.50, 0.020, 0.030), 0.002),
+        box((0, -1.08, 1.39), (1.20, 0.060, 0.012), 0.002), box((0, -2.84, 1.35), (1.50, 0.020, 0.030), 0.002),
     ], "Junta de cierre y almohadilla de espuma de referencia (datum) de la cubierta", edir=(0, 0.4, 1), dist=0.3,
         stage=6))
     A(V3.part(M, "CARGO_Tonneau_Manual_Release", "CARGO_BED", ["rubber", "zinc"], [
-        cyl((0.10, -1.03, 1.30), (0.10, -1.03, 1.34), 0.010, seg=12),
-        hose([(0.10, -1.03, 1.30), (0.30, -1.05, 1.28), (0.65, -1.05, 1.31)], 0.003, 6, 4, 1),
+        cyl((0.10, -1.045, 1.30), (0.10, -1.045, 1.34), 0.010, seg=12),
+        hose([(0.10, -1.045, 1.30), (0.30, -1.055, 1.28), (0.62, -1.055, 1.31)], 0.003, 6, 4, 1),
     ], "Liberación manual de las lamas del tonneau", edir=(0, 0.3, 1), dist=0.3, stage=6))
 
     # --- Clips y revestimientos de pasos de rueda -----------------------------------------------------

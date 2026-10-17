@@ -295,14 +295,18 @@ def rear_unit(M):
         bearing((0.020, yi, zi), X, 0.018, 0.034, 0.014, 10, m=1),
         bearing((0.146, yi, zi), X, 0.018, 0.034, 0.014, 10, m=1),
         gear((0.058, yd, zd), X, 0.0820, 0.0860, 0.042, 61, 0.030, -22.0),
-        cyl((0.010, yd, zd), (0.200, yd, zd), 0.0175, seg=22, m=0),
-        spline((0.186, yd, zd), X, 0.0175, 0.030, 26, 0.0012, 0.0, 0),
+        cyl((0.010, yd, zd), (0.150, yd, zd), 0.0175, seg=22, m=0),
         bearing((0.018, yd, zd), X, 0.0175, 0.036, 0.016, 11, m=1),
         bearing((0.110, yd, zd), X, 0.030, 0.050, 0.018, 12, m=1),
         ring((0.130, yd, zd), X, 0.031, 0.040, 0.008, 28, 2),
         ring((0.165, yd, zd), X, 0.0178, 0.034, 0.008, 28, 2),
     ], "Reductora independiente {lado}: piñón de entrada, eje intermedio, rueda de salida, ejes y rodamientos "
        "(sin diferencial: vectorización de par)", edir=(0.4, 0.3, -1), dist=0.34, **kw))
+    A(V4.part(M, "DU_R_Output_Shaft", sysn, ["gear_steel", "rubber_seal"], [
+        cyl((0.140, yd, zd), (0.200, yd, zd), 0.0175, seg=22, m=0),
+        spline((0.186, yd, zd), X, 0.0175, 0.030, 26, 0.0012, 0.0, 0),
+    ], "Eje de salida estriado {lado} (atraviesa la carcasa por su retén hacia el semieje)",
+        edir=(0.6, 0, -0.6), dist=0.36, **kw))
     xv, yv, zv = 0.30, ym - 0.14, 0.56
     A(V4.part(M, "DU_R_Inverter_Internals", sysn, ["alu_cast", "ceramic", "plastic_black", "capacitor", "copper",
                                                    "pcb_green", "connector_grey", "solder_tin"], [

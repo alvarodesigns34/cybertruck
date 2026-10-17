@@ -26,6 +26,8 @@ import ct_parts as P
 R_TIRE = S.TIRE_RADIUS
 R_RIM = S.RIM_RADIUS
 HALF_RIM = S.RIM_WIDTH_IN * 0.0254 / 2.0          # 0.1143
+COVER_K = 0.955                                    # escala radial del tapacubos para que no invada la pestaña
+HUB_PAD = 0.030                                    # espesor del disco central de la llanta (desde la cara de apoyo)
 HALF_SECTION = S.TIRE_WIDTH / 2.0                  # 0.1425
 TREAD_BASE = R_TIRE - 0.0145                       # fondo de los surcos (profundidad ~14,5 mm)
 
@@ -196,15 +198,17 @@ def rim_mesh(name):
             (0.258, -(HALF_RIM + 0.006)), (0.244, -0.06), (0.226, -0.03), (0.226, 0.045),
             (0.240, 0.075), (0.250, HALF_RIM)]
     L.lathe(mb, prof, (0, 0, 0), (1, 0, 0), seg, 0, closed_profile=True)
-    # Disco central y radios estructurales (ocultos parcialmente por el tapacubos)
+    # Disco central y radios estructurales (ocultos parcialmente por el tapacubos). La cara de apoyo del disco
+    # central es el plano del bombeo (ET 58,5 mm): el disco crece hacia fuera desde ahí, y los radios pasan por
+    # fuera de la pinza delantera (que sobresale ~73 mm del plano medio del disco de freno)
     hub_face = S.RIM_OFFSET
-    L.lathe(mb, [(0.105, hub_face + 0.004), (0.105, hub_face - 0.035), (0.034, hub_face - 0.035),
-                 (0.034, hub_face + 0.004)], (0, 0, 0), (1, 0, 0), 48, 0, closed_profile=True)
+    L.lathe(mb, [(0.105, hub_face + HUB_PAD), (0.105, hub_face), (0.034, hub_face),
+                 (0.034, hub_face + HUB_PAD)], (0, 0, 0), (1, 0, 0), 48, 0, closed_profile=True)
     for k in range(6):
         t = 2 * math.pi * k / 6 + math.pi / 6
         w = 0.032
         pts = []
-        for (r, a, ww) in ((0.10, hub_face, w), (0.235, 0.050, w * 0.8)):
+        for (r, a, ww) in ((0.10, 0.105, w), (0.246, 0.105, w * 0.8)):
             tt = w / r
             pts.append((r, a, tt))
         a0, a1 = pts
@@ -212,7 +216,7 @@ def rim_mesh(name):
         for (r, a, tt) in (a0, a1):
             quad += [cyl(r, t - tt, a), cyl(r, t + tt, a)]
         top = [quad[0], quad[1], quad[3], quad[2]]
-        bot = [tuple(Vector(p) - Vector((0.03, 0, 0))) for p in top]
+        bot = [tuple(Vector(p) - Vector((0.022, 0, 0))) for p in top]
         mb.face(top, 0, want=(1, 0, 0))
         mb.face(bot, 0, want=(-1, 0, 0))
         for i in range(4):
@@ -287,7 +291,7 @@ def cover_mesh(name, mirror=False):
             (0.150, fa - 0.006), (0.070, fa - 0.002), (0.0, fa - 0.002)]
     rings = L.lathe(mb, prof[:-1], (0, 0, 0), (1, 0, 0), seg, 0)
     mb.face(rings[-1], 0, want=(1, 0, 0))
-    back = [cyl(0.264, 2 * math.pi * k / seg, fa - 0.022) for k in range(seg)]
+    back = [cyl(0.264, 2 * math.pi * k / seg, fa - 0.006) for k in range(seg)]
     mb.quad_strip(rings[0], back, closed=True, mat=0, want_fn=lambda c: Vector((0, c.y, c.z)))
     mb.face(back, 0, want=(-1, 0, 0))
 
@@ -329,7 +333,9 @@ def cover_mesh(name, mirror=False):
     hexi = [pt(0.050, k * math.pi / 3) for k in range(6)]
     hexi2 = [pt(0.046, k * math.pi / 3) for k in range(6)]
     _frustum(mb, hexi, hexi2, fa + 0.0155, fa + 0.0175, 2, 3)
-    verts, faces = mb.verts, mb.faces
+    # el tapacubos encaja dentro de la pestaña de la llanta (radio interior ~252-262 mm en esa zona)
+    verts = [(x, y * COVER_K, z * COVER_K) for (x, y, z) in mb.verts]
+    faces = mb.faces
     if mirror:
         verts = [(x, -y, z) for (x, y, z) in verts]
         faces = [list(reversed(f)) for f in faces]
@@ -348,23 +354,25 @@ def hub_mesh(name, driven=True):
     if me:
         bpy.data.meshes.remove(me)
     mb = L.MeshBuilder(merge=1e-6)
-    a_face = S.RIM_OFFSET - 0.004          # cara de apoyo del disco/llanta
-    # brida de 6 lóbulos
-    L.lathe(mb, [(0.035, a_face), (0.086, a_face), (0.086, a_face - 0.012), (0.060, a_face - 0.016),
-                 (0.058, a_face - 0.040), (0.072, a_face - 0.042), (0.072, a_face - 0.075),
-                 (0.050, a_face - 0.080), (0.040, a_face - 0.080)], (0, 0, 0), (1, 0, 0), 48, 0)
-    # centrador y estriado del semieje
-    L.lathe(mb, [(0.035, a_face), (0.035, a_face + 0.012), (0.030, a_face + 0.014), (0.0 if not driven else 0.016,
-                 a_face + 0.014)], (0, 0, 0), (1, 0, 0), 32, 1)
+    # pila de montaje: brida del buje -> placa de la campana del disco (6 mm) -> cara de apoyo de la llanta
+    a_face = S.RIM_OFFSET - 0.007          # cara de la brida, contra el interior de la campana del disco
+    a_b = S.RIM_OFFSET - 0.004             # referencia del cuerpo del buje y del rodamiento
+    # brida de 6 lóbulos (dentro del radio interior de la campana, 82 mm)
+    L.lathe(mb, [(0.035, a_face), (0.080, a_face), (0.080, a_b - 0.012), (0.060, a_b - 0.016),
+                 (0.058, a_b - 0.040), (0.072, a_b - 0.042), (0.072, a_b - 0.075),
+                 (0.050, a_b - 0.080), (0.040, a_b - 0.080)], (0, 0, 0), (1, 0, 0), 48, 0)
+    # centrador (entra en los taladros de la campana y de la llanta, Ø 68 mm) y estriado del semieje
+    L.lathe(mb, [(0.033, a_face), (0.033, a_face + 0.014), (0.029, a_face + 0.016), (0.0 if not driven else 0.016,
+                 a_face + 0.016)], (0, 0, 0), (1, 0, 0), 32, 1)
     if driven:
-        L.lathe(mb, [(0.016, a_face + 0.014), (0.016, a_face + 0.004), (0.0, a_face + 0.004)], (0, 0, 0),
+        L.lathe(mb, [(0.016, a_face + 0.016), (0.016, a_face + 0.006), (0.0, a_face + 0.006)], (0, 0, 0),
                 (1, 0, 0), 6, 2, phase=math.pi / 6)
     # espárragos de rueda (6 x M14)
     for k in range(6):
         c = Vector(cyl(0.135 / 2, 2 * math.pi * k / 6, a_face))
         L.lathe(mb, [(0.0068, -0.010), (0.0068, 0.055), (0.005, 0.058), (0.0, 0.058)], tuple(c), (1, 0, 0), 10, 2)
     # anillo codificador del sensor de velocidad (lado interior)
-    P.tube_ring(mb, (a_face - 0.083, 0, 0), (1, 0, 0), 0.050, 0.066, 0.006, 40, 2)
+    P.tube_ring(mb, (a_b - 0.083, 0, 0), (1, 0, 0), 0.050, 0.066, 0.006, 40, 2)
     me = bpy.data.meshes.new(name)
     me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
@@ -381,7 +389,7 @@ def lug_mesh(name):
         bpy.data.meshes.remove(me)
     mb = L.MeshBuilder(merge=1e-6)
     pcd = 0.135 / 2
-    a0 = S.RIM_OFFSET + 0.001
+    a0 = S.RIM_OFFSET + HUB_PAD + 0.0005
     for k in range(6):
         t = 2 * math.pi * k / 6
         c = Vector(cyl(pcd, t, 0))
@@ -424,9 +432,11 @@ def rotor_mesh(name, diam, thick, vanes=40):
         for i in range(4):
             j = (i + 1) % 4
             mb.face([pts[i], pts[j], top[j], top[i]], 0)
-    # campana (sombrero) hacia el buje, en el lado exterior
-    L.lathe(mb, [(ri + 0.002, thick / 2), (0.090, thick / 2 + 0.002), (0.088, thick / 2 + 0.040),
-                 (0.034, thick / 2 + 0.040), (0.034, thick / 2 + 0.034), (0.082, thick / 2 + 0.034),
+    # campana (sombrero) hacia el buje, en el lado exterior; su cara exterior queda 0,5 mm por debajo de la cara
+    # de apoyo de la llanta (el disco se coloca 52 mm por dentro de ella)
+    h = 0.0515 - thick / 2
+    L.lathe(mb, [(ri + 0.002, thick / 2), (0.090, thick / 2 + 0.002), (0.088, thick / 2 + h),
+                 (0.034, thick / 2 + h), (0.034, thick / 2 + h - 0.006), (0.082, thick / 2 + h - 0.006),
                  (0.084, thick / 2 + 0.006), (ri, thick / 2 - 0.002)], (0, 0, 0), (1, 0, 0), 72, 1,
             closed_profile=True)
     me = bpy.data.meshes.new(name)

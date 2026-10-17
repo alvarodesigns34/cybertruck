@@ -142,7 +142,8 @@ techo coincide con la planta medida (0,722 m frente a 0,728 m en el vértice; 0,
 ### 5.5 Habitáculo
 - **Verificado:** pantallas de 18,5" y 9,4", cinco plazas, consola central con cargadores inalámbricos,
   salida de aire continua («Airwave»), retrovisor interior, parasoles con cortinilla, cotas interiores.
-- **Reconstruido:** puntos H (delantero 0,30/0,80 m y trasero −0,70/0,77 m en Y/Z) derivados de la altura libre
+- **Reconstruido:** puntos H (delantero 0,30/0,80 m y trasero −0,63/0,77 m en Y/Z, respaldo trasero a 15°; en la v4.1 se adelantó 7 cm para que la banqueta no
+  atravesara la pared trasera) derivados de la altura libre
   (criterio SAE con 102 mm) y del techo del modelo; salpicadero plano; volante «squircle» de 360 x 300 mm.
 - **Aproximado:** formas de asientos, consola, paneles de puerta y guarnecidos; cinturones representados recogidos.
 - **Mejoraría la fidelidad:** fotografías ortogonales del habitáculo o datos de la guía de rescate.
@@ -382,3 +383,142 @@ explosionada (despiece de taller), y los tapizados de los asientos se separan de
 - Tornillería: hay juegos individuales en las uniones del manual que no la tenían; muchas uniones siguen con los
   tornillos integrados en la malla de su pieza.
 - Formas exactas de las piezas visibles (ver §10.3).
+
+## 11. Versión 4.1 (17-10-2026): interferencias de ensamblaje
+
+### 11.1 Problema
+
+Tras publicar la v4, el usuario detectó decenas o cientos de **errores de ensamblaje**: piezas mal posicionadas que
+se atraviesan entre sí, por fuera, por dentro y en los asientos. La causa es que cada constructor coloca sus piezas
+con cotas propias (muchas reconstruidas) sin comprobar lo que ya ocupa ese espacio.
+
+### 11.2 Detector (`blender/scripts/interferencias.py`)
+
+- Para cada pareja de mallas cuyas cajas se solapan se cruzan sus árboles BVH (geometría evaluada, coordenadas de
+  mundo, explosión a cero) y se calculan los segmentos de corte entre triángulos.
+- **Superficie visible:** muchas piezas se modelan como varios sólidos cerrados solapados (lóbulos, nervios, tapas).
+  Las caras de un sólido que quedan dentro de otro sólido del mismo objeto no se ven nunca y no cuentan
+  (`_visible`). Esto eliminó falsos positivos como el tren de engranajes dentro de los lóbulos de su carcasa.
+- **Profundidad:** penetración máxima de los vértices de una pieza dentro de la otra (paridad de rayos y punto más
+  cercano), medida solo cerca de la zona de cruce.
+- **Penetraciones intencionadas** (`INTENDED`), que no se cuentan porque en la realidad pasan por un taladro, una
+  guía o un pasamuros:
+  - tornillos, remaches, grapas, espárragos y tuercas (hasta 15 mm);
+  - celdas en su espuma;
+  - ejes que atraviesan la carcasa por su retén;
+  - varillas de los reposacabezas;
+  - portavasos en la consola;
+  - válvula del neumático;
+  - espárragos y centrador del buje en el disco y la llanta;
+  - extremo de la viga del salpicadero en su soporte;
+  - eje del rotor en el piñón;
+  - mazos que cruzan mamparos y suelo (hasta 15 mm);
+  - barras y cables que entran en el cabezal HV;
+  - colectores de la batería por las vigas;
+  - filtro roscado en la reductora;
+  - casquillos de los soportes del motor (hasta 12 mm).
+
+### 11.3 Estrategias de corrección
+
+1. **Recolocación en los constructores**: la corrección principal, en el código fuente y con sus conexiones.
+   - Pila de rueda coherente: brida del buje, campana del disco y cara de apoyo de la llanta en ET 58,5. Disco
+     central de la llanta hacia fuera, radios por fuera de la pinza, tuercas sobre la nueva cara y tapacubos dentro
+     de la pestaña.
+   - Bahía de alta tensión trasera dentro de las paredes de los pasos de rueda. Inversores traseros detrás del
+     motor. Cables y arneses que terminan en las caras de conexión, no dentro de las cajas.
+   - Vano delantero:
+     - batería de 48 V contra el cortafuegos;
+     - HCU, Octovalve, bomba, enfriador, condensador y botella fuera del larguero de la fundición y del frunk;
+     - mangueras con recorridos libres.
+   - Viga del salpicadero sobre la columna de dirección y extremos por delante del larguero del guardabarros.
+     Controladores de carrocería fuera de las tapas laterales y del soplador. Mazo principal sobre la viga.
+   - Suspensión neumática:
+     - conductos que salen de racores reales;
+     - haces bajo el umbral y por dentro de la rueda trasera;
+     - controlador trasero entre la pared de la cabina y la caja.
+   - Alfombrillas con el contorno real del hueco de los pies. Filtro HEPA junto al soplador. Volante y cubierta de
+     la columna coherentes. Placas electrónicas dentro de la carcasa principal de cada módulo.
+2. **Interiores en sus carcasas** (`build_v4.fit_internals`):
+   - Ajuste anisótropo en los ejes de la carcasa (desplazamiento si chocan por un solo lado, reducción del eje que
+     choca, con un límite del 60 %).
+   - Si no basta, recorte booleano con el volumen interior de la carcasa (`ct_v4.clip_inside`).
+   - Las espumas se fuerzan a quedar dentro de su tapizado (`ct_v4.keep_inside`).
+3. **Pasada de montaje** (`build_montaje.py`, parte `"montaje"` de `build_all.run`), para las piezas que en la
+   realidad llevan el alojamiento de lo que se monta en ellas:
+   - **Recortes**: anillos de puerta, moqueta, guarnecido central, espumas acústicas, tablero, tapas laterales del
+     salpicadero, consola, guarnecidos de puerta y de pilares, escudos de freno, laterales y remates de la caja,
+     soportes del «mast», consola de techo y raíles de la persiana. Las láminas se engruesan antes; los cortadores
+     se unen y se amplían 0,6 mm; se usa el solver `MANIFOLD`. Cada recorte se acepta solo si reduce el cruce.
+   - **Compresión** de las juntas de goma, que se deforman contra lo que las comprime.
+   - **Recolocación automática** (`resolver`, `placer`): solo para módulos ocultos, con tope de 15–30 mm. Se probó
+     y se dejó desactivada para la publicación porque movía piezas visibles. La tabla
+     `montaje_desplazamientos.json` queda vacía.
+
+### 11.4 Lecciones
+
+- El solver booleano `EXACT` con mallas grandes o abiertas (juntas, anillos de puerta) **cierra Blender**. En los
+  recortes se usa `MANIFOLD`, y el exacto solo como respaldo con mallas cerradas de menos de 4.000 caras. El recorte
+  de interiores sí lo usa, porque ahí ha sido estable.
+- `MANIFOLD` exige sólidos cerrados sin autointersecciones. Las partes solapadas de un cortador se unen antes
+  (`_union_islands`) y las láminas se engruesan (`_solidify_sheet`).
+- Recortar láminas abiertas sin engrosarlas destroza la malla (se vio en las alfombrillas). Las alfombrillas se
+  corrigieron con su contorno, no con recortes.
+- La reconstrucción completa con la pasada de montaje tarda unos 5 minutos. Las llamadas MCP cortan a los ~100 s,
+  así que conviene lanzarla en un temporizador de Blender y leer el resultado de un fichero.
+
+### 11.5 Resultado y validación
+
+| Comprobación | Resultado |
+|---|---|
+| Parejas que se atraviesan > 3 mm (sin las intencionadas) | ~1.110 al empezar → **279** |
+| Parejas > 10 mm | ~300 → **53** |
+| Parejas > 30 mm | ~33 → **1** |
+| Penetraciones intencionadas reconocidas | 230 parejas (tornillería, pasamuros, guías…) |
+| Cotas oficiales | Sin cambios (altura libre −0,4 mm; batalla, vía y anchura con espejos exactas) |
+| Siluetas | Sin empeorar; perfil trasero ligeramente mejor (media 8,7 mm) |
+| Vista explosionada | Desviación 0 en los 1.139 objetos |
+| Activo web | GLB de 12,5 MB, 1.138 componentes; `Cybertruck.blend` de 16,5 MB |
+
+### 11.6 Qué falta (pendiente)
+
+La lista completa, pareja por pareja y con su posición, está en `docs/interferencias-pendientes.md`. Por zonas:
+
+- **Chasis (58):**
+  - escudos de freno contra la mangueta, la pinza y la rótula (el recorte no siempre se acepta);
+  - motor EPB y brazos;
+  - fuelles de los amortiguadores neumáticos frente a los asientos de los topes;
+  - haces de aire frente al bloque de válvulas y al inversor;
+  - soportes de la unidad trasera frente al actuador de dirección.
+- **Habitáculo (48):**
+  - viga del salpicadero frente a la tapa lateral derecha y al mazo principal;
+  - interiores del volante;
+  - conductos de desempañado frente al «super cowl»;
+  - módulos de airbag frente a los paneles inferiores;
+  - consola de techo, antenas y sensores;
+  - mazos de puerta junto a los guarnecidos.
+- **Carrocería y estructura (48):**
+  - fundición delantera frente al refuerzo del puente y a los soportes de la viga;
+  - altavoz del peatón frente a la viga del paragolpes;
+  - toma de carga frente a su ECU;
+  - soportes de esquina y de fascia;
+  - pilares C frente a guarnecidos.
+- **Caja de carga (45):**
+  - esquinas traseras (cierres del portón, remates, torres, soportes);
+  - «mast» frente a los laterales y al aplique del sail;
+  - lamas de la persiana frente a los carros;
+  - suelo de la caja sobre la rueda trasera (el hueco del paso de rueda queda 8 mm corto).
+- **Alta y baja tensión (27):**
+  - mazo troncal frente a los controladores y mazos de la caja;
+  - cabezal HV y BMS;
+  - cubiertas de bloqueo;
+  - mazos que rozan módulos.
+- **Unidades motrices (25):** interiores de inversores y reductoras que aún asoman unos milímetros por su carcasa,
+  y soportes.
+- **Gestión térmica (20):**
+  - líneas de A/C frente al compresor y al Supermanifold;
+  - mangueras del enfriador y de la unidad delantera frente al conector del canal del salpicadero.
+- **Asientos (8):**
+  - cinturones traseros frente a los guarnecidos del pilar C;
+  - restos de espuma frente al tapizado.
+
+La forma de abordarlas está en `traspaso.md` §14.

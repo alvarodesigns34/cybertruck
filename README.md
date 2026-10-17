@@ -112,14 +112,17 @@ En la consola de Python de Blender:
 ```python
 import sys; sys.path.insert(0, r"<ruta-del-repo>/blender/scripts")
 import build_all
-build_all.run(parts=("body", "wheels", "lights", "details", "interior", "chassis", "v3", "v4", "explode", "scene"))
+build_all.run(parts=("body", "wheels", "lights", "details", "interior", "chassis", "v3", "v4", "montaje", "explode", "scene"))
 import validate; print(validate.run())            # cotas y siluetas
 import export_web
 export_web.export(r"<ruta-del-repo>/web/models/cybertruck.glb",
                   r"<ruta-del-repo>/web/models/cybertruck-manifest.json")
 ```
 
-`build_all.run` solo elimina y regenera la colección CYBERTRUCK; el resto de la escena se conserva.
+`build_all.run` solo elimina y regenera la colección CYBERTRUCK; el resto de la escena se conserva. La parte
+`"montaje"` (`build_montaje.py`) es el ajuste final que elimina interferencias de ensamblaje (recortes y juntas
+comprimidas) y tarda unos minutos; `import interferencias; interferencias.run()` lista las piezas que se siguen
+atravesando (informe en `docs/interferencias-pendientes.md`, generado con `node tools/gen_interferencias.mjs`).
 
 ## Visor web
 
@@ -177,6 +180,10 @@ se completó en la versión 4. Lo que queda, por orden de valor:
 - Leer las figuras del manual de reparación y las páginas Tri Motor del manual de servicio.
 
 ## Limitaciones principales
+
+- **Interferencias de ensamblaje:** la versión 4.1 redujo las piezas que se atraviesan más de 3 mm de unas 1.110
+  parejas a 279 (53 de más de 10 mm), que lista `docs/interferencias-pendientes.md` (sobre todo cruces de 3–10 mm entre mazos, mangueras, módulos
+  ocultos e interiores de la v4). Ver `docs/research-and-fidelity.md` §11.
 
 - La carrocería exterior está reconstruida con gran precisión dimensional, pero la sección transversal depende de
   dos inclinaciones deducidas (6° y 19°) que no se han podido medir en una vista frontal a escala.

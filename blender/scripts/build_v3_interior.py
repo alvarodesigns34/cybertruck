@@ -30,7 +30,7 @@ def build(M):
 
     # --- Salpicadero ---------------------------------------------------------------------------------------------
     A(V3.part(M, "INT_IP_Mid_Panel", D, ["int_plastic", "zinc"], [
-        box((0, 0.975, 0.92), (0.58, 0.030, 0.18), 0.004),
+        box((0, 0.975, 0.905), (0.58, 0.030, 0.17), 0.004),
         line(clip, (-0.22, 0.958, 0.86), (0.22, 0.958, 0.86), 4, axis=(0, -1, 0)),
     ], "Panel medio del salpicadero (Mid Panel Assembly)", edir=(0, -1, 0.1), dist=0.45))
     A(V3.part(M, "INT_IP_Center_Shroud_Service_Panel", D, ["int_plastic"], [
@@ -58,16 +58,16 @@ def build(M):
     for s, sd in ((1, "R"), (-1, "L")):
         side = "derecho" if s > 0 else "izquierdo"
         A(V3.part(M, f"INT_IP_Airwave_Module_{sd}", D, ["int_plastic", "zinc"], [
-            box((s * 0.55, 1.03, 1.05), (0.22, 0.08, 0.05), 0.004),
-            beam((s * 0.55, 1.07, 1.05), (s * 0.55, 1.50, 1.00), 0.06, 0.04, 0.003),
-            line(torx, (s * 0.46, 0.99, 1.05), (s * 0.64, 0.99, 1.05), 3, axis=(0, -1, 0), d=0.005),
+            box((s * 0.58, 1.03, 1.05), (0.20, 0.08, 0.05), 0.004),
+            beam((s * 0.62, 1.07, 1.05), (s * 0.62, 1.50, 1.00), 0.06, 0.04, 0.003),
+            line(torx, (s * 0.50, 0.99, 1.05), (s * 0.66, 0.99, 1.05), 3, axis=(0, -1, 0), d=0.005),
         ], f"Módulo y conducto del «Airwave» {side}", edir=(0, -0.5, 0.5), dist=0.4))
         A(V3.part(M, f"INT_Demist_Duct_Side_{sd}", D, ["int_plastic"], [
             beam((s * 0.76, 1.50, 1.18), (s * 0.78, 1.75, 1.22), 0.04, 0.035, 0.003),
         ], f"Conducto de desempañado de la ventanilla lateral {side}", edir=(s, 0.3, 0.5), dist=0.35))
         A(V3.part(M, f"INT_Floor_Duct_{sd}", D, ["int_plastic"], [
             beam((s * 0.68, 1.20, 0.525), (s * 0.68, 0.60, 0.525), 0.07, 0.025, 0.003),
-            beam((s * 0.16, 1.00, 0.525), (s * 0.16, 0.20, 0.525), 0.06, 0.025, 0.003),
+            beam((s * 0.165, 1.00, 0.525), (s * 0.165, 0.20, 0.525), 0.04, 0.025, 0.003),
         ], f"Conductos de suelo {side}s (exterior e interior)", edir=(s, 0, -0.6), dist=0.35))
         A(V3.part(M, f"INT_Tweeter_{sd}", D, ["speaker_mesh", "plastic_black"], [
             cyl((s * 0.72, 1.52, 1.255), (s * 0.72, 1.52, 1.268), 0.022, seg=16, m=0),
@@ -91,9 +91,10 @@ def build(M):
         box((0.10, 1.12, 0.62), (0.06, 0.05, 0.045), 0.003), cyl((0.10, 1.095, 0.62), (0.10, 1.075, 0.62), 0.010, seg=10, m=1),
     ], "Actuador de la compuerta de mezcla del climatizador", edir=(0, 0.3, -0.3), dist=0.35, stage=6))
     A(V3.part(M, "INT_HVAC_HEPA_Filter", D, ["plastic_black", "carpet", "zinc"], [
-        box((0.30, 0.95, 0.60), (0.20, 0.12, 0.18), 0.004),
-        box((0.30, 0.89, 0.60), (0.22, 0.014, 0.20), 0.003, 0),
-        line(torx, (0.22, 0.88, 0.67), (0.38, 0.88, 0.67), 3, axis=(0, -1, 0), d=0.005),
+        # bajo el soplador, por fuera del conducto derecho al suelo; tapa hacia el hueco de los pies
+        box((0.45, 1.03, 0.60), (0.20, 0.12, 0.18), 0.004),
+        box((0.45, 0.963, 0.60), (0.22, 0.014, 0.20), 0.003, 0),
+        line(torx, (0.37, 0.955, 0.67), (0.53, 0.955, 0.67), 3, axis=(0, -1, 0), d=0.005),
     ], "Filtro HEPA con cubierta (3 tornillos T20 a 1 N·m en el soplador)", edir=(0, -1, -0.3), dist=0.4, stage=6))
     A(V3.part(M, "INT_HVAC_Sensors", D, ["plastic_black"], [
         box((0.30, 1.00, 1.01), (0.028, 0.012, 0.022), 0.002), box((-0.30, 1.00, 1.01), (0.028, 0.012, 0.022), 0.002),
@@ -133,7 +134,7 @@ def build(M):
         side = "derecho" if s > 0 else "izquierdo"
         xc = s * 0.40
         A(V3.part(M, f"INT_SeatF_{sd}_Motors", SE, ["steel_black", "plastic_black", "zinc"], [
-            cyl((xc - 0.06, 0.10, 0.80), (xc + 0.06, 0.10, 0.80), 0.028, seg=16, m=0),
+            cyl((xc - 0.06, 0.20, 0.70), (xc + 0.06, 0.20, 0.70), 0.026, seg=16, m=0),
             cyl((xc - 0.06, 0.55, 0.585), (xc + 0.06, 0.55, 0.585), 0.026, seg=16, m=0),
             cyl((xc - 0.06, 0.28, 0.575), (xc + 0.06, 0.28, 0.575), 0.024, seg=16, m=0),
             box((xc, 0.42, 0.545), (0.10, 0.06, 0.040), 0.004, 1),
@@ -145,19 +146,20 @@ def build(M):
             disc((xc, 0.40, 0.642), Z, 0.032, 0.004, 14, 1),
         ], f"Soplador de ventilación del cojín del asiento delantero {side}", edir=(s * 0.3, 0, -1), dist=0.35))
         A(V3.part(M, f"INT_SeatF_{sd}_Covers", SE, ["int_plastic", "zinc"], [
-            box((s * 0.19, 0.47, 0.59), (0.020, 0.55, 0.045), 0.003), box((s * 0.61, 0.47, 0.59), (0.020, 0.55, 0.045), 0.003),
-            [disc((s * x, y, 0.614), Z, 0.007, 0.003, 10, 1) for x in (0.26, 0.54) for y in (0.26, 0.64)],
+            box((s * 0.205, 0.46, 0.6085), (0.036, 0.55, 0.023), 0.003),
+            box((s * 0.585, 0.46, 0.6085), (0.036, 0.55, 0.023), 0.003),
+            [disc((s * x, y, 0.6215), Z, 0.007, 0.003, 10, 1) for x in (0.205, 0.585) for y in (0.26, 0.64)],
         ], f"Cubiertas de carril y de tornillos del asiento delantero {side} (4 pernos T45P a 34 N·m, desechables)",
             edir=(s * 0.5, 0, 0.3), dist=0.35, stage=6))
         A(V3.part(M, f"INT_Airbag_Seat_Side_{sd}", SE, ["int_plastic", "stitch"], [
-            box((s * 0.665, 0.05, 0.95), (0.040, 0.10, 0.28), 0.005),
+            box((s * 0.682, 0.05, 0.95), (0.040, 0.10, 0.28), 0.005),
         ], f"Airbag lateral montado en el respaldo del asiento delantero {side}", edir=(s, 0, 0.3), dist=0.4,
             group="Seguridad"))
         A(V3.part(M, f"INT_Airbag_Curtain_{sd}", TR, ["int_plastic", "stitch"], [
             box((s * 0.725, 0.0, 1.50), (0.040, 1.70, 0.060), 0.006),
         ], f"Airbag de cortina {side} (techo y pilares)", edir=(s, 0, -0.5), dist=0.4, group="Seguridad"))
         A(V3.part(M, f"INT_Impact_Sensor_BPillar_{sd}", TR, ["plastic_black", "connector_grey"], [
-            box((s * 0.795, 0.10, 0.90), (0.020, 0.040, 0.030), 0.002),
+            box((s * 0.725, 0.10, 0.90), (0.020, 0.040, 0.030), 0.002),
         ], f"Sensor de impacto del pilar B {side}", edir=(s, 0, 0), dist=0.3, stage=6, group="Seguridad"))
         A(V3.part(M, f"INT_Impact_Sensor_Fender_{sd}", "BODY_FASTENERS", ["plastic_black", "connector_grey"], [
             box((s * 0.88, 1.90, 0.80), (0.020, 0.040, 0.030), 0.002),
@@ -166,11 +168,11 @@ def build(M):
             box((s * 0.55, 2.50, 0.56), (0.040, 0.020, 0.030), 0.002),
         ], f"Sensor de impacto del módulo frontal {side}", edir=(s * 0.3, 1, 0), dist=0.3, stage=6, group="Seguridad"))
         A(V3.part(M, f"INT_Door_Pressure_Sensors_{sd}", "BODY_FASTENERS", ["plastic_black", "connector_grey"], [
-            box((s * 0.80, 0.65, 0.66), (0.020, 0.030, 0.030), 0.002), box((s * 0.80, -0.45, 0.66), (0.020, 0.030, 0.030), 0.002),
+            box((s * 0.86, 0.65, 0.66), (0.020, 0.030, 0.030), 0.002), box((s * 0.86, -0.45, 0.66), (0.020, 0.030, 0.030), 0.002),
         ], f"Sensores de presión de las puertas {side}s (delantera y trasera)", edir=(s, 0, 0), dist=0.3, stage=6,
             group="Seguridad"))
         A(V3.part(M, f"INT_Seatbelt_Webguides_{sd}", TR, ["plastic_black", "seatbelt"], [
-            box((s * 0.80, 0.08, 1.32), (0.020, 0.050, 0.060), 0.003), box((s * 0.76, -0.88, 1.25), (0.020, 0.050, 0.060), 0.003),
+            box((s * 0.690, 0.08, 1.32), (0.020, 0.050, 0.060), 0.003), box((s * 0.690, -0.88, 1.25), (0.020, 0.050, 0.060), 0.003),
         ], f"Guías de cinta de los cinturones {side}s (pilares B y C)", edir=(s, 0, 0.3), dist=0.3, stage=6))
         A(V3.part(M, f"INT_Rear_Seat_Underbelly_{sd}", SE, ["int_plastic", "plastic_black"], [
             box((s * 0.35, -0.55, 0.515), (0.50, 0.40, 0.014), 0.003),
@@ -178,15 +180,16 @@ def build(M):
         ], f"Carenado inferior (underbelly) y conducto en Y del suelo del asiento trasero {side}",
             edir=(s * 0.3, -0.3, -1), dist=0.35, stage=2))
         A(V3.part(M, f"INT_Rear_Shoulder_Cover_{sd}", SE, ["int_plastic", "zinc"], [
-            box((s * 0.66, -1.00, 1.18), (0.08, 0.06, 0.10), 0.004),
-            line(clip, (s * 0.64, -1.00, 1.14), (s * 0.64, -1.00, 1.24), 7, axis=(0, 1, 0)),
+            # por detrás de la esquina superior exterior del respaldo (que en la v4 queda delante de la pared)
+            box((s * 0.65, -0.932, 1.172), (0.08, 0.03, 0.10), 0.004),
+            line(clip, (s * 0.64, -0.917, 1.135), (s * 0.64, -0.917, 1.215), 7, axis=(0, 1, 0)),
         ], f"Cubierta de hombro del respaldo trasero {side} (7 clips + 1 datum)", edir=(s * 0.4, -0.5, 0.5),
             dist=0.35, stage=6))
     A(V3.part(M, "INT_SeatF_L_Position_Sensor", SE, ["plastic_black"], [
         box((-0.45, 0.30, 0.545), (0.030, 0.020, 0.012), 0.002),
     ], "Sensor de posición del carril del asiento del conductor", edir=(-0.3, 0, -1), dist=0.3, stage=6))
     A(V3.part(M, "INT_SeatF_R_Occupancy_Sensor", SE, ["plastic_black", "connector_grey"], [
-        box((0.40, 0.46, 0.695), (0.34, 0.34, 0.004), 0.001), box((0.40, 0.30, 0.680), (0.040, 0.030, 0.016), 0.002, 1),
+        box((0.40, 0.50, 0.668), (0.34, 0.34, 0.004), 0.001), box((0.52, 0.36, 0.636), (0.040, 0.030, 0.016), 0.002, 1),
     ], "Sensor de clasificación de ocupación del acompañante (umbrales ≈20 lb y 51–103 lb)", edir=(0.3, 0, 1),
         dist=0.3, stage=6, group="Seguridad"))
     A(V3.part(M, "INT_Airbag_Driver", CT, ["int_plastic", "zinc", "stitch"], [
@@ -224,16 +227,18 @@ def build(M):
                 else:
                     p = (y1 - 0.03 - (t - 0.75) * 4 * (y1 - y0 - 0.06), 0.58)
                 pts.append(p)
+            xw = 0.805 if d == "F" else 0.790      # cara exterior del panel (build_interior_detail)
             A(V3.part(M, f"INT_DoorTrim_Clips_{nm}", DR, ["plastic_black"], [
-                [clip((s * 0.762, y, z), (-s, 0, 0), 0.012, 0) for (y, z) in pts],
+                [clip((s * xw, y, z), (s, 0, 0), 0.012, 0) for (y, z) in pts],
             ], f"14 grapas del panel de la puerta {dn} {side}", edir=(-s, 0, 0), dist=0.3, stage=6))
             A(V3.part(M, f"INT_Door_NVH_Foam_{nm}", DR, ["rubber"], [
-                box((s * 0.752, (y0 + y1) / 2, 0.86), (0.010, (y1 - y0) - 0.16, 0.46), 0.003),
+                box((s * (xw + 0.006), (y0 + y1) / 2, 0.86), (0.010, (y1 - y0) - 0.16, 0.46), 0.003),
             ], f"Espuma NVH de la puerta {dn} {side}", edir=(s, 0, 0), dist=0.3, stage=2))
             A(V3.part(M, f"INT_Door_Manual_Release_{nm}", DR, ["plastic_black", "hose"], [
-                box((s * 0.758, y0 + 0.14, 0.86), (0.016, 0.040, 0.020), 0.003),
-                hose([(s * 0.758, y0 + 0.14, 0.86), (s * 0.755, y0 + 0.25, 0.90), (s * 0.752, y0 + 0.36, 0.84)],
-                     0.002, 6, 4, 1),
+                # tirador por delante del panel, sobre el reposabrazos; el cable discurre por detrás del panel
+                box((s * (xw - 0.046), y0 + 0.14, 0.866), (0.016, 0.040, 0.020), 0.003),
+                hose([(s * (xw + 0.006), y0 + 0.14, 0.86), (s * (xw + 0.008), y0 + 0.25, 0.90),
+                      (s * (xw + 0.010), y0 + 0.36, 0.84)], 0.002, 6, 4, 1),
             ], f"Cable y tirador de liberación manual de la puerta {dn} {side}", edir=(-s, 0, 0.3), dist=0.3,
                 stage=6))
 

@@ -112,20 +112,23 @@ def tonneau_motors(M):
 
 
 def charge_port(M):
-    bb = bbox("EXT_ChargePort_Inlet")
+    """Actuador de bloqueo y motor de la tapa, encima del controlador de la toma (sin tocar barras ni toma)."""
+    bb = bbox("EXT_ChargePort_ECU")
     if bb is None:
         return []
     mn, mx = bb
     c = (mn + mx) / 2
+    s = 1 if c.x > 0 else -1
+    zt = mx.z + 0.004
     return V4.part(M, "EXT_ChargePort_Lock_Actuator", "DOORS_AND_HATCHES", ["plastic_black", "elec_steel",
                                                                              "copper_enamel", "steel_bare",
                                                                              "connector_grey"], [
-        box((mx.x + 0.030, c.y + 0.040, c.z + 0.020), (0.030, 0.030, 0.028), 0.003, 0),
-        cyl((mx.x + 0.030, c.y + 0.040, c.z + 0.034), (mx.x + 0.030, c.y + 0.040, c.z + 0.050), 0.004, seg=10, m=3),
-        CH._small_motor((mx.x + 0.030, c.y - 0.045, c.z + 0.005), Y, 0.012, 0.035, 1, 2, 3, 6),
-        box((mx.x + 0.030, c.y + 0.040, c.z - 0.002), (0.016, 0.014, 0.010), 0.002, 4),
+        box((c.x, c.y - 0.035, zt + 0.014), (0.030, 0.030, 0.028), 0.003, 0),
+        cyl((c.x - s * 0.016, c.y - 0.035, zt + 0.014), (c.x - s * 0.036, c.y - 0.035, zt + 0.014), 0.004, seg=10, m=3),
+        CH._small_motor((c.x, c.y + 0.030, zt + 0.014), Y, 0.012, 0.035, 1, 2, 3, 6),
+        box((c.x, c.y - 0.005, zt + 0.006), (0.016, 0.014, 0.010), 0.002, 4),
     ], "Actuador de bloqueo del conector de carga y motor de la tapa de la toma NACS",
-        edir=(1, 0, 0.3), dist=0.35, stage=6, group="Carga", fid="A", note=NOTE)
+        edir=(s, 0, 0.6), dist=0.35, stage=6, group="Carga", fid="A", note=NOTE)
 
 
 def trailer_sockets(M):

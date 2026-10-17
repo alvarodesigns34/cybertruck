@@ -613,25 +613,43 @@ def part(M, name, system, mats, shapes, label, mirror=False, edir=None, dist=Non
     return objs
 
 
-def _mesh_world(name):
-    """Vértices (mundo, sin modificadores) y caras de un objeto de malla existente."""
+def _mesh_world(name, evaluated=False):
+    """Vértices (mundo) y caras de un objeto de malla existente (con modificadores si `evaluated`)."""
     import bpy
     o = bpy.data.objects.get(name)
     if o is None or o.type != "MESH":
         return None, None
+    if evaluated:
+        dg = bpy.context.evaluated_depsgraph_get()
+        ev = o.evaluated_get(dg)
+        me = ev.to_mesh()
+        mw = ev.matrix_world
+        verts = [mw @ v.co for v in me.vertices]
+        faces = [list(p.vertices) for p in me.polygons]
+        ev.to_mesh_clear()
+        return verts, faces
     mw = o.matrix_world
     verts = [mw @ v.co for v in o.data.vertices]
     faces = [list(p.vertices) for p in o.data.polygons]
     return verts, faces
 
 
-def derived(M, src, name, system, mats, label, scale=(0.9, 0.9, 0.9), offset=(0, 0, 0), core=None, **kw):
+def derived(M, src, name, system, mats, label, scale=(0.9, 0.9, 0.9), offset=(0, 0, 0), core=None, xform=None,
+            evaluated=False, **kw):
     """Pieza derivada de la malla de otra (espumas dentro de tapizados, almas dentro de aros…).
 
     `scale`: factor por eje respecto al centro de la caja del original (espuma interior).
     `core`: (eje, factor) para contraer la sección de un aro hacia su línea media (alma del volante).
+    `xform`: función punto → punto (mundo) para transformaciones a medida (p. ej. recortar el espesor de una
+    espuma por detrás para dejar sitio al armazón). `evaluated`: partir de la malla con modificadores.
     """
-    verts, faces = _mesh_world(src)
+    verts, faces = _mesh_world(src, evaluated)
+    if verts and xform is not None:
+        verts = [Vector(xform(p)) for p in verts]
+        mb = L.MeshBuilder(merge=1e-7)
+        for f in faces:
+            mb.face([tuple(verts[i]) for i in f], 0)
+        return part(M, name, system, mats, [("mb", mb)], label, **kw)
     if not verts:
         return []
     mn = Vector((min(v.x for v in verts), min(v.y for v in verts), min(v.z for v in verts)))
@@ -667,6 +685,218 @@ def derived(M, src, name, system, mats, label, scale=(0.9, 0.9, 0.9), offset=(0,
     for f in faces:
         mb.face([tuple(verts[i]) for i in f], 0)
     return part(M, name, system, mats, [("mb", mb)], label, **kw)
+
+
+def fit_inside(inner, housing, margin=0.0015, k_min=0.6, max_iter=90):
+    """Ajusta `inner` dentro de `housing` para que su superficie deje de cortar la de la carcasa (mallas
+    evaluadas, árboles BVH en coordenadas de mundo). Devuelve el menor factor de escala aplicado en un eje
+    (1.0 si ya cabía, 0.0 si no se consigue sin bajar de `k_min`).
+
+    Se usa para los interiores de la versión 4 (placas, bobinados, engranajes…), cuyas formas son
+    reconstrucciones. El ajuste es anisótropo y se hace en los ejes propios de la carcasa: en cada paso se miran
+    los triángulos del interior que cortan la pared y se clasifican por eje y sentido respecto al centro del
+    interior; si chocan por un solo lado, el interior se desplaza hacia el otro (estaba descentrado); si chocan
+    por los dos, se reduce solo ese eje. Así una placa delgada en una carcasa inclinada solo pierde espesor.
+    """
+    import bpy
+    from mathutils.bvhtree import BVHTree
+    oi, oh = bpy.data.objects.get(inner), bpy.data.objects.get(housing)
+    if oi is None or oh is None:
+        return None
+    bpy.context.view_layer.update()
+    dg = bpy.context.evaluated_depsgraph_get()
+
+    def world(o):
+        ev = o.evaluated_get(dg)
+        me = ev.to_mesh()
+        vs = [ev.matrix_world @ v.co for v in me.vertices]
+        me.calc_loop_triangles()
+        tris = [tuple(t.vertices) for t in me.loop_triangles]
+        ev.to_mesh_clear()
+        return vs, tris
+
+    hv, ht = world(oh)
+    htree = BVHTree.FromPolygons(hv, ht, epsilon=0.0)
+    iv, it = world(oi)
+    if not iv or not it:
+        return None
+    R = oh.matrix_world.to_3x3().normalized()
+    Ri = R.transposed()
+    loc = [Ri @ p for p in iv]                      # coordenadas en los ejes de la carcasa
+    mn = Vector((min(v.x for v in loc), min(v.y for v in loc), min(v.z for v in loc)))
+    mx = Vector((max(v.x for v in loc), max(v.y for v in loc), max(v.z for v in loc)))
+    c = (mn + mx) / 2
+    half = [max((mx[i] - mn[i]) / 2, 1e-4) for i in range(3)]
+    rel = [p - c for p in loc]
+    k = [1.0, 1.0, 1.0]
+    t = Vector((0.0, 0.0, 0.0))
+    tmax = [0.30 * h + 0.006 for h in half]
+
+    def place(kk, tt, extra=0.0):
+        g = [kk[i] * (1.0 + extra / half[i]) for i in range(3)]
+        return [R @ (c + tt + Vector((q.x * g[0], q.y * g[1], q.z * g[2]))) for q in rel]
+
+    def hits(kk, tt):
+        vs = place(kk, tt, margin)
+        return vs, BVHTree.FromPolygons(vs, it, epsilon=0.0).overlap(htree)
+
+    vs, ov = hits(k, t)
+    if not ov:
+        return 1.0
+    for _ in range(max_iter):
+        cnt = {}
+        step = max(1, len(ov) // 300)
+        for ia, _ib in ov[::step]:
+            a, b, cc = (Ri @ vs[j] for j in it[ia])
+            q = (a + b + cc) / 3 - (c + t)
+            i = max(range(3), key=lambda j: abs(q[j]) / half[j])
+            key = (i, 1 if q[i] > 0 else -1)
+            cnt[key] = cnt.get(key, 0) + 1
+        (i, sg), n = max(cnt.items(), key=lambda kv: kv[1])
+        opp = cnt.get((i, -sg), 0)
+        moved = False
+        if opp < 0.25 * n and abs(t[i] - sg * 0.0015) <= tmax[i]:
+            t[i] -= sg * 0.0015
+            moved = True
+        if not moved:
+            if k[i] * 0.97 < k_min:
+                return 0.0
+            k[i] *= 0.97
+        vs, ov = hits(k, t)
+        if not ov:
+            break
+    else:
+        return 0.0
+    mw = oi.matrix_world
+    inv = mw.inverted()
+    final = place(k, t)
+    # se aplica la misma transformación a los vértices originales (sin modificadores)
+    base = [Ri @ (mw @ v.co) for v in oi.data.vertices]
+    for v, p in zip(oi.data.vertices, base):
+        q = p - c
+        v.co = inv @ (R @ (c + t + Vector((q.x * k[0], q.y * k[1], q.z * k[2]))))
+    oi.data.update()
+    del final
+    return round(min(k), 3)
+
+
+def keep_inside(inner, outer, gap=0.003, rounds=2):
+    """Lleva dentro de `outer` (malla evaluada, cerrada) los vértices de `inner` que quedan fuera o a menos de
+    `gap` de su superficie: se proyectan sobre ella y se retiran `gap` hacia dentro. Para espumas dentro de sus
+    tapizados, cuya forma (copia encogida) asoma en las zonas cóncavas. Devuelve los vértices movidos."""
+    import bpy
+    from mathutils.bvhtree import BVHTree
+    oi, oo = bpy.data.objects.get(inner), bpy.data.objects.get(outer)
+    if oi is None or oo is None:
+        return None
+    bpy.context.view_layer.update()
+    dg = bpy.context.evaluated_depsgraph_get()
+    ev = oo.evaluated_get(dg)
+    me = ev.to_mesh()
+    vs = [ev.matrix_world @ v.co for v in me.vertices]
+    me.calc_loop_triangles()
+    tree = BVHTree.FromPolygons(vs, [tuple(t.vertices) for t in me.loop_triangles], epsilon=0.0)
+    ev.to_mesh_clear()
+    up = Vector((0.0123, 0.0217, 1.0)).normalized()
+
+    def inside(p):
+        n, o = 0, p.copy()
+        for _ in range(64):
+            hit = tree.ray_cast(o, up)[0]
+            if hit is None:
+                break
+            n += 1
+            o = hit + up * 1e-5
+        return n % 2 == 1
+    if oi.data.users > 1:
+        oi.data = oi.data.copy()
+    mw = oi.matrix_world
+    inv = mw.inverted()
+    moved = 0
+    for _ in range(rounds):
+        ch = 0
+        for v in oi.data.vertices:
+            p = mw @ v.co
+            loc, nor, _i, d = tree.find_nearest(p)
+            if loc is None:
+                continue
+            if inside(p) and d >= gap:
+                continue
+            v.co = inv @ (loc - nor * gap)
+            ch += 1
+        moved += ch
+        if not ch:
+            break
+    oi.data.update()
+    return moved
+
+
+def clip_inside(inner, housing, margin=0.0015):
+    """Recorta `inner` con el volumen interior de `housing` (intersección booleana contra una copia de la carcasa
+    desplazada `margin` hacia dentro a lo largo de sus normales). Es el último recurso de
+    `build_v4.fit_internals` cuando el ajuste por escala no converge (carcasas con nervios, placas o tabiques
+    interiores): el interior conserva su tamaño y solo se corta donde asomaría por la pared. Se prueba primero el
+    solver MANIFOLD y, si no mejora, el exacto con autointersección; el resultado se acepta solo si corta menos la
+    carcasa que antes. Devuelve el número de caras resultante (0 si se descartó)."""
+    import bpy
+    from mathutils.bvhtree import BVHTree
+    import build_montaje as BM
+    oi, oh = bpy.data.objects.get(inner), bpy.data.objects.get(housing)
+    if oi is None or oh is None:
+        return None
+
+    def tree(o):
+        dg = bpy.context.evaluated_depsgraph_get()
+        ev = o.evaluated_get(dg)
+        me = ev.to_mesh()
+        vs = [ev.matrix_world @ v.co for v in me.vertices]
+        me.calc_loop_triangles()
+        tr = [tuple(t.vertices) for t in me.loop_triangles]
+        ev.to_mesh_clear()
+        return BVHTree.FromPolygons(vs, tr, epsilon=0.0) if tr else None
+
+    BM._bake(oi)
+    th = tree(oh)
+    before = len(tree(oi).overlap(th))
+    if not before:
+        return len(oi.data.polygons)
+    cut, _closed = BM._cutter_object([housing], -margin)
+    n = 0
+    # MANIFOLD primero y, si no mejora, el exacto (en los interiores, mallas cerradas y moderadas, es estable)
+    for solver in ("MANIFOLD", "EXACT"):
+        BM._log(f"clip {inner} {solver}")
+        mod = oi.modifiers.new("_clip", "BOOLEAN")
+        mod.operation = "INTERSECT"
+        mod.solver = solver
+        mod.object = cut
+        if solver == "EXACT":
+            mod.use_self = True
+            mod.use_hole_tolerant = True
+        bpy.context.view_layer.update()
+        dg = bpy.context.evaluated_depsgraph_get()
+        new = bpy.data.meshes.new_from_object(oi.evaluated_get(dg), preserve_all_data_layers=True, depsgraph=dg)
+        oi.modifiers.remove(mod)
+        if len(new.polygons) < 0.15 * max(1, len(oi.data.polygons)):
+            bpy.data.meshes.remove(new)
+            continue
+        old = oi.data
+        oi.data = new
+        bpy.context.view_layer.update()
+        t1 = tree(oi)
+        after = len(t1.overlap(th)) if t1 else before
+        if after >= before:
+            oi.data = old
+            bpy.data.meshes.remove(new)
+            continue
+        new.name = old.name
+        if old.users == 0:
+            bpy.data.meshes.remove(old)
+        n = len(new.polygons)
+        break
+    me = cut.data
+    bpy.data.objects.remove(cut, do_unlink=True)
+    bpy.data.meshes.remove(me)
+    return n
 
 
 def obj_frame(name):

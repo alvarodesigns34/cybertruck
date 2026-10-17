@@ -28,7 +28,8 @@ import build_body as B
 
 FLOOR_Z = 0.505
 H_FRONT = (0.30, 0.80)
-H_REAR = (-0.70, 0.77)
+H_REAR = (-0.63, 0.77)
+REAR_TILT = 15
 SEAT_X = 0.395
 WHEEL_C = Vector((-0.395, 0.735, 1.02))
 
@@ -79,7 +80,7 @@ def steering_wheel_detail(M):
     # actuador de realimentación de la dirección (por cable: sin unión mecánica con las ruedas)
     mb = L.MeshBuilder()
     p0 = c + col_dir * 0.30
-    P.cyl(mb, p0, p0 + col_dir * 0.16, 0.055, 28, 0)
+    P.cyl(mb, p0, p0 + col_dir * 0.16, 0.048, 28, 0)     # cuelga bajo la viga del salpicadero
     P.rbox(mb, p0 + col_dir * 0.08 - v * 0.07, (0.10, 0.06, 0.12), 0.006, 1, rot, 0)
     for k in range(3):
         a = 2 * math.pi * k / 3
@@ -163,15 +164,16 @@ def dashboard_detail(M):
         if o is not None:
             bpy.data.objects.remove(o, do_unlink=True)
     mb = L.MeshBuilder()
-    P.hull(mb, [V(0.14, 0.955, 0.985), V(0.74, 0.955, 0.985), V(0.14, 0.99, 0.90), V(0.74, 0.99, 0.90),
-                V(0.14, 1.09, 0.80), V(0.74, 1.09, 0.80), V(0.14, 1.12, 0.80), V(0.74, 1.12, 0.80),
-                V(0.14, 1.00, 0.985), V(0.74, 1.00, 0.985)], 0)
+    P.hull(mb, [V(0.14, 0.955, 0.985), V(0.69, 0.955, 0.985), V(0.14, 0.99, 0.90), V(0.69, 0.99, 0.90),
+                V(0.14, 1.07, 0.80), V(0.69, 1.07, 0.80), V(0.14, 1.10, 0.80), V(0.69, 1.10, 0.80),
+                V(0.14, 1.00, 0.985), V(0.69, 1.00, 0.985)], 0)
     objs.append(P.make(mb, "INT_IP_Glovebox", "INTERIOR_DASHBOARD", M["int_plastic"], asm, (0.3, -1, -0.3), 0.25, 2,
                        "Salpicadero", "Guantera (5 tornillos T20) con luz de cortesía", "V", bevel=0.006))
     mb = L.MeshBuilder()
-    P.hull(mb, [V(-0.72, 0.955, 0.985), V(-0.08, 0.955, 0.985), V(-0.72, 1.00, 0.88), V(-0.08, 1.00, 0.88),
-                V(-0.72, 1.12, 0.74), V(-0.08, 1.12, 0.74), V(-0.72, 1.16, 0.74), V(-0.08, 1.16, 0.74),
-                V(-0.72, 1.00, 0.985), V(-0.08, 1.00, 0.985)], 0)
+    # por debajo del actuador del volante y de la columna (z ≥ 0,76), delante de la pata del salpicadero
+    P.hull(mb, [V(-0.69, 0.955, 0.760), V(-0.24, 0.955, 0.760), V(-0.69, 1.00, 0.70), V(-0.24, 1.00, 0.70),
+                V(-0.69, 1.08, 0.62), V(-0.24, 1.08, 0.62), V(-0.69, 1.10, 0.62), V(-0.24, 1.10, 0.62),
+                V(-0.69, 1.00, 0.760), V(-0.24, 1.00, 0.760)], 0)
     objs.append(P.make(mb, "INT_IP_Lower_Driver", "INTERIOR_DASHBOARD", M["int_plastic"], asm, (-0.3, -1, -0.3), 0.25,
                        2, "Salpicadero", "Panel inferior del conductor (protección de rodillas)", "V", bevel=0.006))
     # rejilla de desempañado a lo ancho de la base del parabrisas
@@ -184,19 +186,21 @@ def dashboard_detail(M):
     # cuartos laterales del salpicadero (tapas extremas) con salida de desempañado lateral
     for sg, sd in ((1, "R"), (-1, "L")):
         mb = L.MeshBuilder()
-        P.hull(mb, [V(sg * 0.80, 0.95, 1.10), V(sg * 0.86, 0.98, 1.10), V(sg * 0.80, 1.30, 1.16),
-                    V(sg * 0.86, 1.30, 1.16), V(sg * 0.80, 0.98, 0.80), V(sg * 0.86, 1.00, 0.80),
-                    V(sg * 0.80, 1.30, 0.80), V(sg * 0.86, 1.30, 0.80)], 0)
-        P.rbox(mb, V(sg * 0.865, 1.02, 1.06), (0.004, 0.06, 0.03), 0.002, 1, None, 1)
+        # tapa del extremo del salpicadero, por dentro del panel de la puerta delantera
+        P.hull(mb, [V(sg * 0.700, 0.95, 1.10), V(sg * 0.755, 0.98, 1.10), V(sg * 0.700, 1.30, 1.16),
+                    V(sg * 0.755, 1.30, 1.16), V(sg * 0.700, 0.98, 0.80), V(sg * 0.755, 1.00, 0.80),
+                    V(sg * 0.700, 1.30, 0.80), V(sg * 0.755, 1.30, 0.80)], 0)
+        P.rbox(mb, V(sg * 0.757, 1.02, 1.06), (0.004, 0.06, 0.03), 0.002, 1, None, 1)
         objs.append(P.make(mb, f"INT_IP_Quarter_Panel_{sd}", "INTERIOR_DASHBOARD", [M["int_grey"], M["int_plastic"]],
                            asm, (sg, -0.3, 0), 0.25, 2, "Salpicadero",
                            "Panel lateral del salpicadero con salida de desempañado lateral", "V", bevel=0.005))
     # módulo de climatización (HVAC) detrás del salpicadero y conductos al suelo
     mb = L.MeshBuilder()
-    P.rbox(mb, (0.05, 1.20, 0.80), (0.60, 0.26, 0.32), 0.02, 2, None, 0)
-    P.cyl(mb, (0.42, 1.18, 0.78), (0.42, 1.18, 0.92), 0.090, 28, 0)
+    # caja central entre la guantera (delante), la viga transversal (encima) y el mamparo (detrás)
+    P.rbox(mb, (0.06, 1.25, 0.78), (0.56, 0.24, 0.27), 0.02, 2, None, 0)
+    P.cyl(mb, (0.42, 1.24, 0.76), (0.42, 1.24, 0.90), 0.085, 28, 0)
     for sg in (1, -1):
-        P.hose(mb, [(sg * 0.18, 1.10, 0.66), (sg * 0.20, 0.98, 0.56), (sg * 0.24, 0.70, 0.53)], 0.03, 12, 5, 1)
+        P.hose(mb, [(sg * 0.17, 1.15, 0.67), (sg * 0.20, 1.00, 0.56), (sg * 0.22, 0.80, 0.53)], 0.03, 12, 5, 1)
     objs.append(P.make(mb, "INT_HVAC_Module", "INTERIOR_DASHBOARD", [M["plastic_black"], M["plastic_liner"]], asm,
                        (0, 1, 0.3), 0.45, 2, "Climatización",
                        "Módulo de climatización (ventilador, filtro HEPA, compuertas) y conductos al suelo", "V"))
@@ -209,9 +213,11 @@ def dashboard_detail(M):
                        "Electrónica", "Ordenador del vehículo (infoentretenimiento y Autopilot) con disipador", "V"))
     # módulos de airbag del acompañante y de rodillas, y RCM bajo la consola
     mb = L.MeshBuilder()
-    P.rbox(mb, (0.40, 1.04, 1.06), (0.26, 0.10, 0.06), 0.008, 1, None, 0)
-    for x in (-0.40, 0.42):
-        P.rbox(mb, (x, 1.08, 0.80), (0.30, 0.06, 0.05), 0.008, 1, None, 0)
+    # airbag del acompañante en la parte alta del salpicadero, bajo el parabrisas
+    P.rbox(mb, (0.40, 1.45, 1.085), (0.26, 0.12, 0.05), 0.008, 1, None, 0)
+    # rodilleras: la del conductor dentro del panel inferior; la del acompañante bajo la guantera
+    P.rbox(mb, (-0.48, 1.04, 0.69), (0.26, 0.04, 0.05), 0.008, 1, None, 0)
+    P.rbox(mb, (0.42, 1.03, 0.755), (0.26, 0.05, 0.05), 0.008, 1, None, 0)
     objs.append(P.make(mb, "INT_Airbag_Modules", "INTERIOR_DASHBOARD", M["plastic_black"], asm, (0, 0.5, 0.5), 0.35, 2,
                        "Seguridad", "Módulos de airbag del acompañante y de rodillas", "V"))
     mb = L.MeshBuilder()
@@ -274,19 +280,19 @@ def pillar_trims(M):
         objs.append(P.make(mb, f"INT_Trim_BPillar_Upper_{sd}", "INTERIOR_TRIM", M["headliner"], None,
                            (-s, 0, 0.4), 0.35, 2, "Guarnecidos", f"Guarnecido superior del pilar B {side}", "V"))
         mb = L.MeshBuilder()
-        P.hull(mb, [V(s * 0.79, yb - 0.06, FLOOR_Z + 0.05), V(s * 0.79, yb + 0.06, FLOOR_Z + 0.05),
-                    V(s * 0.79, yb - 0.05, zb0), V(s * 0.79, yb + 0.05, zb0),
-                    V(s * 0.83, yb - 0.06, FLOOR_Z + 0.05), V(s * 0.83, yb + 0.06, FLOOR_Z + 0.05),
-                    V(s * 0.83, yb, zb0)], 0)
+        P.hull(mb, [V(s * 0.700, yb - 0.06, FLOOR_Z + 0.05), V(s * 0.700, yb + 0.06, FLOOR_Z + 0.05),
+                    V(s * 0.705, yb - 0.05, zb0), V(s * 0.705, yb + 0.05, zb0),
+                    V(s * 0.748, yb - 0.06, FLOOR_Z + 0.05), V(s * 0.748, yb + 0.06, FLOOR_Z + 0.05),
+                    V(s * 0.748, yb - 0.05, zb0), V(s * 0.748, yb + 0.05, zb0)], 0)
         objs.append(P.make(mb, f"INT_Trim_BPillar_Lower_{sd}", "INTERIOR_TRIM", M["int_plastic"], None,
                            (-s, 0, 0), 0.30, 2, "Guarnecidos", f"Guarnecido inferior del pilar B {side}", "V"))
         # pilar C superior e inferior y subwoofer del pilar C
         mb = L.MeshBuilder()
         yc = S.CAB_REAR_Y + 0.05
         zc0, zc1 = S.z_belt(yc), S.z_top(yc) - 0.06
-        P.hull(mb, [V(s * 0.76, yc - 0.03, FLOOR_Z + 0.05), V(s * 0.76, yc + 0.10, FLOOR_Z + 0.05),
-                    V(s * 0.76, yc - 0.03, zc0), V(s * 0.76, yc + 0.10, zc0), V(s * 0.83, yc - 0.03, FLOOR_Z + 0.05),
-                    V(s * 0.83, yc - 0.03, zc0)], 0)
+        P.hull(mb, [V(s * 0.700, yc - 0.03, FLOOR_Z + 0.05), V(s * 0.700, yc + 0.10, FLOOR_Z + 0.05),
+                    V(s * 0.700, yc - 0.03, zc0), V(s * 0.700, yc + 0.10, zc0), V(s * 0.748, yc - 0.03, FLOOR_Z + 0.05),
+                    V(s * 0.748, yc + 0.10, FLOOR_Z + 0.05), V(s * 0.748, yc - 0.03, zc0), V(s * 0.748, yc + 0.10, zc0)], 0)
         objs.append(P.make(mb, f"INT_Trim_CPillar_Lower_{sd}", "INTERIOR_TRIM", M["int_plastic"], None,
                            (-s, 0.3, 0), 0.30, 2, "Guarnecidos", f"Guarnecido inferior del pilar C {side}", "V"))
         mb = L.MeshBuilder()
@@ -296,9 +302,10 @@ def pillar_trims(M):
         objs.append(P.make(mb, f"INT_Trim_CPillar_Upper_{sd}", "INTERIOR_TRIM", M["headliner"], None,
                            (-s, 0.3, 0.4), 0.35, 2, "Guarnecidos", f"Guarnecido superior del pilar C {side}", "V"))
         mb = L.MeshBuilder()
-        c = V(s * 0.745, yc + 0.02, 0.70)
-        P.rbox(mb, c, (0.06, 0.12, 0.18), 0.012, 2, None, 0)
-        L.lathe(mb, [(0.0, 0.0), (0.045, 0.0), (0.045, 0.004), (0.0, 0.004)], tuple(c + V(-s * 0.03, 0, 0)), (-s, 0, 0),
+        # alojado en el guarnecido del pilar C, con la rejilla sobre su cara interior
+        c = V(s * 0.724, yc + 0.04, 0.745)
+        P.rbox(mb, c, (0.040, 0.11, 0.16), 0.010, 2, None, 0)
+        L.lathe(mb, [(0.0, 0.0), (0.045, 0.0), (0.045, 0.004), (0.0, 0.004)], tuple(c + V(-s * 0.0245, 0, 0)), (-s, 0, 0),
                 24, 1)
         objs.append(P.make(mb, f"INT_Subwoofer_CPillar_{sd}", "INTERIOR_TRIM", [M["int_plastic"], M["speaker_mesh"]],
                            None, (-s, 0.3, 0), 0.40, 2, "Audio", f"Subwoofer del pilar C {side} (2 tornillos)", "V"))
@@ -398,7 +405,7 @@ def door_trim_detail(M):
                                "Moldura de cintura (Beltline) con luz ambiental", "V"))
             # reposabrazos con botonera de ventanillas y pulsador de apertura
             mb = L.MeshBuilder()
-            P.rbox(mb, V(xw - s * 0.07, ym - 0.03, 0.83), (0.09, ln * 0.55, 0.045), 0.018, 3, None, 0)
+            P.rbox(mb, V(xw - s * 0.0815, ym - 0.03, 0.83), (0.09, ln * 0.55, 0.045), 0.018, 3, None, 0)
             objs.append(P.make(mb, f"INT_DoorArmrest_{tag}", "INTERIOR_DOORS", M["leather"], door, (-s, 0, 0), 0.40, 6,
                                "Paneles de puerta", "Reposabrazos acolchado de la puerta", "V"))
             mb = L.MeshBuilder()
@@ -410,20 +417,20 @@ def door_trim_detail(M):
                                "Interruptores de ventanilla" + (" (botonera del conductor)" if nsw > 1 else ""), "V"))
             # bolsillo con luz ambiental, rejilla del altavoz, luz de cortesía y catadióptrico
             mb = L.MeshBuilder()
-            P.rbox(mb, V(xw - s * 0.045, ym + 0.05, FLOOR_Z + 0.12), (0.05, ln * 0.70, 0.11), 0.008, 2, None, 0)
-            P.rbox(mb, V(xw - s * 0.071, ym + 0.05, FLOOR_Z + 0.16), (0.003, ln * 0.62, 0.003), 0.001, 1, None, 1)
+            P.rbox(mb, V(xw - s * 0.059, ym + 0.05, FLOOR_Z + 0.12), (0.05, ln * 0.70, 0.11), 0.008, 2, None, 0)
+            P.rbox(mb, V(xw - s * 0.0855, ym + 0.05, FLOOR_Z + 0.16), (0.003, ln * 0.62, 0.003), 0.001, 1, None, 1)
             objs.append(P.make(mb, f"INT_DoorPocket_{tag}", "INTERIOR_DOORS", [M["int_plastic"], M["led_white"]], door,
                                (-s, 0, -0.3), 0.38, 6, "Paneles de puerta", "Bolsillo con luz ambiental", "V"))
             mb = L.MeshBuilder()
-            L.lathe(mb, [(0.0, 0.0), (0.080, 0.0), (0.080, 0.006), (0.0, 0.008)],
-                    (xw - s * 0.032, ym - 0.12, 0.66), (-s, 0, 0), 40, 0)
+            L.lathe(mb, [(0.0, 0.0), (0.055, 0.0), (0.055, 0.006), (0.0, 0.008)],
+                    (xw - s * 0.0345, ym - 0.12, 0.744), (-s, 0, 0), 40, 0)
             objs.append(P.make(mb, f"INT_DoorSpeaker_{tag}", "INTERIOR_DOORS", M["speaker_mesh"], door, (-s, 0, 0),
                                0.42, 6, "Audio",
                                "Rejilla del subwoofer de la puerta" if key == "F" else "Rejilla del altavoz de la puerta",
                                "V"))
             mb = L.MeshBuilder()
-            P.rbox(mb, V(xw - s * 0.02, ym, FLOOR_Z + 0.042), (0.03, 0.08, 0.004), 0.001, 1, None, 0)
-            P.rbox(mb, V(xw - s * 0.02, yr + 0.02, FLOOR_Z + 0.12), (0.03, 0.006, 0.05), 0.001, 1, None, 1)
+            P.rbox(mb, V(xw - s * 0.0335, ym, FLOOR_Z + 0.055), (0.003, 0.08, 0.008), 0.001, 1, None, 0)
+            P.rbox(mb, V(xw - s * 0.0335, yr + 0.03, FLOOR_Z + 0.12), (0.003, 0.03, 0.05), 0.001, 1, None, 1)
             objs.append(P.make(mb, f"INT_Door_Lamps_{tag}", "INTERIOR_DOORS", [M["led_white"], M["glass_lens_red"]], door,
                                (-s, 0, -0.5), 0.32, 6, "Paneles de puerta",
                                "Luz de cortesía inferior y catadióptrico de la puerta", "V"))
@@ -477,16 +484,17 @@ def seat_details(M):
         # escudo lateral exterior con botones de ajuste (cojín, respaldo, lumbar)
         mb = L.MeshBuilder()
         xo = x + s * 0.255
-        P.hull(mb, [V(xo, hy + 0.48, FLOOR_Z + 0.09), V(xo, hy - 0.05, FLOOR_Z + 0.09), V(xo, hy + 0.46, hz - 0.02),
-                    V(xo, hy - 0.06, hz + 0.02), V(xo - s * 0.025, hy + 0.48, FLOOR_Z + 0.09),
-                    V(xo - s * 0.025, hy - 0.05, FLOOR_Z + 0.09), V(xo - s * 0.025, hy + 0.46, hz - 0.02),
-                    V(xo - s * 0.025, hy - 0.06, hz + 0.02)], 0)
+        # bajo el cojín (z ≤ 0,675): cubre el costado de la bandeja y los mecanismos
+        P.hull(mb, [V(xo, hy + 0.48, FLOOR_Z + 0.09), V(xo, hy - 0.05, FLOOR_Z + 0.09), V(xo, hy + 0.46, 0.675),
+                    V(xo, hy - 0.06, 0.675), V(xo - s * 0.025, hy + 0.48, FLOOR_Z + 0.09),
+                    V(xo - s * 0.025, hy - 0.05, FLOOR_Z + 0.09), V(xo - s * 0.025, hy + 0.46, 0.675),
+                    V(xo - s * 0.025, hy - 0.06, 0.675)], 0)
         objs.append(P.make(mb, f"INT_SeatF_{sd}_Side_Shield", "INTERIOR_SEATS", M["int_plastic"], asm, (s, 0, 0), 0.20, 6,
                            "Asientos", "Escudo lateral exterior del asiento", "V", bevel=0.005))
         mb = L.MeshBuilder()
-        P.rbox(mb, V(xo + s * 0.004, hy + 0.25, hz - 0.06), (0.010, 0.14, 0.022), 0.006, 2, None, 0)
-        P.rbox(mb, V(xo + s * 0.004, hy + 0.05, hz - 0.05), (0.010, 0.02, 0.07), 0.006, 2, None, 0)
-        P.rbox(mb, V(xo + s * 0.004, hy + 0.10, hz - 0.05), (0.010, 0.035, 0.035), 0.010, 2, None, 0)
+        P.rbox(mb, V(xo + s * 0.005, hy + 0.25, 0.640), (0.010, 0.14, 0.022), 0.006, 2, None, 0)
+        P.rbox(mb, V(xo + s * 0.005, hy + 0.05, 0.635), (0.010, 0.02, 0.06), 0.006, 2, None, 0)
+        P.rbox(mb, V(xo + s * 0.005, hy + 0.10, 0.635), (0.010, 0.035, 0.035), 0.010, 2, None, 0)
         objs.append(P.make(mb, f"INT_SeatF_{sd}_Buttons", "INTERIOR_SEATS", M["alu_trim"], asm, (s, 0, 0), 0.30, 6,
                            "Asientos", "Mandos de ajuste del cojín, del reclinado y lumbar de 8 vías", "V"))
         # carcasa trasera rígida del respaldo
@@ -498,7 +506,7 @@ def seat_details(M):
             pts = []
             for (h, w) in ((0.14, 0.24), (0.45, 0.25), (0.62, 0.16), (0.82, 0.14)):
                 for sg in (1, -1):
-                    for dd in (-0.105, -0.085):
+                    for dd in (-0.118, -0.098):        # por detrás del tapizado (que el subsurf encoge)
                         pts.append(b0 + tilt @ V(sg * w, dd, h))
             P.hull(mb, pts, 0)
             objs.append(P.make(mb, f"INT_SeatF_{sd}_Back_Shell", "INTERIOR_SEATS", M["int_plastic"], asm,
@@ -508,7 +516,7 @@ def seat_details(M):
         cush = obj(f"INT_SeatF_{sd}_Cushion")
         if cush is not None:
             tree = _bvh(cush)
-            cy = hy + 0.21
+            cy = hy + 0.225
             for dx in (-0.13, -0.122, 0.122, 0.13):
                 line = _project_line(tree, (x + dx, cy - 0.22, hz + 0.3), (x + dx, cy + 0.22, hz + 0.3), (0, 0, -1))
                 if len(line) > 3:
@@ -542,8 +550,9 @@ def seat_details(M):
     asm = obj("SEAT_REAR")
     hy, hz = H_REAR
     mb = L.MeshBuilder()
-    tilt = rot_x(25)
-    c = V(0.0, hy - 0.06, hz - 0.02) + tilt @ V(0, 0.02, 0.16)
+    tilt = rot_x(REAR_TILT)
+    # reposabrazos plegado: apoyado delante del respaldo central (no dentro de él)
+    c = V(0.0, hy - 0.06, hz - 0.02) + tilt @ V(0, 0.045, 0.35)
     P.rbox(mb, c, (0.20, 0.06, 0.30), 0.02, 2, tilt, 0)
     objs.append(P.make(mb, "INT_SeatR_Armrest", "INTERIOR_SEATS", M["leather"], asm, (0, -0.3, 1), 0.25, 6, "Asientos",
                        "Reposabrazos central trasero (abatible)", "V"))
@@ -588,21 +597,23 @@ def seat_details(M):
 def seatbelts(M):
     objs = []
     for s, sd in ((1, "R"), (-1, "L")):
-        for row, yb, xb in (("F", S.DOOR_B_SEAM_Y - 0.035, 0.80), ("R", S.CAB_REAR_Y + 0.05, 0.76)):
+        # enrollador alojado en el guarnecido del pilar (x 0,700…0,748) y cinta por delante de su cara interior
+        for row, yb, xr in (("F", S.DOOR_B_SEAM_Y - 0.035, 0.728), ("R", S.CAB_REAR_Y + 0.05, 0.724)):
             o = obj(f"INT_Seatbelt_{row}{sd}")
             if o is not None:
                 bpy.data.objects.remove(o, do_unlink=True)
-            x = s * xb
-            top = V(x - s * 0.01, yb, 1.48 if row == "F" else 1.40)
-            low = V(x - s * 0.01, yb + 0.02, FLOOR_Z + 0.10)
+            xw = s * 0.697
+            top = V(xw, yb, 1.48 if row == "F" else 1.40)
+            low = V(s * xr, yb + 0.02, FLOOR_Z + 0.10)
             mb = L.MeshBuilder()
             # cinta recogida a lo largo del pilar, guía superior (webguide) y lengüeta
-            P.sweep(mb, [low + V(0, 0, 0.06), top + V(0, 0, -0.02)], P.rect_profile(0.048, 0.0015), up=(s, 0, 0), mat=0)
-            P.rbox(mb, top + V(0, 0, 0.012), (0.018, 0.06, 0.045), 0.006, 2, None, 1)
-            P.rbox(mb, top + V(-s * 0.004, 0, -0.07), (0.008, 0.05, 0.07), 0.004, 1, None, 2)
-            # enrollador con pretensor (oculto tras el guarnecido) y anclaje inferior
-            P.rbox(mb, low, (0.05, 0.08, 0.11), 0.008, 1, None, 1)
-            P.flange_bolt(mb, low + V(-s * 0.026, 0, 0.03), (-s, 0, 0), 0.010, 3)
+            P.sweep(mb, [V(xw, yb + 0.02, FLOOR_Z + 0.16), top + V(0, 0, -0.02)], P.rect_profile(0.048, 0.0015),
+                    up=(s, 0, 0), mat=0)
+            P.rbox(mb, top + V(-s * 0.010, 0, 0.012), (0.018, 0.06, 0.045), 0.006, 2, None, 1)
+            P.rbox(mb, top + V(-s * 0.006, 0, -0.07), (0.008, 0.05, 0.07), 0.004, 1, None, 2)
+            # enrollador con pretensor (oculto dentro del guarnecido) y anclaje inferior
+            P.rbox(mb, low, (0.036, 0.08, 0.11), 0.006, 1, None, 1)
+            P.flange_bolt(mb, low + V(-s * 0.018, 0, 0.03), (-s, 0, 0), 0.010, 3)
             objs.append(P.make(mb, f"INT_Seatbelt_{row}{sd}", "INTERIOR_SEATS",
                                [M["seatbelt"], M["int_plastic"], M["alu_trim"], M["zinc"]], None, (0, 0, 1), 0.3, 6,
                                "Cinturones",
@@ -626,21 +637,30 @@ def seatbelts(M):
 # Alfombrillas para todo tipo de clima
 # ---------------------------------------------------------------------------
 def floor_mats(M):
+    """Alfombrillas con el contorno del hueco de los pies: las delanteras entre el umbral y la consola, delante de
+    los carriles del asiento y detrás de las tapas del suelo (reposapiés, tapa de pirofusibles); la trasera en U,
+    con escotadura para el final de la consola y por delante del bajo de la banqueta."""
     objs = []
-    for nm, (x, y, w, l) in (("FL", (-0.40, 0.92, 0.55, 0.55)), ("FR", (0.40, 0.92, 0.55, 0.55)),
-                             ("R", (0.0, -0.20, 1.40, 0.45))):
+    # (nombre, piezas rectangulares (x, y, ancho, largo))
+    mats = (("FL", [(-0.42, 0.925, 0.52, 0.21)]),
+            ("FR", [(0.42, 0.985, 0.52, 0.33)]),
+            ("R", [(0.43, -0.025, 0.54, 0.31), (-0.43, -0.025, 0.54, 0.31), (0.0, -0.165, 0.32, 0.03)]))
+    for nm, pieces in mats:
         o = obj(f"INT_FloorMat_{nm}")
         if o is not None:
             bpy.data.objects.remove(o, do_unlink=True)
         mb = L.MeshBuilder()
-        P.rbox(mb, (x, y, FLOOR_Z + 0.016), (w, l, 0.008), 0.003, 1, None, 0)
-        nrib = int(w / 0.045)
-        for i in range(nrib):
-            xx = x - w / 2 + 0.03 + i * (w - 0.06) / max(1, nrib - 1)
-            P.rbox(mb, (xx, y, FLOOR_Z + 0.022), (0.010, l - 0.08, 0.005), 0.002, 1, None, 0)
-        P.sweep(mb, [(x - w / 2 + 0.01, y - l / 2 + 0.01, FLOOR_Z + 0.024), (x + w / 2 - 0.01, y - l / 2 + 0.01, FLOOR_Z + 0.024),
-                     (x + w / 2 - 0.01, y + l / 2 - 0.01, FLOOR_Z + 0.024), (x - w / 2 + 0.01, y + l / 2 - 0.01, FLOOR_Z + 0.024),
-                     (x - w / 2 + 0.01, y - l / 2 + 0.01, FLOOR_Z + 0.024)], P.rect_profile(0.012, 0.012, 0.003, 1))
+        for (x, y, w, l) in pieces:
+            P.rbox(mb, (x, y, FLOOR_Z + 0.016), (w, l, 0.008), 0.003, 1, None, 0)
+            if l < 0.08:
+                continue
+            nrib = int(w / 0.045)
+            for i in range(nrib):
+                xx = x - w / 2 + 0.03 + i * (w - 0.06) / max(1, nrib - 1)
+                P.rbox(mb, (xx, y, FLOOR_Z + 0.022), (0.010, l - 0.08, 0.005), 0.002, 1, None, 0)
+            P.sweep(mb, [(x - w / 2 + 0.01, y - l / 2 + 0.01, FLOOR_Z + 0.024), (x + w / 2 - 0.01, y - l / 2 + 0.01, FLOOR_Z + 0.024),
+                         (x + w / 2 - 0.01, y + l / 2 - 0.01, FLOOR_Z + 0.024), (x - w / 2 + 0.01, y + l / 2 - 0.01, FLOOR_Z + 0.024),
+                         (x - w / 2 + 0.01, y - l / 2 + 0.01, FLOOR_Z + 0.024)], P.rect_profile(0.012, 0.012, 0.003, 1))
         objs.append(P.make(mb, f"INT_FloorMat_{nm}", "INTERIOR_TRIM", M["composite"], None, (0, 0, 1), 0.12, 6,
                            "Guarnecidos", "Alfombrilla para todo tipo de clima con nervios y reborde", "V"))
     return objs

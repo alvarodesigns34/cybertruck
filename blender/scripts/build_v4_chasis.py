@@ -184,18 +184,21 @@ def steering(M):
             [sphere((0.06 + 0.012 * k, yr + 0.0195 * math.cos(1.1 * k), zr + 0.0195 * math.sin(1.1 * k)), 0.0035, 8, 5, 2)
              for k in range(-2, 3)],
             tube([(0.035, yr, zr + 0.027), (0.06, yr, zr + 0.034), (0.085, yr, zr + 0.027)], 0.0035, 8, 3, 1),
-            gear((0.110, yr, zr), X, 0.038, 0.040, 0.022, 60, 0.026, 0.0, 1),
-            bearing((0.135, yr, zr), X, 0.026, 0.040, 0.014, 12, m=2),
+            # polea conducida doble (una pista por motor)
+            gear((0.1105, yr, zr), X, 0.038, 0.040, 0.044, 60, 0.026, 0.0, 1),
+            bearing((0.143, yr, zr), X, 0.026, 0.040, 0.014, 12, m=2),
             [disc((sg * (half - 0.004), yr, zr), X, 0.020, 0.008, 20, 3) for sg in (-1, 1)],
         ]
         motors = []
         belts = []
         for k, dz in enumerate((0.055, -0.035)):
+            xb = 0.100 + 0.021 * k          # cada motor arrastra su propia pista de la polea doble
             cm = (0.235, yr - f * 0.075, zr + dz)
             motors += _small_motor(cm, X, 0.042, 0.14, 0, 1, 2, 12)
             motors.append(cyl((0.165, yr - f * 0.075, zr + dz), (0.090, yr - f * 0.075, zr + dz), 0.0065, seg=12, m=2))
-            motors.append(gear((0.110, yr - f * 0.075, zr + dz), X, 0.0120, 0.0135, 0.022, 18, 0.0066, 0.0, 2))
-            belts.append(V4.belt((0.110, yr, zr), 0.040, (0.110, yr - f * 0.075, zr + dz), 0.0135, X, 0.020 - 0.004 * k))
+            motors.append(gear((xb, yr - f * 0.075, zr + dz), X, 0.0120, 0.0135, 0.018, 18, 0.0066, 0.0, 2))
+            # radio medio de la correa = punta del dentado + holgura + medio espesor (no toca los dientes)
+            belts.append(V4.belt((xb, yr, zr), 0.0425, (xb, yr - f * 0.075, zr + dz), 0.0160, X, 0.016))
         out += V4.part(M, f"STR_{axle}_Rack_BallNut", "STEERING", ["gear_steel", "steel_bare", "bearing_steel",
                                                                      "rubber_seal"], rack,
                        f"Cremallera, tuerca de bolas con recirculación y polea del actuador {es}",
@@ -219,7 +222,7 @@ def steering(M):
 # ---------------------------------------------------------------------------
 def brake_actuation(M):
     out = []
-    c = Vector((-0.40, 1.66, 0.95))
+    c = Vector((-0.37, 1.66, 0.95))      # mismo origen que el servofreno (build_mechanics)
     V4.set_explode("BRK_Booster_Electromechanical", (-0.5, 0.6, 0.5), 0.85, 4)
     out += V4.part(M, "BRK_Booster_Internals", "UNDERBODY", ["elec_steel", "copper_enamel", "gear_steel", "bearing_steel",
                                                              "steel_black"], [
@@ -230,7 +233,6 @@ def brake_actuation(M):
         cyl(tuple(c + Vector((0, -0.02, 0))), tuple(c + Vector((0, 0.15, 0))), 0.010, seg=16, m=2),
         ring(tuple(c + Vector((0, 0.10, 0))), Y, 0.011, 0.022, 0.035, 24, 3),
         bearing(tuple(c + Vector((0, 0.045, 0))), Y, 0.012, 0.030, 0.012, 9, m=3),
-        cyl(tuple(c + Vector((0, -0.12, 0))), tuple(c + Vector((0, -0.02, 0))), 0.006, seg=12, m=4),
         coil(tuple(c + Vector((0, 0.11, 0))), Y, 0.030, 0.003, 5, 0.055, 8, 4),
     ], "Interior del servofreno electromecánico: motor sin escobillas, engranajes, husillo de bolas, muelle de "
        "retorno y varilla de empuje del pedal", edir=(-0.5, 0.6, 0.5), dist=0.55, stage=6, group="Frenos",
@@ -264,7 +266,7 @@ def brake_actuation(M):
         edir=(0, -1, -0.2), dist=0.40, stage=6, group="Frenos", fid="A", note=NOTE)
 
     # HCU (ABS/ESC)
-    h = Vector((0.46, 2.22, 0.66))
+    h = Vector((0.32, 2.125, 0.66))      # mismo origen que la HCU (build_mechanics)
     V4.set_explode("BRK_Hydraulic_Control_Unit", (0.5, 0.5, 0.6), 0.85, 4)
     out += V4.part(M, "BRK_HCU_Internals", "UNDERBODY", ["alu_machined", "copper_enamel", "elec_steel", "pcb_green",
                                                          "plastic_black", "capacitor", "connector_grey", "solder_tin"], [

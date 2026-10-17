@@ -148,7 +148,7 @@ def mirrors(M):
                     V(xb, y_base + 0.04, z_base + 0.07), V(xb + s * 0.025, y_base + 0.06, z_base - 0.005),
                     V(xb + s * 0.025, y_base - 0.03, z_base - 0.005), V(xb + s * 0.025, y_base + 0.03, z_base + 0.05)], 0)
         p0 = V(xb + s * 0.02, y_base + 0.01, z_base + 0.025)
-        p1 = V(s * (x_out - 0.17), y_base - 0.010, z_base + 0.050)
+        p1 = V(s * (x_out - 0.222), y_base - 0.010, z_base + 0.050)      # termina en la cara de la carcasa
         P.hull(mb, [p0 + V(0, -0.035, -0.012), p0 + V(0, 0.035, -0.012), p0 + V(0, 0.02, 0.012), p0 + V(0, -0.03, 0.012),
                     p1 + V(0, -0.025, -0.010), p1 + V(0, 0.03, -0.010), p1 + V(0, 0.02, 0.010), p1 + V(0, -0.02, 0.010)], 0)
         for k in range(3):
@@ -234,12 +234,13 @@ def wiper_and_washer(M):
                        "V"))
     # depósito del lavaparabrisas con bomba, sensor de nivel, boca y tapón
     mb = L.MeshBuilder()
-    t = V(0.62, 2.34, 0.66)
-    P.rbox(mb, t, (0.16, 0.20, 0.22), 0.025, 2, None, 0)
-    P.cyl(mb, t + V(-0.03, 0.06, 0.11), t + V(-0.06, 0.02, 0.30), 0.018, 16, 0)
-    P.disc(mb, t + V(-0.062, 0.018, 0.305), (0, 0, 1), 0.024, 0.016, 16, 1, 0.003)
-    P.cyl(mb, t + V(0.06, -0.08, -0.08), t + V(0.10, -0.08, -0.08), 0.016, 12, 2)
-    P.rbox(mb, t + V(0.07, 0.05, -0.08), (0.03, 0.02, 0.03), 0.003, 1, None, 2)
+    # por encima de la viga del paragolpes y de sus soportes, bajo la tapa del frunk
+    t = V(0.62, 2.30, 0.78)
+    P.rbox(mb, t, (0.14, 0.16, 0.20), 0.022, 2, None, 0)
+    P.cyl(mb, t + V(-0.03, 0.04, 0.10), t + V(-0.05, 0.02, 0.21), 0.018, 16, 0)
+    P.disc(mb, t + V(-0.051, 0.019, 0.215), (0, 0, 1), 0.024, 0.016, 16, 1, 0.003)
+    P.cyl(mb, t + V(0.07, -0.05, -0.06), t + V(0.10, -0.05, -0.06), 0.014, 12, 2)
+    P.rbox(mb, t + V(0.075, 0.04, -0.06), (0.012, 0.02, 0.03), 0.003, 1, None, 2)
     objs.append(P.make(mb, "EXT_Washer_Tank", "GLASS_AND_MIRRORS", [M["plastic_liner"], M["connector_blue"],
                        M["connector_grey"]], None, (1, 0.5, 0), 0.5, 6, "Limpiaparabrisas",
                        "Depósito del lavaparabrisas con bomba, sensor de nivel y boca (3 tornillos)", "V"))
@@ -434,8 +435,8 @@ def tailgate_hardware(M):
                        "Barra de torsión de asistencia del portón (55/80 N·m)", "V"))
     mb = L.MeshBuilder()
     for s in (1, -1):
-        c = V(s * 0.855, -2.80, 1.24)
-        P.rbox(mb, c, (0.04, 0.08, 0.10), 0.006, 1, None, 0)
+        c = V(s * 0.845, -2.865, 1.24)          # alojados en el portón, frente a los percutores de las torres
+        P.rbox(mb, c, (0.04, 0.05, 0.10), 0.006, 1, None, 0)
         P.rbox(mb, c + V(0, 0.0, -0.08), (0.035, 0.05, 0.05), 0.005, 1, None, 1)
         for dz in (-0.03, 0.03):
             P.torx_screw(mb, c + V(-s * 0.021, 0, dz), (-s, 0, 0), 0.007, 2)
@@ -532,7 +533,8 @@ def tonneau_mechanism(M):
                    "Lama de aluminio extruido con articulación y casquillos (Mid Slat)", "R")
         objs.append(o)
     mb = L.MeshBuilder()
-    P.rbox(mb, (0, -1.06, 1.46), (1.56, 0.12, 0.24), 0.04, 2, None, 0)
+    # entre los motores de la cubierta (x ±0,665), sobre la barrera NVH y detrás de la pared de la caja
+    P.rbox(mb, (0, -1.0775, 1.49), (1.28, 0.085, 0.18), 0.03, 2, None, 0)
     objs.append(P.make(mb, "CARGO_Tonneau_Cassette", "CARGO_BED", M["plastic_liner"], None, (0, 0.2, 0.6), 0.75, 6,
                        "Cubierta de la caja", "Casete plano donde se recogen las lamas (Flat Cassette)", "V"))
     mb = L.MeshBuilder()

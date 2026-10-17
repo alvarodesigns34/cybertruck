@@ -44,19 +44,21 @@ def build(M):
         bolt((0.19, 1.04, 1.085), Z, 0.007, 1), torx((0.19, 1.09, 1.25), Y, 0.005, 1),
     ], "Soporte {lado} de la pantalla central", mirror=True, edir=(0, -0.4, 1), dist=0.45, stage=3))
     A(V3.part(M, "BODY_IP_Downleg_Bracket", SYS, ["steel_black", "zinc"], [
-        beam((0.45, 1.07, 0.93), (0.46, 1.13, 0.50), 0.05, 0.03, 0.003),
+        beam((0.45, 1.10, 0.93), (0.46, 1.13, 0.50), 0.05, 0.03, 0.003),
         box((0.46, 1.13, 0.50), (0.10, 0.09, 0.012), 0.002),
         bolt((0.43, 1.13, 0.512), Z, 0.008, 1), bolt((0.49, 1.13, 0.512), Z, 0.008, 1),
     ], "Pata {lado} del salpicadero (Downleg Bracket)", mirror=True, edir=(0, -0.3, -1), dist=0.4, stage=3))
     A(V3.part(M, "BODY_IP_Beam_Bracket", SYS, ["steel_black", "zinc"], [
-        box((0.78, 1.07, 0.96), (0.05, 0.13, 0.15), 0.003),
-        line(rivet, (0.757, 1.03, 0.92), (0.757, 1.11, 1.00), 6, axis=(-1, 0, 0)),
+        # por delante del larguero del guardabarros (y >= 1,248) y por dentro de la fundición
+        box((0.773, 1.20, 0.985), (0.050, 0.09, 0.15), 0.003),
+        line(rivet, (0.750, 1.17, 0.94), (0.750, 1.23, 1.03), 6, axis=(-1, 0, 0)),
     ], "Soporte {lado} de la viga del salpicadero (6 remaches HS o soldadura de tapón)", mirror=True,
         edir=(1, 0, 0.3), dist=0.35, stage=3))
     A(V3.part(M, "BODY_Steering_Column_Bracket", SYS, ["steel_black", "zinc"], [
-        box((-0.39, 1.03, 0.87), (0.14, 0.06, 0.13), 0.004),
-        torx((-0.34, 0.995, 0.90), (0, -1, 0), 0.006, 1), torx((-0.44, 0.995, 0.90), (0, -1, 0), 0.006, 1),
-        torx((-0.34, 0.995, 0.84), (0, -1, 0), 0.006, 1), torx((-0.44, 0.995, 0.84), (0, -1, 0), 0.006, 1),
+        # detrás del actuador del volante, colgado de la viga transversal
+        box((-0.39, 1.25, 1.00), (0.14, 0.04, 0.12), 0.004),
+        torx((-0.34, 1.228, 1.03), (0, -1, 0), 0.006, 1), torx((-0.44, 1.228, 1.03), (0, -1, 0), 0.006, 1),
+        torx((-0.34, 1.228, 0.97), (0, -1, 0), 0.006, 1), torx((-0.44, 1.228, 0.97), (0, -1, 0), 0.006, 1),
     ], "Soporte de la columna de dirección en el salpicadero (4 tuercas a 18 N·m)", edir=(-0.3, -0.6, 0.2),
         dist=0.4, stage=3))
     A(V3.part(M, "BODY_Front_Body_Bridge_Reinforcement", SYS, ["ecoat", "zinc"], [
@@ -191,19 +193,21 @@ def build(M):
 
     # --- Pared trasera de la cabina ---------------------------------------------------------------------
     A(V3.part(M, "BODY_RearWall_Upper_Glove", SYS, ["ecoat", "zinc"], [
-        box((0, -0.93, 1.42), (1.50, 0.05, 0.07), 0.004),
-        line(rivet, (-0.66, -0.93, 1.458), (0.66, -0.93, 1.458), 11, axis=Z),
+        # pegada a la pared trasera (y = -0,953), por detrás de los reposacabezas traseros
+        box((0, -0.939, 1.42), (1.50, 0.028, 0.07), 0.004),
+        line(rivet, (-0.66, -0.939, 1.458), (0.66, -0.939, 1.458), 11, axis=Z),
     ], "Funda del travesaño superior de la pared trasera (11 remaches HS + 3 FF S18 + 2 FF S38)",
         edir=(0, -1, 0.3), dist=0.55, stage=3))
     A(V3.part(M, "BODY_RearWall_Lower_Glove", SYS, ["ecoat", "zinc"], [
-        box((0, -0.93, 0.70), (1.50, 0.05, 0.10), 0.004),
-        line(rivet, (-0.68, -0.93, 0.75), (0.68, -0.93, 0.75), 12, axis=Z),
+        box((0, -0.93, 0.735), (1.50, 0.05, 0.09), 0.004),
+        line(rivet, (-0.68, -0.93, 0.78), (0.68, -0.93, 0.78), 12, axis=Z),
     ], "Funda del travesaño inferior de la pared trasera (24 remaches HS)", edir=(0, -1, -0.2), dist=0.55,
         stage=3))
     A(V3.part(M, "BODY_Rear_Seat_Stanchion", SYS, ["steel_black", "zinc"], [
-        box((0.45, -0.92, 0.88), (0.08, 0.05, 0.46), 0.004),
-        beam((0.45, -0.92, 0.66), (0.62, -0.92, 0.92), 0.04, 0.02, 0.002),
-        line(rivet, (0.45, -0.945, 0.68), (0.45, -0.945, 1.08), 7, axis=(0, -1, 0)),
+        # contra la pared trasera (y = −0,955), por detrás del respaldo y por encima de la funda inferior
+        box((0.45, -0.940, 0.95), (0.08, 0.026, 0.30), 0.004),
+        beam((0.45, -0.940, 0.82), (0.62, -0.940, 1.00), 0.020, 0.04, 0.002),
+        line(rivet, (0.45, -0.953, 0.82), (0.45, -0.953, 1.08), 7, axis=(0, -1, 0)),
     ], "Montante {lado} del asiento trasero y riostra (7 remaches HS + 1 de 4,8 mm; riostra 6 + 2)",
         mirror=True, edir=(0.4, -1, 0.3), dist=0.5, stage=3))
     A(V3.part(M, "BODY_Tonneau_Attachment_Bracket", SYS, ["steel_black", "zinc"], [

@@ -311,3 +311,37 @@ Cybertruck.md` y la ficha consolidada en `docs/ficha-tecnica-piezas.md`.
   el editor o un heredoc con comillas simples).
 - **Pendiente:** fusionar y publicar (solo cuando el usuario lo pida), formas exactas con fuentes de geometría,
   carga progresiva del GLB y el resto de §9.
+
+## 14. Versión 4.1 (17-10-2026): interferencias de ensamblaje
+
+**Encargo del usuario:** «hay muchísimos errores de ensamblaje (piezas mal posicionadas que se atraviesan), por
+fuera, por dentro, asientos… arréglalo y publica». Tras varias horas de correcciones, el usuario pidió publicar lo
+hecho y **documentar todo lo que falta**.
+
+**Qué hay:**
+- Detector `blender/scripts/interferencias.py`: superficie visible, profundidad cerca del cruce y lista de
+  penetraciones intencionadas. Ver `docs/research-and-fidelity.md` §11.
+- Pasada de montaje `blender/scripts/build_montaje.py`, parte `"montaje"` de `build_all.run`:
+  - recortes de pieles y estructuras ocultas;
+  - juntas comprimidas;
+  - recolocación automática, que existe pero está desactivada: la tabla `montaje_desplazamientos.json` no existe.
+- `build_v4.fit_internals`: ajuste anisótropo, recorte de interiores en su carcasa y espumas dentro del tapizado.
+- Muchas recolocaciones en los constructores (ruedas, bahía HV trasera, vano delantero, salpicadero, suspensión
+  neumática, mazos, alfombrillas, volante…).
+- Informe de lo pendiente: `docs/interferencias-pendientes.md`. Se regenera así:
+  `import interferencias, json; json.dump(interferencias.run(), open("interf.json", "w"))` en Blender y luego
+  `node tools/gen_interferencias.mjs interf.json`.
+
+**Cómo continuar** (por orden de valor):
+1. Las parejas visibles del informe: habitáculo, asientos y caja. Se corrigen en su constructor; si una pieza
+   lleva en la realidad el alojamiento de otra, se añade a `build_montaje.CARVE`.
+2. Mazos y mangueras: hay que retrazarlos punto a punto. Antes, consultar la ocupación con rayos (ver
+   `build_montaje._inside`) y las cajas de los módulos vecinos.
+3. Interiores de la v4 que siguen asomando: comprobar que `ct_v4.clip_inside` los recorta (registro con la variable
+   de entorno `CT_MONTAJE_LOG`).
+
+**Trampas:**
+- `EXACT` con mallas grandes o abiertas cierra Blender. Hay que usar `MANIFOLD` y unir antes las partes solapadas.
+- La reconstrucción completa tarda ~5 min. Se lanza en un temporizador (`bpy.app.timers`) y se lee el resultado de
+  un fichero, porque el MCP corta a los ~100 s.
+- Tras un cierre de Blender hay que volver a añadir `blender/scripts` a `sys.path`.

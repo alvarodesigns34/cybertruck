@@ -54,13 +54,13 @@ def build(M):
     ], "Clips y cintas de abrasión del mazo troncal de 48 V (6 traseros + 3 delanteros; PN 1879451-99-A, 1908543-99-A)",
         edir=(0, 0, -1), dist=0.3, stage=6))
     for nm, es, pts, r, m in (
-            ("Fascia", "de la fascia delantera", [(0.30, 2.60, 0.62), (0.35, 2.30, 0.70), (0.45, 1.90, 0.95)], 0.007, "harness"),
+            ("Fascia", "de la fascia delantera", [(0.30, 2.60, 0.62), (0.48, 2.52, 0.70), (0.49, 2.30, 0.72), (0.50, 1.95, 0.95)], 0.007, "harness"),
             ("Seat_L", "del asiento izquierdo", [(-0.40, 0.50, 0.54), (-0.30, 0.90, 0.52), (-0.58, 1.26, 0.74)], 0.006, "harness"),
-            ("Seat_R", "del asiento derecho", [(0.40, 0.50, 0.54), (0.30, 0.90, 0.52), (0.58, 1.26, 0.74)], 0.006, "harness"),
-            ("Rear_Subframe", "del subchasis trasero (Tri Motor)", [(-0.30, -1.50, 0.40), (0.0, -2.00, 0.34), (0.30, -1.55, 0.40)], 0.008, "harness"),
+            ("Seat_R", "del asiento derecho", [(0.40, 0.50, 0.54), (0.28, 0.90, 0.525), (0.30, 1.10, 0.55), (0.58, 1.25, 0.68), (0.58, 1.318, 0.72)], 0.006, "harness"),
+            ("Rear_Subframe", "del subchasis trasero (Tri Motor)", [(-0.38, -1.50, 0.40), (-0.15, -1.60, 0.33), (0.15, -1.60, 0.33), (0.38, -1.55, 0.40)], 0.008, "harness"),
             ("Cowl_Speaker", "del altavoz del cowl", [(-0.50, 1.90, 1.22), (0.0, 1.88, 1.20), (0.50, 1.90, 1.22)], 0.004, "harness"),
-            ("Ancillary", "de la bahía auxiliar", [(-0.40, -1.20, 0.62), (0.0, -1.15, 0.72), (0.40, -1.20, 0.64)], 0.007, "harness"),
-            ("Shunt_Jumper", "puente de derivación (shunt) del pack", [(0.10, -1.32, 0.63), (0.20, -1.25, 0.70), (0.35, -1.30, 0.66)], 0.006, "hv_orange")):
+            ("Ancillary", "de la bahía auxiliar", [(-0.37, -1.072, 0.64), (0.0, -1.065, 0.72), (0.40, -1.060, 0.66)], 0.007, "harness"),
+            ("Shunt_Jumper", "puente de derivación (shunt) del pack", [(0.09, -1.30, 0.64), (0.11, -1.27, 0.708), (0.30, -1.25, 0.709)], 0.006, "hv_orange")):
         A(V3.part(M, f"LV_Harness_{nm}", B, [m, "connector_grey"], [
             hose(pts, r, 8, 5, 0), box(pts[0], (0.020, 0.016, 0.014), 0.002, 1), box(pts[-1], (0.020, 0.016, 0.014), 0.002, 1),
         ], f"Mazo {es}", edir=(0, 0, 1), dist=0.3, stage=6, fid="A",
@@ -104,8 +104,9 @@ def build(M):
     A(V3.part(M, "ELE_BLE_EndPoints", FA, ["plastic_black", "zinc"], [
         box((0.25, 2.55, 0.62), (0.030, 0.025, 0.018), 0.002), box((0.0, -2.80, 0.76), (0.030, 0.025, 0.018), 0.002),
         box((0.0, 0.20, 0.545), (0.030, 0.025, 0.018), 0.002), box((0.15, -2.80, 0.60), (0.030, 0.025, 0.018), 0.002),
-        [box((s * 0.56, y, 0.70), (0.030, 0.025, 0.018), 0.002) for s in (1, -1) for y in (1.35, -1.35)],
-        [torx((s * 0.56, y, 0.712), Z, 0.004, 1) for s in (1, -1) for y in (1.35, -1.35)],
+        # delanteros en el paso de rueda; traseros sobre la cara exterior de la pared del paso, detrás de su extensión
+        [box((s * x, y, 0.70), (0.030, 0.025, 0.018), 0.002) for s in (1, -1) for x, y in ((0.56, 1.35), (0.522, -1.45))],
+        [torx((s * x, y, 0.712), Z, 0.004, 1) for s in (1, -1) for x, y in ((0.56, 1.35), (0.522, -1.45))],
     ], "Puntos finales Bluetooth LE de la llave del teléfono (fascia, interior, trasera y pasos de rueda; T20 a 1,5 N·m)",
         edir=(0, 0, 1), dist=0.3, stage=6, fid="A",
         note="Unos 8 puntos según el manual de servicio; las posiciones exactas no están publicadas"))

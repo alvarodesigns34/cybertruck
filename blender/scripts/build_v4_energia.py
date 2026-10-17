@@ -19,7 +19,7 @@ se reconstruye («Aproximado»). El número de celdas de la batería de 48 V no 
 """
 
 import math
-from mathutils import Vector
+from mathutils import Vector, Matrix
 import ct_specs as S
 import ct_v4 as V4
 from ct_v4 import (gear, ring_gear, spline, sphere, bearing, taper, tube, screw, pcb, stator, winding, coil,
@@ -120,16 +120,18 @@ def electronics(M):
         y = 1.70 if k < 7 else 1.74
         cells.append(cyl((x, y, 0.735), (x, y, 0.805), 0.0105, seg=16, m=0))
         cells.append(disc((x, y, 0.806), Z, 0.0045, 0.002, 12, 1))
-    A(V4.part(M, "LV_Battery_48V_Internals", "BATTERY_ASSEMBLY", ["cell", "steel_bare", "nylon"] + PCB_MATS, cells + [
+    # la caja se trasladó contra el cortafuegos (build_mechanics): el interior la acompaña
+    off48 = Matrix.Translation((0.34 - 0.52, 1.60 - 1.74, 0.86 - 0.80))
+    A(V4.part(M, "LV_Battery_48V_Internals", "BATTERY_ASSEMBLY", ["cell", "steel_bare", "nylon"] + PCB_MATS, [V4.xf(off48, cells + [
         [box((0.52, y, 0.809), (0.17, 0.008, 0.0008), 0.0, 1) for y in (1.70, 1.74)],
         box((0.52, 1.72, 0.733), (0.17, 0.07, 0.004), 0.001, 2),
         pcb((0.52, 1.78, 0.80), (0.17, 0.06, 0.0016), (0, 1, 0), Z, 30, 73, 3, 4, 5, 6, 7),
-    ], "Interior de la batería de 48 V: celdas cilíndricas en serie, tiras de conexión, soporte y placa BMS",
+    ])], "Interior de la batería de 48 V: celdas cilíndricas en serie, tiras de conexión, soporte y placa BMS",
         edir=(0.4, 0.3, 1), dist=0.45, stage=6, group="Baja tensión", fid="A",
         note=NOTE + ". El número de celdas (13 en serie) es una estimación a partir de la tensión nominal"))
-    for nm, c, nrm, sd in (("LV_Body_Controller_LH", (-0.62, 1.296, 0.80), (0, 1, 0), 81),
-                           ("LV_Body_Controller_RH", (0.62, 1.296, 0.80), (0, 1, 0), 82),
-                           ("LV_Body_Controller_Rear", (0.0, -1.024, 0.95), (0, -1, 0), 83)):
+    for nm, c, nrm, sd in (("LV_Body_Controller_LH", (-0.585, 1.296, 0.80), (0, 1, 0), 81),
+                           ("LV_Body_Controller_RH", (0.585, 1.351, 0.80), (0, 1, 0), 82),
+                           ("LV_Body_Controller_Rear", (0.0, -0.994, 0.755), (0, -1, 0), 83)):
         A(V4.part(M, nm + "_PCB", "BATTERY_ASSEMBLY", PCB_MATS, [
             pcb(c, (0.20, 0.13, 0.0016), nrm, Z, 70, sd),
         ], f"Placa del controlador de carrocería ({nm.split('_')[-1]}): eFuses, microcontrolador y Ethernet",
@@ -138,7 +140,6 @@ def electronics(M):
         pcb((0.42, 1.20, 1.012), (0.27, 0.17, 0.0016), Z, X, 90, 91),
         [box((0.36 + 0.12 * k, 1.20, 1.020), (0.045, 0.045, 0.006), 0.001, 5) for k in range(2)],
         box((0.42, 1.20, 1.032), (0.27, 0.17, 0.006), 0.002, 5),
-        tube([(0.30, 1.29, 1.032), (0.30, 1.33, 1.032), (0.30, 1.35, 1.00)], 0.006, 10, 3, 6),
     ], "Interior del ordenador de a bordo: placa base con los dos procesadores, disipadores y placa fría líquida",
         parent="IP_ASSEMBLY", edir=(0.3, 0, 1), dist=0.45, stage=6, group="Electrónica", fid="A", note=NOTE))
     A(V4.part(M, "LV_Trailer_ECU_PCB", "BATTERY_ASSEMBLY", PCB_MATS, [
@@ -182,8 +183,8 @@ def thermal(M):
     out = []
     A = out.extend
     A(V4.part(M, "CHS_Cooling_Fans", "UNDERBODY", ["plastic_black", "plastic_black", "elec_steel", "copper_enamel"], [
-        _fan((sx * 0.225, 2.372, 0.565), Y, 0.130, 7, 0.045) for sx in (-1, 1)
-    ] + [CH._small_motor((sx * 0.225, 2.355, 0.565), Y, 0.040, 0.035, 2, 3, 2, 9) for sx in (-1, 1)],
+        _fan((sx * 0.225, 2.332, 0.565), Y, 0.130, 7, 0.045) for sx in (-1, 1)
+    ] + [CH._small_motor((sx * 0.225, 2.315, 0.565), Y, 0.040, 0.035, 2, 3, 2, 9) for sx in (-1, 1)],
         "Hélices de 7 palas, cubos y motores sin escobillas de los dos ventiladores del módulo de refrigeración",
         parent="THERMAL_FRONT", edir=(0, -1, 0.3), dist=0.30, stage=6, group="Refrigeración", fid="A", note=NOTE))
     # Compresor de A/C eléctrico de espiral (eje X)
@@ -217,35 +218,37 @@ def thermal(M):
         CH._small_motor((0.45, 1.735, 0.78), Y, 0.032, 0.055, 1, 2, 3, 9),
     ], "Rodete de 7 álabes y motor de rotor húmedo de la bomba de refrigerante",
         edir=(0.6, -0.4, 0.4), dist=0.70, stage=6, group="Refrigeración", fid="A", note=NOTE))
-    # Climatizador (HVAC): soplante, evaporador, condensador interior, compuertas
-    blow = Vector((0.33, 1.16, 0.64))
+    # Climatizador (HVAC): todo dentro de la caja de build_interior_detail (x -0,22…0,34, y 1,13…1,37,
+    # z 0,645…0,915) y de la voluta del soplante (cilindro r 0,085 en x 0,42, y 1,24, z 0,76…0,90)
+    blow = Vector((0.42, 1.24, 0.835))
     blades = []
     for k in range(36):
         a = 2 * math.pi * k / 36
         d = Vector((math.cos(a), math.sin(a), 0))
         t = Vector((-math.sin(a), math.cos(a), 0))
-        p0 = blow + d * 0.060
-        p1 = blow + d * 0.074 + t * 0.008
-        blades.append(beam(tuple(p0), tuple(p1), 0.0012, 0.070, up=(0, 0, 1), r=0.0, m=0))
+        p0 = blow + d * 0.056
+        p1 = blow + d * 0.069 + t * 0.007
+        blades.append(beam(tuple(p0), tuple(p1), 0.0012, 0.050, up=(0, 0, 1), r=0.0, m=0))
     A(V4.part(M, "INT_HVAC_Internals", "INTERIOR_DASHBOARD", ["plastic_black", "radiator", "alu_machined",
                                                               "elec_steel", "copper_enamel", "gear_steel", "rubber_seal",
                                                               "felt"], blades + [
-        disc(tuple(blow + Vector((0, 0, -0.036))), Z, 0.075, 0.003, 36, 0),
-        ring(tuple(blow + Vector((0, 0, 0.036))), Z, 0.058, 0.075, 0.003, 36, 0),
-        CH._small_motor(tuple(blow + Vector((0, 0, -0.075))), Z, 0.040, 0.05, 3, 4, 5, 10),
-        # evaporador: placas y aletas
-        box((0.03, 1.21, 0.73), (0.30, 0.050, 0.25), 0.002, 1),
-        [box((0.03, 1.21, 0.603 + 0.248 * k), (0.31, 0.056, 0.008), 0.001, 2) for k in range(2)],
-        [cyl((-0.13, 1.21 + dy, 0.62), (-0.18, 1.21 + dy, 0.62), 0.008, seg=12, m=2) for dy in (-0.012, 0.012)],
+        disc(tuple(blow + Vector((0, 0, -0.026))), Z, 0.071, 0.003, 36, 0),
+        ring(tuple(blow + Vector((0, 0, 0.026))), Z, 0.054, 0.071, 0.003, 36, 0),
+        CH._small_motor((0.42, 1.24, 0.785), Z, 0.036, 0.034, 3, 4, 5, 10),
+        # evaporador: núcleo de placas y aletas con colectores
+        box((0.06, 1.320, 0.78), (0.46, 0.034, 0.21), 0.002, 1),
+        [box((0.06, 1.320, 0.672 + 0.216 * k), (0.47, 0.038, 0.006), 0.001, 2) for k in range(2)],
+        [cyl((-0.17, 1.320 + dy, 0.70), (-0.205, 1.320 + dy, 0.70), 0.007, seg=12, m=2) for dy in (-0.009, 0.009)],
         # condensador interior (bomba de calor)
-        box((0.03, 1.07, 0.73), (0.26, 0.030, 0.20), 0.002, 1),
-        [box((0.03, 1.07, 0.625 + 0.21 * k), (0.27, 0.036, 0.008), 0.001, 2) for k in range(2)],
+        box((0.04, 1.225, 0.78), (0.38, 0.028, 0.19), 0.002, 1),
+        [box((0.04, 1.225, 0.682 + 0.196 * k), (0.39, 0.032, 0.006), 0.001, 2) for k in range(2)],
         # compuertas de mezcla y de modo (aletas con eje)
-        [box((0.03, 1.00, 0.80 + 0.06 * k), (0.26, 0.004, 0.050), 0.001, 0) for k in range(2)],
-        [cyl((-0.11, 1.00, 0.825 + 0.06 * k), (0.17, 1.00, 0.825 + 0.06 * k), 0.004, seg=8, m=5) for k in range(2)],
-        box((0.10, 0.80, 0.90), (0.30, 0.004, 0.06), 0.001, 0),
-        cyl((0.10, 1.20, 0.52), (0.10, 1.32, 0.48), 0.008, seg=10, m=6),
-        box((0.20, 1.00, 0.56), (0.20, 0.30, 0.004), 0.0, 7),
+        [box((0.06, 1.165, 0.81 + 0.05 * k), (0.40, 0.004, 0.040), 0.001, 0) for k in range(2)],
+        [cyl((-0.16, 1.165, 0.83 + 0.05 * k), (0.28, 1.165, 0.83 + 0.05 * k), 0.004, seg=8, m=5) for k in range(2)],
+        box((0.06, 1.165, 0.71), (0.40, 0.004, 0.05), 0.001, 0),
+        # desagüe del evaporador a través del mamparo y aislante del fondo de la caja
+        cyl((0.06, 1.30, 0.660), (0.06, 1.34, 0.610), 0.008, seg=10, m=6),
+        box((0.06, 1.25, 0.665), (0.48, 0.20, 0.004), 0.0, 7),
     ], "Interior del climatizador: soplante centrífuga de 36 álabes con motor, evaporador, condensador interior de "
        "la bomba de calor, compuertas de mezcla y de modo, desagüe y aislante",
         parent="IP_ASSEMBLY", edir=(0.3, 0, 1), dist=0.70, stage=6, group="Climatización", fid="A", note=NOTE))
@@ -294,6 +297,36 @@ BOARDS = {
 }
 
 
+def _main_island(o):
+    """Vértices (coordenadas locales) de la parte suelta de mayor volumen de caja de la malla de `o`."""
+    import bmesh
+    bm = bmesh.new()
+    bm.from_mesh(o.data)
+    best, best_v = None, -1.0
+    seen = set()
+    for v0 in bm.verts:
+        if v0.index in seen:
+            continue
+        stack, isl = [v0], []
+        seen.add(v0.index)
+        while stack:
+            v = stack.pop()
+            isl.append(v.co.copy())
+            for e in v.link_edges:
+                w = e.other_vert(v)
+                if w.index not in seen:
+                    seen.add(w.index)
+                    stack.append(w)
+        mn = Vector((min(p.x for p in isl), min(p.y for p in isl), min(p.z for p in isl)))
+        mx = Vector((max(p.x for p in isl), max(p.y for p in isl), max(p.z for p in isl)))
+        d = mx - mn
+        vol = d.x * d.y * d.z
+        if vol > best_v:
+            best, best_v = isl, vol
+    bm.free()
+    return best or [v.co for v in o.data.vertices]
+
+
 def embedded_boards(M):
     """Placa electrónica dentro de cada módulo cerrado, en las coordenadas locales del módulo."""
     import bpy
@@ -302,7 +335,9 @@ def embedded_boards(M):
         o = bpy.data.objects.get(nm)
         if o is None or o.type != "MESH" or not o.data.vertices:
             continue
-        vs = [v.co for v in o.data.vertices]
+        # la placa va en la mayor de las partes sueltas del módulo (su carcasa): en los módulos de varias piezas
+        # (caja, válvulas, botella…) la caja del objeto entero dejaría la placa flotando entre ellas
+        vs = _main_island(o)
         mn = Vector((min(v.x for v in vs), min(v.y for v in vs), min(v.z for v in vs)))
         mx = Vector((max(v.x for v in vs), max(v.y for v in vs), max(v.z for v in vs)))
         size = mx - mn
@@ -316,10 +351,9 @@ def embedded_boards(M):
         uw = abs(u_axis.x) * size.x + abs(u_axis.y) * size.y + abs(u_axis.z) * size.z
         vh = abs(upv[0]) * size.x + abs(upv[1]) * size.y + abs(upv[2]) * size.z
         p = Vector(c)
-        p[thin] -= size[thin] * 0.18
         ncomp = max(4, min(60, int(uw * vh / 0.0004)))
         out += V4.part(M, f"{nm}_PCB", o.get("system", "BODY_FASTENERS"), PCB_MATS, [
-            pcb(tuple(p), (uw * 0.82, vh * 0.80, 0.0012 if min(uw, vh) < 0.05 else 0.0016), tuple(nrm), upv, ncomp,
+            pcb(tuple(p), (uw * 0.66, vh * 0.62, 0.0012 if min(uw, vh) < 0.05 else 0.0016), tuple(nrm), upv, ncomp,
                 200 + k),
         ], f"Placa electrónica del {desc}", frame=o.matrix_world.copy(),
             parent=o.parent.name if o.parent is not None and o.parent.name != "CYBERTRUCK_ROOT" else None,

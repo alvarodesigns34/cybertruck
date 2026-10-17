@@ -42,7 +42,7 @@
 ## Flujo de trabajo
 
 1. Editar la ficha (`ct_specs.py`) o el constructor correspondiente en `blender/scripts/`.
-2. En Blender (MCP): `build_all.run(parts=("body","wheels","lights","details","interior","chassis","v3","v4","explode","scene"))`.
+2. En Blender (MCP): `build_all.run(parts=("body","wheels","lights","details","interior","chassis","v3","v4","montaje","explode","scene"))`.
    Las piezas de la versión 3 se escriben con `ct_v3.part` (formas en coordenadas de mundo del lado derecho,
    `mirror=True` para la pareja izquierda) en los módulos `build_v3_*.py`. Las de la versión 4 (interior
    funcional y tornillería) se escriben con `ct_v4.part` (formas mecánicas de alto detalle; `frame=` para usar las
@@ -54,7 +54,7 @@
 
 ## Estado y puntos de continuación
 
-* Estado al 17-10-2026 (versión 4, rama `modelo-v4-coche-completo`, sin fusionar ni publicar): 1.137 objetos
+* Estado al 17-10-2026 (versión 4, publicada en `main`; la 4.1 de interferencias, más abajo): 1.137 objetos
   (1.098 mallas), ~1,19 millones de triángulos, 78 materiales con texturas físicas generadas (`ct_textures.py`,
   WebP en `blender/textures/`), GLB de 12,0 MB, `Cybertruck.blend` de 14,7 MB; validado (cotas y siluetas
   idénticas a la v3, explosión con desviación 0 en los 1.137 objetos), exportado al visor y probado en local.
@@ -80,6 +80,14 @@
   (`ct_parts.make` lo aplica automáticamente).
 * Hoja de ruta del 17-10-2026: **completada** en la versión 4 (más piezas, hiperrealismo, suelo de cristal,
   iluminación y reflejos, HUD tipo Apple).
+* Versión 4.1 (17-10-2026, interferencias de ensamblaje): detector `interferencias.py` (superficie visible,
+  profundidad cerca del cruce, penetraciones intencionadas), pasada de montaje `build_montaje.py` (parte
+  `"montaje"`: recortes y juntas comprimidas), interiores ajustados o recortados en su carcasa
+  (`build_v4.fit_internals`) y numerosas recolocaciones en los constructores: de ~1.110 a 279 parejas que se atraviesan más de 3 mm (53 de más
+  de 10 mm); 1.139 objetos, GLB de 12,5 MB, `Cybertruck.blend` de 16,5 MB, cotas y explosión validadas. Lo que queda está en
+  `docs/interferencias-pendientes.md` (`node tools/gen_interferencias.mjs <interf.json>`); método y lecciones en
+  `docs/research-and-fidelity.md` §11 y `traspaso.md` §14. No usar el solver booleano `EXACT` con mallas grandes o
+  abiertas: cierra Blender.
 * Lecciones de la v4: (1) antes de leer `matrix_world` de objetos recién creados hay que llamar a
   `bpy.context.view_layer.update()` (`build_v4.build_all` ya lo hace); (2) las piezas internas pueden asomar por
   la carrocería: comprobarlo con renders y con rayos verticales contra la tapa del frunk; (3) las texturas se

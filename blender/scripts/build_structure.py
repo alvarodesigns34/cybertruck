@@ -147,20 +147,22 @@ def sills_and_floor(M):
     for s, sd in ((1, "R"), (-1, "L")):
         side = "derecho" if s > 0 else "izquierdo"
         mb = L.MeshBuilder()
-        P.rbox(mb, (s * 0.870, 0.13, 0.345), (0.13, 2.30, 0.11), 0.010, 1, None, 0)
-        P.rbox(mb, (s * 0.870, 0.13, 0.404), (0.15, 2.30, 0.010), 0.002, 1, None, 0)      # pestaña superior
+        # termina en y = 1,15, detrás de la aleta del paso de rueda delantero
+        P.rbox(mb, (s * 0.870, 0.065, 0.345), (0.13, 2.17, 0.11), 0.010, 1, None, 0)
+        P.rbox(mb, (s * 0.870, 0.065, 0.404), (0.15, 2.17, 0.010), 0.002, 1, None, 0)      # pestaña superior
         objs.append(P.make(mb, f"BODY_Sill_{sd}", SYS, M["ecoat"], None, (s, 0, -0.3), 0.75, 3,
                            "Estructura de la carrocería", f"Umbral {side} de acero de ultra alta resistencia", "R"))
         mb = L.MeshBuilder()
-        P.rbox(mb, (s * 0.870, 0.13, 0.345), (0.10, 2.26, 0.085), 0.004, 1, None, 0)
+        P.rbox(mb, (s * 0.870, 0.065, 0.345), (0.10, 2.13, 0.085), 0.004, 1, None, 0)
         for k in range(3):
-            P.rbox(mb, (s * 0.870, 0.13, 0.318 + k * 0.027), (0.098, 2.25, 0.004), 0.001, 1, None, 0)
+            P.rbox(mb, (s * 0.870, 0.065, 0.318 + k * 0.027), (0.098, 2.12, 0.004), 0.001, 1, None, 0)
         objs.append(P.make(mb, f"BODY_Sill_Insert_{sd}", SYS, M["alu_machined"], None, (s, 0, -0.6), 1.05, 3,
                            "Estructura de la carrocería", f"Inserto de aluminio extruido del umbral {side}", "R"))
     # Refuerzos en X sobre la batería y travesaño de los asientos delanteros
     mb = L.MeshBuilder()
     for s in (1, -1):
-        for a, b in (((s * 0.80, 1.20), (s * 0.30, 0.46)), ((s * 0.30, 0.46), (s * 0.80, -0.86))):
+        # interrumpidos a ambos lados del travesaño de los asientos delanteros (y = 0,35..0,51)
+        for a, b in (((s * 0.80, 1.20), (s * 0.30, 0.525)), ((s * 0.30, 0.335), (s * 0.80, -0.86))):
             P.beam(mb, (a[0], a[1], 0.468), (b[0], b[1], 0.468), 0.085, 0.022, r=0.004)
     objs.append(P.make(mb, "BODY_Floor_X_Brace", SYS, M["ecoat"], None, (0, 0, -0.6), 0.55, 3,
                        "Estructura de la carrocería", "Refuerzos del suelo en X (acero estampado)", "R"))
@@ -269,12 +271,18 @@ def bed_structure(M):
                        "Estructura de la carrocería", "Megabeam: travesaño delantero de equipos térmicos", "V"))
     # viga transversal del salpicadero (Supercarrier) con patas y soporte de la columna
     mb = L.MeshBuilder()
-    P.cyl(mb, (-0.80, 1.07, 0.96), (0.80, 1.07, 0.96), 0.032, 24, 0)
+    # tramo central (por encima de la columna de dirección, que cuelga de él) y extremos acodados hacia los
+    # pilares A, terminados en sus soportes por delante del larguero del guardabarros (y = 1,20)
+    P.cyl(mb, (-0.66, 1.07, 0.985), (0.66, 1.07, 0.985), 0.032, 24, 0)
+    for sg in (1, -1):
+        P.hose(mb, [(sg * 0.64, 1.07, 0.985), (sg * 0.69, 1.10, 0.985), (sg * 0.72, 1.16, 0.985),
+                    (sg * 0.74, 1.20, 0.985)], 0.032, 24, 4, 0, True, None)
     for x in (-0.15, 0.15):
-        P.beam(mb, (x, 1.07, 0.93), (x * 1.3, 1.02, 0.52), 0.05, 0.025, r=0.004)
-    P.rbox(mb, (-0.39, 1.00, 0.93), (0.14, 0.12, 0.06), 0.006, 1, None, 0)
-    for x in (-0.80, 0.80):
-        P.disc(mb, (x, 1.07, 0.96), (1, 0, 0), 0.06, 0.006, 20, 0, 0.002)
+        P.beam(mb, (x, 1.07, 0.955), (x * 1.3, 1.02, 0.52), 0.05, 0.025, r=0.004)
+    # abrazadera de la columna entre el tubo y el actuador de realimentación
+    P.rbox(mb, (-0.39, 1.03, 0.942), (0.14, 0.10, 0.020), 0.004, 1, None, 0)
+    for x in (-0.745, 0.745):
+        P.disc(mb, (x, 1.20, 0.985), (1, 0, 0), 0.06, 0.006, 20, 0, 0.002)
     objs.append(P.make(mb, "BODY_IP_CrossCar_Beam", SYS, M["steel_black"], None, (0, -0.4, 0.6), 0.55, 3,
                        "Estructura de la carrocería",
                        "Viga transversal del salpicadero (Supercarrier) con soporte de la columna", "R"))

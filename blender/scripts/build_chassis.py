@@ -135,7 +135,8 @@ def build_cargo_bed(M):
     objs.append(o)
     # Compartimento inferior (Gear Locker) bajo el suelo de la caja
     mb = L.MeshBuilder()
-    L.box(mb, (0.0, -2.52, zf - 0.13), (0.88, 0.60, 0.24), 0)
+    # bajo la tapa (z ≥ 0,794) y por encima del paragolpes trasero
+    L.box(mb, (0.0, -2.52, 0.745), (0.86, 0.60, 0.09), 0)
     o = mb.build("CARGO_Gear_Locker", "CARGO_BED", M["composite"], parent=asm)
     L.bevel(o, 0.01, 2, 40)
     L.explode(o, (0, 0, -1), 0.45, 6, "Caja de carga", "Compartimento inferior Gear Locker (97 l)", "R")

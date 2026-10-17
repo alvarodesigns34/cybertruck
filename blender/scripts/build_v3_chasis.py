@@ -24,6 +24,29 @@ def line(fn, a, b, n, **kw):
     return [fn(tuple(a + (b - a) * (i / max(1, n - 1))), **kw) for i in range(n)]
 
 
+def _bbox(name):
+    import bpy
+    bpy.context.view_layer.update()
+    o = bpy.data.objects[name]
+    pts = [o.matrix_world @ Vector(c) for c in o.bound_box]
+    return (Vector((min(p.x for p in pts), min(p.y for p in pts), min(p.z for p in pts))),
+            Vector((max(p.x for p in pts), max(p.y for p in pts), max(p.z for p in pts))))
+
+
+def _top(name, x, y, default):
+    """Altura de la cara superior de un objeto en (x, y) por un rayo vertical descendente."""
+    import bpy
+    from mathutils.bvhtree import BVHTree
+    o = bpy.data.objects[name]
+    ev = o.evaluated_get(bpy.context.evaluated_depsgraph_get())
+    me = ev.to_mesh()
+    mw = ev.matrix_world
+    tree = BVHTree.FromPolygons([mw @ v.co for v in me.vertices], [p.vertices[:] for p in me.polygons])
+    ev.to_mesh_clear()
+    hit = tree.ray_cast(Vector((x, y, 5.0)), Vector((0, 0, -1)))[0]
+    return default if hit is None else hit.z
+
+
 def build(M):
     out = []
     A = out.extend
@@ -85,11 +108,18 @@ def build(M):
             box((s * 0.80, cy, 0.437 - 0.232), (0.030, 0.050, 0.006), 0.001),
         ], f"Contrapesos adhesivos de equilibrado de la rueda {es}", edir=(s, 0, 0), dist=0.3, stage=6))
         # Purgador, botas y muelles de retorno de la pinza
+        # se colocan sobre la cara superior de la pinza (rayo vertical), no a cotas fijas que caían en el disco
+        cmn, cmx = _bbox(f"BRK_{tag}_Caliper")
+        ycal = (cmn.y + cmx.y) / 2
+        xb = s * (min(abs(cmn.x), abs(cmx.x)) + 0.022)          # mitad interior de la pinza (cilindros)
+        zb = _top(f"BRK_{tag}_Caliper", xb, ycal, cmx.z) - 0.003
+        xs = (cmn.x + cmx.x) / 2
+        zs = [_top(f"BRK_{tag}_Caliper", xs, ycal + d, cmx.z) for d in (-0.03, 0.03)]
         A(V3.part(M, f"BRK_{tag}_Caliper_Service_Parts", whl, ["zinc", "rubber"], [
-            cyl((s * 0.885, cy - f * 0.02, 0.595), (s * 0.885, cy - f * 0.02, 0.625), 0.006, 0.004, 8, 0),
-            cyl((s * 0.885, cy - f * 0.02, 0.625), (s * 0.885, cy - f * 0.02, 0.640), 0.008, seg=10, m=1),
-            box((s * 0.84, cy + f * 0.035, 0.52), (0.012, 0.010, 0.050), 0.001),
-            box((s * 0.84, cy - f * 0.075, 0.52), (0.012, 0.010, 0.050), 0.001),
+            cyl((xb, ycal, zb), (xb, ycal, zb + 0.020), 0.006, 0.004, 8, 0),
+            cyl((xb, ycal, zb + 0.020), (xb, ycal, zb + 0.032), 0.008, seg=10, m=1),
+            box((xs, ycal - 0.03, zs[0] + 0.0025), (0.050, 0.010, 0.004), 0.001),
+            box((xs, ycal + 0.03, zs[1] + 0.0025), (0.050, 0.010, 0.004), 0.001),
         ], f"Purgador con capuchón, botas y muelles de retorno de la pinza {es}", edir=(s, 0, 0.3), dist=0.4,
             stage=6))
         # Extremo exterior de la bieleta de dirección (rótula y contratuerca)
@@ -100,12 +130,14 @@ def build(M):
         ], f"Extremo exterior de la bieleta de dirección {es} (contratuerca 24 mm a 90 N·m, tuerca a mangueta 170 N·m)",
             edir=(s, 0, -0.1), dist=0.45))
         if f < 0:
+            # el motor EPB forma parte de la malla de la pinza trasera; aquí, su conector y su mazo, por debajo
+            # del brazo superior (z >= 0,618) y por dentro de él (x < 0,439) hasta el bastidor
             A(V3.part(M, f"BRK_{tag}_EPB_Motor", whl, ["steel_black", "plastic_black"], [
-                cyl((s * 0.765, cy + 0.05, 0.60), (s * 0.765, cy + 0.05, 0.675), 0.030, seg=18, m=0),
-                box((s * 0.765, cy + 0.05, 0.69), (0.040, 0.040, 0.020), 0.003, 1),
-                hose([(s * 0.765, cy + 0.05, 0.70), (s * 0.70, cy + 0.10, 0.74), (s * 0.55, cy + 0.15, 0.78)], 0.0035,
-                     6, 4, 0),
-            ], f"Motor del freno de estacionamiento eléctrico (EPB) de la pinza {es}", edir=(s, 0, 0.5), dist=0.45))
+                box((s * 0.725, cy + 0.14, 0.57), (0.030, 0.030, 0.020), 0.003, 1),
+                hose([(s * 0.725, cy + 0.14, 0.57), (s * 0.60, cy + 0.16, 0.585), (s * 0.45, cy + 0.15, 0.60),
+                      (s * 0.40, cy + 0.15, 0.78)], 0.0035, 6, 4, 0),
+            ], f"Conector y mazo del motor del freno de estacionamiento eléctrico (EPB) de la pinza {es}",
+                edir=(s, 0, 0.5), dist=0.45))
 
     # --- Ejes: estabilizadoras, subchasis, tornillería ---------------------------------------------------------
     for ax, f, sus in (("F", 1, "FRONT_SUSPENSION"), ("R", -1, "REAR_SUSPENSION")):
@@ -160,13 +192,21 @@ def build(M):
         cyl((-0.55, -2.45, 0.54), (-0.55, -2.45, 0.56), 0.012, seg=12, m=1),
     ], "Puerto de llenado de aire con tapón", edir=(0, -0.3, -1), dist=0.3, stage=6))
     for nm, es, pts in (
-            ("Rear", "trasero", [(0.38, -2.30, 0.54), (0.20, -2.20, 0.62), (0.58, -1.92, 0.60)]),
-            ("R", "derecho", [(0.40, -2.28, 0.53), (0.70, -2.10, 0.45), (0.88, -1.60, 0.34), (0.89, 0.0, 0.31),
-                              (0.87, 1.30, 0.33), (0.66, 1.80, 0.62)]),
-            ("L", "izquierdo", [(0.34, -2.28, 0.53), (-0.20, -2.20, 0.45), (-0.88, -1.60, 0.34), (-0.89, 0.0, 0.31),
-                                (-0.87, 1.30, 0.33), (-0.66, 1.80, 0.62)])):
+            # salen de la cara delantera del bloque de válvulas; por fuera del inversor trasero, por dentro de la
+            # rueda trasera y bajo el umbral (z = 0,283), junto a las líneas de freno
+            ("Rear", "trasero", [(0.43, -2.267, 0.50), (0.50, -2.20, 0.50), (0.56, -2.05, 0.56), (0.58, -1.92, 0.60)]),
+            # puntos de control densos bajo el umbral para que la curva no baje de la altura libre oficial
+            ("R", "derecho", [(0.415, -2.267, 0.50), (0.50, -2.12, 0.42), (0.58, -1.70, 0.33), (0.62, -1.50, 0.31),
+                              (0.66, -1.30, 0.296), (0.78, -1.15, 0.289), (0.895, -1.00, 0.2855),
+                              (0.895, -0.50, 0.2855), (0.895, 0.0, 0.2855), (0.895, 0.60, 0.2855),
+                              (0.89, 1.10, 0.288), (0.88, 1.30, 0.30), (0.78, 1.55, 0.42), (0.66, 1.80, 0.62)]),
+            ("L", "izquierdo", [(0.345, -2.267, 0.50), (0.10, -2.22, 0.45), (-0.20, -2.20, 0.45), (-0.50, -2.12, 0.42),
+                                (-0.58, -1.70, 0.33), (-0.62, -1.50, 0.31), (-0.66, -1.30, 0.296),
+                                (-0.78, -1.15, 0.289), (-0.895, -1.00, 0.2855), (-0.895, -0.50, 0.2855),
+                                (-0.895, 0.0, 0.2855), (-0.895, 0.60, 0.2855), (-0.89, 1.10, 0.288),
+                                (-0.88, 1.30, 0.30), (-0.78, 1.55, 0.42), (-0.66, 1.80, 0.62)])):
         A(V3.part(M, f"CHS_Air_Line_Bundle_{nm}", "REAR_SUSPENSION", ["hose", "zinc"], [
-            hose(pts, 0.0045, 8, 5, 0),
+            hose(pts, 0.0045, 8, 5, 0, zmin=0.282),
             [nut(p, Z, 0.012, 1, 0.0) for p in (pts[0], pts[-1])],
         ], f"Haz de líneas de aire {es} (racores VOSS codificados por color)", edir=(0, 0, -1), dist=0.3,
             stage=6))
@@ -178,8 +218,9 @@ def build(M):
         [cyl((x, y, z), (x, y, z + 0.022), 0.007, seg=10, m=0) for (x, y, z) in
          ((0.61, 1.92, 0.945), (-0.61, 1.92, 0.945), (0.62, -1.92, 0.865), (-0.62, -1.92, 0.865),
           (0.60, 1.88, 0.60), (-0.60, 1.88, 0.60), (0.60, -1.88, 0.53), (-0.60, -1.88, 0.53),
-          (-0.15, -2.40, 0.545), (-0.05, -2.40, 0.545), (0.05, -2.40, 0.545), (0.20, -2.35, 0.57),
-          (0.30, -2.31, 0.58), (0.27, -2.40, 0.50), (0.14, -2.40, 0.50), (0.0, -2.40, 0.50))],
+          # sobre la generatriz superior del depósito (r = 66 mm) y en la tapa del bloque de válvulas
+          (-0.05, -2.36, 0.567), (0.05, -2.36, 0.567), (0.15, -2.36, 0.567), (0.25, -2.36, 0.567),
+          (0.345, -2.30, 0.561), (0.37, -2.30, 0.561), (0.395, -2.30, 0.561), (0.42, -2.30, 0.561))],
         [nut((x, y, z), Z, 0.014, 1, 0.0) for (x, y, z) in
          ((0.61, 1.92, 0.945), (-0.61, 1.92, 0.945), (0.62, -1.92, 0.865), (-0.62, -1.92, 0.865))],
     ], "Racores VOSS del sistema de aire (≥ 16 uds., 2–8 N·m)", edir=(0, 0, 1), dist=0.3, stage=6))

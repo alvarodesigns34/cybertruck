@@ -25,32 +25,35 @@ def build(M):
 
     # --- Gestión térmica (hoy agrupada en THM_Supermanifold) -------------------------------------------------
     A(V3.part(M, "THM_Octovalve", "UNDERBODY", ["alu_machined", "plastic_black", "zinc"], [
-        box((0.44, 1.86, 0.90), (0.10, 0.12, 0.10), 0.006),
-        cyl((0.44, 1.86, 0.95), (0.44, 1.86, 1.00), 0.032, seg=16, m=1),
-        line(torx, (0.40, 1.82, 0.952), (0.48, 1.90, 0.952), 4, axis=Z, d=0.006),
+        # sobre la placa de asiento de la Octovalve en la tapa del Supermanifold
+        box((0.30, 1.83, 0.935), (0.10, 0.12, 0.10), 0.006),
+        cyl((0.30, 1.83, 0.985), (0.30, 1.83, 1.035), 0.032, seg=16, m=1),
+        line(torx, (0.26, 1.79, 0.987), (0.34, 1.87, 0.987), 4, axis=Z, d=0.006),
     ], "Octovalve (4 tornillos T25 a 7 N·m, 7 clips de resorte, 4 conectores)", edir=(0.5, 0.3, 0.5), dist=0.45,
         stage=5))
     A(V3.part(M, "THM_Coolant_Pump", "UNDERBODY", ["alu_cast", "zinc"], [
-        cyl((0.45, 1.69, 0.78), (0.45, 1.79, 0.78), 0.040, 0.036, 20, 0),
-        line(torx, (0.42, 1.795, 0.80), (0.48, 1.795, 0.76), 4, axis=Y, d=0.005),
+        cyl((0.39, 1.734, 0.70), (0.39, 1.834, 0.70), 0.040, 0.036, 20, 0),
+        line(torx, (0.36, 1.839, 0.72), (0.42, 1.839, 0.68), 4, axis=Y, d=0.005),
     ], "Bomba de refrigerante del Supermanifold (4 tornillos T20 a 2 N·m, giro de purga 3.500–6.500 rpm)",
         edir=(0.5, -0.3, 0.3), dist=0.45, stage=5))
     A(V3.part(M, "THM_Chiller", "UNDERBODY", ["alu_machined", "plastic_black", "zinc"], [
-        box((0.44, 1.97, 0.74), (0.10, 0.16, 0.16), 0.005),
-        [box((0.44, 1.97, 0.66 + 0.04 * k), (0.108, 0.168, 0.003), 0.001) for k in range(1, 4)],
-        line(nut, (0.40, 1.91, 0.825), (0.48, 2.03, 0.825), 4, axis=Z, d=0.008, stud=0.0),
-        box((0.44, 2.065, 0.80), (0.05, 0.020, 0.040), 0.003, 1),
+        # entre el Supermanifold, la HCU, el larguero de la fundición (x = 0,45) y la pared trasera del frunk
+        box((0.412, 1.93, 0.74), (0.07, 0.08, 0.16), 0.005),
+        [box((0.412, 1.93, 0.66 + 0.04 * k), (0.078, 0.088, 0.003), 0.001) for k in range(1, 4)],
+        line(nut, (0.385, 1.90, 0.825), (0.44, 1.96, 0.825), 4, axis=Z, d=0.008, stud=0.0),
+        box((0.412, 1.88, 0.70), (0.05, 0.020, 0.040), 0.003, 1),
     ], "Enfriador (chiller) de la batería (4 tuercas 8 mm a 7 N·m, controlador 3 pernos a 4 N·m, 9 conectores)",
         edir=(0.5, 0.4, 0), dist=0.45, stage=5))
     A(V3.part(M, "THM_LCCR_Condenser", "UNDERBODY", ["alu_machined", "plastic_black", "zinc"], [
-        box((0.44, 1.97, 0.95), (0.10, 0.14, 0.10), 0.005),
-        line(nut, (0.40, 1.92, 1.005), (0.48, 2.02, 1.005), 4, axis=Z, d=0.008, stud=0.0),
-        cyl((0.40, 2.04, 0.95), (0.40, 2.07, 0.95), 0.009, seg=10, m=1), cyl((0.48, 2.04, 0.95), (0.48, 2.07, 0.95), 0.009, seg=10, m=1),
+        box((0.412, 1.93, 0.95), (0.07, 0.08, 0.10), 0.005),
+        line(nut, (0.385, 1.90, 1.005), (0.44, 1.96, 1.005), 4, axis=Z, d=0.008, stud=0.0),
+        cyl((0.39, 1.89, 0.95), (0.39, 1.86, 0.95), 0.009, seg=10, m=1), cyl((0.435, 1.89, 0.95), (0.435, 1.86, 0.95), 0.009, seg=10, m=1),
     ], "Condensador refrigerado por líquido (LCCR; 4 tuercas 8 mm a 7 N·m, 2 tapas de puerto A/C)",
         edir=(0.5, 0.4, 0.4), dist=0.45, stage=5))
     A(V3.part(M, "THM_Coolant_Bottle", "UNDERBODY", ["plastic_textured", "plastic_black"], [
-        cyl((0.50, 2.14, 0.84), (0.50, 2.14, 1.00), 0.050, 0.046, 24, 0),
-        cyl((0.50, 2.14, 1.00), (0.50, 2.14, 1.03), 0.030, seg=16, m=1),
+        # por fuera del larguero de la fundición, sobre el brazo superior
+        cyl((0.53, 2.14, 0.84), (0.53, 2.14, 1.00), 0.050, 0.046, 24, 0),
+        cyl((0.53, 2.14, 1.00), (0.53, 2.14, 1.03), 0.030, seg=16, m=1),
     ], "Botella de refrigerante con tapón (nivel entre NOM y MAX; recarga al vacío 60–70 cmHg)",
         edir=(0.5, 0.2, 0.8), dist=0.45, stage=5))
     A(V3.part(M, "THM_Expansion_Valves", "UNDERBODY", ["alu_machined", "copper", "plastic_black"], [
@@ -101,15 +104,18 @@ def build(M):
         line(torx, (0.27, 1.20, 0.533), (0.45, 1.20, 0.533), 4, axis=Z, d=0.006),
     ], "Cubierta de acceso a los pirofusibles (4 tornillos E-Torx a 10 N·m)", edir=(0, 0, 1), dist=0.4))
     A(V3.part(M, "HV_Harness_FDU", "BATTERY_ASSEMBLY", ["hv_orange", "connector_grey", "zinc"], [
-        hose([(0.0, 1.26, 0.50), (0.10, 1.55, 0.58), (0.20, 1.78, 0.64)], 0.014, 12, 5, 0),
-        box((0.22, 1.82, 0.645), (0.05, 0.04, 0.04), 0.004, 1), bolt((0.22, 1.82, 0.670), Z, 0.010, 2),
+        # termina en la cara trasera del inversor delantero (y = 1,697 m)
+        hose([(0.0, 1.26, 0.50), (0.10, 1.50, 0.58), (0.20, 1.655, 0.64)], 0.014, 12, 5, 0),
+        box((0.20, 1.675, 0.64), (0.05, 0.040, 0.04), 0.004, 1), bolt((0.20, 1.675, 0.665), Z, 0.010, 2),
     ], "Arnés de alta tensión de la unidad motriz delantera (1 perno 10 mm a 10 N·m)", edir=(0.2, 0.4, 0.8),
         dist=0.45, stage=5))
     for s, sd in ((1, "R"), (-1, "L")):
         A(V3.part(M, f"HV_Harness_RDU_{sd}", "BATTERY_ASSEMBLY", ["hv_orange", "connector_grey", "zinc"], [
-            hose([(s * 0.20, -1.22, 0.64), (s * 0.30, -1.65, 0.66), (s * 0.31, -2.02, 0.64)], 0.012, 12, 5, 0),
-            box((s * 0.31, -2.04, 0.655), (0.05, 0.04, 0.04), 0.004, 1),
-            line(bolt, (s * 0.29, -2.05, 0.678), (s * 0.33, -2.05, 0.678), 2, axis=Z, d=0.010, m=2),
+            # de la cara trasera del clúster de dispositivos a la cara delantera del inversor (sobre el motor)
+            hose([(s * 0.05, -1.373, 0.63), (s * 0.12, -1.47, 0.64), (s * 0.28, -1.75, 0.66), (s * 0.30, -2.09, 0.655)],
+                 0.012, 12, 5, 0),
+            box((s * 0.30, -2.112, 0.655), (0.05, 0.04, 0.04), 0.004, 1),
+            line(bolt, (s * 0.28, -2.112, 0.678), (s * 0.32, -2.112, 0.678), 2, axis=Z, d=0.010, m=2),
         ], f"Arnés de alta tensión del motor trasero {'derecho' if s > 0 else 'izquierdo'} (Tri Motor; 4 pernos 10 mm a 4 N·m)",
             edir=(s * 0.3, -0.6, 0.8), dist=0.45, stage=5))
     A(V3.part(M, "HV_Charge_Port_Busbar", "BATTERY_ASSEMBLY", ["copper", "zinc"], [
@@ -150,16 +156,18 @@ def build(M):
         ], f"Cubierta acústica (NVH) del motor trasero {'derecho' if s > 0 else 'izquierdo'} (5 clips)",
             edir=(s * 0.3, -0.3, 1), dist=0.45, stage=5))
     A(V3.part(M, "DU_R_Inverter_Mount_RH", "DRIVE_UNITS", ["alu_cast", "zinc"], [
-        box((0.40, -2.17, 0.56), (0.10, 0.04, 0.12), 0.004), box((0.47, -1.95, 0.50), (0.10, 0.18, 0.08), 0.004),
-        line(nut, (0.37, -2.195, 0.60), (0.43, -2.195, 0.60), 3, axis=(0, -1, 0), d=0.012, stud=0.0),
-        line(bolt, (0.44, -1.89, 0.545), (0.50, -2.01, 0.545), 4, axis=Z, d=0.010),
+        # placa detrás del inversor y pata por fuera de la tapa del motor
+        box((0.40, -2.234, 0.575), (0.10, 0.04, 0.12), 0.004), box((0.502, -1.95, 0.50), (0.10, 0.18, 0.08), 0.004),
+        line(nut, (0.37, -2.259, 0.61), (0.43, -2.259, 0.61), 3, axis=(0, -1, 0), d=0.012, stud=0.0),
+        line(bolt, (0.472, -1.89, 0.545), (0.532, -2.01, 0.545), 4, axis=Z, d=0.010),
     ], "Soporte del inversor derecho y del motor trasero derecho (3 × EP14 35 N·m + 55°; 4 × E14 35 N·m + 55°)",
         edir=(0.5, -0.4, -0.5), dist=0.45, stage=5))
     # Mangueras de refrigerante de las unidades motrices y de la batería
     A(V3.part(M, "THM_FDU_Coolant_Hoses", "UNDERBODY", ["hose", "zinc"], [
-        hose([(0.05, 2.12, 0.40), (0.20, 2.20, 0.50), (0.38, 2.10, 0.74)], 0.011, 10, 5, 0),
-        hose([(0.10, 1.74, 0.58), (0.28, 1.76, 0.66), (0.40, 1.80, 0.76)], 0.011, 10, 5, 0),
-        clip((0.20, 2.20, 0.50), (0, 0, 1), 0.014, 1), clip((0.28, 1.76, 0.66), (0, 0, 1), 0.014, 1),
+        # alimentación: del lado derecho de la reductora a la base del Supermanifold; inversor -> enfriador
+        hose([(0.240, 1.80, 0.45), (0.27, 1.80, 0.58), (0.30, 1.82, 0.715)], 0.011, 10, 5, 0),
+        hose([(0.248, 1.95, 0.63), (0.33, 1.95, 0.63), (0.41, 1.93, 0.648)], 0.011, 10, 5, 0),
+        clip((0.27, 1.80, 0.58), (0, 0, 1), 0.014, 1), clip((0.33, 1.95, 0.63), (0, 0, 1), 0.014, 1),
     ], "Mangueras de refrigerante de la unidad motriz delantera (alimentación en línea e inversor–intercambiador)",
         edir=(0.3, 0.3, 0.3), dist=0.4, stage=5))
     A(V3.part(M, "THM_RDU_Coolant_Hoses", "UNDERBODY", ["hose", "zinc"], [
@@ -169,9 +177,10 @@ def build(M):
     ], "Mangueras de refrigerante de la unidad motriz trasera (alimentación y retorno de los dos refrigeradores de placa)",
         edir=(0, -0.4, 0.4), dist=0.4, stage=5))
     A(V3.part(M, "THM_Chiller_Battery_Hoses", "UNDERBODY", ["hose", "zinc"], [
-        hose([(0.40, 2.03, 0.72), (0.34, 1.80, 0.52), (0.20, 1.46, 0.44)], 0.012, 10, 5, 0),
-        hose([(0.48, 2.03, 0.72), (0.42, 1.80, 0.50), (0.30, 1.46, 0.42)], 0.012, 10, 5, 0),
-        clip((0.34, 1.80, 0.55), (0, 0, 1), 0.014, 1), clip((0.42, 1.80, 0.53), (0, 0, 1), 0.014, 1),
+        # desde los conectores de la cara trasera del enfriador, por debajo de la bomba de refrigerante
+        hose([(0.395, 1.869, 0.70), (0.39, 1.848, 0.60), (0.34, 1.75, 0.50), (0.20, 1.46, 0.44)], 0.012, 10, 5, 0),
+        hose([(0.43, 1.869, 0.70), (0.425, 1.85, 0.58), (0.415, 1.75, 0.48), (0.30, 1.46, 0.42)], 0.012, 10, 5, 0),
+        clip((0.34, 1.75, 0.53), (0, 0, 1), 0.014, 1), clip((0.42, 1.75, 0.51), (0, 0, 1), 0.014, 1),
     ], "Mangueras del enfriador a la batería (suministro y retorno; 2 clips + 2 clips de borde)",
         edir=(0.3, 0, -0.5), dist=0.4, stage=5))
     return [o for o in out if o is not None]
