@@ -99,7 +99,7 @@ def build_wiper(M):
     L.box(mb, ((x0 + x1) / 2, y, z - 0.009), (x1 - x0 - 0.01, 0.006, 0.008), 1)
     blade = mb.build("EXT_Wiper_Blade", "GLASS_AND_MIRRORS", [M["plastic_black"], M["bushing"]], parent=asm)
     blade.rotation_euler = (math.atan(0.33), 0, 0)
-    L.explode(blade, (0, 0, 1), 0.10, 6, "Limpiaparabrisas", "Escobilla de ~1,26 m", "A")
+    L.explode(blade, (0, 0, 1), 0.10, 6, "Limpiaparabrisas", "Escobilla (longitud en conflicto: 62 in, ~50 in o ~1,22 m según la fuente)", "A")
     mb = L.MeshBuilder()
     L.box(mb, (0.0, 1.915, S.z_top(1.915) + 0.022), (0.14, 0.03, 0.014), 0)
     L.lathe(mb, [(0.018, 0.0), (0.018, 0.02), (0.0, 0.022)], pivot, (0, 0.3, 1), 20, 0)

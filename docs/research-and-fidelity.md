@@ -187,11 +187,14 @@ Comparación de siluetas por trazado de rayos frente a los perfiles medidos en l
 
 | Perfil | Muestras | Error medio | P95 | Máximo |
 |---|---|---|---|---|
-| Superior | 125 | 2,9 mm | 6,8 mm | 10,2 mm |
-| Semianchura en planta | 49 | 6,8 mm (v1: 6,7; +0,02 mm por las inscripciones del neumático) | 19,2 mm | 29,3 mm |
-| Trasero | 22 | 9,8 mm | 21,9 mm | 65,1 mm |
+| Superior | 125 | 2,9 mm | 7,2 mm | 13,3 mm (v2: 10,2) |
+| Semianchura en planta | 49 | 6,7 mm | 19,2 mm | 29,3 mm |
+| Trasero | 22 | 9,2 mm (v2: 9,8) | 21,0 mm | 65,1 mm |
 | Inferior | 31 | 12,5 mm | 40,3 mm | 121,1 mm |
 | Frontal | 34 | 16,0 mm | 51,3 mm | 151,3 mm |
+
+Las cotas y siluetas anteriores se revalidaron tras la versión 3 (948 objetos): las dimensiones oficiales no
+cambian y los perfiles quedan dentro de ±0,6 mm de media (ver §9).
 
 Los máximos del perfil inferior y frontal corresponden al labio inferior de la fascia delantera, que se ha
 elevado deliberadamente a 0,266 m para respetar la altura libre oficial (el diagrama muestra 0,252 m).
@@ -260,3 +263,46 @@ frecuencia (periódicas por construcción) y se guardan en WebP en `blender/text
 UV de 1 unidad = 1 m y una repetición por material (acero 0,40 m → 0,39 mm/px; caucho 0,08 m; plástico
 granulado 0,05 m; piel 0,08 m; tejido 0,012 m; fundición 0,20 m). El mapa de rugosidad codifica la
 metalicidad en el canal B (convención glTF), de modo que Blender y el visor usan los mismos datos.
+
+## 9. Versión 3 (17-10-2026): piezas del backlog y correcciones
+
+### 9.1 Método
+
+1. La investigación de la versión 3 se consolidó en [`ficha-tecnica-piezas.md`](ficha-tecnica-piezas.md): nombres
+   oficiales, cantidades, fijaciones y pares del manual de servicio, del manual de reparación de carrocería, del
+   manual del propietario y de la hoja de rescate, con 30 conflictos de fuentes señalados.
+2. Cada pieza nueva se programó con `ct_v3.py` en los módulos `build_v3_*.py`, dentro del hueco que dejaba la
+   geometría de la versión 2. Las piezas simétricas se generan reflejando las **coordenadas** de entrada (no la
+   malla), de modo que las normales quedan hacia fuera.
+3. Se revalidó con `validate.run()` (cotas oficiales y siluetas por trazado de rayos) y con
+   `build_explode.verify_roundtrip()`; los desajustes que introdujeron piezas nuevas (altura libre, perfil frontal,
+   trasero y de planta) se corrigieron recolocando esas piezas, no relajando la validación.
+
+### 9.2 Resultado y fidelidad
+
+- 387 objetos nuevos (948 en total). Etiquetado: «Verificado» solo para nombre, cantidad y fijaciones en el
+  manual (`ct_parts.make` los clasifica «Reconstruido» porque la forma es reconstruida); las antenas, puntos BLE,
+  tomas de 48 V y mazos son «Aproximado» (existencia en el manual de servicio, posición no publicada).
+- Sin cota ni masa por pieza: las fuentes públicas no las publican (el mapa de materiales y las cotas de control del
+  manual de reparación son imágenes). Los espesores y materiales nuevos son interpretaciones razonadas.
+- No se modelaron las opciones fuera de serie (Terrestrial Armor, barra de luz off-road), las piezas propias de las
+  variantes Long Range/Dual Motor ni las «secciones de reparación» (Section, Half Section), que no son piezas del
+  vehículo.
+
+### 9.3 Fallos corregidos
+
+| Fallo | Corrección |
+|---|---|
+| 51 mallas cerradas con las normales hacia dentro (cajas de `ct_lib.box`, llantas, protectores de disco, portavasos, pantallas, asientos…) | `ct_lib.box` orienta las caras hacia fuera y `ct_lib.orient_closed_components` (usada por `mesh_object` y por las mallas de ruedas) propaga un sentido coherente y invierte las componentes de volumen negativo; las láminas abiertas no se tocan |
+| Mallas cerradas con sentido mixto de caras (carriles de la cubierta) | La misma función las deja coherentes |
+| Par del tirante de puerta 35 N·m (el manual indica un perno T40 a 23 N·m) | Etiqueta corregida |
+| Bisagras «25/38 N·m» (25 N·m es la barra de torsión izquierda del portón) | 2 fijaciones por bisagra a 38 N·m |
+| Controlador trasero de 48 V con «4 tuercas» | 3 fijaciones: 2 tuercas de 13 N·m + 1 perno de 10 N·m; controladores delanteros: 4 tuercas de 10 mm a 14 N·m |
+| Bandeja de la batería con «44 tornillos» | Recuento aproximado y variable según la página del manual |
+| Persianas activas «7 lamas», barra de luz «64 LED», 22 lamas del tonneau | Se declara que el número no consta en las fuentes (Aproximado) |
+| Escobilla «~1,26 m» | Se declara el conflicto de fuentes: 62 in, ~50 in o ~1,22 m |
+| Batería «~800 V» | 700 V nominales (manual del propietario); 800 V según la hoja de rescate |
+| Pantallas de 18,5" y 9,4" etiquetadas «Verificado» | «Reconstruido»: el tamaño solo consta en fuentes secundarias |
+
+Pendiente: 7 láminas abiertas (faldillas de aleta, paragolpes delantero, puerta de la toma de carga, piloto
+lateral) conservan 3–16 aristas con caras de sentido discontinuo; no afectan a las cotas ni a la explosión.

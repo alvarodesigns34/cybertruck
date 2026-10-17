@@ -90,7 +90,7 @@
    "type": "EMPTY",
    "parent": "CYBERTRUCK_ROOT",
    "system": "BATTERY_ASSEMBLY",
-   "label": "Batería estructural de alta tensión (~123 kWh, 1.344 celdas 4680, ~800 V)",
+   "label": "Batería estructural de alta tensión (~123 kWh, 1.344 celdas 4680; 700 V nominales según el manual del propietario, 800 V según la hoja de rescate)",
    "group": "Batería",
    "stage": 5,
    "fidelity": "R",
@@ -504,7 +504,7 @@
    "type": "MESH",
    "parent": "BATTERY_PACK",
    "system": "BATTERY_ASSEMBLY",
-   "label": "Bandeja estructural con brida perimetral (44 tornillos a los largueros)",
+   "label": "Bandeja estructural con brida perimetral (unos 22 pernos exteriores + 14 interiores + 4 al fundido trasero; el recuento varía según la página del manual)",
    "group": "Batería",
    "stage": 6,
    "fidelity": "R",
@@ -554,6 +554,24 @@
    "faces": 132
   },
   {
+   "name": "BAT_Mounting_Bolts",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Pernos de fijación del pack (laterales 16 × 15 mm, delanteros 6 × 18 mm y 6 × 24 mm, traseros 4 × 21 mm y 8 × 13 mm)",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 2640
+  },
+  {
    "name": "BAT_Pyro_Fuses",
    "type": "MESH",
    "parent": "BATTERY_PACK",
@@ -590,6 +608,186 @@
    "faces": 138
   },
   {
+   "name": "BODY_Access_Plugs_1870761",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Tapones de taladro de acceso Ø29 mm 1870761-00 (2 FUB, 4 RUB, 3 lateral) con sellante",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 900
+  },
+  {
+   "name": "BODY_Aerobracket",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte aerodinámico (Aerobracket) del salpicadero",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.5,
+   "faces": 176
+  },
+  {
+   "name": "BODY_Bed_Bridge_Bracket",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte del puente trasero de la caja (3 remaches HS)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 164
+  },
+  {
+   "name": "BODY_Bumper_Beam_Mount_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte izquierdo de la viga del paragolpes (3 tornillos HF M8×28 a 21 N·m + adhesivo)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.95783,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 242
+  },
+  {
+   "name": "BODY_Bumper_Beam_Mount_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte derecho de la viga del paragolpes (3 tornillos HF M8×28 a 21 N·m + adhesivo)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.95783,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 242
+  },
+  {
+   "name": "BODY_CFM_Bracket",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte del módulo de ventiladores (2 remaches HS 6,5 mm + adhesivo)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.70711,
+    -0.70711
+   ],
+   "explode_dist": 0.45,
+   "faces": 124
+  },
+  {
+   "name": "BODY_CPillar_Inner_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Pilar C interior izquierdo (33 remaches HS + 2 tornillos M10×33 a 90 N·m)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.92057,
+    -0.27617,
+    0.27617
+   ],
+   "explode_dist": 0.5,
+   "faces": 538
+  },
+  {
+   "name": "BODY_CPillar_Inner_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Pilar C interior derecho (33 remaches HS + 2 tornillos M10×33 a 90 N·m)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.92057,
+    -0.27617,
+    0.27617
+   ],
+   "explode_dist": 0.5,
+   "faces": 538
+  },
+  {
+   "name": "BODY_CPillar_Lower_Nut_Plate_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placa izquierdo de tuercas inferior del pilar C",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    -0.28735,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 84
+  },
+  {
+   "name": "BODY_CPillar_Lower_Nut_Plate_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placa derecho de tuercas inferior del pilar C",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    -0.28735,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 84
+  },
+  {
    "name": "BODY_Cabin_Floor",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -624,6 +822,78 @@
    ],
    "explode_dist": 0.3,
    "faces": 1
+  },
+  {
+   "name": "BODY_Cantrail_Stud_Plate_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placas izquierdos de espárragos del larguero de techo (1 avellanado estructural de 6,5 mm)",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.37139,
+    0.0,
+    0.92848
+   ],
+   "explode_dist": 0.45,
+   "faces": 108
+  },
+  {
+   "name": "BODY_Cantrail_Stud_Plate_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placas derechos de espárragos del larguero de techo (1 avellanado estructural de 6,5 mm)",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.37139,
+    0.0,
+    0.92848
+   ],
+   "explode_dist": 0.45,
+   "faces": 108
+  },
+  {
+   "name": "BODY_Cantrail_Trim_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soportes izquierdos de la moldura del cantrail (soldadura por puntos + adhesivo)",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.37139,
+    0.0,
+    0.92848
+   ],
+   "explode_dist": 0.4,
+   "faces": 132
+  },
+  {
+   "name": "BODY_Cantrail_Trim_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soportes derechos de la moldura del cantrail (soldadura por puntos + adhesivo)",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.37139,
+    0.0,
+    0.92848
+   ],
+   "explode_dist": 0.4,
+   "faces": 132
   },
   {
    "name": "BODY_Casting_Front_UnderBody",
@@ -680,6 +950,60 @@
    "faces": 523
   },
   {
+   "name": "BODY_Dash_FUB_Gutter_Connector_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Conector izquierdo de canaleta salpicadero–fundición (8 remaches de 4,8 mm + adhesivo)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.56569,
+    0.42426,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 364
+  },
+  {
+   "name": "BODY_Dash_FUB_Gutter_Connector_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Conector derecho de canaleta salpicadero–fundición (8 remaches de 4,8 mm + adhesivo)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.56569,
+    0.42426,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 364
+  },
+  {
+   "name": "BODY_Dash_Reinforcement",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Refuerzo del mamparo (Dash Reinforcement): 61 remaches HS + 4 flow-form S18",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.83205,
+    0.5547
+   ],
+   "explode_dist": 0.55,
+   "faces": 1178
+  },
+  {
    "name": "BODY_DoorRing_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -714,6 +1038,78 @@
    ],
    "explode_dist": 0.55,
    "faces": 280
+  },
+  {
+   "name": "BODY_FDU_Mount_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte izquierdo de la unidad motriz delantera (3 tornillos HHL M10×41 a 65 N·m)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.64018,
+    0.0,
+    -0.76822
+   ],
+   "explode_dist": 0.5,
+   "faces": 242
+  },
+  {
+   "name": "BODY_FDU_Mount_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte derecho de la unidad motriz delantera (3 tornillos HHL M10×41 a 65 N·m)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.64018,
+    0.0,
+    -0.76822
+   ],
+   "explode_dist": 0.5,
+   "faces": 242
+  },
+  {
+   "name": "BODY_Fender_Beam_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Viga superior izquierdo de la aleta (3 tornillos HF M8×28 a 28 N·m)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.82956,
+    0.20739,
+    0.51848
+   ],
+   "explode_dist": 0.45,
+   "faces": 242
+  },
+  {
+   "name": "BODY_Fender_Beam_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Viga superior derecho de la aleta (3 tornillos HF M8×28 a 28 N·m)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.82956,
+    0.20739,
+    0.51848
+   ],
+   "explode_dist": 0.45,
+   "faces": 242
   },
   {
    "name": "BODY_Firewall",
@@ -752,6 +1148,24 @@
    "faces": 176
   },
   {
+   "name": "BODY_Front_Body_Bridge_Reinforcement",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Refuerzo del puente delantero (Front Body Bridge): 18 remaches HS izq. / 20 der.",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.5,
+   "faces": 420
+  },
+  {
    "name": "BODY_Front_Bumper_Beam",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -768,6 +1182,96 @@
    ],
    "explode_dist": 0.9,
    "faces": 842
+  },
+  {
+   "name": "BODY_Front_Energy_Absorber_Bracket_Center",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte central del absorbedor delantero",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 242
+  },
+  {
+   "name": "BODY_Front_Energy_Absorber_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte izquierdo del absorbedor delantero (4 tuercas 13 mm a 30 N·m)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.95783,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 220
+  },
+  {
+   "name": "BODY_Front_Energy_Absorber_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte derecho del absorbedor delantero (4 tuercas 13 mm a 30 N·m)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.95783,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 220
+  },
+  {
+   "name": "BODY_Front_Quarter_Window_Frame_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Marco izquierdo del vidrio fijo delantero de cuarto (8 remaches HS + 3 avellanados + 2 flow-form S18)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.87039,
+    0.34816,
+    0.34816
+   ],
+   "explode_dist": 0.4,
+   "faces": 332
+  },
+  {
+   "name": "BODY_Front_Quarter_Window_Frame_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Marco derecho del vidrio fijo delantero de cuarto (8 remaches HS + 3 avellanados + 2 flow-form S18)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.87039,
+    0.34816,
+    0.34816
+   ],
+   "explode_dist": 0.4,
+   "faces": 332
   },
   {
    "name": "BODY_Frunk_Tub",
@@ -788,6 +1292,186 @@
    "faces": 5
   },
   {
+   "name": "BODY_HV_Battery_Support_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte izquierdo de la batería HV (22 remaches HS + soldadura por puntos)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    -0.19612
+   ],
+   "explode_dist": 0.5,
+   "faces": 528
+  },
+  {
+   "name": "BODY_HV_Battery_Support_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte derecho de la batería HV (22 remaches HS + soldadura por puntos)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    -0.19612
+   ],
+   "explode_dist": 0.5,
+   "faces": 528
+  },
+  {
+   "name": "BODY_Header_Front_Gusset_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Cartela izquierdo de la cabecera delantera",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "explode_dist": 0.35,
+   "faces": 128
+  },
+  {
+   "name": "BODY_Header_Front_Gusset_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Cartela derecho de la cabecera delantera",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.70711,
+    0.0,
+    0.70711
+   ],
+   "explode_dist": 0.35,
+   "faces": 128
+  },
+  {
+   "name": "BODY_Header_Front_Lower",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Cabecera delantera inferior (soldadura por puntos y adhesivo)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "BODY_Header_Front_Upper",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Cabecera delantera superior (4 avellanados largos + 12 flow-form S18)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.45,
+   "faces": 524
+  },
+  {
+   "name": "BODY_Header_Rear_Lower",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Cabecera trasera inferior (REAR WALL HEADER INNER; 6 remaches HS o 20 flow-form S18)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.45,
+   "faces": 444
+  },
+  {
+   "name": "BODY_Header_Rear_Upper",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Cabecera trasera superior (32 flow-form S18)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.5,
+   "faces": 684
+  },
+  {
+   "name": "BODY_IP_Beam_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte izquierdo de la viga del salpicadero (6 remaches HS o soldadura de tapón)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.35,
+   "faces": 284
+  },
+  {
+   "name": "BODY_IP_Beam_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte derecho de la viga del salpicadero (6 remaches HS o soldadura de tapón)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.35,
+   "faces": 284
+  },
+  {
    "name": "BODY_IP_CrossCar_Beam",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -804,6 +1488,114 @@
    ],
    "explode_dist": 0.55,
    "faces": 358
+  },
+  {
+   "name": "BODY_IP_Display_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte izquierdo de la pantalla central",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.0,
+    -0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.45,
+   "faces": 226
+  },
+  {
+   "name": "BODY_IP_Display_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte derecho de la pantalla central",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.45,
+   "faces": 226
+  },
+  {
+   "name": "BODY_IP_Downleg_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Pata izquierdo del salpicadero (Downleg Bracket)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.0,
+    -0.28735,
+    -0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 220
+  },
+  {
+   "name": "BODY_IP_Downleg_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Pata derecho del salpicadero (Downleg Bracket)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    -0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 220
+  },
+  {
+   "name": "BODY_Mast_Backing_Plates_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placas de refuerzo izquierdos del «mast» (superior, superior-media, inferior-media e inferior)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 176
+  },
+  {
+   "name": "BODY_Mast_Backing_Plates_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placas de refuerzo derechos del «mast» (superior, superior-media, inferior-media e inferior)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.70711,
+    0.0,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 176
   },
   {
    "name": "BODY_Mast_L",
@@ -860,6 +1652,78 @@
    "faces": 193
   },
   {
+   "name": "BODY_Mudflap_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Pernos profundos de las faldillas (delanteras 2 × 1,8 N·m; traseras 4 × 2,2 N·m)",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 792
+  },
+  {
+   "name": "BODY_NVH_Pads",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Almohadillas NVH (mamparo, cowl y pared trasera)",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.83205,
+    0.5547
+   ],
+   "explode_dist": 0.35,
+   "faces": 132
+  },
+  {
+   "name": "BODY_Ramp_Bracket_CPillar_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte de rampa izquierdo del pilar C",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    -0.28735,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 8
+  },
+  {
+   "name": "BODY_Ramp_Bracket_CPillar_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte de rampa derecho del pilar C",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    -0.28735,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 8
+  },
+  {
    "name": "BODY_RearWall_Crossmember",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -876,6 +1740,60 @@
    ],
    "explode_dist": 0.55,
    "faces": 185
+  },
+  {
+   "name": "BODY_RearWall_Lower_Glove",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Funda del travesaño inferior de la pared trasera (24 remaches HS)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.55,
+   "faces": 524
+  },
+  {
+   "name": "BODY_RearWall_Upper_Glove",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Funda del travesaño superior de la pared trasera (11 remaches HS + 3 FF S18 + 2 FF S38)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.55,
+   "faces": 484
+  },
+  {
+   "name": "BODY_Rear_Energy_Absorber_Center_Bracket",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte central del absorbedor trasero (2 pernos 18 mm a 90 N·m por lado)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 242
   },
   {
    "name": "BODY_Rear_Energy_Absorbers",
@@ -896,6 +1814,204 @@
    "faces": 156
   },
   {
+   "name": "BODY_Rear_Fascia_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte izquierdo de la fascia trasera (3 remaches HS)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.44721,
+    -0.89443,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 164
+  },
+  {
+   "name": "BODY_Rear_Fascia_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte derecho de la fascia trasera (3 remaches HS)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.44721,
+    -0.89443,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 164
+  },
+  {
+   "name": "BODY_Rear_Rail_Backing_Plate_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placa trasera izquierdo del larguero trasero fundido (15 remaches de brida de 6,5 mm)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.48507,
+    -0.48507,
+    -0.72761
+   ],
+   "explode_dist": 0.45,
+   "faces": 364
+  },
+  {
+   "name": "BODY_Rear_Rail_Backing_Plate_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placa trasera derecho del larguero trasero fundido (15 remaches de brida de 6,5 mm)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.48507,
+    -0.48507,
+    -0.72761
+   ],
+   "explode_dist": 0.45,
+   "faces": 364
+  },
+  {
+   "name": "BODY_Rear_Seat_Stanchion_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Montante izquierdo del asiento trasero y riostra (7 remaches HS + 1 de 4,8 mm; riostra 6 + 2)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.35777,
+    -0.89443,
+    0.26833
+   ],
+   "explode_dist": 0.5,
+   "faces": 368
+  },
+  {
+   "name": "BODY_Rear_Seat_Stanchion_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Montante derecho del asiento trasero y riostra (7 remaches HS + 1 de 4,8 mm; riostra 6 + 2)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.35777,
+    -0.89443,
+    0.26833
+   ],
+   "explode_dist": 0.5,
+   "faces": 368
+  },
+  {
+   "name": "BODY_Rear_Wheel_Arch_Extension_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Extensión delantera del paso de rueda trasero izquierdo (6 remaches de 4,8 mm)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.88045,
+    0.17609,
+    0.44023
+   ],
+   "explode_dist": 0.45,
+   "faces": 284
+  },
+  {
+   "name": "BODY_Rear_Wheel_Arch_Extension_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Extensión delantera del paso de rueda trasero derecho (6 remaches de 4,8 mm)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.88045,
+    0.17609,
+    0.44023
+   ],
+   "explode_dist": 0.45,
+   "faces": 284
+  },
+  {
+   "name": "BODY_Rear_Wheel_Arch_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Paso de rueda trasero izquierdo (4 remaches HS + 5 de 4,8 mm + 2 avellanados)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.80845,
+    -0.16169,
+    0.56592
+   ],
+   "explode_dist": 0.5,
+   "faces": 458
+  },
+  {
+   "name": "BODY_Rear_Wheel_Arch_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Paso de rueda trasero derecho (4 remaches HS + 5 de 4,8 mm + 2 avellanados)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.80845,
+    -0.16169,
+    0.56592
+   ],
+   "explode_dist": 0.5,
+   "faces": 458
+  },
+  {
+   "name": "BODY_Rivets_Countersunk_4p8",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Remaches avellanados de 4,8 mm (1028719-00-A) de laterales y soportes",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1600
+  },
+  {
    "name": "BODY_Rivets_FlowForm",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -912,6 +2028,168 @@
    ],
    "explode_dist": 0.3,
    "faces": 2880
+  },
+  {
+   "name": "BODY_Rivets_FlowForm_S18",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Remaches flow-form S18 (1069329-00-A; cuerpo y taladro Ø8 mm) de pared trasera, cabeceras y marcos",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1280
+  },
+  {
+   "name": "BODY_Rivets_SPR_5mm",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Remaches autoperforantes SPR Ø5 (1026936-00-A y familia) en el anillo de puertas",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 960
+  },
+  {
+   "name": "BODY_Rivets_Structural_6p5",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Remaches estructurales de 6,5 mm (HS 1454538-00-A) de las piezas fundidas",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 2400
+  },
+  {
+   "name": "BODY_Rocker_Support_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soportes izquierdo del umbral (2 por lado; 12 remaches de 4,8 mm cada uno)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.89443,
+    0.0,
+    -0.44721
+   ],
+   "explode_dist": 0.45,
+   "faces": 408
+  },
+  {
+   "name": "BODY_Rocker_Support_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soportes derecho del umbral (2 por lado; 12 remaches de 4,8 mm cada uno)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.89443,
+    0.0,
+    -0.44721
+   ],
+   "explode_dist": 0.45,
+   "faces": 408
+  },
+  {
+   "name": "BODY_Sail_Datum_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte izquierdo de datum de la vela (2 clips de borde 1518812-00 + 2 bridas)",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.83045,
+    -0.24914,
+    0.49827
+   ],
+   "explode_dist": 0.4,
+   "faces": 164
+  },
+  {
+   "name": "BODY_Sail_Datum_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte derecho de datum de la vela (2 clips de borde 1518812-00 + 2 bridas)",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.83045,
+    -0.24914,
+    0.49827
+   ],
+   "explode_dist": 0.4,
+   "faces": 164
+  },
+  {
+   "name": "BODY_Sail_Panel_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte superior izquierdo del panel de la vela (3 remaches HS)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.83045,
+    -0.24914,
+    0.49827
+   ],
+   "explode_dist": 0.4,
+   "faces": 164
+  },
+  {
+   "name": "BODY_Sail_Panel_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte superior derecho del panel de la vela (3 remaches HS)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.83045,
+    -0.24914,
+    0.49827
+   ],
+   "explode_dist": 0.4,
+   "faces": 164
   },
   {
    "name": "BODY_Seat_Crossmember_Front",
@@ -1004,6 +2282,42 @@
    "faces": 88
   },
   {
+   "name": "BODY_Steering_Column_Bracket",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soporte de la columna de dirección en el salpicadero (4 tuercas a 18 N·m)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.42857,
+    -0.85714,
+    0.28571
+   ],
+   "explode_dist": 0.4,
+   "faces": 332
+  },
+  {
+   "name": "BODY_Super_Cowl",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Super Cowl: travesaño del cowl bajo el parabrisas",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.55,
+   "faces": 769
+  },
+  {
    "name": "BODY_Tailgate_Tower_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -1038,6 +2352,186 @@
    ],
    "explode_dist": 0.55,
    "faces": 125
+  },
+  {
+   "name": "BODY_Tailgate_Tower_Support_Plate_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placa izquierdo de soporte de la torre del portón (5 avellanados largos de 4,8 mm)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.66667,
+    -0.66667,
+    0.33333
+   ],
+   "explode_dist": 0.4,
+   "faces": 244
+  },
+  {
+   "name": "BODY_Tailgate_Tower_Support_Plate_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placa derecho de soporte de la torre del portón (5 avellanados largos de 4,8 mm)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.66667,
+    -0.66667,
+    0.33333
+   ],
+   "explode_dist": 0.4,
+   "faces": 244
+  },
+  {
+   "name": "BODY_TieDown_Nut_Plate_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placas izquierdos de tuercas de los anclajes de carga (1 avellanado estructural 6,5 mm)",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 168
+  },
+  {
+   "name": "BODY_TieDown_Nut_Plate_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placas derechos de tuercas de los anclajes de carga (1 avellanado estructural 6,5 mm)",
+   "group": "Body Structure",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 168
+  },
+  {
+   "name": "BODY_Tonneau_Attachment_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soportes izquierdos de fijación de la cubierta (inferior: 1 HS + 2 avellanados; superior: 3 HS + 1)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.53916,
+    -0.53916,
+    0.647
+   ],
+   "explode_dist": 0.4,
+   "faces": 168
+  },
+  {
+   "name": "BODY_Tonneau_Attachment_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Soportes derechos de fijación de la cubierta (inferior: 1 HS + 2 avellanados; superior: 3 HS + 1)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.53916,
+    -0.53916,
+    0.647
+   ],
+   "explode_dist": 0.4,
+   "faces": 168
+  },
+  {
+   "name": "BODY_WheelLiner_Clips_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Clips a presión del pasarruedas delantero izquierdo (14 clips)",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 840
+  },
+  {
+   "name": "BODY_WheelLiner_Clips_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Clips a presión del pasarruedas delantero derecho (14 clips)",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 840
+  },
+  {
+   "name": "BODY_WheelLiner_Clips_RL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Clips a presión del pasarruedas trasero izquierdo (19 clips)",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 1140
+  },
+  {
+   "name": "BODY_WheelLiner_Clips_RR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Clips a presión del pasarruedas trasero derecho (19 clips)",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 1140
   },
   {
    "name": "BODY_WheelLiner_FL",
@@ -1110,6 +2604,42 @@
    ],
    "explode_dist": 0.35,
    "faces": 4
+  },
+  {
+   "name": "BODY_XM_Bash_Plate_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placa de protección XM izquierdo del umbral (remachada 4,8 mm o soldada)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.70711,
+    0.0,
+    -0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 364
+  },
+  {
+   "name": "BODY_XM_Bash_Plate_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Placa de protección XM derecho del umbral (remachada 4,8 mm o soldada)",
+   "group": "Body Structure",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.70711,
+    0.0,
+    -0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 364
   },
   {
    "name": "BRAKE_FL",
@@ -1220,6 +2750,24 @@
    "faces": 816
   },
   {
+   "name": "BRK_FL_Caliper_Service_Parts",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Purgador con capuchón, botas y muelles de retorno de la pinza delantera izquierda",
+   "group": "Front Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 110
+  },
+  {
    "name": "BRK_FL_Pads",
    "type": "MESH",
    "parent": "BRAKE_FL",
@@ -1292,6 +2840,24 @@
    "faces": 816
   },
   {
+   "name": "BRK_FR_Caliper_Service_Parts",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Purgador con capuchón, botas y muelles de retorno de la pinza delantera derecha",
+   "group": "Front Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 110
+  },
+  {
    "name": "BRK_FR_Pads",
    "type": "MESH",
    "parent": "BRAKE_FR",
@@ -1346,6 +2912,24 @@
    "faces": 320
   },
   {
+   "name": "BRK_HCU_Bracket",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Soporte de la unidad hidráulica (HCU) del ABS/ESC",
+   "group": "Underbody",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.18814,
+    0.28222,
+    -0.94072
+   ],
+   "explode_dist": 0.4,
+   "faces": 286
+  },
+  {
    "name": "BRK_Hydraulic_Control_Unit",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -1362,6 +2946,24 @@
    ],
    "explode_dist": 0.55,
    "faces": 110
+  },
+  {
+   "name": "BRK_Pedal_Support_Bracket",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Soporte de los pedales (acelerador: 2 tuercas 13 mm a 10 N·m)",
+   "group": "Interior Controls",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.5547,
+    -0.83205
+   ],
+   "explode_dist": 0.4,
+   "faces": 176
   },
   {
    "name": "BRK_Pipes",
@@ -1398,6 +3000,42 @@
    ],
    "explode_dist": 0.22,
    "faces": 668
+  },
+  {
+   "name": "BRK_RL_Caliper_Service_Parts",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Purgador con capuchón, botas y muelles de retorno de la pinza trasera izquierda",
+   "group": "Rear Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 110
+  },
+  {
+   "name": "BRK_RL_EPB_Motor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera izquierda",
+   "group": "Rear Wheels And Brakes",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.45,
+   "faces": 114
   },
   {
    "name": "BRK_RL_Pads",
@@ -1470,6 +3108,42 @@
    ],
    "explode_dist": 0.22,
    "faces": 668
+  },
+  {
+   "name": "BRK_RR_Caliper_Service_Parts",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Purgador con capuchón, botas y muelles de retorno de la pinza trasera derecha",
+   "group": "Rear Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 110
+  },
+  {
+   "name": "BRK_RR_EPB_Motor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Motor del freno de estacionamiento eléctrico (EPB) de la pinza trasera derecha",
+   "group": "Rear Wheels And Brakes",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.45,
+   "faces": 114
   },
   {
    "name": "BRK_RR_Pads",
@@ -1634,6 +3308,24 @@
    "faces": 6
   },
   {
+   "name": "CAM_Windshield_Fan",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Ventilador de la cámara del parabrisas (3 tornillos T6 a 0,12 N·m, 3 calzos antirruido)",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 264
+  },
+  {
    "name": "CAM_Windshield_Module",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -1670,6 +3362,114 @@
    "faces": 0
   },
   {
+   "name": "CARGO_Bed_Cargo_Tub_Lid",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Tapa, junta y amortiguador del compartimento bajo la caja (97 L, límite 220 lb)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 74
+  },
+  {
+   "name": "CARGO_Bed_Closeout_Rear_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Cierre trasero izquierdo de la caja (Bed Closeout Rear)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.83205,
+    -0.5547,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 284
+  },
+  {
+   "name": "CARGO_Bed_Closeout_Rear_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Cierre trasero derecho de la caja (Bed Closeout Rear)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.83205,
+    -0.5547,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 284
+  },
+  {
+   "name": "CARGO_Bed_False_Wall",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Pared falsa de la caja (2 pernos 15 mm a 45 N·m + 4 tuercas 13 mm a 30 N·m)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 264
+  },
+  {
+   "name": "CARGO_Bed_Front_Wall",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Pared delantera de la caja (Front Wall Assembly Truck Bed)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.5,
+   "faces": 44
+  },
+  {
+   "name": "CARGO_Bed_Outlet_Door",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Tapa (puerta) del módulo de tomas de la caja (2 tornillos T25R a 1,5 N·m + 1 perno a 10 N·m)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 188
+  },
+  {
    "name": "CARGO_Bed_Outlets",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -1688,6 +3488,78 @@
    "faces": 176
   },
   {
+   "name": "CARGO_Bed_Side_Wall_Lower_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Pared lateral inferior izquierdo de la caja (1 perno 15 mm 46 N·m, 4 pernos 10 mm 11 N·m…)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 440
+  },
+  {
+   "name": "CARGO_Bed_Side_Wall_Lower_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Pared lateral inferior derecho de la caja (1 perno 15 mm 46 N·m, 4 pernos 10 mm 11 N·m…)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 440
+  },
+  {
+   "name": "CARGO_Bed_Side_Wall_Upper_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Pared lateral superior izquierdo de la caja (8 clips)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.45,
+   "faces": 524
+  },
+  {
+   "name": "CARGO_Bed_Side_Wall_Upper_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Pared lateral superior derecho de la caja (8 clips)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.89443,
+    0.0,
+    0.44721
+   ],
+   "explode_dist": 0.45,
+   "faces": 524
+  },
+  {
    "name": "CARGO_Bed_Tub",
    "type": "MESH",
    "parent": "CARGO_BED_TUB",
@@ -1704,6 +3576,24 @@
    ],
    "explode_dist": 0.05,
    "faces": 74
+  },
+  {
+   "name": "CARGO_Bed_XMember",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Travesaño en X y travesaño inferior de la cubeta (2 pernos 13 mm a 36 N·m)",
+   "group": "Cargo Bed",
+   "stage": 3,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 220
   },
   {
    "name": "CARGO_Gear_Locker",
@@ -1760,6 +3650,42 @@
    "faces": 44
   },
   {
+   "name": "CARGO_Tonneau_Cam_Block_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Bloques de leva izquierdos de la cubierta (Cam Block)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.83205,
+    0.0,
+    0.5547
+   ],
+   "explode_dist": 0.35,
+   "faces": 88
+  },
+  {
+   "name": "CARGO_Tonneau_Cam_Block_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Bloques de leva derechos de la cubierta (Cam Block)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.83205,
+    0.0,
+    0.5547
+   ],
+   "explode_dist": 0.35,
+   "faces": 88
+  },
+  {
    "name": "CARGO_Tonneau_Cassette",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -1814,6 +3740,150 @@
    "faces": 484
   },
   {
+   "name": "CARGO_Tonneau_Closeout_Foam",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Junta de cierre y almohadilla de espuma de referencia (datum) de la cubierta",
+   "group": "Cargo Bed",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
+   "name": "CARGO_Tonneau_Corner_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Soporte de esquina izquierdo de la cubierta (1 perno a 9 N·m)",
+   "group": "Cargo Bed",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.57735,
+    -0.57735,
+    0.57735
+   ],
+   "explode_dist": 0.35,
+   "faces": 110
+  },
+  {
+   "name": "CARGO_Tonneau_Corner_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Soporte de esquina derecho de la cubierta (1 perno a 9 N·m)",
+   "group": "Cargo Bed",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.57735,
+    -0.57735,
+    0.57735
+   ],
+   "explode_dist": 0.35,
+   "faces": 110
+  },
+  {
+   "name": "CARGO_Tonneau_Deflector_Clip_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Clips izquierdos del deflector de la cubierta",
+   "group": "Cargo Bed",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.44721,
+    0.0,
+    0.89443
+   ],
+   "explode_dist": 0.3,
+   "faces": 300
+  },
+  {
+   "name": "CARGO_Tonneau_Deflector_Clip_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Clips derechos del deflector de la cubierta",
+   "group": "Cargo Bed",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.44721,
+    0.0,
+    0.89443
+   ],
+   "explode_dist": 0.3,
+   "faces": 300
+  },
+  {
+   "name": "CARGO_Tonneau_Hinge_Pivot_Applique_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Aplique del pivote izquierdo de la cubierta",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.83205,
+    0.0,
+    0.5547
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "CARGO_Tonneau_Hinge_Pivot_Applique_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Aplique del pivote derecho de la cubierta",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.83205,
+    0.0,
+    0.5547
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "CARGO_Tonneau_Manual_Release",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Liberación manual de las lamas del tonneau",
+   "group": "Cargo Bed",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.3,
+   "faces": 64
+  },
+  {
    "name": "CARGO_Tonneau_Motor_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -1848,6 +3918,24 @@
    ],
    "explode_dist": 0.45,
    "faces": 242
+  },
+  {
+   "name": "CARGO_Tonneau_NVH_Barrier",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Barrera NVH del casete (10 pernos de 8 mm a 5 N·m)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 704
   },
   {
    "name": "CARGO_Tonneau_Rail_L",
@@ -2282,15 +4370,51 @@
    "faces": 36
   },
   {
+   "name": "CARGO_Tonneau_Water_Seal_Center_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Junta izquierdo de gestión de agua del tonneau (1 clip)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.5547,
+    0.0,
+    0.83205
+   ],
+   "explode_dist": 0.3,
+   "faces": 126
+  },
+  {
+   "name": "CARGO_Tonneau_Water_Seal_Center_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Junta derecho de gestión de agua del tonneau (1 clip)",
+   "group": "Cargo Bed",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.5547,
+    0.0,
+    0.83205
+   ],
+   "explode_dist": 0.3,
+   "faces": 126
+  },
+  {
    "name": "CHS_Active_Grille_Shutter",
    "type": "MESH",
    "parent": "THERMAL_FRONT",
    "system": "UNDERBODY",
-   "label": "Persianas activas de la rejilla (7 lamas)",
+   "label": "Persianas activas de la rejilla (número de lamas no publicado; 12 pestañas de bloqueo + 2 clips)",
    "group": "Refrigeración",
    "stage": 6,
    "fidelity": "R",
-   "note": "Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida",
+   "note": null,
    "explode_dir_blender": [
     0.0,
     0.98058,
@@ -2426,6 +4550,132 @@
    "faces": 44
   },
   {
+   "name": "CHS_Air_Compressor_Carrier",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Soporte del compresor de aire (3 tuercas 13 mm a 12 N·m) y conducto de escape",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    -0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 192
+  },
+  {
+   "name": "CHS_Air_Compressor_Exhaust",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Escape y silenciador del compresor de aire (collar a presión)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    -0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 98
+  },
+  {
+   "name": "CHS_Air_Fill_Port",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Puerto de llenado de aire con tapón",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    -0.95783
+   ],
+   "explode_dist": 0.3,
+   "faces": 28
+  },
+  {
+   "name": "CHS_Air_Inlet_Valve_Block",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Bloque de válvula de admisión de aire (racor VOSS a 4 N·m)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.4575,
+    -0.76249,
+    -0.4575
+   ],
+   "explode_dist": 0.35,
+   "faces": 58
+  },
+  {
+   "name": "CHS_Air_Line_Bundle_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Haz de líneas de aire izquierdo (racores VOSS codificados por color)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 290
+  },
+  {
+   "name": "CHS_Air_Line_Bundle_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Haz de líneas de aire derecho (racores VOSS codificados por color)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 290
+  },
+  {
+   "name": "CHS_Air_Line_Bundle_Rear",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Haz de líneas de aire trasero (racores VOSS codificados por color)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 170
+  },
+  {
    "name": "CHS_Cooling_Fan_Module",
    "type": "MESH",
    "parent": "THERMAL_FRONT",
@@ -2480,6 +4730,24 @@
    "faces": 512
   },
   {
+   "name": "CHS_SCUBA_Valve_Block",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Bloque de válvulas SCUBA y puerto de llenado del pack presurizado (racores VOSS 12 mm a 8 N·m)",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.70711,
+    -0.56569,
+    -0.42426
+   ],
+   "explode_dist": 0.4,
+   "faces": 190
+  },
+  {
    "name": "CHS_Skid_Plate_Front",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -2516,6 +4784,42 @@
    "faces": 1176
   },
   {
+   "name": "CHS_Subframe_F_Bolts",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Pernos del subchasis delantero (8 principales; 24 mm 215–355 N·m)",
+   "group": "Front Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 528
+  },
+  {
+   "name": "CHS_Subframe_F_Ground_Strap",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Cinta de masa del subchasis delantero (1 perno 10 mm a 10 N·m)",
+   "group": "Front Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.5145,
+    -0.85749
+   ],
+   "explode_dist": 0.3,
+   "faces": 198
+  },
+  {
    "name": "CHS_Subframe_R",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -2534,6 +4838,60 @@
    "faces": 1176
   },
   {
+   "name": "CHS_Subframe_R_Bolts",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Pernos del subchasis trasero (8 principales; 24 mm 215–355 N·m)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 528
+  },
+  {
+   "name": "CHS_Subframe_R_Ground_Strap",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Cinta de masa del subchasis trasero (1 perno 10 mm a 10 N·m)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.5145,
+    -0.85749
+   ],
+   "explode_dist": 0.3,
+   "faces": 198
+  },
+  {
+   "name": "CHS_Subframe_R_Locating_Pins",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Clavijas de posicionado del subchasis trasero (3 uds.)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 36
+  },
+  {
    "name": "CHS_Tow_Hitch_Receiver",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -2550,6 +4908,24 @@
    ],
    "explode_dist": 0.5,
    "faces": 12
+  },
+  {
+   "name": "CHS_VOSS_Fittings",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Racores VOSS del sistema de aire (≥ 16 uds., 2–8 N·m)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 368
   },
   {
    "name": "CONSOLE_ASSEMBLY",
@@ -2574,10 +4950,10 @@
    "type": "EMPTY",
    "parent": "IP_ASSEMBLY",
    "system": "INTERIOR_CONTROLS",
-   "label": "Pantalla táctil central de 18,5\"",
+   "label": "Pantalla táctil central de 18,5\" (tamaño según fuentes secundarias)",
    "group": "Pantallas",
    "stage": 2,
-   "fidelity": "V",
+   "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
     0.0,
@@ -2768,6 +5144,24 @@
    "faces": 0
   },
   {
+   "name": "DU_F_Breather_Ground_Plugs",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Respiradero, trenza de masa, tapones de llenado y vaciado (Allen 8 mm a 15 N·m) y retén de salida de la unidad delantera",
+   "group": "Drive Units",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.51215,
+    0.38411,
+    0.76822
+   ],
+   "explode_dist": 0.45,
+   "faces": 302
+  },
+  {
    "name": "DU_F_Gearbox",
    "type": "MESH",
    "parent": "DRIVE_UNIT_FRONT",
@@ -2912,6 +5306,24 @@
    "faces": 580
   },
   {
+   "name": "DU_Halfshaft_FL_Joints_Boots",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Juntas homocinéticas y fuelles del semieje delantera izquierda (perno central 24 mm a 300 N·m, siempre nuevo)",
+   "group": "Drive Units",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 488
+  },
+  {
    "name": "DU_Halfshaft_FR",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -2928,6 +5340,24 @@
    ],
    "explode_dist": 0.55,
    "faces": 580
+  },
+  {
+   "name": "DU_Halfshaft_FR_Joints_Boots",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Juntas homocinéticas y fuelles del semieje delantera derecha (perno central 24 mm a 300 N·m, siempre nuevo)",
+   "group": "Drive Units",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 488
   },
   {
    "name": "DU_Halfshaft_RL",
@@ -2948,6 +5378,24 @@
    "faces": 580
   },
   {
+   "name": "DU_Halfshaft_RL_Joints_Boots",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Juntas homocinéticas y fuelles del semieje trasera izquierda (perno central 24 mm a 300 N·m, siempre nuevo)",
+   "group": "Drive Units",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 488
+  },
+  {
    "name": "DU_Halfshaft_RR",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -2964,6 +5412,42 @@
    ],
    "explode_dist": 0.55,
    "faces": 580
+  },
+  {
+   "name": "DU_Halfshaft_RR_Joints_Boots",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Juntas homocinéticas y fuelles del semieje trasera derecha (perno central 24 mm a 300 N·m, siempre nuevo)",
+   "group": "Drive Units",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.5,
+   "faces": 488
+  },
+  {
+   "name": "DU_R_Breather_Plugs_Seals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Respiradero, tapones de llenado y vaciado y retenes de salida de la unidad trasera",
+   "group": "Drive Units",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.5547,
+    0.83205
+   ],
+   "explode_dist": 0.45,
+   "faces": 326
   },
   {
    "name": "DU_R_Gearbox",
@@ -3000,6 +5484,24 @@
    ],
    "explode_dist": 0.36,
    "faces": 460
+  },
+  {
+   "name": "DU_R_Inverter_Mount_RH",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Soporte del inversor derecho y del motor trasero derecho (3 × EP14 35 N·m + 55°; 4 × E14 35 N·m + 55°)",
+   "group": "Drive Units",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.61546,
+    -0.49237,
+    -0.61546
+   ],
+   "explode_dist": 0.45,
+   "faces": 484
   },
   {
    "name": "DU_R_Inverter_R",
@@ -3074,6 +5576,42 @@
    "faces": 398
   },
   {
+   "name": "DU_R_NVH_Cover_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Cubierta acústica (NVH) del motor trasero izquierdo (5 clips)",
+   "group": "Drive Units",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.27617,
+    -0.27617,
+    0.92057
+   ],
+   "explode_dist": 0.45,
+   "faces": 344
+  },
+  {
+   "name": "DU_R_NVH_Cover_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Cubierta acústica (NVH) del motor trasero derecho (5 clips)",
+   "group": "Drive Units",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.27617,
+    -0.27617,
+    0.92057
+   ],
+   "explode_dist": 0.45,
+   "faces": 344
+  },
+  {
    "name": "DU_R_OilPump_Filter",
    "type": "MESH",
    "parent": "DRIVE_UNIT_REAR",
@@ -3128,6 +5666,186 @@
    "faces": 424
   },
   {
+   "name": "ELE_Antennas",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Antenas: GPS (en el glare shield, 1 tornillo T10 a 0,8 N·m), AM/FM/HD, Wi-Fi y radio por satélite",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Nombres y existencia en el manual de servicio; cantidad y posición exactas no publicadas",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 248
+  },
+  {
+   "name": "ELE_BLE_EndPoints",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Puntos finales Bluetooth LE de la llave del teléfono (fascia, interior, trasera y pasos de rueda; T20 a 1,5 N·m)",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Unos 8 puntos según el manual de servicio; las posiciones exactas no están publicadas",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 640
+  },
+  {
+   "name": "ELE_FM_HD_Tuner",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Sintonizador FM/HD y amplificador de antena FM",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "A",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
+   "name": "ELE_Powershare_48V_Outlets",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Tomas de 48 V de 400 W (frunk y techo; fuente secundaria)",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Fuente secundaria; el manual de servicio no las describe",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
+   "name": "EXT_Applique_BPillar_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aplique del pilar B izquierda (1 perno 10 mm a 6 N·m, 2 conectores, 3 clips)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 110
+  },
+  {
+   "name": "EXT_Applique_BPillar_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aplique del pilar B derecha (1 perno 10 mm a 6 N·m, 2 conectores, 3 clips)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 110
+  },
+  {
+   "name": "EXT_Applique_CPillar_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aplique del pilar C izquierda",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.94072,
+    -0.28222,
+    0.18814
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Applique_CPillar_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aplique del pilar C derecha",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.94072,
+    -0.28222,
+    0.18814
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Applique_Sail_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aplique de la vela izquierda (17 clips + 1 datum + 1 clip de arnés + 1 conector)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.92057,
+    -0.27617,
+    0.27617
+   ],
+   "explode_dist": 0.5,
+   "faces": 764
+  },
+  {
+   "name": "EXT_Applique_Sail_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aplique de la vela derecha (17 clips + 1 datum + 1 clip de arnés + 1 conector)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.92057,
+    -0.27617,
+    0.27617
+   ],
+   "explode_dist": 0.5,
+   "faces": 764
+  },
+  {
    "name": "EXT_BedSide_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -3162,6 +5880,60 @@
    ],
    "explode_dist": 0.85,
    "faces": 15
+  },
+  {
+   "name": "EXT_Bed_Side_Corner_Brackets_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Soportes izquierdos del aplique de la esquina de la caja y del escalón del piloto",
+   "group": "Exterior Panels",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.80178,
+    -0.53452,
+    0.26726
+   ],
+   "explode_dist": 0.4,
+   "faces": 160
+  },
+  {
+   "name": "EXT_Bed_Side_Corner_Brackets_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Soportes derechos del aplique de la esquina de la caja y del escalón del piloto",
+   "group": "Exterior Panels",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.80178,
+    -0.53452,
+    0.26726
+   ],
+   "explode_dist": 0.4,
+   "faces": 160
+  },
+  {
+   "name": "EXT_Camera_Cover_Lower_Fascia",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Cubierta de la cámara de la fascia inferior (2 tornillos PH1 a 2 N·m)",
+   "group": "Exterior Panels",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 188
   },
   {
    "name": "EXT_ChargePort_Door",
@@ -3236,11 +6008,47 @@
    "faces": 1
   },
   {
+   "name": "EXT_Dash_Absorber_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Absorbedor izquierdo del salpicadero (Dash Absorber)",
+   "group": "Exterior Panels",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.35857,
+    0.59761,
+    0.71714
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Dash_Absorber_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Absorbedor derecho del salpicadero (Dash Absorber)",
+   "group": "Exterior Panels",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.35857,
+    0.59761,
+    0.71714
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
    "name": "EXT_Door_FL_CheckStrap",
    "type": "MESH",
    "parent": "DOOR_FL",
    "system": "DOORS_AND_HATCHES",
-   "label": "Tirante de retención de la puerta (3 fijaciones; 35 N·m)",
+   "label": "Tirante de retención de la puerta (perno T40 a 23 N·m)",
    "group": "Puertas",
    "stage": 6,
    "fidelity": "R",
@@ -3294,7 +6102,7 @@
    "type": "MESH",
    "parent": "DOOR_FL",
    "system": "DOORS_AND_HATCHES",
-   "label": "Bisagras superior e inferior con placas de espárragos (25/38 N·m)",
+   "label": "Bisagras superior e inferior con placas de espárragos (2 fijaciones por bisagra a 38 N·m)",
    "group": "Puertas",
    "stage": 6,
    "fidelity": "R",
@@ -3402,7 +6210,7 @@
    "type": "MESH",
    "parent": "DOOR_FR",
    "system": "DOORS_AND_HATCHES",
-   "label": "Tirante de retención de la puerta (3 fijaciones; 35 N·m)",
+   "label": "Tirante de retención de la puerta (perno T40 a 23 N·m)",
    "group": "Puertas",
    "stage": 6,
    "fidelity": "R",
@@ -3456,7 +6264,7 @@
    "type": "MESH",
    "parent": "DOOR_FR",
    "system": "DOORS_AND_HATCHES",
-   "label": "Bisagras superior e inferior con placas de espárragos (25/38 N·m)",
+   "label": "Bisagras superior e inferior con placas de espárragos (2 fijaciones por bisagra a 38 N·m)",
    "group": "Puertas",
    "stage": 6,
    "fidelity": "R",
@@ -3560,6 +6368,150 @@
    "faces": 64
   },
   {
+   "name": "EXT_Door_F_Closeout_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Panel de cierre (closeout) de la puerta delantera izquierda",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Door_F_Closeout_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Panel de cierre (closeout) de la puerta delantera derecha",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Door_F_Presenter_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Presentador de la puerta delantera izquierda (2 pernos T30 a 13 N·m, 1 conector)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 176
+  },
+  {
+   "name": "EXT_Door_F_Presenter_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Presentador de la puerta delantera derecha (2 pernos T30 a 13 N·m, 1 conector)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 176
+  },
+  {
+   "name": "EXT_Door_F_Regulator_Motor_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Motor Q de 48 V del elevalunas de la puerta delantera izquierda (3 pernos T25 a 4 N·m)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    -0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 84
+  },
+  {
+   "name": "EXT_Door_F_Regulator_Motor_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Motor Q de 48 V del elevalunas de la puerta delantera derecha (3 pernos T25 a 4 N·m)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    -0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 84
+  },
+  {
+   "name": "EXT_Door_Hinge_Stud_Plates_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Placas de espárragos de las bisagras de puerta, lado izquierdo (4 por lado)",
+   "group": "Doors And Hatches",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 256
+  },
+  {
+   "name": "EXT_Door_Hinge_Stud_Plates_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Placas de espárragos de las bisagras de puerta, lado derecho (4 por lado)",
+   "group": "Doors And Hatches",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 256
+  },
+  {
    "name": "EXT_Door_Primary_Seals_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -3600,7 +6552,7 @@
    "type": "MESH",
    "parent": "DOOR_RL",
    "system": "DOORS_AND_HATCHES",
-   "label": "Tirante de retención de la puerta (3 fijaciones; 35 N·m)",
+   "label": "Tirante de retención de la puerta (perno T40 a 23 N·m)",
    "group": "Puertas",
    "stage": 6,
    "fidelity": "R",
@@ -3654,7 +6606,7 @@
    "type": "MESH",
    "parent": "DOOR_RL",
    "system": "DOORS_AND_HATCHES",
-   "label": "Bisagras superior e inferior con placas de espárragos (25/38 N·m)",
+   "label": "Bisagras superior e inferior con placas de espárragos (2 fijaciones por bisagra a 38 N·m)",
    "group": "Puertas",
    "stage": 6,
    "fidelity": "R",
@@ -3762,7 +6714,7 @@
    "type": "MESH",
    "parent": "DOOR_RR",
    "system": "DOORS_AND_HATCHES",
-   "label": "Tirante de retención de la puerta (3 fijaciones; 35 N·m)",
+   "label": "Tirante de retención de la puerta (perno T40 a 23 N·m)",
    "group": "Puertas",
    "stage": 6,
    "fidelity": "R",
@@ -3816,7 +6768,7 @@
    "type": "MESH",
    "parent": "DOOR_RR",
    "system": "DOORS_AND_HATCHES",
-   "label": "Bisagras superior e inferior con placas de espárragos (25/38 N·m)",
+   "label": "Bisagras superior e inferior con placas de espárragos (2 fijaciones por bisagra a 38 N·m)",
    "group": "Puertas",
    "stage": 6,
    "fidelity": "R",
@@ -3920,6 +6872,150 @@
    "faces": 64
   },
   {
+   "name": "EXT_Door_R_Closeout_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Panel de cierre (closeout) de la puerta trasera izquierda",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Door_R_Closeout_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Panel de cierre (closeout) de la puerta trasera derecha",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Door_R_Presenter_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Presentador de la puerta trasera izquierda (2 pernos T30 a 13 N·m, 1 conector)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 176
+  },
+  {
+   "name": "EXT_Door_R_Presenter_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Presentador de la puerta trasera derecha (2 pernos T30 a 13 N·m, 1 conector)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 176
+  },
+  {
+   "name": "EXT_Door_R_Regulator_Motor_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Motor Q de 48 V del elevalunas de la puerta trasera izquierda (3 pernos T25 a 4 N·m)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    -0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 84
+  },
+  {
+   "name": "EXT_Door_R_Regulator_Motor_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Motor Q de 48 V del elevalunas de la puerta trasera derecha (3 pernos T25 a 4 N·m)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    -0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 84
+  },
+  {
+   "name": "EXT_Fender_Baffle_Front_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Deflector de la aleta delantera izquierdo",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.28735,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Fender_Baffle_Front_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Deflector de la aleta delantera derecho",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.28735,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
    "name": "EXT_Fender_FL",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -3954,6 +7050,42 @@
    ],
    "explode_dist": 0.7,
    "faces": 3
+  },
+  {
+   "name": "EXT_Flare_Carrier_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Soportes izquierdos de las aletas de paso de rueda (Fore/Aft delanteros y traseros; 2 y 6 pernos a 7 N·m)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 440
+  },
+  {
+   "name": "EXT_Flare_Carrier_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Soportes derechos de las aletas de paso de rueda (Fore/Aft delanteros y traseros; 2 y 6 pernos a 7 N·m)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 440
   },
   {
    "name": "EXT_Flare_FL",
@@ -4046,6 +7178,24 @@
    "faces": 170
   },
   {
+   "name": "EXT_Front_Center_Applique",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Aplique central delantero (se retira para acceder al faro)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.5,
+   "faces": 44
+  },
+  {
    "name": "EXT_Front_End_Carrier",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4062,6 +7212,42 @@
    ],
    "explode_dist": 0.6,
    "faces": 824
+  },
+  {
+   "name": "EXT_Front_Fascia_Fairing_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Carenado izquierdo de la fascia delantera",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.44721,
+    0.89443,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 110
+  },
+  {
+   "name": "EXT_Front_Fascia_Fairing_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Carenado derecho de la fascia delantera",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.44721,
+    0.89443,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 110
   },
   {
    "name": "EXT_Front_Fascia_Upper",
@@ -4098,6 +7284,78 @@
    ],
    "explode_dist": 0.45,
    "faces": 114
+  },
+  {
+   "name": "EXT_Frunk_Access_Panel",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Panel de acceso del frunk (cubre la cubeta y el conjunto del frunk)",
+   "group": "Exterior Panels",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 476
+  },
+  {
+   "name": "EXT_Frunk_Aero_Seal_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta aerodinámica izquierdo del Powergate",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.86387,
+    0.25916,
+    0.43193
+   ],
+   "explode_dist": 0.35,
+   "faces": 122
+  },
+  {
+   "name": "EXT_Frunk_Aero_Seal_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta aerodinámica derecho del Powergate",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.86387,
+    0.25916,
+    0.43193
+   ],
+   "explode_dist": 0.35,
+   "faces": 122
+  },
+  {
+   "name": "EXT_Frunk_Bolt_Caps_Bumpstops",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Tapas de los 6 pernos del frunk (2 visibles) y topes de goma del capó",
+   "group": "Exterior Panels",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 188
   },
   {
    "name": "EXT_Frunk_Hinges",
@@ -4154,6 +7412,24 @@
    "faces": 7
   },
   {
+   "name": "EXT_Frunk_Manual_Release",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Liberación manual del Powergate (cable y tirador en el frunk)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.35,
+   "faces": 88
+  },
+  {
    "name": "EXT_Frunk_Seal",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4170,6 +7446,24 @@
    ],
    "explode_dist": 0.6,
    "faces": 22
+  },
+  {
+   "name": "EXT_Frunk_Striker",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Percutor del Powergate (2 pernos T40 a 15 N·m)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 218
   },
   {
    "name": "EXT_Frunk_Struts",
@@ -4190,6 +7484,132 @@
    "faces": 296
   },
   {
+   "name": "EXT_Frunk_Switches",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Interruptor de seguridad e interruptor del frunk",
+   "group": "Exterior Panels",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
+   "name": "EXT_Frunk_Underhood_Apron_Rear",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Faldón trasero bajo el capó (9 clips)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 584
+  },
+  {
+   "name": "EXT_Glass_Run_Seal_APillar_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Guía de cristal del pilar A izquierdo (Glass Run Seal Front Door)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.89443,
+    0.26833,
+    0.35777
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Glass_Run_Seal_APillar_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Guía de cristal del pilar A derecho (Glass Run Seal Front Door)",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.89443,
+    0.26833,
+    0.35777
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Grille_Foam_Seals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Juntas de espuma superior, inferior y laterales de la rejilla delantera",
+   "group": "Exterior Panels",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 176
+  },
+  {
+   "name": "EXT_Header_Seal_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cabecera izquierda",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.78087,
+    0.0,
+    0.6247
+   ],
+   "explode_dist": 0.3,
+   "faces": 162
+  },
+  {
+   "name": "EXT_Header_Seal_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cabecera derecha",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.78087,
+    0.0,
+    0.6247
+   ],
+   "explode_dist": 0.3,
+   "faces": 162
+  },
+  {
    "name": "EXT_License_Plate_Rear",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4206,6 +7626,42 @@
    ],
    "explode_dist": 0.5,
    "faces": 6
+  },
+  {
+   "name": "EXT_Lightbar_Beauty_Cover_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Embellecedor izquierdo de la barra de luz delantera",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.35777,
+    0.89443,
+    0.26833
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Lightbar_Beauty_Cover_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Embellecedor derecho de la barra de luz delantera",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.35777,
+    0.89443,
+    0.26833
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
   },
   {
    "name": "EXT_Mirror_L_Actuator",
@@ -4316,6 +7772,42 @@
    "faces": 18
   },
   {
+   "name": "EXT_Mirror_SkullCap_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Carcasa superior (skull cap) del retrovisor izquierda",
+   "group": "Glass And Mirrors",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.83045,
+    0.24914,
+    0.49827
+   ],
+   "explode_dist": 0.4,
+   "faces": 260
+  },
+  {
+   "name": "EXT_Mirror_SkullCap_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Carcasa superior (skull cap) del retrovisor derecha",
+   "group": "Glass And Mirrors",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.83045,
+    0.24914,
+    0.49827
+   ],
+   "explode_dist": 0.4,
+   "faces": 260
+  },
+  {
    "name": "EXT_MudFlap_FL",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4406,6 +7898,42 @@
    "faces": 368
   },
   {
+   "name": "EXT_Powergate_Fascia",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Fascia del Powergate (cubierta del borde delantero del capó, se retira antes de la barra de luz)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.5145,
+    0.85749
+   ],
+   "explode_dist": 0.55,
+   "faces": 404
+  },
+  {
+   "name": "EXT_Rear_Absorber_Fascia_Bracket_Center",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Soporte central del escalón del absorbedor trasero",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 176
+  },
+  {
    "name": "EXT_Rear_Bumper",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4442,6 +7970,42 @@
    "faces": 1148
   },
   {
+   "name": "EXT_Rear_Fascia_Step_Bracket_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Soporte izquierdo del escalón de la fascia trasera (2 pernos 13 mm a 16 N·m del enganche)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.19612,
+    -0.98058,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 176
+  },
+  {
+   "name": "EXT_Rear_Fascia_Step_Bracket_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Soporte derecho del escalón de la fascia trasera (2 pernos 13 mm a 16 N·m del enganche)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.19612,
+    -0.98058,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 176
+  },
+  {
    "name": "EXT_Rocker_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4476,6 +8040,78 @@
    ],
    "explode_dist": 0.5,
    "faces": 6
+  },
+  {
+   "name": "EXT_Rocker_Rear_Fairing_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Carenado trasero del faldón izquierdo",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.92057,
+    -0.27617,
+    -0.27617
+   ],
+   "explode_dist": 0.4,
+   "faces": 12
+  },
+  {
+   "name": "EXT_Rocker_Rear_Fairing_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Carenado trasero del faldón derecho",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.92057,
+    -0.27617,
+    -0.27617
+   ],
+   "explode_dist": 0.4,
+   "faces": 12
+  },
+  {
+   "name": "EXT_Rocker_Step_Reinforcement_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Refuerzos izquierdos del escalón del faldón (delantero y trasero; 3 pernos 10 mm a 15 N·m cada uno)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.85749,
+    0.0,
+    -0.5145
+   ],
+   "explode_dist": 0.4,
+   "faces": 484
+  },
+  {
+   "name": "EXT_Rocker_Step_Reinforcement_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Refuerzos derechos del escalón del faldón (delantero y trasero; 3 pernos 10 mm a 15 N·m cada uno)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.85749,
+    0.0,
+    -0.5145
+   ],
+   "explode_dist": 0.4,
+   "faces": 484
   },
   {
    "name": "EXT_RoofRail_L",
@@ -4550,6 +8186,42 @@
    "faces": 2
   },
   {
+   "name": "EXT_Sail_Baffle_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Deflector (baffle) de la vela izquierda",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.92057,
+    -0.27617,
+    0.27617
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "EXT_Sail_Baffle_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Deflector (baffle) de la vela derecha",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.92057,
+    -0.27617,
+    0.27617
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
    "name": "EXT_Tailgate",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4566,6 +8238,24 @@
    ],
    "explode_dist": 0.95,
    "faces": 8
+  },
+  {
+   "name": "EXT_Tailgate_Bumpstops",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Topes del portón",
+   "group": "Doors And Hatches",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 28
   },
   {
    "name": "EXT_Tailgate_Cinch_Latches",
@@ -4622,6 +8312,42 @@
    "faces": 384
   },
   {
+   "name": "EXT_Tailgate_Inner_Cover",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Cubierta interior del portón",
+   "group": "Doors And Hatches",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.45,
+   "faces": 1004
+  },
+  {
+   "name": "EXT_Tailgate_Manual_Release_Cap",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Tapa y cable de liberación manual del portón",
+   "group": "Doors And Hatches",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 118
+  },
+  {
    "name": "EXT_Tailgate_Seal",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4638,6 +8364,42 @@
    ],
    "explode_dist": 0.25,
    "faces": 10
+  },
+  {
+   "name": "EXT_Tailgate_Seal_Side_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta lateral izquierdo del portón",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.88045,
+    -0.44023,
+    0.17609
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Tailgate_Seal_Side_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta lateral derecho del portón",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.88045,
+    -0.44023,
+    0.17609
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
   },
   {
    "name": "EXT_Tailgate_Torsion_Rod",
@@ -4694,6 +8456,240 @@
    "faces": 6
   },
   {
+   "name": "EXT_Trailer_Hitch_Cover",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Tapa del enganche (cierres de cuarto de vuelta, 4 pestañas)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 72
+  },
+  {
+   "name": "EXT_Trim_Cantrail_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Moldura exterior del larguero de techo izquierda",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 162
+  },
+  {
+   "name": "EXT_Trim_Cantrail_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Moldura exterior del larguero de techo derecha",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.70711,
+    0.0,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 162
+  },
+  {
+   "name": "EXT_Underhood_Apron_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Faldón izquierdo bajo el capó (Underhood Apron)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.37139,
+    0.0,
+    0.92848
+   ],
+   "explode_dist": 0.4,
+   "faces": 284
+  },
+  {
+   "name": "EXT_Underhood_Apron_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Faldón derecho bajo el capó (Underhood Apron)",
+   "group": "Exterior Panels",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.37139,
+    0.0,
+    0.92848
+   ],
+   "explode_dist": 0.4,
+   "faces": 284
+  },
+  {
+   "name": "EXT_Waist_Seal_Inner_Front_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cintura interior de la puerta delantera izquierda",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Waist_Seal_Inner_Front_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cintura interior de la puerta delantera derecha",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Waist_Seal_Inner_Rear_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cintura interior de la puerta trasera izquierda",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Waist_Seal_Inner_Rear_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cintura interior de la puerta trasera derecha",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Waist_Seal_Outer_Front_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cintura exterior de la puerta delantera izquierda",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Waist_Seal_Outer_Front_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cintura exterior de la puerta delantera derecha",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Waist_Seal_Outer_Rear_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cintura exterior de la puerta trasera izquierda",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
+   "name": "EXT_Waist_Seal_Outer_Rear_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Junta de cintura exterior de la puerta trasera derecha",
+   "group": "Doors And Hatches",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 66
+  },
+  {
    "name": "EXT_Washer_Hose",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4712,6 +8708,24 @@
    "faces": 110
   },
   {
+   "name": "EXT_Washer_Pump_Hoses",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Bomba del lavaparabrisas y mangueras (Megabeam, limpiaparabrisas y boquilla de la cámara; 2 clips)",
+   "group": "Glass And Mirrors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.52981,
+    0.66227,
+    0.52981
+   ],
+   "explode_dist": 0.4,
+   "faces": 324
+  },
+  {
    "name": "EXT_Washer_Tank",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4728,6 +8742,24 @@
    ],
    "explode_dist": 0.5,
    "faces": 264
+  },
+  {
+   "name": "EXT_Windshield_Glare_Shield",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Visera antideslumbrante del parabrisas (2 clips) y tira separadora de goma",
+   "group": "Body Fasteners",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 208
   },
   {
    "name": "EXT_Wiper_Arm",
@@ -4752,7 +8784,7 @@
    "type": "MESH",
    "parent": "WIPER_ASSEMBLY",
    "system": "GLASS_AND_MIRRORS",
-   "label": "Escobilla de ~1,26 m con deflector y goma",
+   "label": "Escobilla con deflector y goma (longitud en conflicto: 62 in, ~50 in o ~1,22 m según la fuente)",
    "group": "Limpiaparabrisas",
    "stage": 6,
    "fidelity": "R",
@@ -4782,6 +8814,24 @@
    ],
    "explode_dist": 0.45,
    "faces": 312
+  },
+  {
+   "name": "EXT_Wiper_Motor_Controller",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Controlador del motor del limpiaparabrisas (48 V)",
+   "group": "Glass And Mirrors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.27617,
+    0.27617,
+    0.92057
+   ],
+   "explode_dist": 0.35,
+   "faces": 154
   },
   {
    "name": "GLS_Door_FL",
@@ -4892,6 +8942,42 @@
    "faces": 6
   },
   {
+   "name": "GLS_Quarter_Glass_Seal_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Junta del vidrio fijo delantero de cuarto izquierda",
+   "group": "Glass And Mirrors",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.94072,
+    0.28222,
+    0.18814
+   ],
+   "explode_dist": 0.35,
+   "faces": 98
+  },
+  {
+   "name": "GLS_Quarter_Glass_Seal_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Junta del vidrio fijo delantero de cuarto derecha",
+   "group": "Glass And Mirrors",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.94072,
+    0.28222,
+    0.18814
+   ],
+   "explode_dist": 0.35,
+   "faces": 98
+  },
+  {
    "name": "GLS_Rear_Window",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -4982,6 +9068,24 @@
    "faces": 10
   },
   {
+   "name": "HV_ACJB_Harnesses",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Arneses HV de la caja de CA (ACJB) a la PCS y al cabezal de carga rápida",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.4,
+   "faces": 332
+  },
+  {
    "name": "HV_AC_Junction_Box",
    "type": "MESH",
    "parent": "ANCILLARY_BAY",
@@ -5018,6 +9122,24 @@
    "faces": 108
   },
   {
+   "name": "HV_Ancillary_Fuses",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Fusibles Eaton EVK22-60-T (60 A / 1000 VDC) y Littelfuse 828-30 de la bahía auxiliar (2 × 8 mm a 6 N·m)",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.4,
+   "faces": 352
+  },
+  {
    "name": "HV_Cables",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5036,6 +9158,60 @@
    "faces": 1194
   },
   {
+   "name": "HV_Charge_Port_Busbar",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Barra colectora de la toma de carga NACS al cabezal HV (2 pernos 9 N·m; resistencia 0,050–0,195 mΩ)",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    -0.28735,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 166
+  },
+  {
+   "name": "HV_Contactors",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Contactores del pack en la caja de CA (ACJB; prueba de gripado de contactor)",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.4,
+   "faces": 136
+  },
+  {
+   "name": "HV_DPDT_Switch",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Interruptor DPDT 800 V / 400 V del pack (conmuta dos bloques en serie o paralelo)",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.4,
+   "faces": 68
+  },
+  {
    "name": "HV_Device_Cluster",
    "type": "MESH",
    "parent": "ANCILLARY_BAY",
@@ -5052,6 +9228,78 @@
    ],
    "explode_dist": 0.4,
    "faces": 44
+  },
+  {
+   "name": "HV_First_Responder_Loop",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Lazo de primera respuesta (desconexión MV; esperar 2 min tras cortar)",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.45,
+   "faces": 118
+  },
+  {
+   "name": "HV_Harness_FDU",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Arnés de alta tensión de la unidad motriz delantera (1 perno 10 mm a 10 N·m)",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.21822,
+    0.43644,
+    0.87287
+   ],
+   "explode_dist": 0.45,
+   "faces": 232
+  },
+  {
+   "name": "HV_Harness_RDU_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Arnés de alta tensión del motor trasero izquierdo (Tri Motor; 4 pernos 10 mm a 4 N·m)",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    -0.5747,
+    0.76626
+   ],
+   "explode_dist": 0.45,
+   "faces": 298
+  },
+  {
+   "name": "HV_Harness_RDU_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Arnés de alta tensión del motor trasero derecho (Tri Motor; 4 pernos 10 mm a 4 N·m)",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    -0.5747,
+    0.76626
+   ],
+   "explode_dist": 0.45,
+   "faces": 298
   },
   {
    "name": "HV_Last_Mile_Busbar",
@@ -5090,6 +9338,96 @@
    "faces": 576
   },
   {
+   "name": "HV_Pyro_Access_Cover",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Cubierta de acceso a los pirofusibles (4 tornillos E-Torx a 10 N·m)",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 332
+  },
+  {
+   "name": "INT_Air_Extractor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Extractor de aire de la pared trasera",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 176
+  },
+  {
+   "name": "INT_Airbag_Curtain_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Airbag de cortina izquierdo (techo y pilares)",
+   "group": "Seguridad",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.89443,
+    0.0,
+    -0.44721
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
+   "name": "INT_Airbag_Curtain_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Airbag de cortina derecho (techo y pilares)",
+   "group": "Seguridad",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.89443,
+    0.0,
+    -0.44721
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
+   "name": "INT_Airbag_Driver",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Airbag del conductor en el centro del volante (2 clips de resorte + 1 conector)",
+   "group": "Seguridad",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 164
+  },
+  {
    "name": "INT_Airbag_Modules",
    "type": "MESH",
    "parent": "IP_ASSEMBLY",
@@ -5106,6 +9444,60 @@
    ],
    "explode_dist": 0.35,
    "faces": 132
+  },
+  {
+   "name": "INT_Airbag_Seat_Side_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Airbag lateral montado en el respaldo del asiento delantero izquierdo",
+   "group": "Seguridad",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
+   "name": "INT_Airbag_Seat_Side_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Airbag lateral montado en el respaldo del asiento delantero derecho",
+   "group": "Seguridad",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
+   "name": "INT_Cabin_Outlets_120V",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Tomas de 120 V de la cabina (NEMA 5-20; 20 A compartidos)",
+   "group": "Interior Controls",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.5145,
+    0.85749
+   ],
+   "explode_dist": 0.3,
+   "faces": 176
   },
   {
    "name": "INT_Cabin_Radar",
@@ -5198,6 +9590,42 @@
    "faces": 6
   },
   {
+   "name": "INT_Carpet_Clips_RH",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "8 grapas y 4 datums de la alfombra derecha",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 680
+  },
+  {
+   "name": "INT_Center_Floor_Trim",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Molduras del suelo central, de la pared trasera inferior y lateral de los pedales",
+   "group": "Interior Trim",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 132
+  },
+  {
    "name": "INT_Coathook_Maplight_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5232,6 +9660,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 152
+  },
+  {
+   "name": "INT_Console_Airwave_Rear",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Conjunto «Airwave» trasero de la consola y su tapa",
+   "group": "Interior Controls",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.92848,
+    0.37139
+   ],
+   "explode_dist": 0.35,
+   "faces": 264
   },
   {
    "name": "INT_Console_Armrest",
@@ -5342,6 +9788,60 @@
    "faces": 44
   },
   {
+   "name": "INT_Console_Harness_Lamp",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Mazo de la consola y luz de cortesía de la consola",
+   "group": "Interior Controls",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 126
+  },
+  {
+   "name": "INT_Console_Rear_Panel_Clips",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Clips del panel trasero de la consola (10 + 3 pestañas)",
+   "group": "Interior Controls",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 600
+  },
+  {
+   "name": "INT_Console_Riser_Rails",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Base (riser) y raíles del suelo central de la consola (2 pernos traseros + 4 delanteros a 5 N·m)",
+   "group": "Interior Controls",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 528
+  },
+  {
    "name": "INT_Console_Side_Panel_L",
    "type": "MESH",
    "parent": "CONSOLE_ASSEMBLY",
@@ -5376,6 +9876,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 12
+  },
+  {
+   "name": "INT_Console_USB_Controller_Hub",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Controlador y concentrador USB de la consola (USB-C de 65 W)",
+   "group": "Interior Controls",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.5145,
+    0.85749
+   ],
+   "explode_dist": 0.35,
+   "faces": 176
   },
   {
    "name": "INT_Console_USB_Ports",
@@ -5432,6 +9950,60 @@
    "faces": 440
   },
   {
+   "name": "INT_Demist_Duct_Side_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Conducto de desempañado de la ventanilla lateral izquierdo",
+   "group": "Interior Dashboard",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.86387,
+    0.25916,
+    0.43193
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "INT_Demist_Duct_Side_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Conducto de desempañado de la ventanilla lateral derecho",
+   "group": "Interior Dashboard",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.86387,
+    0.25916,
+    0.43193
+   ],
+   "explode_dist": 0.35,
+   "faces": 44
+  },
+  {
+   "name": "INT_Demist_Ducts_Center",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Conductos de desempañado del parabrisas (conductor y acompañante)",
+   "group": "Interior Dashboard",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.35,
+   "faces": 88
+  },
+  {
    "name": "INT_Display_Center_Housing",
    "type": "MESH",
    "parent": "DISPLAY_CENTER",
@@ -5472,10 +10044,10 @@
    "type": "MESH",
    "parent": "DISPLAY_CENTER",
    "system": "INTERIOR_CONTROLS",
-   "label": "Panel de 18,5\" (409,6 x 230,4 mm)",
+   "label": "Panel de 18,5\" (409,6 x 230,4 mm; tamaño según fuentes secundarias)",
    "group": "Pantallas",
    "stage": 6,
-   "fidelity": "V",
+   "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
     0.0,
@@ -5508,10 +10080,10 @@
    "type": "MESH",
    "parent": "CONSOLE_ASSEMBLY",
    "system": "INTERIOR_CONTROLS",
-   "label": "Pantalla trasera de 9,4\"",
+   "label": "Pantalla trasera de 9,4\" (tamaño según fuentes secundarias)",
    "group": "Pantallas",
    "stage": 2,
-   "fidelity": "V",
+   "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
     0.0,
@@ -5520,6 +10092,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 6
+  },
+  {
+   "name": "INT_Display_Shroud",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Marco (Display Shroud) de la pantalla central",
+   "group": "Interior Controls",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 176
   },
   {
    "name": "INT_DoorArmrest_FL",
@@ -5810,6 +10400,78 @@
    "faces": 120
   },
   {
+   "name": "INT_DoorTrim_Clips_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "14 grapas del panel de la puerta delantera izquierda",
+   "group": "Interior Doors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 840
+  },
+  {
+   "name": "INT_DoorTrim_Clips_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "14 grapas del panel de la puerta delantera derecha",
+   "group": "Interior Doors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 840
+  },
+  {
+   "name": "INT_DoorTrim_Clips_RL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "14 grapas del panel de la puerta trasera izquierda",
+   "group": "Interior Doors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 840
+  },
+  {
+   "name": "INT_DoorTrim_Clips_RR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "14 grapas del panel de la puerta trasera derecha",
+   "group": "Interior Doors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 840
+  },
+  {
    "name": "INT_DoorTrim_FL",
    "type": "MESH",
    "parent": "DOOR_FL",
@@ -6026,6 +10688,186 @@
    "faces": 88
   },
   {
+   "name": "INT_Door_Manual_Release_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "Cable y tirador de liberación manual de la puerta delantera izquierda",
+   "group": "Interior Doors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 94
+  },
+  {
+   "name": "INT_Door_Manual_Release_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "Cable y tirador de liberación manual de la puerta delantera derecha",
+   "group": "Interior Doors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 94
+  },
+  {
+   "name": "INT_Door_Manual_Release_RL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "Cable y tirador de liberación manual de la puerta trasera izquierda",
+   "group": "Interior Doors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 94
+  },
+  {
+   "name": "INT_Door_Manual_Release_RR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "Cable y tirador de liberación manual de la puerta trasera derecha",
+   "group": "Interior Doors",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 94
+  },
+  {
+   "name": "INT_Door_NVH_Foam_FL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "Espuma NVH de la puerta delantera izquierda",
+   "group": "Interior Doors",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Door_NVH_Foam_FR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "Espuma NVH de la puerta delantera derecha",
+   "group": "Interior Doors",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Door_NVH_Foam_RL",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "Espuma NVH de la puerta trasera izquierda",
+   "group": "Interior Doors",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Door_NVH_Foam_RR",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DOORS",
+   "label": "Espuma NVH de la puerta trasera derecha",
+   "group": "Interior Doors",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Door_Pressure_Sensors_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Sensores de presión de las puertas izquierdos (delantera y trasera)",
+   "group": "Seguridad",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
+   "name": "INT_Door_Pressure_Sensors_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Sensores de presión de las puertas derechos (delantera y trasera)",
+   "group": "Seguridad",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
    "name": "INT_Door_Window_Switches_FL",
    "type": "MESH",
    "parent": "DOOR_FL",
@@ -6098,6 +10940,42 @@
    "faces": 44
   },
   {
+   "name": "INT_Duct_Bezel_Carpet_Rear",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Embellecedor del conducto trasero en la alfombra",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Ethernet_Diagnostic_RJ45",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Módulo de diagnóstico Ethernet (RJ45)",
+   "group": "Interior Dashboard",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
    "name": "INT_FloorMat_FL",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -6152,6 +11030,42 @@
    "faces": 1442
   },
   {
+   "name": "INT_Floor_Duct_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Conductos de suelo izquierdos (exterior e interior)",
+   "group": "Interior Dashboard",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.85749,
+    0.0,
+    -0.5145
+   ],
+   "explode_dist": 0.35,
+   "faces": 88
+  },
+  {
+   "name": "INT_Floor_Duct_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Conductos de suelo derechos (exterior e interior)",
+   "group": "Interior Dashboard",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.85749,
+    0.0,
+    -0.5145
+   ],
+   "explode_dist": 0.35,
+   "faces": 88
+  },
+  {
    "name": "INT_Footrest",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -6170,6 +11084,78 @@
    "faces": 108
   },
   {
+   "name": "INT_Footwell_Cover",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Cubierta de la zona de pies del conductor (1 perno a 3 N·m, se retira al sacar el pack)",
+   "group": "Interior Dashboard",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 110
+  },
+  {
+   "name": "INT_Gear_Selector_Buttons",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Botones P-R-N-D del selector de marcha en la consola del techo (sin palanca)",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 352
+  },
+  {
+   "name": "INT_HVAC_Blend_Door_Actuator",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Actuador de la compuerta de mezcla del climatizador",
+   "group": "Interior Dashboard",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.70711,
+    -0.70711
+   ],
+   "explode_dist": 0.35,
+   "faces": 56
+  },
+  {
+   "name": "INT_HVAC_HEPA_Filter",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Filtro HEPA con cubierta (3 tornillos T20 a 1 N·m en el soplador)",
+   "group": "Interior Dashboard",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    -0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 304
+  },
+  {
    "name": "INT_HVAC_Module",
    "type": "MESH",
    "parent": "IP_ASSEMBLY",
@@ -6186,6 +11172,78 @@
    ],
    "explode_dist": 0.45,
    "faces": 382
+  },
+  {
+   "name": "INT_HVAC_Sensors",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Sensores de climatización (temperatura y humedad de cabina, ventilado, parabrisas)",
+   "group": "Interior Dashboard",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.85749,
+    0.5145
+   ],
+   "explode_dist": 0.3,
+   "faces": 132
+  },
+  {
+   "name": "INT_Header_Front_Clips",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "19 grapas e imán de la moldura de cabecera delantera",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1184
+  },
+  {
+   "name": "INT_IP_Airwave_Module_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Módulo y conducto del «Airwave» izquierdo",
+   "group": "Interior Dashboard",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.70711,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 304
+  },
+  {
+   "name": "INT_IP_Airwave_Module_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Módulo y conducto del «Airwave» derecho",
+   "group": "Interior Dashboard",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.70711,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 304
   },
   {
    "name": "INT_IP_Airwave_Vent",
@@ -6224,6 +11282,24 @@
    "faces": 6
   },
   {
+   "name": "INT_IP_Center_Shroud_Service_Panel",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Panel de servicio del embellecedor central",
+   "group": "Interior Dashboard",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 44
+  },
+  {
    "name": "INT_IP_Defrost_Panel",
    "type": "MESH",
    "parent": "IP_ASSEMBLY",
@@ -6240,6 +11316,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 1760
+  },
+  {
+   "name": "INT_IP_Gap_Hiders",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Cubrejuntas del salpicadero (superior e inferior)",
+   "group": "Interior Dashboard",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
   },
   {
    "name": "INT_IP_Glovebox",
@@ -6276,6 +11370,24 @@
    ],
    "explode_dist": 0.25,
    "faces": 16
+  },
+  {
+   "name": "INT_IP_Mid_Panel",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Panel medio del salpicadero (Mid Panel Assembly)",
+   "group": "Interior Dashboard",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.99504,
+    0.0995
+   ],
+   "explode_dist": 0.45,
+   "faces": 284
   },
   {
    "name": "INT_IP_Quarter_Panel_L",
@@ -6332,6 +11444,132 @@
    "faces": 10
   },
   {
+   "name": "INT_Impact_Sensor_BPillar_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Sensor de impacto del pilar B izquierdo",
+   "group": "Seguridad",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Impact_Sensor_BPillar_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Sensor de impacto del pilar B derecho",
+   "group": "Seguridad",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Impact_Sensor_Fender_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Sensor de impacto de la aleta izquierdo",
+   "group": "Seguridad",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.28735,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Impact_Sensor_Fender_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Sensor de impacto de la aleta derecho",
+   "group": "Seguridad",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.28735,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Impact_Sensor_FrontEnd_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Sensor de impacto del módulo frontal izquierdo",
+   "group": "Seguridad",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.95783,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Impact_Sensor_FrontEnd_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Sensor de impacto del módulo frontal derecho",
+   "group": "Seguridad",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.95783,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "INT_Interior_Camera",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Cámara interior de la cabina sobre el retrovisor (2 tornillos T10 a 0,8 N·m)",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.35112,
+    0.93633
+   ],
+   "explode_dist": 0.35,
+   "faces": 202
+  },
+  {
    "name": "INT_Overhead_Console",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -6384,6 +11622,114 @@
    ],
    "explode_dist": 0.25,
    "faces": 152
+  },
+  {
+   "name": "INT_Puddle_Lamps",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Luces de cortesía de la guantera y de las zonas de pies",
+   "group": "Interior Dashboard",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.5145,
+    -0.85749
+   ],
+   "explode_dist": 0.3,
+   "faces": 132
+  },
+  {
+   "name": "INT_Rear_Seat_Underbelly_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Carenado inferior (underbelly) y conducto en Y del suelo del asiento trasero izquierdo",
+   "group": "Interior Seats",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.27617,
+    -0.27617,
+    -0.92057
+   ],
+   "explode_dist": 0.35,
+   "faces": 88
+  },
+  {
+   "name": "INT_Rear_Seat_Underbelly_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Carenado inferior (underbelly) y conducto en Y del suelo del asiento trasero derecho",
+   "group": "Interior Seats",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.27617,
+    -0.27617,
+    -0.92057
+   ],
+   "explode_dist": 0.35,
+   "faces": 88
+  },
+  {
+   "name": "INT_Rear_Shoulder_Cover_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Cubierta de hombro del respaldo trasero izquierdo (7 clips + 1 datum)",
+   "group": "Interior Seats",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.49237,
+    -0.61546,
+    0.61546
+   ],
+   "explode_dist": 0.35,
+   "faces": 464
+  },
+  {
+   "name": "INT_Rear_Shoulder_Cover_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Cubierta de hombro del respaldo trasero derecho (7 clips + 1 datum)",
+   "group": "Interior Seats",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.49237,
+    -0.61546,
+    0.61546
+   ],
+   "explode_dist": 0.35,
+   "faces": 464
+  },
+  {
+   "name": "INT_Rearview_Beauty_Cover",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Cubierta decorativa del retrovisor interior (beauty cover)",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
   },
   {
    "name": "INT_Rearview_Mirror",
@@ -6494,6 +11840,24 @@
    "faces": 6
   },
   {
+   "name": "INT_SeatF_L_Blower",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Soplador de ventilación del cojín del asiento delantero izquierdo",
+   "group": "Interior Seats",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    -0.95783
+   ],
+   "explode_dist": 0.35,
+   "faces": 92
+  },
+  {
    "name": "INT_SeatF_L_Buttons",
    "type": "MESH",
    "parent": "SEAT_FRONT_L",
@@ -6512,6 +11876,24 @@
    "faces": 324
   },
   {
+   "name": "INT_SeatF_L_Covers",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Cubiertas de carril y de tornillos del asiento delantero izquierdo (4 pernos T45P a 34 N·m, desechables)",
+   "group": "Interior Seats",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.85749,
+    0.0,
+    0.5145
+   ],
+   "explode_dist": 0.35,
+   "faces": 288
+  },
+  {
    "name": "INT_SeatF_L_Cushion",
    "type": "MESH",
    "parent": "SEAT_FRONT_L",
@@ -6528,6 +11910,42 @@
    ],
    "explode_dist": 0.08,
    "faces": 112
+  },
+  {
+   "name": "INT_SeatF_L_Motors",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Motores del asiento delantero izquierdo: reclinado, altura, inclinación y puente de carril (Bridge Track)",
+   "group": "Interior Seats",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    -0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 230
+  },
+  {
+   "name": "INT_SeatF_L_Position_Sensor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Sensor de posición del carril del asiento del conductor",
+   "group": "Interior Seats",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.28735,
+    0.0,
+    -0.95783
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
   },
   {
    "name": "INT_SeatF_L_Side_Shield",
@@ -6638,6 +12056,24 @@
    "faces": 6
   },
   {
+   "name": "INT_SeatF_R_Blower",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Soplador de ventilación del cojín del asiento delantero derecho",
+   "group": "Interior Seats",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    -0.95783
+   ],
+   "explode_dist": 0.35,
+   "faces": 92
+  },
+  {
    "name": "INT_SeatF_R_Buttons",
    "type": "MESH",
    "parent": "SEAT_FRONT_R",
@@ -6656,6 +12092,24 @@
    "faces": 324
   },
   {
+   "name": "INT_SeatF_R_Covers",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Cubiertas de carril y de tornillos del asiento delantero derecho (4 pernos T45P a 34 N·m, desechables)",
+   "group": "Interior Seats",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.85749,
+    0.0,
+    0.5145
+   ],
+   "explode_dist": 0.35,
+   "faces": 288
+  },
+  {
    "name": "INT_SeatF_R_Cushion",
    "type": "MESH",
    "parent": "SEAT_FRONT_R",
@@ -6672,6 +12126,42 @@
    ],
    "explode_dist": 0.08,
    "faces": 112
+  },
+  {
+   "name": "INT_SeatF_R_Motors",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Motores del asiento delantero derecho: reclinado, altura, inclinación y puente de carril (Bridge Track)",
+   "group": "Interior Seats",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    -0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 230
+  },
+  {
+   "name": "INT_SeatF_R_Occupancy_Sensor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Sensor de clasificación de ocupación del acompañante (umbrales ≈20 lb y 51–103 lb)",
+   "group": "Seguridad",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
   },
   {
    "name": "INT_SeatF_R_Side_Shield",
@@ -6944,6 +12434,24 @@
    "faces": 228
   },
   {
+   "name": "INT_SeatR_Release_Straps",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Correas de liberación de las hebillas del asiento trasero",
+   "group": "Interior Seats",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.3,
+   "faces": 176
+  },
+  {
    "name": "INT_SeatR_Stitching",
    "type": "MESH",
    "parent": "SEAT_REAR",
@@ -7052,6 +12560,42 @@
    "faces": 268
   },
   {
+   "name": "INT_Seatbelt_Webguides_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Guías de cinta de los cinturones izquierdos (pilares B y C)",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
+   "name": "INT_Seatbelt_Webguides_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Guías de cinta de los cinturones derechos (pilares B y C)",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
    "name": "INT_Speakers_Rear_Header",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -7142,6 +12686,24 @@
    "faces": 60
   },
   {
+   "name": "INT_Steering_Column_Shroud_Lower",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Carcasa inferior de la columna (Lower Column Shroud) y su clip",
+   "group": "Steering",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.70711,
+    -0.70711
+   ],
+   "explode_dist": 0.35,
+   "faces": 82
+  },
+  {
    "name": "INT_Subwoofer_CPillar_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -7212,6 +12774,114 @@
    ],
    "explode_dist": 0.3,
    "faces": 164
+  },
+  {
+   "name": "INT_Super_Horn",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Bocina «Super Horn» y bocina de tono bajo izquierda",
+   "group": "Underbody",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.92848,
+    0.37139
+   ],
+   "explode_dist": 0.4,
+   "faces": 172
+  },
+  {
+   "name": "INT_TCU_Bracket",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Unidad de control de telemática (TCU) con soporte (2 tornillos T25 a 3 N·m, 4 + 2 clips)",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.19612,
+    0.0,
+    0.98058
+   ],
+   "explode_dist": 0.35,
+   "faces": 472
+  },
+  {
+   "name": "INT_Telephony_Mic_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Micrófono de telefonía izquierdo",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 60
+  },
+  {
+   "name": "INT_Telephony_Mic_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Micrófono de telefonía derecho",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 60
+  },
+  {
+   "name": "INT_Trim_APillar_Clips_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Grapas del guarnecido del pilar A izquierdo (4 delanteras, 8 superiores, 1 central)",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 780
+  },
+  {
+   "name": "INT_Trim_APillar_Clips_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Grapas del guarnecido del pilar A derecho (4 delanteras, 8 superiores, 1 central)",
+   "group": "Interior Trim",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 780
   },
   {
    "name": "INT_Trim_APillar_L",
@@ -7394,6 +13064,60 @@
    "faces": 8
   },
   {
+   "name": "INT_Tweeter_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Tweeter izquierdo del salpicadero",
+   "group": "Interior Dashboard",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.69171,
+    0.20751,
+    0.69171
+   ],
+   "explode_dist": 0.35,
+   "faces": 82
+  },
+  {
+   "name": "INT_Tweeter_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Tweeter derecho del salpicadero",
+   "group": "Interior Dashboard",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.69171,
+    0.20751,
+    0.69171
+   ],
+   "explode_dist": 0.35,
+   "faces": 82
+  },
+  {
+   "name": "INT_Windshield_Shades",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Cortinillas del techo de cristal fijo (par)",
+   "group": "Interior Trim",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 88
+  },
+  {
    "name": "IP_ASSEMBLY",
    "type": "EMPTY",
    "parent": "CYBERTRUCK_ROOT",
@@ -7524,7 +13248,7 @@
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
    "system": "LIGHTING",
-   "label": "Fila de 64 LED de la barra de luz delantera",
+   "label": "Fila de LED de la barra de luz delantera (el número de LED no consta en las fuentes)",
    "group": "Iluminación",
    "stage": 6,
    "fidelity": "A",
@@ -7536,6 +13260,24 @@
    ],
    "explode_dist": 0.38,
    "faces": 2816
+  },
+  {
+   "name": "LGT_Frunk_Lamp",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Luz del frunk",
+   "group": "Lighting",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
   },
   {
    "name": "LGT_Headlamp_L",
@@ -7772,6 +13514,42 @@
    "faces": 2112
   },
   {
+   "name": "LGT_Reflector_Rear_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Catadióptrico trasero izquierdo",
+   "group": "Lighting",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.37139,
+    -0.92848,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
+   "name": "LGT_Reflector_Rear_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Catadióptrico trasero derecho",
+   "group": "Lighting",
+   "stage": 1,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.37139,
+    -0.92848,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 44
+  },
+  {
    "name": "LGT_Reverse_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -7806,6 +13584,42 @@
    ],
    "explode_dist": 0.4,
    "faces": 6
+  },
+  {
+   "name": "LGT_Side_Repeater_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Repetidor lateral izquierdo (integrado junto a la cámara de la aleta)",
+   "group": "Lighting",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.19612,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
+   "name": "LGT_Side_Repeater_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Repetidor lateral derecho (integrado junto a la cámara de la aleta)",
+   "group": "Lighting",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.19612,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
   },
   {
    "name": "LGT_TailLamp_BodySide_L",
@@ -7844,6 +13658,24 @@
    "faces": 5
   },
   {
+   "name": "LV_Backbone_Clips",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Clips y cintas de abrasión del mazo troncal de 48 V (6 traseros + 3 delanteros; PN 1879451-99-A, 1908543-99-A)",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 672
+  },
+  {
    "name": "LV_Battery_48V",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -7866,7 +13698,7 @@
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
    "system": "BATTERY_ASSEMBLY",
-   "label": "Controlador de carrocería izquierdo (4 tuercas al mamparo)",
+   "label": "Controlador de carrocería izquierdo (4 tuercas de 10 mm a 14 N·m)",
    "group": "Baja tensión",
    "stage": 5,
    "fidelity": "R",
@@ -7884,7 +13716,7 @@
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
    "system": "BATTERY_ASSEMBLY",
-   "label": "Controlador de carrocería derecho (4 tuercas al mamparo)",
+   "label": "Controlador de carrocería derecho (4 tuercas de 10 mm a 14 N·m)",
    "group": "Baja tensión",
    "stage": 5,
    "fidelity": "R",
@@ -7902,7 +13734,7 @@
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
    "system": "BATTERY_ASSEMBLY",
-   "label": "Controlador trasero (media tensión) (4 tuercas al mamparo)",
+   "label": "Controlador trasero (media tensión) (3 fijaciones: 2 tuercas de 13 N·m + 1 perno de 10 N·m)",
    "group": "Baja tensión",
    "stage": 5,
    "fidelity": "R",
@@ -7914,6 +13746,42 @@
    ],
    "explode_dist": 0.5,
    "faces": 572
+  },
+  {
+   "name": "LV_Ferrite_Core_Coax",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Núcleo de ferrita del clúster de dispositivos y cables coaxiales (cámara de fascia, antena GPS)",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 140
+  },
+  {
+   "name": "LV_Harness_Ancillary",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Mazo de la bahía auxiliar",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recorrido reconstruido: los manuales no publican longitudes ni trazado",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 170
   },
   {
    "name": "LV_Harness_Bed_L",
@@ -7950,6 +13818,24 @@
    ],
    "explode_dist": 0.4,
    "faces": 282
+  },
+  {
+   "name": "LV_Harness_Cowl_Speaker",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Mazo del altavoz del cowl",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recorrido reconstruido: los manuales no publican longitudes ni trazado",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 170
   },
   {
    "name": "LV_Harness_Door_FL",
@@ -8024,6 +13910,24 @@
    "faces": 218
   },
   {
+   "name": "LV_Harness_Fascia",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Mazo de la fascia delantera",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recorrido reconstruido: los manuales no publican longitudes ni trazado",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 170
+  },
+  {
    "name": "LV_Harness_Frunk",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -8060,6 +13964,78 @@
    "faces": 724
   },
   {
+   "name": "LV_Harness_Rear_Subframe",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Mazo del subchasis trasero (Tri Motor)",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recorrido reconstruido: los manuales no publican longitudes ni trazado",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 170
+  },
+  {
+   "name": "LV_Harness_Seat_L",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Mazo del asiento izquierdo",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recorrido reconstruido: los manuales no publican longitudes ni trazado",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 170
+  },
+  {
+   "name": "LV_Harness_Seat_R",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Mazo del asiento derecho",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recorrido reconstruido: los manuales no publican longitudes ni trazado",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 170
+  },
+  {
+   "name": "LV_Harness_Shunt_Jumper",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Mazo puente de derivación (shunt) del pack",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Recorrido reconstruido: los manuales no publican longitudes ni trazado",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 170
+  },
+  {
    "name": "LV_Harness_Tailgate",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -8094,6 +14070,78 @@
    ],
    "explode_dist": 0.4,
    "faces": 282
+  },
+  {
+   "name": "LV_MV_Jump_Post",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Poste de arranque (jump post) del frunk entre el depósito de frenos y el frunk",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.35,
+   "faces": 30
+  },
+  {
+   "name": "LV_MV_Locking_Covers",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Cubiertas cautivas de bloqueo MV de los controladores de carrocería (8 mm a 6 N·m) y conectores azules de 48 V",
+   "group": "Battery Assembly",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 462
+  },
+  {
+   "name": "LV_MV_Maintainer",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Mantenedor de media tensión (MV) de 48 V",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.59761,
+    0.35857,
+    0.71714
+   ],
+   "explode_dist": 0.4,
+   "faces": 154
+  },
+  {
+   "name": "LV_Trailer_ECU",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "ECU de remolque tras la fascia trasera (2 tuercas 10 mm a 9 N·m, conector con palanca)",
+   "group": "Battery Assembly",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 176
   },
   {
    "name": "MIRROR_L",
@@ -8222,6 +14270,24 @@
    "faces": 236
   },
   {
+   "name": "STR_FL_TieRod_End",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Extremo exterior de la bieleta de dirección delantera izquierda (contratuerca 24 mm a 90 N·m, tuerca a mangueta 170 N·m)",
+   "group": "Steering",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    -0.0995
+   ],
+   "explode_dist": 0.45,
+   "faces": 220
+  },
+  {
    "name": "STR_FR_TieRod",
    "type": "MESH",
    "parent": "SUSP_FR",
@@ -8238,6 +14304,24 @@
    ],
    "explode_dist": 0.4,
    "faces": 236
+  },
+  {
+   "name": "STR_FR_TieRod_End",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Extremo exterior de la bieleta de dirección delantera derecha (contratuerca 24 mm a 90 N·m, tuerca a mangueta 170 N·m)",
+   "group": "Steering",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    -0.0995
+   ],
+   "explode_dist": 0.45,
+   "faces": 220
   },
   {
    "name": "STR_F_Actuator",
@@ -8258,6 +14342,24 @@
    "faces": 1986
   },
   {
+   "name": "STR_F_Actuator_Controller",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Controladores y sensores de posición triple redundantes del actuador de dirección delantero (4 conectores con bloqueo)",
+   "group": "Steering",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.45,
+   "faces": 396
+  },
+  {
    "name": "STR_RL_TieRod",
    "type": "MESH",
    "parent": "SUSP_RL",
@@ -8274,6 +14376,24 @@
    ],
    "explode_dist": 0.4,
    "faces": 236
+  },
+  {
+   "name": "STR_RL_TieRod_End",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Extremo exterior de la bieleta de dirección trasera izquierda (contratuerca 24 mm a 90 N·m, tuerca a mangueta 170 N·m)",
+   "group": "Steering",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    -0.0995
+   ],
+   "explode_dist": 0.45,
+   "faces": 220
   },
   {
    "name": "STR_RR_TieRod",
@@ -8294,6 +14414,24 @@
    "faces": 236
   },
   {
+   "name": "STR_RR_TieRod_End",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Extremo exterior de la bieleta de dirección trasera derecha (contratuerca 24 mm a 90 N·m, tuerca a mangueta 170 N·m)",
+   "group": "Steering",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    -0.0995
+   ],
+   "explode_dist": 0.45,
+   "faces": 220
+  },
+  {
    "name": "STR_R_Actuator",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -8312,6 +14450,60 @@
    "faces": 2234
   },
   {
+   "name": "STR_R_Actuator_Controller",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Controladores y sensores de posición triple redundantes del actuador de dirección trasero (4 conectores con bloqueo)",
+   "group": "Steering",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.45,
+   "faces": 396
+  },
+  {
+   "name": "STR_Rear_Steer_Jumper_Harness",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Mazo puente de la dirección trasera (Harness - Jumper - Rear Steer)",
+   "group": "Steering",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 122
+  },
+  {
+   "name": "STR_Steering_Column_Control_Module",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Módulo de control de la columna de dirección (SCCM; conectores X0012–X0014 al controlador izquierdo)",
+   "group": "Steering",
+   "stage": 2,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.85749,
+    0.5145
+   ],
+   "explode_dist": 0.35,
+   "faces": 88
+  },
+  {
    "name": "STR_Steering_Feedback_Actuator",
    "type": "MESH",
    "parent": "STEERING_WHEEL",
@@ -8328,6 +14520,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 316
+  },
+  {
+   "name": "STR_Steering_Jumper_Harness",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Mazo puente de la dirección (Harness - Steering Jumper)",
+   "group": "Steering",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 166
   },
   {
    "name": "SUSP_FL",
@@ -8438,6 +14648,42 @@
    "faces": 0
   },
   {
+   "name": "SUS_FL_ArmBushings",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Casquillos de los brazos superior e inferior delantera izquierda",
+   "group": "Front Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.4,
+   "faces": 320
+  },
+  {
+   "name": "SUS_FL_BallJoints",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Rótulas superior e inferior de la mangueta delantera izquierda (tuercas 18 mm a 80 N·m y 24 mm a 190 N·m)",
+   "group": "Front Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.4,
+   "faces": 352
+  },
+  {
    "name": "SUS_FL_BrakeHose",
    "type": "MESH",
    "parent": "SUSP_FL",
@@ -8454,6 +14700,24 @@
    ],
    "explode_dist": 0.28,
    "faces": 218
+  },
+  {
+   "name": "SUS_FL_BumpStop_SpringSeat",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Tope de rebote y asiento del muelle neumático delantera izquierda",
+   "group": "Front Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 114
   },
   {
    "name": "SUS_FL_Damper",
@@ -8582,6 +14846,24 @@
    "faces": 140
   },
   {
+   "name": "SUS_FL_RideHeightSensor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Sensor de altura delantera izquierda con varilla articulada al brazo superior (1 tuerca 15 mm a 50 N·m)",
+   "group": "Front Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 294
+  },
+  {
    "name": "SUS_FL_StabLink",
    "type": "MESH",
    "parent": "SUSP_FL",
@@ -8690,6 +14972,42 @@
    "faces": 0
   },
   {
+   "name": "SUS_FR_ArmBushings",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Casquillos de los brazos superior e inferior delantera derecha",
+   "group": "Front Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.4,
+   "faces": 320
+  },
+  {
+   "name": "SUS_FR_BallJoints",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Rótulas superior e inferior de la mangueta delantera derecha (tuercas 18 mm a 80 N·m y 24 mm a 190 N·m)",
+   "group": "Front Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.4,
+   "faces": 352
+  },
+  {
    "name": "SUS_FR_BrakeHose",
    "type": "MESH",
    "parent": "SUSP_FR",
@@ -8706,6 +15024,24 @@
    ],
    "explode_dist": 0.28,
    "faces": 218
+  },
+  {
+   "name": "SUS_FR_BumpStop_SpringSeat",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Tope de rebote y asiento del muelle neumático delantera derecha",
+   "group": "Front Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 114
   },
   {
    "name": "SUS_FR_Damper",
@@ -8834,6 +15170,24 @@
    "faces": 140
   },
   {
+   "name": "SUS_FR_RideHeightSensor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Sensor de altura delantera derecha con varilla articulada al brazo superior (1 tuerca 15 mm a 50 N·m)",
+   "group": "Front Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 294
+  },
+  {
    "name": "SUS_FR_StabLink",
    "type": "MESH",
    "parent": "SUSP_FR",
@@ -8906,6 +15260,24 @@
    "faces": 180
   },
   {
+   "name": "SUS_F_Ankle_Catchers",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "«Ankle catchers» de las bieletas estabilizadoras delanteras (4 pernos 18 mm a 110 N·m)",
+   "group": "Front Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 220
+  },
+  {
    "name": "SUS_F_StabilizerBar",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -8922,6 +15294,24 @@
    ],
    "explode_dist": 0.6,
    "faces": 988
+  },
+  {
+   "name": "SUS_F_Stabilizer_Bushings",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_SUSPENSION",
+   "label": "Casquillos y abrazaderas de la barra estabilizadora delantera (4 pernos 15 mm a 50 N·m)",
+   "group": "Front Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.31623,
+    -0.94868
+   ],
+   "explode_dist": 0.4,
+   "faces": 380
   },
   {
    "name": "SUS_RL_AirBag",
@@ -8960,6 +15350,42 @@
    "faces": 0
   },
   {
+   "name": "SUS_RL_ArmBushings",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Casquillos de los brazos superior e inferior trasera izquierda",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.4,
+   "faces": 320
+  },
+  {
+   "name": "SUS_RL_BallJoints",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Rótulas superior e inferior de la mangueta trasera izquierda (tuercas 18 mm a 80 N·m y 24 mm a 190 N·m)",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.4,
+   "faces": 352
+  },
+  {
    "name": "SUS_RL_BrakeHose",
    "type": "MESH",
    "parent": "SUSP_RL",
@@ -8976,6 +15402,24 @@
    ],
    "explode_dist": 0.28,
    "faces": 218
+  },
+  {
+   "name": "SUS_RL_BumpStop_SpringSeat",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Tope de rebote y asiento del muelle neumático trasera izquierda",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 114
   },
   {
    "name": "SUS_RL_Damper",
@@ -9104,6 +15548,24 @@
    "faces": 140
   },
   {
+   "name": "SUS_RL_RideHeightSensor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Sensor de altura trasera izquierda con varilla articulada al brazo superior (1 tuerca 15 mm a 50 N·m)",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 294
+  },
+  {
    "name": "SUS_RL_StabLink",
    "type": "MESH",
    "parent": "SUSP_RL",
@@ -9212,6 +15674,42 @@
    "faces": 0
   },
   {
+   "name": "SUS_RR_ArmBushings",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Casquillos de los brazos superior e inferior trasera derecha",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.4,
+   "faces": 320
+  },
+  {
+   "name": "SUS_RR_BallJoints",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Rótulas superior e inferior de la mangueta trasera derecha (tuercas 18 mm a 80 N·m y 24 mm a 190 N·m)",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.4,
+   "faces": 352
+  },
+  {
    "name": "SUS_RR_BrakeHose",
    "type": "MESH",
    "parent": "SUSP_RR",
@@ -9228,6 +15726,24 @@
    ],
    "explode_dist": 0.28,
    "faces": 218
+  },
+  {
+   "name": "SUS_RR_BumpStop_SpringSeat",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Tope de rebote y asiento del muelle neumático trasera derecha",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 114
   },
   {
    "name": "SUS_RR_Damper",
@@ -9356,6 +15872,24 @@
    "faces": 140
   },
   {
+   "name": "SUS_RR_RideHeightSensor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Sensor de altura trasera derecha con varilla articulada al brazo superior (1 tuerca 15 mm a 50 N·m)",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 294
+  },
+  {
    "name": "SUS_RR_StabLink",
    "type": "MESH",
    "parent": "SUSP_RR",
@@ -9428,6 +15962,24 @@
    "faces": 180
   },
   {
+   "name": "SUS_R_Ankle_Catchers",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "«Ankle catchers» de las bieletas estabilizadoras traseras (4 pernos 18 mm a 110 N·m)",
+   "group": "Rear Suspension",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 220
+  },
+  {
    "name": "SUS_R_StabilizerBar",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -9444,6 +15996,24 @@
    ],
    "explode_dist": 0.6,
    "faces": 780
+  },
+  {
+   "name": "SUS_R_Stabilizer_Bushings",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_SUSPENSION",
+   "label": "Casquillos y abrazaderas de la barra estabilizadora trasera (4 pernos 15 mm a 50 N·m)",
+   "group": "Rear Suspension",
+   "stage": 4,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.31623,
+    -0.94868
+   ],
+   "explode_dist": 0.4,
+   "faces": 380
   },
   {
    "name": "SW_Door_Front_L",
@@ -9590,6 +16160,24 @@
    "faces": 164
   },
   {
+   "name": "THM_AC_Service_Ports",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Puertos de servicio de A/C con válvulas Schrader y tapones (alta y baja presión)",
+   "group": "Underbody",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 52
+  },
+  {
    "name": "THM_Battery_Coolant_Hoses",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -9608,6 +16196,204 @@
    "faces": 244
   },
   {
+   "name": "THM_Car_Computer_Coolant_Hoses",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Mangueras de refrigerante del ordenador del coche (2) con pasamuros",
+   "group": "Underbody",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.4,
+   "faces": 264
+  },
+  {
+   "name": "THM_Chiller",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Enfriador (chiller) de la batería (4 tuercas 8 mm a 7 N·m, controlador 3 pernos a 4 N·m, 9 conectores)",
+   "group": "Underbody",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.78087,
+    0.6247,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 396
+  },
+  {
+   "name": "THM_Chiller_Battery_Hoses",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Mangueras del enfriador a la batería (suministro y retorno; 2 clips + 2 clips de borde)",
+   "group": "Underbody",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.5145,
+    0.0,
+    -0.85749
+   ],
+   "explode_dist": 0.4,
+   "faces": 324
+  },
+  {
+   "name": "THM_Coolant_Bottle",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Botella de refrigerante con tapón (nivel entre NOM y MAX; recarga al vacío 60–70 cmHg)",
+   "group": "Underbody",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.51848,
+    0.20739,
+    0.82956
+   ],
+   "explode_dist": 0.45,
+   "faces": 44
+  },
+  {
+   "name": "THM_Coolant_Pump",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Bomba de refrigerante del Supermanifold (4 tornillos T20 a 2 N·m, giro de purga 3.500–6.500 rpm)",
+   "group": "Underbody",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.76249,
+    -0.4575,
+    0.4575
+   ],
+   "explode_dist": 0.45,
+   "faces": 310
+  },
+  {
+   "name": "THM_Expansion_Valves",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Válvulas de expansión con bobinas (Supermanifold)",
+   "group": "Underbody",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.4,
+   "faces": 60
+  },
+  {
+   "name": "THM_FDU_Coolant_Hoses",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Mangueras de refrigerante de la unidad motriz delantera (alimentación en línea e inversor–intercambiador)",
+   "group": "Underbody",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.57735,
+    0.57735,
+    0.57735
+   ],
+   "explode_dist": 0.4,
+   "faces": 324
+  },
+  {
+   "name": "THM_LCCR_Condenser",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Condensador refrigerado por líquido (LCCR; 4 tuercas 8 mm a 7 N·m, 2 tapas de puerto A/C)",
+   "group": "Underbody",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.66227,
+    0.52981,
+    0.52981
+   ],
+   "explode_dist": 0.45,
+   "faces": 244
+  },
+  {
+   "name": "THM_Octovalve",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Octovalve (4 tornillos T25 a 7 N·m, 7 clips de resorte, 4 conectores)",
+   "group": "Underbody",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.65094,
+    0.39057,
+    0.65094
+   ],
+   "explode_dist": 0.45,
+   "faces": 350
+  },
+  {
+   "name": "THM_Pack_Pressurization_Line",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Línea de presurización del pack (Wade/Scuba; 2 racores VOSS 12 mm a 8 N·m)",
+   "group": "Underbody",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.35112,
+    -0.93633
+   ],
+   "explode_dist": 0.4,
+   "faces": 106
+  },
+  {
+   "name": "THM_Penta_HVAC_Line",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Línea Penta de climatización (1 tuerca 13 mm a 36 N·m, arandelas lubricadas con RB100EV)",
+   "group": "Underbody",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.4,
+   "faces": 136
+  },
+  {
    "name": "THM_Powertrain_Hose_Bundle",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -9624,6 +16410,24 @@
    ],
    "explode_dist": 0.6,
    "faces": 724
+  },
+  {
+   "name": "THM_RDU_Coolant_Hoses",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Mangueras de refrigerante de la unidad motriz trasera (alimentación y retorno de los dos refrigeradores de placa)",
+   "group": "Underbody",
+   "stage": 5,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.0,
+    -0.70711,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 324
   },
   {
    "name": "THM_Radiator_Hoses",
@@ -9660,6 +16464,24 @@
    ],
    "explode_dist": 0.55,
    "faces": 392
+  },
+  {
+   "name": "THM_Supermanifold_Controller_Sensors",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Controlador y sensores de presión del Supermanifold, válvulas antirretorno y botella desecante",
+   "group": "Underbody",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    0.36515,
+    0.18257,
+    0.91287
+   ],
+   "explode_dist": 0.4,
+   "faces": 128
   },
   {
    "name": "TONNEAU_ASSEMBLY",
@@ -9752,6 +16574,24 @@
    "faces": 0
   },
   {
+   "name": "WHL_FL_BalanceWeights",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Contrapesos adhesivos de equilibrado de la rueda delantera izquierda",
+   "group": "Front Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
+  },
+  {
    "name": "WHL_FL_Cover_Core",
    "type": "MESH",
    "parent": "WHEEL_FL",
@@ -9806,6 +16646,24 @@
    "faces": 1956
   },
   {
+   "name": "WHL_FL_Studs",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Espárragos M14×1,5 de la rueda delantera izquierda (6 uds., tuercas de 21 mm a 205 N·m)",
+   "group": "Front Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 72
+  },
+  {
    "name": "WHL_FL_Tire",
    "type": "MESH",
    "parent": "WHEEL_FL",
@@ -9840,6 +16698,24 @@
    ],
    "explode_dist": 0.22,
    "faces": 116
+  },
+  {
+   "name": "WHL_FR_BalanceWeights",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Contrapesos adhesivos de equilibrado de la rueda delantera derecha",
+   "group": "Front Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
   },
   {
    "name": "WHL_FR_Cover_Core",
@@ -9896,6 +16772,24 @@
    "faces": 1956
   },
   {
+   "name": "WHL_FR_Studs",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Espárragos M14×1,5 de la rueda delantera derecha (6 uds., tuercas de 21 mm a 205 N·m)",
+   "group": "Front Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 72
+  },
+  {
    "name": "WHL_FR_Tire",
    "type": "MESH",
    "parent": "WHEEL_FR",
@@ -9930,6 +16824,24 @@
    ],
    "explode_dist": 0.22,
    "faces": 116
+  },
+  {
+   "name": "WHL_RL_BalanceWeights",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Contrapesos adhesivos de equilibrado de la rueda trasera izquierda",
+   "group": "Rear Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
   },
   {
    "name": "WHL_RL_Cover_Core",
@@ -9986,6 +16898,24 @@
    "faces": 1956
   },
   {
+   "name": "WHL_RL_Studs",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Espárragos M14×1,5 de la rueda trasera izquierda (6 uds., tuercas de 21 mm a 205 N·m)",
+   "group": "Rear Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 72
+  },
+  {
    "name": "WHL_RL_Tire",
    "type": "MESH",
    "parent": "WHEEL_RL",
@@ -10020,6 +16950,24 @@
    ],
    "explode_dist": 0.22,
    "faces": 116
+  },
+  {
+   "name": "WHL_RR_BalanceWeights",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Contrapesos adhesivos de equilibrado de la rueda trasera derecha",
+   "group": "Rear Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 88
   },
   {
    "name": "WHL_RR_Cover_Core",
@@ -10074,6 +17022,24 @@
    ],
    "explode_dist": 0.1,
    "faces": 1956
+  },
+  {
+   "name": "WHL_RR_Studs",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Espárragos M14×1,5 de la rueda trasera derecha (6 uds., tuercas de 21 mm a 205 N·m)",
+   "group": "Rear Wheels And Brakes",
+   "stage": 6,
+   "fidelity": "R",
+   "note": null,
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.45,
+   "faces": 72
   },
   {
    "name": "WHL_RR_Tire",

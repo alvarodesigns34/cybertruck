@@ -534,7 +534,7 @@ def build_battery(M):
     yc = (BAT_Y0 + BAT_Y1) / 2
     asm = L.assembly("BATTERY_PACK", "BATTERY_ASSEMBLY", (0.0, yc, (BAT_ZB + BAT_ZT) / 2))
     L.explode(asm, (0, 0, -1), 1.35, 5, "Batería",
-              "Batería estructural de alta tensión (~123 kWh, 1.344 celdas 4680, ~800 V)", "R")
+              "Batería estructural de alta tensión (~123 kWh, 1.344 celdas 4680; 700 V nominales según el manual del propietario, 800 V según la hoja de rescate)", "R")
     objs = [asm]
     ln = BAT_Y0 - BAT_Y1
     # --- bandeja: fondo, paredes y brida perimetral atornillada a los largueros laterales
@@ -554,7 +554,7 @@ def build_battery(M):
         for sg in (1, -1):
             P.flange_bolt(mb, (sg * (BAT_HW + 0.022), y, BAT_ZT - 0.006), (0, 0, 1), 0.010, 1)
     objs.append(P.make(mb, "BAT_Enclosure_Tray", "BATTERY_ASSEMBLY", [M["battery"], M["zinc"]], asm, (0, 0, -1), 0.25, 6,
-                       "Batería", "Bandeja estructural con brida perimetral (44 tornillos a los largueros)", "R"))
+                       "Batería", "Bandeja estructural con brida perimetral (unos 22 pernos exteriores + 14 interiores + 4 al fundido trasero; el recuento varía según la página del manual)", "R"))
     # --- tapa estructural (suelo del habitáculo): los asientos delanteros se atornillan a ella
     mb = L.MeshBuilder()
     P.rbox(mb, (0, yc, BAT_ZT - 0.006), (2 * BAT_HW - 0.03, ln - 0.03, 0.012), 0.003, 1, None, 0)
@@ -791,7 +791,7 @@ def build_thermal(M):
         z = zc - 0.115 + i * 0.032
         P.beam(mb, (-0.43, yc + 0.085, z), (0.43, yc + 0.085, z), 0.028, 0.003, up=(0, 0.5, 1))
     objs.append(P.make(mb, "CHS_Active_Grille_Shutter", "UNDERBODY", M["plastic_black"], asm, (0, 1, -0.2), 0.75, 6,
-                       "Refrigeración", "Persianas activas de la rejilla (7 lamas)", "V"))
+                       "Refrigeración", "Persianas activas de la rejilla (número de lamas no publicado; 12 pestañas de bloqueo + 2 clips)", "R"))
     # Supermanifold con Octovalve, bombas, enfriador, condensador refrigerado por líquido y botella
     mb = L.MeshBuilder()
     c = V(0.20, 1.83, 0.80)
@@ -950,7 +950,8 @@ def build_electrical(M):
             P.rbox(mb, V(*p) + V(-0.09 + i * 0.026, 0.028, -0.01), (0.006, 0.008, 0.11), 0.002, 1, None, 0)
         objs.append(P.make(mb, name, "BATTERY_ASSEMBLY", [M["alu_cast"], M["connector_grey"]], None,
                            (0, 0.5 if p[1] > 0 else -0.5, 1), 0.5, 5, "Baja tensión",
-                           lbl + " (4 tuercas al mamparo)", "V"))
+                           lbl + (" (3 fijaciones: 2 tuercas de 13 N·m + 1 perno de 10 N·m)" if name.endswith("Rear")
+                                  else " (4 tuercas de 10 mm a 14 N·m)"), "V"))
     # Mazos de cables principales: columna vertebral de media tensión y Ethernet
     mb = L.MeshBuilder()
     P.corrugated(mb, [(-0.62, 1.30, 0.74), (-0.75, 1.10, 0.50), (-0.79, 0.50, 0.47), (-0.79, -0.80, 0.47),

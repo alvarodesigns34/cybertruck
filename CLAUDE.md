@@ -33,25 +33,40 @@
 * Las caras de láminas abiertas se orientan con `MeshBuilder.face(..., want=dirección)`; no usar
   `recalc_normals` en superficies abiertas.
 * Los perfiles se validan por trazado de rayos (`validate.py`), no por muestreo de vértices.
+* Toda pieza nueva debe quedar dentro de la envolvente oficial: tras añadirla se ejecuta `validate.run()` y la
+  altura libre (−0,4 mm) y las siluetas no deben empeorar (las piezas que sobresalen se recolocan, no se relaja la
+  validación). Las mallas cerradas se orientan hacia fuera con `ct_lib.orient_closed_components`.
+* Fuente de nombres, cantidades y fijaciones: `docs/ficha-tecnica-piezas.md` (identificadores EXT-, EST-, CHS-, TRN-,
+  INT-, ELE-). Los datos que las fuentes no publican (masas, cotas por pieza) no se inventan: se marcan «Aproximado».
 
 ## Flujo de trabajo
 
 1. Editar la ficha (`ct_specs.py`) o el constructor correspondiente en `blender/scripts/`.
-2. En Blender (MCP): `build_all.run(parts=("body","wheels","lights","details","interior","chassis","explode","scene"))`.
+2. En Blender (MCP): `build_all.run(parts=("body","wheels","lights","details","interior","chassis","v3","explode","scene"))`.
+   Las piezas de la versión 3 se escriben con `ct_v3.part` (formas en coordenadas de mundo del lado derecho,
+   `mirror=True` para la pareja izquierda) en los módulos `build_v3_*.py`.
 3. Validar: `validate.run()` y `build_explode.verify_roundtrip()`; inspeccionar con `preview.py` o las cámaras `CAM_*`.
 4. Exportar con `export_web.export(...)`, guardar `blender/Cybertruck.blend` y ejecutar `node tools/gen_inventory.mjs`.
 5. Probar el visor con `node tools/serve.mjs web 8080` y publicar con *push* a `main` (GitHub Actions → Pages).
 
 ## Estado y puntos de continuación
 
-* Estado al 16-10-2026 (versión 2): 561 objetos (522 mallas), ~498 mil triángulos, 61 materiales con texturas
-  físicas generadas (`ct_textures.py`, WebP en `blender/textures/`), GLB de 5,3 MB; validado (cotas sin cambios,
-  explosión con desviación 0), exportado y publicado en https://alvarodesigns34.github.io/cybertruck/.
-  Módulos nuevos: `ct_parts.py`, `build_structure.py`, `build_mechanics.py`, `build_exterior.py`,
-  `build_interior_detail.py`. Renders de validación: `preview.render_shot` (21 planos, 4 iluminaciones).
+* Estado al 17-10-2026 (versión 3): 948 objetos (909 mallas), ~653 mil triángulos, 61 materiales con texturas
+  físicas generadas (`ct_textures.py`, WebP en `blender/textures/`), GLB de 7,0 MB; validado (cotas sin cambios,
+  explosión con desviación 0 en los 948 objetos), exportado al visor. La versión 2 (16-10-2026, 561 objetos) está
+  publicada en https://alvarodesigns34.github.io/cybertruck/; la 3 se publica al fusionar la rama
+  `modelo-v3-piezas-faltantes` en `main`.
+  Módulos: `ct_parts.py`, `build_structure.py`, `build_mechanics.py`, `build_exterior.py`,
+  `build_interior_detail.py` (v2) y `ct_v3.py`, `build_v3.py`, `build_v3_estructura/exterior/chasis/motriz/interior/
+  electronica/complemento.py` (v3, 387 piezas del backlog de `docs/ficha-tecnica-piezas.md`). Renders de validación:
+  `preview.render_shot` (21 planos, 4 iluminaciones; los de `docs/renders/` son de la versión 2).
+* Versión 3: se corrigieron las normales invertidas de 51 mallas cerradas y varias etiquetas que discrepaban de
+  los manuales (ver `docs/research-and-fidelity.md` §9).
 * Criterio de fidelidad: «Verificado» solo si la geometría procede de medidas o planos; las piezas cuya
   existencia y fijaciones constan en el manual pero cuya forma es reconstruida se marcan «Reconstruido»
   (`ct_parts.make` lo aplica automáticamente).
 * Mejoras pendientes más valiosas: forma exacta de faros, retrovisores, paragolpes y piezas fundidas (requiere
-  escaneo o fotografías ortogonales); molde real del Scorpion ATR; carga progresiva del GLB por sistemas si sigue
-  creciendo; verificación de la sección transversal con una vista frontal a escala.
+  escaneo o fotografías ortogonales); molde real del Scorpion ATR; carga progresiva del GLB por sistemas (ya 7,0 MB);
+  verificación de la sección transversal con una vista frontal a escala; leer las figuras del manual de reparación
+  (cotas de control y mapa de materiales por pieza) y las páginas Tri Motor del manual de servicio; opciones fuera
+  de serie (Terrestrial Armor, barra de luz off-road); renovar los renders de `docs/renders/` con las piezas nuevas.
