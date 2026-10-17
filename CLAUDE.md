@@ -42,47 +42,51 @@
 ## Flujo de trabajo
 
 1. Editar la ficha (`ct_specs.py`) o el constructor correspondiente en `blender/scripts/`.
-2. En Blender (MCP): `build_all.run(parts=("body","wheels","lights","details","interior","chassis","v3","explode","scene"))`.
+2. En Blender (MCP): `build_all.run(parts=("body","wheels","lights","details","interior","chassis","v3","v4","explode","scene"))`.
    Las piezas de la versión 3 se escriben con `ct_v3.part` (formas en coordenadas de mundo del lado derecho,
-   `mirror=True` para la pareja izquierda) en los módulos `build_v3_*.py`.
+   `mirror=True` para la pareja izquierda) en los módulos `build_v3_*.py`. Las de la versión 4 (interior
+   funcional y tornillería) se escriben con `ct_v4.part` (formas mecánicas de alto detalle; `frame=` para usar las
+   coordenadas locales de otro objeto y `derived(...)` para espumas o almas a partir de otra malla) en
+   `build_v4_*.py`.
 3. Validar: `validate.run()` y `build_explode.verify_roundtrip()`; inspeccionar con `preview.py` o las cámaras `CAM_*`.
 4. Exportar con `export_web.export(...)`, guardar `blender/Cybertruck.blend` y ejecutar `node tools/gen_inventory.mjs`.
 5. Probar el visor con `node tools/serve.mjs web 8080` y publicar con *push* a `main` (GitHub Actions → Pages).
 
 ## Estado y puntos de continuación
 
-* Estado al 17-10-2026 (versión 3): 948 objetos (909 mallas), ~653 mil triángulos, 61 materiales con texturas
-  físicas generadas (`ct_textures.py`, WebP en `blender/textures/`), GLB de 7,0 MB; validado (cotas sin cambios,
-  explosión con desviación 0 en los 948 objetos), exportado al visor. La versión 2 (16-10-2026, 561 objetos) está
-  publicada en https://alvarodesigns34.github.io/cybertruck/; la 3 se publica al fusionar la rama
-  `modelo-v3-piezas-faltantes` en `main`.
+* Estado al 17-10-2026 (versión 4, rama `modelo-v4-coche-completo`, sin fusionar ni publicar): 1.137 objetos
+  (1.098 mallas), ~1,19 millones de triángulos, 78 materiales con texturas físicas generadas (`ct_textures.py`,
+  WebP en `blender/textures/`), GLB de 12,0 MB, `Cybertruck.blend` de 14,7 MB; validado (cotas y siluetas
+  idénticas a la v3, explosión con desviación 0 en los 1.137 objetos), exportado al visor y probado en local.
+  El visor publicado en https://alvarodesigns34.github.io/cybertruck/ es el de la versión 3; la 4 se publica al
+  fusionar la rama en `main` (el despliegue se dispara con los cambios en `web/`).
   Módulos: `ct_parts.py`, `build_structure.py`, `build_mechanics.py`, `build_exterior.py`,
-  `build_interior_detail.py` (v2) y `ct_v3.py`, `build_v3.py`, `build_v3_estructura/exterior/chasis/motriz/interior/
-  electronica/complemento.py` (v3, 387 piezas del backlog de `docs/ficha-tecnica-piezas.md`). Renders de validación:
-  `preview.render_shot` (21 planos, 4 iluminaciones; los de `docs/renders/` son de la versión 2).
-* Versión 3: se corrigieron las normales invertidas de 51 mallas cerradas y varias etiquetas que discrepaban de
-  los manuales (ver `docs/research-and-fidelity.md` §9).
+  `build_interior_detail.py` (v2); `ct_v3.py`, `build_v3_*.py` (v3, 387 piezas del backlog de
+  `docs/ficha-tecnica-piezas.md`); `ct_v4.py`, `build_v4.py`, `build_v4_motriz/chasis/energia/habitaculo/
+  carroceria/tornilleria.py` (v4, 189 piezas: interior funcional de los conjuntos y tornillería). Renders:
+  `preview.render_shot` (26 planos renovados con la v4; los 5 últimos, con las carcasas ocultas).
+* Versión 4 («coche completo», ver `docs/research-and-fidelity.md` §10): interior de motores, reductoras,
+  inversores, juntas homocinéticas, rodamientos, pinzas, amortiguadores, actuadores, servofreno, bomba de freno, HCU,
+  compresor, batería (BMB, BMS, barras, junta), PCS, 48 V, placas de 33 módulos, climatizador, compresor de A/C,
+  asientos (armazón, muelles, espumas), volante, enrolladores, pantallas, altavoces, vigas de puerta, faros, tomas
+  de remolque, emblema Cyberbeast y 21 juegos de tornillería. Las carcasas se apartan más que su contenido en la
+  explosión. Todo lo interior es «Aproximado» (forma y recuentos reconstruidos).
+* Visor (v4): HUD de vidrio líquido (`web/src/style.css`, `web/index.html`), suelo de cristal / opaco / oculto,
+  entornos HDR propios «Estudio» y «Exterior» y reflejo plano del suelo (`web/src/lighting.js`), mapeo AgX;
+  preferencias en `localStorage`. El gancho de pruebas `window.__ct` expone `setFloor`, `setEnvironment` y
+  `setReflections`. Resuelto el hallazgo de las piezas que quedaban bajo el suelo opaco al explosionar.
 * Criterio de fidelidad: «Verificado» solo si la geometría procede de medidas o planos; las piezas cuya
   existencia y fijaciones constan en el manual pero cuya forma es reconstruida se marcan «Reconstruido»
   (`ct_parts.make` lo aplica automáticamente).
-* Hoja de ruta (acordada con el usuario el 17-10-2026, aún sin empezar):
-  1. **Más piezas**: añadir bastantes más piezas, todas las posibles de forma realista (sin inventar datos que las
-     fuentes no publican): tornillería individual por pieza, opciones fuera de serie, espumas y tapicerías, mazos,
-     conectores, soportes y todo lo pendiente de `docs/ficha-tecnica-piezas.md`.
-  2. **Hiperrealismo del modelo**: mejorar el modelo en general con el hiperrealismo como eje (formas exactas de
-     faros, retrovisores, paragolpes y fundiciones, molde del neumático, materiales y texturas físicas, biseles,
-     holguras y desgaste creíbles, iluminación y renders), siempre dentro de las cotas oficiales.
-  3. **HUD del visor**: rediseñar bastante más la interfaz con estética tipo Apple (liquid glass, translucidez y
-     desenfoque, tipografía y microinteracciones cuidadas), manteniendo el texto en español y la accesibilidad.
-* Hallazgo pendiente del visor (17-10-2026, aún sin implementar): al explosionar, muchas piezas de la parte baja
-  (suspensión, tren motriz, batería, bajos) descienden por debajo del suelo (`web/src/main.js`: círculo opaco de
-  radio 26 m en y = −0,002 y rejilla en y = 0) y solo se ven si la cámara atraviesa el suelo. Es coherente con la
-  fórmula de explosión (`explode_dir` hacia −Z en los conjuntos bajos), pero dificulta ver el despiece. Propuesta
-  acordada con el usuario: **suelo de cristal semitransparente** (se ve a través de él lo que queda debajo) y una
-  **opción para ocultar el suelo**. Solo toca el visor: no cambia el modelo, las direcciones de explosión ni
-  Blender. Ver `README.md` (Limitaciones principales).
+* Hoja de ruta del 17-10-2026: **completada** en la versión 4 (más piezas, hiperrealismo, suelo de cristal,
+  iluminación y reflejos, HUD tipo Apple).
+* Lecciones de la v4: (1) antes de leer `matrix_world` de objetos recién creados hay que llamar a
+  `bpy.context.view_layer.update()` (`build_v4.build_all` ya lo hace); (2) las piezas internas pueden asomar por
+  la carrocería: comprobarlo con renders y con rayos verticales contra la tapa del frunk; (3) las texturas se
+  repiten cada pocos centímetros, así que no sirven para huellas o suciedad localizada (se probó y se descartó).
 * Mejoras pendientes más valiosas: forma exacta de faros, retrovisores, paragolpes y piezas fundidas (requiere
-  escaneo o fotografías ortogonales); molde real del Scorpion ATR; carga progresiva del GLB por sistemas (ya 7,0 MB);
+  escaneo o fotografías ortogonales); molde real del Scorpion ATR; carga progresiva del GLB por sistemas (12,0 MB);
   verificación de la sección transversal con una vista frontal a escala; leer las figuras del manual de reparación
   (cotas de control y mapa de materiales por pieza) y las páginas Tri Motor del manual de servicio; opciones fuera
-  de serie (Terrestrial Armor, barra de luz off-road); renovar los renders de `docs/renders/` con las piezas nuevas.
+  de serie (Terrestrial Armor, barra de luz off-road); tornillería individual en las uniones que aún la llevan
+  integrada en la malla.

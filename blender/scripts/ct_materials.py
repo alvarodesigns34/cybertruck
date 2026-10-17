@@ -224,7 +224,8 @@ def build_library():
                           coat=0.6, coat_roughness=0.2)
     M["brake_pad"] = mat_tex("CT_Brake_Pad", (0.08, 0.075, 0.07), 0.2, 0.8, "cast", "pad",
                              rough=False, normal_strength=1.0, tile=0.05)
-    M["zinc"] = simple("CT_Steel_Zinc", (0.55, 0.56, 0.57), 1.0, 0.38, "zinc")
+    M["zinc"] = mat_tex("CT_Steel_Zinc", (0.55, 0.56, 0.57), 1.0, 0.38, "zinc", "zinc", color_map=True,
+                        normal_strength=0.4)
     M["fastener_black"] = simple("CT_Fastener_Black", (0.03, 0.03, 0.032), 0.8, 0.42, "fastener")
     M["valve_brass"] = simple("CT_Valve_Brass", (0.80, 0.62, 0.33), 1.0, 0.3, "brass")
 
@@ -233,8 +234,8 @@ def build_library():
                             color_map=True)
     M["alu_forged"] = mat_tex("CT_Aluminium_Forged", (0.66, 0.66, 0.65), 1.0, 0.36, "cast", "aluminium_forged",
                               rough=False, normal_strength=0.15, tile=0.3)
-    M["alu_machined"] = simple("CT_Aluminium_Machined", (0.80, 0.80, 0.79), 1.0, 0.22, "aluminium_machined",
-                               anisotropic=0.4)
+    M["alu_machined"] = mat_tex("CT_Aluminium_Machined", (0.80, 0.80, 0.79), 1.0, 0.22, "machined",
+                                "aluminium_machined", normal_strength=0.3, anisotropic=0.4)
     M["steel_black"] = mat_tex("CT_Steel_Black", (0.025, 0.025, 0.027), 0.6, 0.48, "cast", "steel_black",
                                rough=False, normal_strength=0.15)
     M["steel_bare"] = simple("CT_Steel_Bare", (0.48, 0.48, 0.47), 1.0, 0.40, "steel_bare")
@@ -255,7 +256,8 @@ def build_library():
                            rough=False, normal_strength=0.8, tile=0.01)
     M["connector_grey"] = simple("CT_Connector_Grey", (0.12, 0.12, 0.13), 0.0, 0.45, "plastic")
     M["connector_blue"] = simple("CT_Connector_Blue", (0.05, 0.15, 0.55), 0.0, 0.4, "plastic")
-    M["pcb_green"] = simple("CT_PCB", (0.03, 0.18, 0.08), 0.1, 0.35, "plastic")
+    M["pcb_green"] = mat_tex("CT_PCB", (0.03, 0.18, 0.08), 0.0, 0.35, "pcb", "plastic", color_map=True,
+                             normal_strength=0.8)
     M["radiator"] = mat_tex("CT_Radiator_Core", (0.62, 0.62, 0.60), 1.0, 0.5, "fabric", "radiator",
                             rough=False, normal_strength=1.5, tile=0.004)
 
@@ -285,6 +287,32 @@ def build_library():
     M["composite"] = mat_tex("CT_Composite_Bed", (0.045, 0.046, 0.048), 0.0, 0.7, "composite", "composite",
                              normal_strength=1.0)
     M["ground"] = simple("CT_Floor_Ground", (0.30, 0.30, 0.30), 0.0, 0.6, "ground")
+
+    # --- Versión 4: materiales del interior de los conjuntos (motores, reductoras, electrónica, asientos)
+    M["elec_steel"] = mat_tex("CT_Electrical_Steel", (0.20, 0.21, 0.235), 0.85, 0.46, "cast", "electrical_steel",
+                              rough=False, normal_strength=0.12, tile=0.06)
+    M["copper_enamel"] = simple("CT_Copper_Enamel", (0.70, 0.30, 0.13), 1.0, 0.22, "copper",
+                                coat=0.8, coat_roughness=0.08)
+    M["magnet"] = simple("CT_Magnet_NdFeB_Nickel", (0.70, 0.70, 0.68), 1.0, 0.18, "chrome")
+    M["bearing_steel"] = mat_tex("CT_Bearing_Steel", (0.78, 0.78, 0.77), 1.0, 0.10, "machined", "chrome",
+                                 normal_strength=0.15, tile=0.015)
+    M["gear_steel"] = mat_tex("CT_Gear_Steel", (0.56, 0.56, 0.54), 1.0, 0.26, "machined", "steel_bare",
+                              normal_strength=0.35, anisotropic=0.3)
+    M["foam_pu"] = mat_tex("CT_Seat_Foam_PU", (0.62, 0.50, 0.26), 0.0, 0.95, "foam", "foam",
+                           color_map=True, normal_strength=0.8)
+    M["felt"] = mat_tex("CT_NVH_Felt", (0.05, 0.05, 0.055), 0.0, 0.97, "felt", "felt",
+                        normal_strength=0.8, sheen=0.4)
+    M["capacitor"] = simple("CT_Capacitor_Film", (0.10, 0.10, 0.11), 0.0, 0.5, "plastic")
+    M["ceramic"] = simple("CT_Ceramic_Substrate", (0.82, 0.80, 0.74), 0.0, 0.45, "plastic")
+    M["thermal_pad"] = simple("CT_Thermal_Interface", (0.42, 0.45, 0.50), 0.0, 0.7, "plastic")
+    M["solder_tin"] = simple("CT_Tin_Plating", (0.80, 0.80, 0.80), 1.0, 0.25, "aluminium_machined")
+    M["nylon"] = simple("CT_Nylon_Natural", (0.72, 0.68, 0.58), 0.0, 0.45, "plastic", subsurface=0.1)
+    M["grease"] = simple("CT_Grease_Lithium", (0.12, 0.09, 0.04), 0.0, 0.15, "plastic")
+    M["spring_steel"] = simple("CT_Spring_Steel_Phosphate", (0.05, 0.05, 0.055), 0.8, 0.45, "fastener")
+    M["seat_frame"] = mat_tex("CT_Seat_Frame_Ecoat", (0.035, 0.036, 0.04), 0.3, 0.5, "cast", "seat_frame",
+                              rough=False, normal_strength=0.2)
+    M["magnesium"] = mat_tex("CT_Magnesium_Die_Cast", (0.42, 0.43, 0.44), 0.9, 0.5, "cast", "magnesium",
+                             rough=False, normal_strength=0.2)
     return M
 
 

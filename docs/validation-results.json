@@ -88,9 +88,10 @@
    "max_mm": 29.3
   }
  },
- "explosion": {
-  "objects": 948,
+ "explosion_roundtrip": {
+  "objects": 1137,
   "max_deviation": 0.0,
   "ok": true
- }
+ },
+ "version": "4 (17-10-2026): 1.137 objetos"
 }

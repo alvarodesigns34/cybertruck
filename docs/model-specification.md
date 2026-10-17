@@ -100,11 +100,11 @@ desplazamiento = explode_dir · explode_dist · smoothstep(t0, t1, e)
   intencionada (p. ej., la rueda sale y después el neumático se separa de la llanta) sin multiplicarse ni anularse.
 - Es una función pura del parámetro: no hay estado acumulado. Verificación automática
   (`build_explode.verify_roundtrip` y prueba equivalente en el navegador): tras recorrer
-  0 → 0,33 → 1 → 0,5 → 0 → 1 → 0, la desviación máxima de las matrices de mundo es **0** en los 948 objetos (561 en la versión 2).
+  0 → 0,33 → 1 → 0,5 → 0 → 1 → 0, la desviación máxima de las matrices de mundo es **0** en los 1.137 objetos de la versión 4 (948 en la 3).
 
 ## 5. Materiales
 
-Biblioteca en `ct_materials.py` (61 materiales exportados). Desde la versión 2 los detalles de superficie
+Biblioteca en `ct_materials.py` (78 materiales; 61 hasta la versión 3). Desde la versión 2 los detalles de superficie
 proceden de **texturas físicas generadas** por `ct_textures.py` (ruido filtrado en frecuencia, periódico,
 guardado en WebP en `blender/textures/`), conectadas con nodos que el exportador glTF reconoce, de modo que
 Blender y el visor web muestran el mismo material:
@@ -117,6 +117,8 @@ Blender y el visor web muestran el mismo material:
 | `leather` (1024 px) | 0,08 | Piel sintética Tactical Grey (grano abombado) |
 | `fabric`, `carpet` | 0,012 / 0,04 | Guarnecido de techo, cinturones, cinta de mazos, rejillas, moqueta |
 | `cast`, `rotor`, `composite` | 0,20 / 0,12 / 0,10 | Fundición de aluminio, discos de freno, cubeta de la caja |
+| `pcb` (1024 px), `foam`, `felt` | 0,08 / 0,03 / 0,03 | Placas de circuito (pistas, pads, vías, serigrafía), espuma de asientos, fieltro aislante (v4) |
+| `machined`, `zinc` | 0,03 / 0,02 | Aluminio y acero mecanizados o rectificados, tornillería zincada (v4) |
 
 | Material | Uso | Notas |
 |---|---|---|
@@ -153,6 +155,9 @@ describe (`web/src/materials.js`) sin sustituir los mapas exportados.
 | `ct_v3.py` | Ayudas declarativas de la versión 3: cada pieza es una lista de formas elementales (cajas, cilindros, envolventes, barridos, tornillería, rótulas, fuelles) del lado derecho; `mirror=True` genera la pareja izquierda reflejando las coordenadas de entrada (no la malla) |
 | `build_v3.py` | Orquesta los módulos de la versión 3 (`build_all.run(parts=(…, "v3", …))`, antes de la vista explosionada) |
 | `build_v3_estructura.py` · `build_v3_exterior.py` · `build_v3_chasis.py` · `build_v3_motriz.py` · `build_v3_interior.py` · `build_v3_electronica.py` · `build_v3_complemento.py` | Piezas añadidas a partir de `docs/ficha-tecnica-piezas.md` (identificadores EXT-, EST-, CHS-, TRN-, INT-, ELE-): estructura, exterior y caja, chasis y circuito de aire, tren motriz, térmica y alta tensión, interior, electrónica de 48 V y piezas menores |
+| `ct_v4.py` | Formas de alto detalle de la versión 4: engranajes rectos y helicoidales, coronas y estátores ranurados, rodamientos de bolas, esferas, toros, muelles, tubos curvados, correas, tornillos con rosca, placas de circuito con componentes, cabezas de bobina (horquillas y devanado distribuido), abrazaderas, aletas; `part(..., frame=)` describe piezas en las coordenadas locales de otro objeto y `derived(...)` crea piezas a partir de la malla de otra (espumas, almas) |
+| `build_v4.py` | Orquesta los módulos de la versión 4 (`build_all.run(parts=(…, "v3", "v4", …))`) |
+| `build_v4_motriz.py` · `build_v4_chasis.py` · `build_v4_energia.py` · `build_v4_habitaculo.py` · `build_v4_carroceria.py` · `build_v4_tornilleria.py` | Interior funcional de los conjuntos (motores, reductoras, inversores, juntas, rodamientos, pinzas, amortiguadores, actuadores, servofreno, HCU, batería, PCS, 48 V, climatizador, asientos, volante, pantallas…) y tornillería individual de las uniones del manual |
 | `build_scene.py` | Estudio, iluminaciones (`studio`, `exterior`, `sunset`, `overcast`) y cámaras |
 | `build_explode.py` | Controladores de la vista explosionada y verificación |
 | `validate.py` | Cotas y comparación de siluetas por trazado de rayos |
@@ -172,16 +177,16 @@ describe (`web/src/materials.js`) sin sustituir los mapas exportados.
 
 `CAM_3Q_Front`, `CAM_3Q_Rear`, `CAM_Side_Profile` (teleobjetivo 135 mm para minimizar la distorsión),
 `CAM_Front`, `CAM_Rear` (85 mm), `CAM_Top` (ortográfica), `CAM_Interior`, `CAM_Wheel_Detail`, `CAM_Underbody`,
-`CAM_Exploded`. Los 21 planos de `docs/renders/` se definen en `preview.SHOTS`.
+`CAM_Exploded`. Los 26 planos de `docs/renders/` se definen en `preview.SHOTS` (los 5 últimos muestran el interior funcional de la versión 4 con las carcasas ocultas).
 
 ## 7. Cifras del activo
 
-| Métrica | v1 | v2 | v3 |
-|---|---|---|---|
-| Objetos en la colección del vehículo | 309 | 561 (522 mallas, 38 conjuntos, 1 raíz) | **948** (909 mallas, 38 conjuntos, 1 raíz) |
-| Triángulos evaluados (con modificadores) | 174.862 | 498.396 | 653.442 |
-| Materiales | 39 | 61 (10 juegos de texturas) | 61 (sin cambios) |
-| `blender/Cybertruck.blend` (comprimido, texturas externas) | 1,12 MB | 4,5 MB | 6,5 MB |
-| `blender/textures/` (WebP) | — | 1,6 MB | 1,6 MB |
-| `web/models/cybertruck.glb` (Draco + WebP) | 1,07 MB | 5,3 MB | 7,0 MB |
-| `web/models/cybertruck-manifest.json` | ~0,12 MB | ~0,24 MB | ~0,41 MB |
+| Métrica | v1 | v2 | v3 | v4 |
+|---|---|---|---|---|
+| Objetos en la colección del vehículo | 309 | 561 (522 mallas, 38 conjuntos, 1 raíz) | 948 (909 mallas, 38 conjuntos, 1 raíz) | **1.137** (1.098 mallas, 38 conjuntos, 1 raíz) |
+| Triángulos evaluados (con modificadores) | 174.862 | 498.396 | 653.442 | 1.189.792 |
+| Materiales | 39 | 61 (10 juegos de texturas) | 61 (sin cambios) | 78 (15 juegos de texturas) |
+| `blender/Cybertruck.blend` (comprimido, texturas externas) | 1,12 MB | 4,5 MB | 6,5 MB | 14,7 MB |
+| `blender/textures/` (WebP) | — | 1,6 MB | 1,6 MB | 2,8 MB |
+| `web/models/cybertruck.glb` (Draco + WebP) | 1,07 MB | 5,3 MB | 7,0 MB | 12,0 MB |
+| `web/models/cybertruck-manifest.json` | ~0,12 MB | ~0,24 MB | ~0,41 MB | ~0,50 MB |

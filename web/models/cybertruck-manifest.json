@@ -104,6 +104,42 @@
    "faces": 0
   },
   {
+   "name": "BAT_BMS_Controller",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Controlador del sistema de gestión de la batería (BMS) dentro de la cabecera de alta tensión",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.7,
+   "faces": 396
+  },
+  {
+   "name": "BAT_Block_1_BMB",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Placa de supervisión de celdas (BMB) del bloque 1 con circuito flexible de medida de tensión y temperatura",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.8,
+   "faces": 608
+  },
+  {
    "name": "BAT_Block_1_Busbars",
    "type": "MESH",
    "parent": "BATTERY_PACK",
@@ -192,6 +228,24 @@
    ],
    "explode_dist": 0.62,
    "faces": 44
+  },
+  {
+   "name": "BAT_Block_2_BMB",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Placa de supervisión de celdas (BMB) del bloque 2 con circuito flexible de medida de tensión y temperatura",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.8,
+   "faces": 724
   },
   {
    "name": "BAT_Block_2_Busbars",
@@ -284,6 +338,24 @@
    "faces": 44
   },
   {
+   "name": "BAT_Block_3_BMB",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Placa de supervisión de celdas (BMB) del bloque 3 con circuito flexible de medida de tensión y temperatura",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.8,
+   "faces": 654
+  },
+  {
    "name": "BAT_Block_3_Busbars",
    "type": "MESH",
    "parent": "BATTERY_PACK",
@@ -372,6 +444,24 @@
    ],
    "explode_dist": 0.62,
    "faces": 44
+  },
+  {
+   "name": "BAT_Block_4_BMB",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Placa de supervisión de celdas (BMB) del bloque 4 con circuito flexible de medida de tensión y temperatura",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.37139,
+    0.92848
+   ],
+   "explode_dist": 0.8,
+   "faces": 630
   },
   {
    "name": "BAT_Block_4_Busbars",
@@ -482,6 +572,24 @@
    "faces": 504
   },
   {
+   "name": "BAT_Coolant_Manifolds",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Colectores de refrigerante de los serpentines (entrada y salida, conexiones al frontal de la bandeja)",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.6,
+   "faces": 660
+  },
+  {
    "name": "BAT_Enclosure_Lid",
    "type": "MESH",
    "parent": "BATTERY_PACK",
@@ -552,6 +660,42 @@
    ],
    "explode_dist": 0.35,
    "faces": 132
+  },
+  {
+   "name": "BAT_Lid_Seal",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Junta perimetral de estanqueidad entre la bandeja y la tapa (sellado para vadeo)",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 1.05,
+   "faces": 194
+  },
+  {
+   "name": "BAT_Main_Busbars",
+   "type": "MESH",
+   "parent": "BATTERY_PACK",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Barras colectoras principales del pack (serie entre bloques y polos + / − hasta la cabecera de alta tensión)",
+   "group": "Batería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.95,
+   "faces": 616
   },
   {
    "name": "BAT_Mounting_Bolts",
@@ -1290,6 +1434,24 @@
    ],
    "explode_dist": 1.05,
    "faces": 5
+  },
+  {
+   "name": "BODY_Frunk_Tub_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_STRUCTURE",
+   "label": "Tornillos de la cubeta del frunk (6 × 10 mm, 12 N·m)",
+   "group": "Tornillería",
+   "stage": 3,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    0.44721,
+    0.89443
+   ],
+   "explode_dist": 1.2,
+   "faces": 3600
   },
   {
    "name": "BODY_HV_Battery_Support_Bracket_L",
@@ -2728,8 +2890,26 @@
     0.647,
     0.53916
    ],
-   "explode_dist": 0.6,
+   "explode_dist": 0.85,
    "faces": 96
+  },
+  {
+   "name": "BRK_Booster_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Interior del servofreno electromecánico: motor sin escobillas, engranajes, husillo de bolas, muelle de retorno y varilla de empuje del pedal",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.53916,
+    0.647,
+    0.53916
+   ],
+   "explode_dist": 0.55,
+   "faces": 5346
   },
   {
    "name": "BRK_FL_Caliper",
@@ -2750,6 +2930,24 @@
    "faces": 816
   },
   {
+   "name": "BRK_FL_Caliper_Internals",
+   "type": "MESH",
+   "parent": "BRAKE_FL",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Interior de la pinza delantera izquierda: 4 pistones con juntas y guardapolvos, pasadores y muelle antirruido",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.4264,
+    -0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.34,
+   "faces": 1464
+  },
+  {
    "name": "BRK_FL_Caliper_Service_Parts",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -2766,6 +2964,24 @@
    ],
    "explode_dist": 0.4,
    "faces": 110
+  },
+  {
+   "name": "BRK_FL_Pad_Shims",
+   "type": "MESH",
+   "parent": "BRAKE_FL",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Láminas antirruido de las pastillas delantera izquierda y avisador acústico de desgaste",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.4264,
+    -0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.42,
+   "faces": 232
   },
   {
    "name": "BRK_FL_Pads",
@@ -2840,6 +3056,24 @@
    "faces": 816
   },
   {
+   "name": "BRK_FR_Caliper_Internals",
+   "type": "MESH",
+   "parent": "BRAKE_FR",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Interior de la pinza delantera derecha: 4 pistones con juntas y guardapolvos, pasadores y muelle antirruido",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.4264,
+    -0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.34,
+   "faces": 1464
+  },
+  {
    "name": "BRK_FR_Caliper_Service_Parts",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -2856,6 +3090,24 @@
    ],
    "explode_dist": 0.4,
    "faces": 110
+  },
+  {
+   "name": "BRK_FR_Pad_Shims",
+   "type": "MESH",
+   "parent": "BRAKE_FR",
+   "system": "FRONT_WHEELS_AND_BRAKES",
+   "label": "Láminas antirruido de las pastillas delantera derecha y avisador acústico de desgaste",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.4264,
+    -0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.42,
+   "faces": 232
   },
   {
    "name": "BRK_FR_Pads",
@@ -2930,6 +3182,24 @@
    "faces": 286
   },
   {
+   "name": "BRK_HCU_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Interior de la HCU: 12 electroválvulas, motor de la bomba de pistones y placa de control",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.53916,
+    0.53916,
+    0.647
+   ],
+   "explode_dist": 0.5,
+   "faces": 3036
+  },
+  {
    "name": "BRK_Hydraulic_Control_Unit",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -2944,8 +3214,62 @@
     0.53916,
     0.647
    ],
-   "explode_dist": 0.55,
+   "explode_dist": 0.85,
    "faces": 110
+  },
+  {
+   "name": "BRK_Master_Cylinder",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Bomba de freno tándem (2 circuitos, 2 tuercas al servofreno, conexiones al depósito y a la HCU)",
+   "group": "Frenos",
+   "stage": 4,
+   "fidelity": "R",
+   "note": "La bomba de freno es necesaria con servofreno electromecánico; forma reconstruida",
+   "explode_dir_blender": [
+    -0.26833,
+    0.89443,
+    0.35777
+   ],
+   "explode_dist": 0.7,
+   "faces": 298
+  },
+  {
+   "name": "BRK_Master_Cylinder_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Pistones primario y secundario de la bomba de freno con copelas y muelles",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.26833,
+    0.89443,
+    0.35777
+   ],
+   "explode_dist": 1.0,
+   "faces": 1328
+  },
+  {
+   "name": "BRK_Pedal_Pushrod",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Varilla de empuje del pedal de freno con fuelle del mamparo",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 124
   },
   {
    "name": "BRK_Pedal_Support_Bracket",
@@ -3002,6 +3326,24 @@
    "faces": 668
   },
   {
+   "name": "BRK_RL_Caliper_Internals",
+   "type": "MESH",
+   "parent": "BRAKE_RL",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Interior de la pinza trasera izquierda: pistón Ø54 mm con junta y guardapolvos, husillo y tuerca del freno de estacionamiento eléctrico, clips de apoyo",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.4264,
+    0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.34,
+   "faces": 678
+  },
+  {
    "name": "BRK_RL_Caliper_Service_Parts",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -3036,6 +3378,24 @@
    ],
    "explode_dist": 0.45,
    "faces": 114
+  },
+  {
+   "name": "BRK_RL_Pad_Shims",
+   "type": "MESH",
+   "parent": "BRAKE_RL",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Láminas antirruido de las pastillas trasera izquierda y avisador acústico de desgaste",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.4264,
+    0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.42,
+   "faces": 232
   },
   {
    "name": "BRK_RL_Pads",
@@ -3110,6 +3470,24 @@
    "faces": 668
   },
   {
+   "name": "BRK_RR_Caliper_Internals",
+   "type": "MESH",
+   "parent": "BRAKE_RR",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Interior de la pinza trasera derecha: pistón Ø54 mm con junta y guardapolvos, husillo y tuerca del freno de estacionamiento eléctrico, clips de apoyo",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.4264,
+    0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.34,
+   "faces": 678
+  },
+  {
    "name": "BRK_RR_Caliper_Service_Parts",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -3144,6 +3522,24 @@
    ],
    "explode_dist": 0.45,
    "faces": 114
+  },
+  {
+   "name": "BRK_RR_Pad_Shims",
+   "type": "MESH",
+   "parent": "BRAKE_RR",
+   "system": "REAR_WHEELS_AND_BRAKES",
+   "label": "Láminas antirruido de las pastillas trasera derecha y avisador acústico de desgaste",
+   "group": "Frenos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.4264,
+    0.6396,
+    0.6396
+   ],
+   "explode_dist": 0.42,
+   "faces": 232
   },
   {
    "name": "BRK_RR_Pads",
@@ -3236,6 +3632,24 @@
    "faces": 6
   },
   {
+   "name": "CAM_BPillar_L_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del cámara del pilar B izquierdo (sensor de imagen)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.15,
+   "faces": 12
+  },
+  {
    "name": "CAM_BPillar_R",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -3252,6 +3666,24 @@
    ],
    "explode_dist": 0.25,
    "faces": 6
+  },
+  {
+   "name": "CAM_BPillar_R_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del cámara del pilar B derecho (sensor de imagen)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.15,
+   "faces": 12
   },
   {
    "name": "CAM_FenderFlare_L",
@@ -3272,6 +3704,24 @@
    "faces": 6
   },
   {
+   "name": "CAM_FenderFlare_L_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del cámara de la aleta izquierda (sensor de imagen)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.15,
+   "faces": 12
+  },
+  {
    "name": "CAM_FenderFlare_R",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -3290,6 +3740,24 @@
    "faces": 6
   },
   {
+   "name": "CAM_FenderFlare_R_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del cámara de la aleta derecha (sensor de imagen)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.15,
+   "faces": 50
+  },
+  {
    "name": "CAM_Front_Fascia",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -3306,6 +3774,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 6
+  },
+  {
+   "name": "CAM_Front_Fascia_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del cámara de la fascia delantera (sensor de imagen)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 18
   },
   {
    "name": "CAM_Windshield_Fan",
@@ -3342,6 +3828,24 @@
    ],
    "explode_dist": 0.35,
    "faces": 6
+  },
+  {
+   "name": "CAM_Windshield_Module_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del módulo de cámaras del parabrisas (sensores de imagen y calefactor)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.21,
+   "faces": 486
   },
   {
    "name": "CARGO_BED_TUB",
@@ -3576,6 +4080,24 @@
    ],
    "explode_dist": 0.05,
    "faces": 74
+  },
+  {
+   "name": "CARGO_Bed_Tub_Fasteners",
+   "type": "MESH",
+   "parent": "CARGO_BED_TUB",
+   "system": "CARGO_BED",
+   "label": "Tornillos del suelo de la caja (12 cortos de 15 mm a 56 N·m y 2 largos a 46 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.2,
+   "faces": 7840
   },
   {
    "name": "CARGO_Bed_XMember",
@@ -3902,6 +4424,24 @@
    "faces": 242
   },
   {
+   "name": "CARGO_Tonneau_Motor_L_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Interior del motor izquierdo de la cubierta de la caja: motor, sinfín, corona y piñón de la cadena",
+   "group": "Cubierta",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.70711,
+    0.0,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 3354
+  },
+  {
    "name": "CARGO_Tonneau_Motor_R",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -3918,6 +4458,24 @@
    ],
    "explode_dist": 0.45,
    "faces": 242
+  },
+  {
+   "name": "CARGO_Tonneau_Motor_R_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "CARGO_BED",
+   "label": "Interior del motor derecho de la cubierta de la caja: motor, sinfín, corona y piñón de la cadena",
+   "group": "Cubierta",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.70711,
+    0.0,
+    0.70711
+   ],
+   "explode_dist": 0.4,
+   "faces": 3354
   },
   {
    "name": "CARGO_Tonneau_NVH_Barrier",
@@ -3956,6 +4514,24 @@
    "faces": 90
   },
   {
+   "name": "CARGO_Tonneau_Rail_L_Fasteners",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Tornillos del raíl de la cubierta (9 × 10 mm, 9 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 5400
+  },
+  {
    "name": "CARGO_Tonneau_Rail_R",
    "type": "MESH",
    "parent": "TONNEAU_ASSEMBLY",
@@ -3972,6 +4548,24 @@
    ],
    "explode_dist": 0.25,
    "faces": 90
+  },
+  {
+   "name": "CARGO_Tonneau_Rail_R_Fasteners",
+   "type": "MESH",
+   "parent": "TONNEAU_ASSEMBLY",
+   "system": "CARGO_BED",
+   "label": "Tornillos del raíl de la cubierta (9 × 10 mm, 9 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.4,
+   "faces": 5400
   },
   {
    "name": "CARGO_Tonneau_Slat_01",
@@ -4492,7 +5086,7 @@
     -0.28735,
     0.0
    ],
-   "explode_dist": 0.4,
+   "explode_dist": 0.7,
    "faces": 132
   },
   {
@@ -4584,6 +5178,24 @@
    ],
    "explode_dist": 0.4,
    "faces": 98
+  },
+  {
+   "name": "CHS_Air_Compressor_Internals",
+   "type": "MESH",
+   "parent": "AIR_SUPPLY",
+   "system": "REAR_SUSPENSION",
+   "label": "Interior del compresor: motor, excéntrica, biela, pistón y cartucho secador",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.35,
+   "faces": 2712
   },
   {
    "name": "CHS_Air_Fill_Port",
@@ -4692,6 +5304,24 @@
    ],
    "explode_dist": 0.45,
    "faces": 272
+  },
+  {
+   "name": "CHS_Cooling_Fans",
+   "type": "MESH",
+   "parent": "THERMAL_FRONT",
+   "system": "UNDERBODY",
+   "label": "Hélices de 7 palas, cubos y motores sin escobillas de los dos ventiladores del módulo de refrigeración",
+   "group": "Refrigeración",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.3,
+   "faces": 5376
   },
   {
    "name": "CHS_Radiator",
@@ -4908,6 +5538,24 @@
    ],
    "explode_dist": 0.5,
    "faces": 12
+  },
+  {
+   "name": "CHS_Trailer_Sockets",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Tomas eléctricas de remolque de 7 polos (SAE J2863) y 4 polos con tapas",
+   "group": "Remolque",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    -0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 328
   },
   {
    "name": "CHS_VOSS_Fittings",
@@ -5162,22 +5810,58 @@
    "faces": 302
   },
   {
+   "name": "DU_F_Differential",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Diferencial abierto: corona de 61 dientes, caja, eje y satélites, planetarios y rodamientos de rodillos",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.91287,
+    -0.18257,
+    -0.36515
+   ],
+   "explode_dist": 0.36,
+   "faces": 5148
+  },
+  {
    "name": "DU_F_Gearbox",
    "type": "MESH",
    "parent": "DRIVE_UNIT_FRONT",
    "system": "DRIVE_UNITS",
    "label": "Reductora de una velocidad (15,02:1) con diferencial y bloqueo electromagnético",
    "group": "Unidades motrices",
-   "stage": 6,
+   "stage": 5,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
-    1.0,
+    0.99875,
     0.0,
-    0.0
+    0.04994
    ],
-   "explode_dist": 0.25,
+   "explode_dist": 0.55,
    "faces": 1276
+  },
+  {
+   "name": "DU_F_Gearbox_Cover_Bolts",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Tornillos de la tapa de la reductora (14 × M8 con brida)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.99875,
+    0.0,
+    0.04994
+   ],
+   "explode_dist": 0.75,
+   "faces": 9240
   },
   {
    "name": "DU_F_HeatExchanger",
@@ -5198,13 +5882,49 @@
    "faces": 336
   },
   {
+   "name": "DU_F_Input_Gear",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Piñón de entrada helicoidal (19 dientes, sobre el estriado del rotor)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.22,
+   "faces": 856
+  },
+  {
+   "name": "DU_F_Intermediate_Shaft",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Eje intermedio: rueda helicoidal de 53 dientes, piñón de 17 dientes y rodamientos",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.94072,
+    0.18814,
+    -0.28222
+   ],
+   "explode_dist": 0.3,
+   "faces": 4244
+  },
+  {
    "name": "DU_F_Inverter",
    "type": "MESH",
    "parent": "DRIVE_UNIT_FRONT",
    "system": "DRIVE_UNITS",
    "label": "Inversor integrado de la unidad delantera con cabecera de alta tensión",
    "group": "Unidades motrices",
-   "stage": 6,
+   "stage": 5,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
@@ -5212,8 +5932,116 @@
     0.0,
     1.0
    ],
-   "explode_dist": 0.35,
+   "explode_dist": 0.62,
    "faces": 620
+  },
+  {
+   "name": "DU_F_Inverter_ColdPlate",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Placa fría del inversor con aletas de aceite/refrigerante y racores",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 204
+  },
+  {
+   "name": "DU_F_Inverter_Control_PCB",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Placa de control del inversor (microcontrolador, CAN y conector de baja tensión)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.42,
+   "faces": 690
+  },
+  {
+   "name": "DU_F_Inverter_Current_Sensors",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Sensores de corriente de fase (núcleos de ferrita con efecto Hall)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.22,
+   "faces": 416
+  },
+  {
+   "name": "DU_F_Inverter_DC_Capacitor",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Condensador del bus de continua (película, encapsulado) con barras de conexión",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.27,
+   "faces": 220
+  },
+  {
+   "name": "DU_F_Inverter_Gate_Driver_PCB",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Placa de excitación de puerta (drivers aislados y fuentes de alimentación)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.34,
+   "faces": 856
+  },
+  {
+   "name": "DU_F_Inverter_Power_Modules",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Módulos de potencia (3 semipuentes de SiC sobre sustrato cerámico con hilos de conexión)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.2,
+   "faces": 552
   },
   {
    "name": "DU_F_Motor_Housing",
@@ -5222,15 +6050,15 @@
    "system": "DRIVE_UNITS",
    "label": "Carcasa del motor de imanes permanentes (estátor de horquillas)",
    "group": "Unidades motrices",
-   "stage": 6,
+   "stage": 5,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
-    -0.95783,
-    0.28735,
-    0.0
+    -0.98414,
+    0.14762,
+    0.09841
    ],
-   "explode_dist": 0.3,
+   "explode_dist": 0.62,
    "faces": 854
   },
   {
@@ -5252,13 +6080,31 @@
    "faces": 398
   },
   {
+   "name": "DU_F_Mounts_Fasteners",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Tornillos de los soportes de la unidad motriz al subchasis (18 mm)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 3600
+  },
+  {
    "name": "DU_F_NVH_Cover",
    "type": "MESH",
    "parent": "DRIVE_UNIT_FRONT",
    "system": "DRIVE_UNITS",
    "label": "Cubierta acústica (NVH) del motor delantero",
    "group": "Unidades motrices",
-   "stage": 6,
+   "stage": 5,
    "fidelity": "R",
    "note": "Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida",
    "explode_dir_blender": [
@@ -5266,7 +6112,7 @@
     0.4575,
     0.4575
    ],
-   "explode_dist": 0.45,
+   "explode_dist": 0.75,
    "faces": 40
   },
   {
@@ -5288,6 +6134,186 @@
    "faces": 108
   },
   {
+   "name": "DU_F_Output_Shafts",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Ejes de salida estriados y retenes de aceite (izquierdo y derecho)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.19612,
+    0.0,
+    -0.98058
+   ],
+   "explode_dist": 0.3,
+   "faces": 484
+  },
+  {
+   "name": "DU_F_Park_Lock",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Bloqueo electromagnético: rueda de bloqueo, trinquete y solenoide con conector",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.86387,
+    0.25916,
+    -0.43193
+   ],
+   "explode_dist": 0.36,
+   "faces": 378
+  },
+  {
+   "name": "DU_F_Phase_Busbars",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Barras de fase del motor al inversor (3 fases, pasamuros aislante y tornillos de 10 mm)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.38,
+   "faces": 374
+  },
+  {
+   "name": "DU_F_Resolver",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Resolver de posición del rotor (estátor bobinado y rotor de chapas)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.92848,
+    0.0,
+    0.37139
+   ],
+   "explode_dist": 0.58,
+   "faces": 796
+  },
+  {
+   "name": "DU_F_Rotor",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Rotor de imanes permanentes (chapas con imanes de NdFeB en V y placas extremas de equilibrado)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.46,
+   "faces": 554
+  },
+  {
+   "name": "DU_F_Rotor_Bearings",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Rodamientos del rotor (lado reductora y lado tapa; aislados contra corrientes de eje)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.97014,
+    0.0,
+    0.24254
+   ],
+   "explode_dist": 0.52,
+   "faces": 1784
+  },
+  {
+   "name": "DU_F_Rotor_Magnets",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Imanes permanentes de NdFeB niquelados del rotor (8 polos en V)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.46,
+   "faces": 704
+  },
+  {
+   "name": "DU_F_Rotor_Shaft",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Eje del rotor hueco con estriado de salida (refrigeración por aceite interior)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.4,
+   "faces": 206
+  },
+  {
+   "name": "DU_F_Stator_Core",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Paquete de chapa magnética del estátor (48 ranuras, chapas de acero al silicio soldadas)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 792
+  },
+  {
+   "name": "DU_F_Stator_Hairpins",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_FRONT",
+   "system": "DRIVE_UNITS",
+   "label": "Devanado de horquillas de cobre esmaltado (cabezas de bobina, terminales de fase y aislantes de ranura)",
+   "group": "Unidad motriz delantera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 5508
+  },
+  {
    "name": "DU_Halfshaft_FL",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5304,6 +6330,42 @@
    ],
    "explode_dist": 0.55,
    "faces": 580
+  },
+  {
+   "name": "DU_Halfshaft_FL_Boot_Clamps",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Abrazaderas de oreja de los fuelles del semieje delantero izquierdo (4)",
+   "group": "Semiejes",
+   "stage": 5,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.55,
+   "faces": 688
+  },
+  {
+   "name": "DU_Halfshaft_FL_Hub_Bolt",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Tornillo central del buje delantero izquierdo (24 mm, 300 N·m; de un solo uso)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "R",
+   "note": "Par y llave del manual de servicio; longitud de la caña reconstruida",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 1.25,
+   "faces": 918
   },
   {
    "name": "DU_Halfshaft_FL_Joints_Boots",
@@ -5324,6 +6386,42 @@
    "faces": 488
   },
   {
+   "name": "DU_Halfshaft_FL_Rzeppa_Joint",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Junta homocinética exterior Rzeppa del semieje delantero izquierdo (nuez, jaula y 6 bolas)",
+   "group": "Semiejes",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    -0.98058
+   ],
+   "explode_dist": 0.3,
+   "faces": 728
+  },
+  {
+   "name": "DU_Halfshaft_FL_Tripod_Joint",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Junta homocinética interior de trípode del semieje delantero izquierdo (araña, rodillos de agujas y estriado)",
+   "group": "Semiejes",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.19612,
+    -0.98058
+   ],
+   "explode_dist": 0.3,
+   "faces": 834
+  },
+  {
    "name": "DU_Halfshaft_FR",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5340,6 +6438,42 @@
    ],
    "explode_dist": 0.55,
    "faces": 580
+  },
+  {
+   "name": "DU_Halfshaft_FR_Boot_Clamps",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Abrazaderas de oreja de los fuelles del semieje delantero derecho (4)",
+   "group": "Semiejes",
+   "stage": 5,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.55,
+   "faces": 688
+  },
+  {
+   "name": "DU_Halfshaft_FR_Hub_Bolt",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Tornillo central del buje delantero derecho (24 mm, 300 N·m; de un solo uso)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "R",
+   "note": "Par y llave del manual de servicio; longitud de la caña reconstruida",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 1.25,
+   "faces": 918
   },
   {
    "name": "DU_Halfshaft_FR_Joints_Boots",
@@ -5360,6 +6494,42 @@
    "faces": 488
   },
   {
+   "name": "DU_Halfshaft_FR_Rzeppa_Joint",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Junta homocinética exterior Rzeppa del semieje delantero derecho (nuez, jaula y 6 bolas)",
+   "group": "Semiejes",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    -0.98058
+   ],
+   "explode_dist": 0.3,
+   "faces": 728
+  },
+  {
+   "name": "DU_Halfshaft_FR_Tripod_Joint",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Junta homocinética interior de trípode del semieje delantero derecho (araña, rodillos de agujas y estriado)",
+   "group": "Semiejes",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.19612,
+    -0.98058
+   ],
+   "explode_dist": 0.3,
+   "faces": 834
+  },
+  {
    "name": "DU_Halfshaft_RL",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5376,6 +6546,42 @@
    ],
    "explode_dist": 0.55,
    "faces": 580
+  },
+  {
+   "name": "DU_Halfshaft_RL_Boot_Clamps",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Abrazaderas de oreja de los fuelles del semieje trasero izquierdo (4)",
+   "group": "Semiejes",
+   "stage": 5,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.55,
+   "faces": 688
+  },
+  {
+   "name": "DU_Halfshaft_RL_Hub_Bolt",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Tornillo central del buje trasero izquierdo (24 mm, 300 N·m; de un solo uso)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "R",
+   "note": "Par y llave del manual de servicio; longitud de la caña reconstruida",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 1.25,
+   "faces": 918
   },
   {
    "name": "DU_Halfshaft_RL_Joints_Boots",
@@ -5396,6 +6602,42 @@
    "faces": 488
   },
   {
+   "name": "DU_Halfshaft_RL_Rzeppa_Joint",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Junta homocinética exterior Rzeppa del semieje trasero izquierdo (nuez, jaula y 6 bolas)",
+   "group": "Semiejes",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.19612,
+    -0.98058
+   ],
+   "explode_dist": 0.3,
+   "faces": 728
+  },
+  {
+   "name": "DU_Halfshaft_RL_Tripod_Joint",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Junta homocinética interior de trípode del semieje trasero izquierdo (araña, rodillos de agujas y estriado)",
+   "group": "Semiejes",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    -0.98058
+   ],
+   "explode_dist": 0.3,
+   "faces": 834
+  },
+  {
    "name": "DU_Halfshaft_RR",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5412,6 +6654,42 @@
    ],
    "explode_dist": 0.55,
    "faces": 580
+  },
+  {
+   "name": "DU_Halfshaft_RR_Boot_Clamps",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Abrazaderas de oreja de los fuelles del semieje trasero derecho (4)",
+   "group": "Semiejes",
+   "stage": 5,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    -0.28735
+   ],
+   "explode_dist": 0.55,
+   "faces": 688
+  },
+  {
+   "name": "DU_Halfshaft_RR_Hub_Bolt",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Tornillo central del buje trasero derecho (24 mm, 300 N·m; de un solo uso)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "R",
+   "note": "Par y llave del manual de servicio; longitud de la caña reconstruida",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 1.25,
+   "faces": 918
   },
   {
    "name": "DU_Halfshaft_RR_Joints_Boots",
@@ -5432,6 +6710,42 @@
    "faces": 488
   },
   {
+   "name": "DU_Halfshaft_RR_Rzeppa_Joint",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Junta homocinética exterior Rzeppa del semieje trasero derecho (nuez, jaula y 6 bolas)",
+   "group": "Semiejes",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.19612,
+    -0.98058
+   ],
+   "explode_dist": 0.3,
+   "faces": 728
+  },
+  {
+   "name": "DU_Halfshaft_RR_Tripod_Joint",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DRIVE_UNITS",
+   "label": "Junta homocinética interior de trípode del semieje trasero derecho (araña, rodillos de agujas y estriado)",
+   "group": "Semiejes",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    -0.98058
+   ],
+   "explode_dist": 0.3,
+   "faces": 834
+  },
+  {
    "name": "DU_R_Breather_Plugs_Seals",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5450,22 +6764,94 @@
    "faces": 326
   },
   {
+   "name": "DU_R_Gear_Train_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Reductora independiente izquierdo: piñón de entrada, eje intermedio, rueda de salida, ejes y rodamientos (sin diferencial: vectorización de par)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.35777,
+    0.26833,
+    -0.89443
+   ],
+   "explode_dist": 0.34,
+   "faces": 9662
+  },
+  {
+   "name": "DU_R_Gear_Train_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Reductora independiente derecho: piñón de entrada, eje intermedio, rueda de salida, ejes y rodamientos (sin diferencial: vectorización de par)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.35777,
+    0.26833,
+    -0.89443
+   ],
+   "explode_dist": 0.34,
+   "faces": 9662
+  },
+  {
    "name": "DU_R_Gearbox",
    "type": "MESH",
    "parent": "DRIVE_UNIT_REAR",
    "system": "DRIVE_UNITS",
    "label": "Carcasa común de las dos reductoras independientes (15,02:1), desplazadas hacia atrás",
    "group": "Unidades motrices",
-   "stage": 6,
+   "stage": 5,
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
     0.0,
-    -0.89443,
-    -0.44721
+    0.28735,
+    -0.95783
+   ],
+   "explode_dist": 0.5,
+   "faces": 704
+  },
+  {
+   "name": "DU_R_Inverter_Internals_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Interior del inversor trasero izquierdo: placa fría, módulos de potencia, condensador, barras y placa de control",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.08909,
+    -0.89087,
+    0.44544
    ],
    "explode_dist": 0.3,
-   "faces": 704
+   "faces": 1138
+  },
+  {
+   "name": "DU_R_Inverter_Internals_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Interior del inversor trasero derecho: placa fría, módulos de potencia, condensador, barras y placa de control",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.08909,
+    -0.89087,
+    0.44544
+   ],
+   "explode_dist": 0.3,
+   "faces": 1138
   },
   {
    "name": "DU_R_Inverter_L",
@@ -5474,15 +6860,15 @@
    "system": "DRIVE_UNITS",
    "label": "Inversor del motor trasero izquierdo (montado en su parte posterior)",
    "group": "Unidades motrices",
-   "stage": 6,
+   "stage": 5,
    "fidelity": "R",
    "note": "Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida",
    "explode_dir_blender": [
-    -0.33333,
-    -0.66667,
-    0.66667
+    -0.17609,
+    -0.88045,
+    0.44023
    ],
-   "explode_dist": 0.36,
+   "explode_dist": 0.6,
    "faces": 460
   },
   {
@@ -5510,15 +6896,15 @@
    "system": "DRIVE_UNITS",
    "label": "Inversor del motor trasero derecho (montado en su parte posterior)",
    "group": "Unidades motrices",
-   "stage": 6,
+   "stage": 5,
    "fidelity": "R",
    "note": "Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida",
    "explode_dir_blender": [
-    0.33333,
-    -0.66667,
-    0.66667
+    0.17609,
+    -0.88045,
+    0.44023
    ],
-   "explode_dist": 0.36,
+   "explode_dist": 0.6,
    "faces": 460
   },
   {
@@ -5528,15 +6914,15 @@
    "system": "DRIVE_UNITS",
    "label": "Motor de inducción trasero izquierdo (rotor de cobre)",
    "group": "Unidades motrices",
-   "stage": 6,
+   "stage": 5,
    "fidelity": "R",
    "note": "Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida",
    "explode_dir_blender": [
-    -0.98058,
-    -0.19612,
-    0.0
+    -0.98414,
+    -0.14762,
+    0.09841
    ],
-   "explode_dist": 0.32,
+   "explode_dist": 0.62,
    "faces": 854
   },
   {
@@ -5546,15 +6932,15 @@
    "system": "DRIVE_UNITS",
    "label": "Motor de inducción trasero derecho (rotor de cobre)",
    "group": "Unidades motrices",
-   "stage": 6,
+   "stage": 5,
    "fidelity": "R",
    "note": "Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida",
    "explode_dir_blender": [
-    0.98058,
-    -0.19612,
-    0.0
+    0.98414,
+    -0.14762,
+    0.09841
    ],
-   "explode_dist": 0.32,
+   "explode_dist": 0.62,
    "faces": 854
   },
   {
@@ -5576,6 +6962,24 @@
    "faces": 398
   },
   {
+   "name": "DU_R_Mounts_Fasteners",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Tornillos de los soportes de la unidad motriz al subchasis (18 mm)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 3600
+  },
+  {
    "name": "DU_R_NVH_Cover_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5586,11 +6990,11 @@
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
-    -0.27617,
-    -0.27617,
-    0.92057
+    -0.78811,
+    -0.39406,
+    0.47287
    ],
-   "explode_dist": 0.45,
+   "explode_dist": 0.75,
    "faces": 344
   },
   {
@@ -5604,11 +7008,11 @@
    "fidelity": "R",
    "note": null,
    "explode_dir_blender": [
-    0.27617,
-    -0.27617,
-    0.92057
+    0.78811,
+    -0.39406,
+    0.47287
    ],
-   "explode_dist": 0.45,
+   "explode_dist": 0.75,
    "faces": 344
   },
   {
@@ -5666,6 +7070,150 @@
    "faces": 424
   },
   {
+   "name": "DU_R_Rotor_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Rotor de jaula de ardilla de cobre izquierdo (barras, anillos de cortocircuito y aros de retención)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.46,
+   "faces": 1202
+  },
+  {
+   "name": "DU_R_Rotor_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Rotor de jaula de ardilla de cobre derecho (barras, anillos de cortocircuito y aros de retención)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.46,
+   "faces": 1202
+  },
+  {
+   "name": "DU_R_Rotor_Shaft_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Eje del rotor izquierdo con estriado, rodamientos y resolver",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.54,
+   "faces": 2038
+  },
+  {
+   "name": "DU_R_Rotor_Shaft_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Eje del rotor derecho con estriado, rodamientos y resolver",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.54,
+   "faces": 2038
+  },
+  {
+   "name": "DU_R_Stator_Core_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Paquete de chapa del estátor del motor de inducción izquierdo (60 ranuras)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1136
+  },
+  {
+   "name": "DU_R_Stator_Core_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Paquete de chapa del estátor del motor de inducción derecho (60 ranuras)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1136
+  },
+  {
+   "name": "DU_R_Stator_Winding_L",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Devanado distribuido del motor de inducción izquierdo (cabezas de bobina atadas y terminales de fase)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1092
+  },
+  {
+   "name": "DU_R_Stator_Winding_R",
+   "type": "MESH",
+   "parent": "DRIVE_UNIT_REAR",
+   "system": "DRIVE_UNITS",
+   "label": "Devanado distribuido del motor de inducción derecho (cabezas de bobina atadas y terminales de fase)",
+   "group": "Unidad motriz trasera",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 1092
+  },
+  {
    "name": "ELE_Antennas",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5718,6 +7266,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 88
+  },
+  {
+   "name": "ELE_FM_HD_Tuner_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del sintonizador FM/HD",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 62
   },
   {
    "name": "ELE_Powershare_48V_Outlets",
@@ -5972,6 +7538,24 @@
    "faces": 88
   },
   {
+   "name": "EXT_ChargePort_ECU_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Placa electrónica del controlador de la toma de carga",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -0.94072,
+    0.18814,
+    0.28222
+   ],
+   "explode_dist": 0.21,
+   "faces": 230
+  },
+  {
    "name": "EXT_ChargePort_Inlet",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -5990,6 +7574,24 @@
    "faces": 344
   },
   {
+   "name": "EXT_ChargePort_Lock_Actuator",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Actuador de bloqueo del conector de carga y motor de la tapa de la toma NACS",
+   "group": "Carga",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.95783,
+    0.0,
+    0.28735
+   ],
+   "explode_dist": 0.35,
+   "faces": 2588
+  },
+  {
    "name": "EXT_Cowl_Wiper_Applique",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -6006,6 +7608,24 @@
    ],
    "explode_dist": 0.55,
    "faces": 1
+  },
+  {
+   "name": "EXT_Cyberbeast_Emblem",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Emblema Cyberbeast (cabeza de Cerbero) en la parte trasera derecha",
+   "group": "Exterior",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Existencia y lado según la hoja de rescate de Tesla; forma y posición exactas aproximadas",
+   "explode_dir_blender": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "explode_dist": 0.35,
+   "faces": 196
   },
   {
    "name": "EXT_Dash_Absorber_L",
@@ -6080,6 +7700,24 @@
    "faces": 44
   },
   {
+   "name": "EXT_Door_FL_Controller_PCB",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Placa electrónica del controlador de la puerta delantera izquierda",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -0.94868,
+    0.0,
+    0.31623
+   ],
+   "explode_dist": 0.216,
+   "faces": 272
+  },
+  {
    "name": "EXT_Door_FL_GlassFrame",
    "type": "MESH",
    "parent": "DOOR_FL",
@@ -6114,6 +7752,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 728
+  },
+  {
+   "name": "EXT_Door_FL_Intrusion_Beam",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Viga antiintrusión de acero de ultra alta resistencia de la puerta delantera L con soportes, tornillos y guías del cristal",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.92848,
+    0.0,
+    -0.37139
+   ],
+   "explode_dist": 0.3,
+   "faces": 2116
   },
   {
    "name": "EXT_Door_FL_Latch",
@@ -6242,6 +7898,24 @@
    "faces": 44
   },
   {
+   "name": "EXT_Door_FR_Controller_PCB",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Placa electrónica del controlador de la puerta delantera derecha",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.94868,
+    0.0,
+    0.31623
+   ],
+   "explode_dist": 0.216,
+   "faces": 266
+  },
+  {
    "name": "EXT_Door_FR_GlassFrame",
    "type": "MESH",
    "parent": "DOOR_FR",
@@ -6276,6 +7950,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 728
+  },
+  {
+   "name": "EXT_Door_FR_Intrusion_Beam",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Viga antiintrusión de acero de ultra alta resistencia de la puerta delantera R con soportes, tornillos y guías del cristal",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.92848,
+    0.0,
+    -0.37139
+   ],
+   "explode_dist": 0.3,
+   "faces": 2116
   },
   {
    "name": "EXT_Door_FR_Latch",
@@ -6584,6 +8276,24 @@
    "faces": 44
   },
   {
+   "name": "EXT_Door_RL_Controller_PCB",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Placa electrónica del controlador de la puerta trasera izquierda",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -0.94868,
+    0.0,
+    0.31623
+   ],
+   "explode_dist": 0.216,
+   "faces": 342
+  },
+  {
    "name": "EXT_Door_RL_GlassFrame",
    "type": "MESH",
    "parent": "DOOR_RL",
@@ -6618,6 +8328,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 728
+  },
+  {
+   "name": "EXT_Door_RL_Intrusion_Beam",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Viga antiintrusión de acero de ultra alta resistencia de la puerta trasera L con soportes, tornillos y guías del cristal",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.92848,
+    0.0,
+    -0.37139
+   ],
+   "explode_dist": 0.3,
+   "faces": 2116
   },
   {
    "name": "EXT_Door_RL_Latch",
@@ -6746,6 +8474,24 @@
    "faces": 44
   },
   {
+   "name": "EXT_Door_RR_Controller_PCB",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Placa electrónica del controlador de la puerta trasera derecha",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.94868,
+    0.0,
+    0.31623
+   ],
+   "explode_dist": 0.216,
+   "faces": 420
+  },
+  {
    "name": "EXT_Door_RR_GlassFrame",
    "type": "MESH",
    "parent": "DOOR_RR",
@@ -6780,6 +8526,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 728
+  },
+  {
+   "name": "EXT_Door_RR_Intrusion_Beam",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "DOORS_AND_HATCHES",
+   "label": "Viga antiintrusión de acero de ultra alta resistencia de la puerta trasera R con soportes, tornillos y guías del cristal",
+   "group": "Puertas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.92848,
+    0.0,
+    -0.37139
+   ],
+   "explode_dist": 0.3,
+   "faces": 2116
   },
   {
    "name": "EXT_Door_RR_Latch",
@@ -7034,6 +8798,24 @@
    "faces": 3
   },
   {
+   "name": "EXT_Fender_FL_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Tornillos de la aleta delantera: 3 al pilar A y 2 a la viga superior (13 mm, 30 N·m)",
+   "group": "Tornillería",
+   "stage": 1,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    -0.96561,
+    0.2414,
+    0.09656
+   ],
+   "explode_dist": 0.85,
+   "faces": 2400
+  },
+  {
    "name": "EXT_Fender_FR",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -7050,6 +8832,24 @@
    ],
    "explode_dist": 0.7,
    "faces": 3
+  },
+  {
+   "name": "EXT_Fender_FR_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Tornillos de la aleta delantera: 3 al pilar A y 2 a la viga superior (13 mm, 30 N·m)",
+   "group": "Tornillería",
+   "stage": 1,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.96561,
+    0.2414,
+    0.09656
+   ],
+   "explode_dist": 0.85,
+   "faces": 2400
   },
   {
    "name": "EXT_Flare_Carrier_L",
@@ -7176,6 +8976,24 @@
    ],
    "explode_dist": 0.8,
    "faces": 170
+  },
+  {
+   "name": "EXT_Front_Bumper_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Tornillos de la fascia delantera (4 × 10 mm, 4 N·m)",
+   "group": "Tornillería",
+   "stage": 1,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.9500000000000001,
+   "faces": 2400
   },
   {
    "name": "EXT_Front_Center_Applique",
@@ -7700,6 +9518,24 @@
    "faces": 236
   },
   {
+   "name": "EXT_Mirror_L_Arm_Fasteners",
+   "type": "MESH",
+   "parent": "MIRROR_L",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Tornillos del retrovisor (3 × T40 de un solo uso, 18 N·m; PN 1857466-00-B)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22999999999999998,
+   "faces": 1458
+  },
+  {
    "name": "EXT_Mirror_L_Housing",
    "type": "MESH",
    "parent": "MIRROR_L",
@@ -7752,6 +9588,24 @@
    ],
    "explode_dist": 0.08,
    "faces": 236
+  },
+  {
+   "name": "EXT_Mirror_R_Arm_Fasteners",
+   "type": "MESH",
+   "parent": "MIRROR_R",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Tornillos del retrovisor (3 × T40 de un solo uso, 18 N·m; PN 1857466-00-B)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.22999999999999998,
+   "faces": 1458
   },
   {
    "name": "EXT_Mirror_R_Housing",
@@ -7952,6 +9806,24 @@
    "faces": 64
   },
   {
+   "name": "EXT_Rear_Bumper_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Tornillos centrales de la fascia trasera (2 × 10 mm, 6 N·m)",
+   "group": "Tornillería",
+   "stage": 1,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.9500000000000001,
+   "faces": 1200
+  },
+  {
    "name": "EXT_Rear_Diffuser",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -7968,6 +9840,24 @@
    ],
    "explode_dist": 0.45,
    "faces": 1148
+  },
+  {
+   "name": "EXT_Rear_Diffuser_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "EXTERIOR_PANELS",
+   "label": "Tornillos del difusor (9 × 10 mm, 6 N·m)",
+   "group": "Tornillería",
+   "stage": 1,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    -0.5145,
+    -0.85749
+   ],
+   "explode_dist": 0.6,
+   "faces": 5400
   },
   {
    "name": "EXT_Rear_Fascia_Step_Bracket_L",
@@ -8744,6 +10634,24 @@
    "faces": 264
   },
   {
+   "name": "EXT_Washer_Tank_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Tornillos del depósito del lavaparabrisas (3 × 10 mm, 8 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.89443,
+    0.44721,
+    0.0
+   ],
+   "explode_dist": 0.65,
+   "faces": 1800
+  },
+  {
    "name": "EXT_Windshield_Glare_Shield",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -8832,6 +10740,60 @@
    ],
    "explode_dist": 0.35,
    "faces": 154
+  },
+  {
+   "name": "EXT_Wiper_Motor_Controller_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Placa electrónica del controlador del limpiaparabrisas",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.27617,
+    0.27617,
+    0.92058
+   ],
+   "explode_dist": 0.21,
+   "faces": 36
+  },
+  {
+   "name": "EXT_Wiper_Motor_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Tornillos del motor del limpiaparabrisas (3 × 13 mm, 24 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.6,
+   "faces": 1440
+  },
+  {
+   "name": "EXT_Wiper_Motor_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "GLASS_AND_MIRRORS",
+   "label": "Interior del motor del limpiaparabrisas: tornillo sinfín, corona de nailon y motor",
+   "group": "Limpiaparabrisas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.27617,
+    0.27617,
+    0.92057
+   ],
+   "explode_dist": 0.65,
+   "faces": 3354
   },
   {
    "name": "GLS_Door_FL",
@@ -9086,6 +11048,24 @@
    "faces": 332
   },
   {
+   "name": "HV_ACJB_Internals",
+   "type": "MESH",
+   "parent": "ANCILLARY_BAY",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Interior de la caja de conexiones de alterna (ACJB): barras, soportes aislantes y placa de medida",
+   "group": "Alta tensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -0.27617,
+    -0.27617,
+    0.92057
+   ],
+   "explode_dist": 0.55,
+   "faces": 588
+  },
+  {
    "name": "HV_AC_Junction_Box",
    "type": "MESH",
    "parent": "ANCILLARY_BAY",
@@ -9320,6 +11300,24 @@
    "faces": 14
   },
   {
+   "name": "HV_PCS_Internals",
+   "type": "MESH",
+   "parent": "ANCILLARY_BAY",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Interior del PCS: cargador embarcado y convertidor CC-CC (transformadores planos, bobinas, condensadores, placa de potencia y placa fría)",
+   "group": "Alta tensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.27617,
+    -0.27617,
+    0.92057
+   ],
+   "explode_dist": 0.55,
+   "faces": 1362
+  },
+  {
    "name": "HV_Power_Conversion_System",
    "type": "MESH",
    "parent": "ANCILLARY_BAY",
@@ -9518,6 +11516,24 @@
    "faces": 44
   },
   {
+   "name": "INT_Cabin_Radar_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Placa electrónica del radar de habitáculo (antena impresa y transceptor)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 48
+  },
+  {
    "name": "INT_Cantrail_L",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -9570,6 +11586,24 @@
    ],
    "explode_dist": 0.4,
    "faces": 572
+  },
+  {
+   "name": "INT_Car_Computer_Internals",
+   "type": "MESH",
+   "parent": "IP_ASSEMBLY",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Interior del ordenador de a bordo: placa base con los dos procesadores, disipadores y placa fría líquida",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.45,
+   "faces": 1194
   },
   {
    "name": "INT_Carpet",
@@ -9896,6 +11930,24 @@
    "faces": 176
   },
   {
+   "name": "INT_Console_USB_Controller_Hub_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Placa electrónica del concentrador USB de la consola",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.5145,
+    0.85749
+   ],
+   "explode_dist": 0.21,
+   "faces": 142
+  },
+  {
    "name": "INT_Console_USB_Ports",
    "type": "MESH",
    "parent": "CONSOLE_ASSEMBLY",
@@ -9948,6 +12000,24 @@
    ],
    "explode_dist": 0.22,
    "faces": 440
+  },
+  {
+   "name": "INT_Console_Wireless_Charger_Coils",
+   "type": "MESH",
+   "parent": "CONSOLE_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Bobinas Qi, ferritas y placa de los dos cargadores inalámbricos de la consola",
+   "group": "Consola",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.3,
+   "faces": 2266
   },
   {
    "name": "INT_Demist_Duct_Side_L",
@@ -10022,6 +12092,24 @@
    "faces": 6
   },
   {
+   "name": "INT_Display_Center_Internals",
+   "type": "MESH",
+   "parent": "DISPLAY_CENTER",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Interior de la pantalla central de 18,5\": panel LCD, retroiluminación, placa base y chapa de disipación",
+   "group": "Pantallas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.22,
+   "faces": 686
+  },
+  {
    "name": "INT_Display_Center_Mount",
    "type": "MESH",
    "parent": "DISPLAY_CENTER",
@@ -10074,6 +12162,24 @@
    ],
    "explode_dist": 0.25,
    "faces": 6
+  },
+  {
+   "name": "INT_Display_Rear_Internals",
+   "type": "MESH",
+   "parent": "CONSOLE_ASSEMBLY",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Interior de la pantalla trasera de 9,4\": panel LCD, retroiluminación, placa base y chapa de disipación",
+   "group": "Pantallas",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.22,
+   "faces": 466
   },
   {
    "name": "INT_Display_Rear_Screen",
@@ -10346,6 +12452,24 @@
    "faces": 120
   },
   {
+   "name": "INT_DoorSpeaker_FL_Driver",
+   "type": "MESH",
+   "parent": "DOOR_FL",
+   "system": "INTERIOR_DOORS",
+   "label": "Altavoz de la puerta FL: cesta, cono, guardapolvo, bobina móvil e imán de ferrita",
+   "group": "Audio",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 472
+  },
+  {
    "name": "INT_DoorSpeaker_FR",
    "type": "MESH",
    "parent": "DOOR_FR",
@@ -10362,6 +12486,24 @@
    ],
    "explode_dist": 0.42,
    "faces": 120
+  },
+  {
+   "name": "INT_DoorSpeaker_FR_Driver",
+   "type": "MESH",
+   "parent": "DOOR_FR",
+   "system": "INTERIOR_DOORS",
+   "label": "Altavoz de la puerta FR: cesta, cono, guardapolvo, bobina móvil e imán de ferrita",
+   "group": "Audio",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 472
   },
   {
    "name": "INT_DoorSpeaker_RL",
@@ -10382,6 +12524,24 @@
    "faces": 120
   },
   {
+   "name": "INT_DoorSpeaker_RL_Driver",
+   "type": "MESH",
+   "parent": "DOOR_RL",
+   "system": "INTERIOR_DOORS",
+   "label": "Altavoz de la puerta RL: cesta, cono, guardapolvo, bobina móvil e imán de ferrita",
+   "group": "Audio",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 472
+  },
+  {
    "name": "INT_DoorSpeaker_RR",
    "type": "MESH",
    "parent": "DOOR_RR",
@@ -10398,6 +12558,24 @@
    ],
    "explode_dist": 0.42,
    "faces": 120
+  },
+  {
+   "name": "INT_DoorSpeaker_RR_Driver",
+   "type": "MESH",
+   "parent": "DOOR_RR",
+   "system": "INTERIOR_DOORS",
+   "label": "Altavoz de la puerta RR: cesta, cono, guardapolvo, bobina móvil e imán de ferrita",
+   "group": "Audio",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 472
   },
   {
    "name": "INT_DoorTrim_Clips_FL",
@@ -11156,6 +13334,24 @@
    "faces": 304
   },
   {
+   "name": "INT_HVAC_Internals",
+   "type": "MESH",
+   "parent": "IP_ASSEMBLY",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Interior del climatizador: soplante centrífuga de 36 álabes con motor, evaporador, condensador interior de la bomba de calor, compuertas de mezcla y de modo, desagüe y aislante",
+   "group": "Climatización",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.28735,
+    0.0,
+    0.95783
+   ],
+   "explode_dist": 0.7,
+   "faces": 3554
+  },
+  {
    "name": "INT_HVAC_Module",
    "type": "MESH",
    "parent": "IP_ASSEMBLY",
@@ -11462,6 +13658,24 @@
    "faces": 44
   },
   {
+   "name": "INT_Impact_Sensor_BPillar_L_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Placa electrónica del sensor de impacto del pilar B izquierdo",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 12
+  },
+  {
    "name": "INT_Impact_Sensor_BPillar_R",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -11478,6 +13692,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 44
+  },
+  {
+   "name": "INT_Impact_Sensor_BPillar_R_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Placa electrónica del sensor de impacto del pilar B derecho",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 12
   },
   {
    "name": "INT_Impact_Sensor_Fender_L",
@@ -11498,6 +13730,24 @@
    "faces": 44
   },
   {
+   "name": "INT_Impact_Sensor_Fender_L_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del sensor de impacto de la aleta izquierda",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -0.95783,
+    0.28735,
+    0.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 12
+  },
+  {
    "name": "INT_Impact_Sensor_Fender_R",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -11514,6 +13764,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 44
+  },
+  {
+   "name": "INT_Impact_Sensor_Fender_R_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del sensor de impacto de la aleta derecha",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.95783,
+    0.28735,
+    0.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 18
   },
   {
    "name": "INT_Impact_Sensor_FrontEnd_L",
@@ -11534,6 +13802,24 @@
    "faces": 44
   },
   {
+   "name": "INT_Impact_Sensor_FrontEnd_L_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del sensor de impacto frontal izquierdo",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -0.28735,
+    0.95783,
+    0.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 50
+  },
+  {
    "name": "INT_Impact_Sensor_FrontEnd_R",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -11550,6 +13836,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 44
+  },
+  {
+   "name": "INT_Impact_Sensor_FrontEnd_R_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BODY_FASTENERS",
+   "label": "Placa electrónica del sensor de impacto frontal derecho",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.28735,
+    0.95783,
+    0.0
+   ],
+   "explode_dist": 0.18,
+   "faces": 50
   },
   {
    "name": "INT_Interior_Camera",
@@ -11786,6 +14090,96 @@
    "faces": 236
   },
   {
+   "name": "INT_Restraint_Control_Module_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_CONTROLS",
+   "label": "Placa electrónica del módulo de control de airbags (acelerómetros y condensador de reserva)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "explode_dist": 0.39,
+   "faces": 462
+  },
+  {
+   "name": "INT_SeatF_Frame_L",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Armazón del asiento delantero izquierdo: largueros, travesaños, muelles en zigzag, herrajes de reclinado, armazón del respaldo con malla lumbar y 4 tornillos a las guías",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.19612,
+    0.0,
+    -0.98058
+   ],
+   "explode_dist": 0.1,
+   "faces": 3844
+  },
+  {
+   "name": "INT_SeatF_Frame_R",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Armazón del asiento delantero derecho: largueros, travesaños, muelles en zigzag, herrajes de reclinado, armazón del respaldo con malla lumbar y 4 tornillos a las guías",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.19612,
+    0.0,
+    -0.98058
+   ],
+   "explode_dist": 0.1,
+   "faces": 3844
+  },
+  {
+   "name": "INT_SeatF_Heat_Vent_Mats_L",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Esteras de calefacción (hilo resistivo) y de ventilación del asiento delantero izquierdo",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.26,
+   "faces": 122
+  },
+  {
+   "name": "INT_SeatF_Heat_Vent_Mats_R",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Esteras de calefacción (hilo resistivo) y de ventilación del asiento delantero derecho",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.28735,
+    0.95783
+   ],
+   "explode_dist": 0.26,
+   "faces": 122
+  },
+  {
    "name": "INT_SeatF_L_Back",
    "type": "MESH",
    "parent": "SEAT_FRONT_L",
@@ -11800,7 +14194,25 @@
     -0.95783,
     0.28735
    ],
-   "explode_dist": 0.1,
+   "explode_dist": 0.36,
+   "faces": 144
+  },
+  {
+   "name": "INT_SeatF_L_Back_Foam",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma de poliuretano moldeada del respaldo delantero izquierdo",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95794,
+    0.28698
+   ],
+   "explode_dist": 0.18,
    "faces": 144
   },
   {
@@ -11908,7 +14320,25 @@
     0.28735,
     0.95783
    ],
-   "explode_dist": 0.08,
+   "explode_dist": 0.34,
+   "faces": 112
+  },
+  {
+   "name": "INT_SeatF_L_Cushion_Foam",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_L",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma de poliuretano moldeada del cojín delantero izquierdo",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.28698,
+    0.95794
+   ],
+   "explode_dist": 0.17,
    "faces": 112
   },
   {
@@ -12016,7 +14446,25 @@
     -0.95783,
     0.28735
    ],
-   "explode_dist": 0.1,
+   "explode_dist": 0.36,
+   "faces": 144
+  },
+  {
+   "name": "INT_SeatF_R_Back_Foam",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma de poliuretano moldeada del respaldo delantero derecho",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95794,
+    0.28698
+   ],
+   "explode_dist": 0.18,
    "faces": 144
   },
   {
@@ -12124,7 +14572,25 @@
     0.28735,
     0.95783
    ],
-   "explode_dist": 0.08,
+   "explode_dist": 0.34,
+   "faces": 112
+  },
+  {
+   "name": "INT_SeatF_R_Cushion_Foam",
+   "type": "MESH",
+   "parent": "SEAT_FRONT_R",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma de poliuretano moldeada del cojín delantero derecho",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.28698,
+    0.95794
+   ],
+   "explode_dist": 0.17,
    "faces": 112
   },
   {
@@ -12286,7 +14752,25 @@
     -0.95783,
     0.28735
    ],
-   "explode_dist": 0.1,
+   "explode_dist": 0.36,
+   "faces": 80
+  },
+  {
+   "name": "INT_SeatR_C_Back_Foam",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma del respaldo trasero (central)",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95794,
+    0.28698
+   ],
+   "explode_dist": 0.18,
    "faces": 80
   },
   {
@@ -12304,7 +14788,25 @@
     0.28735,
     0.95783
    ],
-   "explode_dist": 0.08,
+   "explode_dist": 0.34,
+   "faces": 112
+  },
+  {
+   "name": "INT_SeatR_C_Cushion_Foam",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma del cojín trasero (central)",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.28698,
+    0.95794
+   ],
+   "explode_dist": 0.17,
    "faces": 112
   },
   {
@@ -12326,6 +14828,24 @@
    "faces": 228
   },
   {
+   "name": "INT_SeatR_Frame",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Armazón del banco trasero: travesaños, muelles en zigzag, armazones de respaldo 60/40 con bisagras, cierres y tornillos al suelo",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "explode_dist": 0.1,
+   "faces": 3700
+  },
+  {
    "name": "INT_SeatR_L_Back",
    "type": "MESH",
    "parent": "SEAT_REAR",
@@ -12340,7 +14860,25 @@
     -0.95783,
     0.28735
    ],
-   "explode_dist": 0.1,
+   "explode_dist": 0.36,
+   "faces": 80
+  },
+  {
+   "name": "INT_SeatR_L_Back_Foam",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma del respaldo trasero (izquierda)",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95794,
+    0.28698
+   ],
+   "explode_dist": 0.18,
    "faces": 80
   },
   {
@@ -12358,7 +14896,25 @@
     0.28735,
     0.95783
    ],
-   "explode_dist": 0.08,
+   "explode_dist": 0.34,
+   "faces": 112
+  },
+  {
+   "name": "INT_SeatR_L_Cushion_Foam",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma del cojín trasero (izquierda)",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.28698,
+    0.95794
+   ],
+   "explode_dist": 0.17,
    "faces": 112
   },
   {
@@ -12394,7 +14950,25 @@
     -0.95783,
     0.28735
    ],
-   "explode_dist": 0.1,
+   "explode_dist": 0.36,
+   "faces": 80
+  },
+  {
+   "name": "INT_SeatR_R_Back_Foam",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma del respaldo trasero (derecha)",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95794,
+    0.28698
+   ],
+   "explode_dist": 0.18,
    "faces": 80
   },
   {
@@ -12412,7 +14986,25 @@
     0.28735,
     0.95783
    ],
-   "explode_dist": 0.08,
+   "explode_dist": 0.34,
+   "faces": 112
+  },
+  {
+   "name": "INT_SeatR_R_Cushion_Foam",
+   "type": "MESH",
+   "parent": "SEAT_REAR",
+   "system": "INTERIOR_SEATS",
+   "label": "Espuma del cojín trasero (derecha)",
+   "group": "Asientos",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.28698,
+    0.95794
+   ],
+   "explode_dist": 0.17,
    "faces": 112
   },
   {
@@ -12506,6 +15098,24 @@
    "faces": 268
   },
   {
+   "name": "INT_Seatbelt_FL_Retractor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Interior del enrollador del cinturón FL: carrete con cinta, rueda de bloqueo y pretensor pirotécnico",
+   "group": "Cinturones",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 504
+  },
+  {
    "name": "INT_Seatbelt_FR",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -12522,6 +15132,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 268
+  },
+  {
+   "name": "INT_Seatbelt_FR_Retractor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Interior del enrollador del cinturón FR: carrete con cinta, rueda de bloqueo y pretensor pirotécnico",
+   "group": "Cinturones",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 504
   },
   {
    "name": "INT_Seatbelt_RL",
@@ -12542,6 +15170,24 @@
    "faces": 268
   },
   {
+   "name": "INT_Seatbelt_RL_Retractor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Interior del enrollador del cinturón RL: carrete con cinta, rueda de bloqueo y pretensor pirotécnico",
+   "group": "Cinturones",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 504
+  },
+  {
    "name": "INT_Seatbelt_RR",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -12558,6 +15204,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 268
+  },
+  {
+   "name": "INT_Seatbelt_RR_Retractor",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_SEATS",
+   "label": "Interior del enrollador del cinturón RR: carrete con cinta, rueda de bloqueo y pretensor pirotécnico",
+   "group": "Cinturones",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.98058,
+    0.0,
+    0.19612
+   ],
+   "explode_dist": 0.3,
+   "faces": 504
   },
   {
    "name": "INT_Seatbelt_Webguides_L",
@@ -12614,6 +15278,24 @@
    "faces": 176
   },
   {
+   "name": "INT_SteeringWheel_Armature",
+   "type": "MESH",
+   "parent": "STEERING_WHEEL",
+   "system": "STEERING",
+   "label": "Alma de magnesio inyectado del aro del volante (bajo la espuma y el tapizado)",
+   "group": "Volante",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95794,
+    0.28698
+   ],
+   "explode_dist": 0.2,
+   "faces": 720
+  },
+  {
    "name": "INT_SteeringWheel_Controls",
    "type": "MESH",
    "parent": "STEERING_WHEEL",
@@ -12650,6 +15332,24 @@
    "faces": 420
   },
   {
+   "name": "INT_SteeringWheel_Hub_Internals",
+   "type": "MESH",
+   "parent": "STEERING_WHEEL",
+   "system": "STEERING",
+   "label": "Radios de magnesio, muelle de reloj (clock spring), adaptador estriado del buje y tornillo central del volante",
+   "group": "Volante",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95794,
+    0.28698
+   ],
+   "explode_dist": 0.3,
+   "faces": 1118
+  },
+  {
    "name": "INT_SteeringWheel_Rim",
    "type": "MESH",
    "parent": "STEERING_WHEEL",
@@ -12661,10 +15361,10 @@
    "note": null,
    "explode_dir_blender": [
     0.0,
-    -0.95783,
-    0.28735
+    -0.95794,
+    0.28698
    ],
-   "explode_dist": 0.1,
+   "explode_dist": 0.4,
    "faces": 720
   },
   {
@@ -12810,6 +15510,24 @@
    ],
    "explode_dist": 0.35,
    "faces": 472
+  },
+  {
+   "name": "INT_TCU_Bracket_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "INTERIOR_TRIM",
+   "label": "Placa electrónica del unidad telemática (módem LTE, GNSS, Wi-Fi y Bluetooth)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.19612,
+    0.0,
+    0.98058
+   ],
+   "explode_dist": 0.21,
+   "faces": 142
   },
   {
    "name": "INT_Telephony_Mic_L",
@@ -13190,6 +15908,24 @@
    "faces": 38
   },
   {
+   "name": "LGT_Front_Lightbar_Housing_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Fijaciones de la barra de luz (2 tuercas a 3 N·m y 2 pernos a 4 N·m, 10 mm)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    0.19612
+   ],
+   "explode_dist": 0.35,
+   "faces": 2400
+  },
+  {
    "name": "LGT_Front_Lightbar_LED",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -13316,6 +16052,42 @@
    "faces": 440
   },
   {
+   "name": "LGT_Headlamp_L_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Tornillos del faro (2 × 10 mm, 5 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    -0.25916,
+    0.86387,
+    0.43193
+   ],
+   "explode_dist": 0.7000000000000001,
+   "faces": 1200
+  },
+  {
+   "name": "LGT_Headlamp_L_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Interior del faro izquierdo: disipadores de los módulos LED, placa de control, motor de nivelación y respiradero",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 2936
+  },
+  {
    "name": "LGT_Headlamp_L_Projectors",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -13368,6 +16140,42 @@
    ],
    "explode_dist": 0.65,
    "faces": 440
+  },
+  {
+   "name": "LGT_Headlamp_R_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Tornillos del faro (2 × 10 mm, 5 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.25916,
+    0.86387,
+    0.43193
+   ],
+   "explode_dist": 0.7000000000000001,
+   "faces": 1200
+  },
+  {
+   "name": "LGT_Headlamp_R_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Interior del faro derecho: disipadores de los módulos LED, placa de control, motor de nivelación y respiradero",
+   "group": "Iluminación",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria por función; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.4,
+   "faces": 2898
   },
   {
    "name": "LGT_Headlamp_R_Projectors",
@@ -13458,6 +16266,24 @@
    ],
    "explode_dist": 0.24,
    "faces": 572
+  },
+  {
+   "name": "LGT_Rear_Lightbar_Housing_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Tornillos de la luz del portón (8 × T30, 5 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.0,
+    -0.95783,
+    0.28735
+   ],
+   "explode_dist": 0.39,
+   "faces": 5488
   },
   {
    "name": "LGT_Rear_Lightbar_LED",
@@ -13640,6 +16466,24 @@
    "faces": 5
   },
   {
+   "name": "LGT_TailLamp_BodySide_L_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Tornillos del piloto lateral (2 × T30, 5 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    -0.91287,
+    -0.36515,
+    0.18257
+   ],
+   "explode_dist": 0.5,
+   "faces": 1372
+  },
+  {
    "name": "LGT_TailLamp_BodySide_R",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -13656,6 +16500,24 @@
    ],
    "explode_dist": 0.35,
    "faces": 5
+  },
+  {
+   "name": "LGT_TailLamp_BodySide_R_Fasteners",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "LIGHTING",
+   "label": "Tornillos del piloto lateral (2 × T30, 5 N·m)",
+   "group": "Tornillería",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Cantidad, llave y par según el manual de servicio (docs/ficha-tecnica-piezas.md); posición de cada tornillo reconstruida",
+   "explode_dir_blender": [
+    0.91287,
+    -0.36515,
+    0.18257
+   ],
+   "explode_dist": 0.5,
+   "faces": 1372
   },
   {
    "name": "LV_Backbone_Clips",
@@ -13694,6 +16556,24 @@
    "faces": 152
   },
   {
+   "name": "LV_Battery_48V_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Interior de la batería de 48 V: celdas cilíndricas en serie, tiras de conexión, soporte y placa BMS",
+   "group": "Baja tensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados). El número de celdas (13 en serie) es una estimación a partir de la tensión nominal",
+   "explode_dir_blender": [
+    0.35777,
+    0.26833,
+    0.89443
+   ],
+   "explode_dist": 0.45,
+   "faces": 1400
+  },
+  {
    "name": "LV_Body_Controller_LH",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -13710,6 +16590,24 @@
    ],
    "explode_dist": 0.5,
    "faces": 572
+  },
+  {
+   "name": "LV_Body_Controller_LH_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Placa del controlador de carrocería (LH): eFuses, microcontrolador y Ethernet",
+   "group": "Baja tensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.85,
+   "faces": 652
   },
   {
    "name": "LV_Body_Controller_RH",
@@ -13730,6 +16628,24 @@
    "faces": 572
   },
   {
+   "name": "LV_Body_Controller_RH_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Placa del controlador de carrocería (RH): eFuses, microcontrolador y Ethernet",
+   "group": "Baja tensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.85,
+   "faces": 728
+  },
+  {
    "name": "LV_Body_Controller_Rear",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -13746,6 +16662,24 @@
    ],
    "explode_dist": 0.5,
    "faces": 572
+  },
+  {
+   "name": "LV_Body_Controller_Rear_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Placa del controlador de carrocería (Rear): eFuses, microcontrolador y Ethernet",
+   "group": "Baja tensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.44721,
+    0.89443
+   ],
+   "explode_dist": 0.85,
+   "faces": 720
   },
   {
    "name": "LV_Ferrite_Core_Coax",
@@ -13946,6 +16880,24 @@
    "faces": 346
   },
   {
+   "name": "LV_Harness_IP_Main",
+   "type": "MESH",
+   "parent": "IP_ASSEMBLY",
+   "system": "INTERIOR_DASHBOARD",
+   "label": "Mazo principal del salpicadero: tronco a lo largo de la viga transversal con ramales a pantalla, ordenador, climatizador, actuador del volante, controladores y módulo de airbags",
+   "group": "Baja tensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza necesaria para el uso del vehículo; forma, dimensiones y posición reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.5145,
+    0.85749
+   ],
+   "explode_dist": 0.45,
+   "faces": 1268
+  },
+  {
    "name": "LV_Harness_MV_Backbone",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -14126,6 +17078,24 @@
    "faces": 154
   },
   {
+   "name": "LV_MV_Maintainer_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Placa electrónica del mantenedor de 48 V",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.59761,
+    0.35857,
+    0.71714
+   ],
+   "explode_dist": 0.24,
+   "faces": 154
+  },
+  {
    "name": "LV_Trailer_ECU",
    "type": "MESH",
    "parent": "CYBERTRUCK_ROOT",
@@ -14142,6 +17112,24 @@
    ],
    "explode_dist": 0.45,
    "faces": 176
+  },
+  {
+   "name": "LV_Trailer_ECU_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "BATTERY_ASSEMBLY",
+   "label": "Placa de la ECU de remolque (salidas de luces y freno eléctrico)",
+   "group": "Baja tensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.92848,
+    0.37139
+   ],
+   "explode_dist": 0.65,
+   "faces": 174
   },
   {
    "name": "MIRROR_L",
@@ -14338,7 +17326,7 @@
     -0.89443,
     -0.44721
    ],
-   "explode_dist": 0.75,
+   "explode_dist": 1.05,
    "faces": 1986
   },
   {
@@ -14358,6 +17346,96 @@
    ],
    "explode_dist": 0.45,
    "faces": 396
+  },
+  {
+   "name": "STR_F_Actuator_Controller_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Placa electrónica del controlador del actuador de dirección delantero",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.27,
+   "faces": 974
+  },
+  {
+   "name": "STR_F_Actuator_ECU_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Placa de control redundante del actuador delantero (dos canales, sensores de posición y par)",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.8,
+   "faces": 602
+  },
+  {
+   "name": "STR_F_Drive_Belts",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Correas dentadas de los dos motores a la tuerca de bolas (actuador delantero)",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.18257,
+    -0.91287,
+    -0.36515
+   ],
+   "explode_dist": 0.62,
+   "faces": 208
+  },
+  {
+   "name": "STR_F_Motors_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Estátores, rotores y piñones de los dos motores redundantes del actuador delantero",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.35777,
+    -0.89443,
+    -0.26833
+   ],
+   "explode_dist": 0.7,
+   "faces": 5772
+  },
+  {
+   "name": "STR_F_Rack_BallNut",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Cremallera, tuerca de bolas con recirculación y polea del actuador delantero",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.89443,
+    -0.44721
+   ],
+   "explode_dist": 0.55,
+   "faces": 2954
   },
   {
    "name": "STR_RL_TieRod",
@@ -14446,7 +17524,7 @@
     0.89443,
     -0.44721
    ],
-   "explode_dist": 0.75,
+   "explode_dist": 1.05,
    "faces": 2234
   },
   {
@@ -14466,6 +17544,96 @@
    ],
    "explode_dist": 0.45,
    "faces": 396
+  },
+  {
+   "name": "STR_R_Actuator_Controller_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Placa electrónica del controlador del actuador de dirección trasero",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.19612,
+    0.98058
+   ],
+   "explode_dist": 0.27,
+   "faces": 814
+  },
+  {
+   "name": "STR_R_Actuator_ECU_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Placa de control redundante del actuador trasero (dos canales, sensores de posición y par)",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.98058,
+    -0.19612
+   ],
+   "explode_dist": 0.8,
+   "faces": 578
+  },
+  {
+   "name": "STR_R_Drive_Belts",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Correas dentadas de los dos motores a la tuerca de bolas (actuador trasero)",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.18257,
+    0.91287,
+    -0.36515
+   ],
+   "explode_dist": 0.62,
+   "faces": 208
+  },
+  {
+   "name": "STR_R_Motors_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Estátores, rotores y piñones de los dos motores redundantes del actuador trasero",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.35777,
+    0.89443,
+    -0.26833
+   ],
+   "explode_dist": 0.7,
+   "faces": 5772
+  },
+  {
+   "name": "STR_R_Rack_BallNut",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Cremallera, tuerca de bolas con recirculación y polea del actuador trasero",
+   "group": "Dirección",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.0,
+    0.89443,
+    -0.44721
+   ],
+   "explode_dist": 0.55,
+   "faces": 2954
   },
   {
    "name": "STR_Rear_Steer_Jumper_Harness",
@@ -14504,6 +17672,24 @@
    "faces": 88
   },
   {
+   "name": "STR_Steering_Column_Control_Module_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "STEERING",
+   "label": "Placa electrónica del módulo de control de la columna (mandos del volante)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    -0.85749,
+    0.5145
+   ],
+   "explode_dist": 0.21,
+   "faces": 106
+  },
+  {
    "name": "STR_Steering_Feedback_Actuator",
    "type": "MESH",
    "parent": "STEERING_WHEEL",
@@ -14520,6 +17706,24 @@
    ],
    "explode_dist": 0.3,
    "faces": 316
+  },
+  {
+   "name": "STR_Steering_Feedback_Actuator_PCB",
+   "type": "MESH",
+   "parent": "STEERING_WHEEL",
+   "system": "STEERING",
+   "label": "Placa electrónica del actuador de realimentación del volante (sensor de ángulo y par)",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.0,
+    0.92848,
+    -0.37139
+   ],
+   "explode_dist": 0.18,
+   "faces": 708
   },
   {
    "name": "STR_Steering_Jumper_Harness",
@@ -14738,6 +17942,24 @@
    "faces": 260
   },
   {
+   "name": "SUS_FL_Damper_Internals",
+   "type": "MESH",
+   "parent": "SUS_FL_AirSpring",
+   "system": "FRONT_SUSPENSION",
+   "label": "Interior del amortiguador monotubo FL: vástago, pistón con láminas de válvula, guía con retén y pistón flotante de la cámara de gas",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.08305,
+    0.0,
+    0.99655
+   ],
+   "explode_dist": 0.42,
+   "faces": 1646
+  },
+  {
    "name": "SUS_FL_Damper_Rod",
    "type": "MESH",
    "parent": "SUS_FL_AirSpring",
@@ -14772,6 +17994,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 832
+  },
+  {
+   "name": "SUS_FL_Hub_Bearing",
+   "type": "MESH",
+   "parent": "SUSP_FL",
+   "system": "FRONT_SUSPENSION",
+   "label": "Rodamiento de buje delantero de doble hilera de bolas con retenes",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.14,
+   "faces": 2224
   },
   {
    "name": "SUS_FL_Knuckle",
@@ -15062,6 +18302,24 @@
    "faces": 260
   },
   {
+   "name": "SUS_FR_Damper_Internals",
+   "type": "MESH",
+   "parent": "SUS_FR_AirSpring",
+   "system": "FRONT_SUSPENSION",
+   "label": "Interior del amortiguador monotubo FR: vástago, pistón con láminas de válvula, guía con retén y pistón flotante de la cámara de gas",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.08305,
+    0.0,
+    0.99655
+   ],
+   "explode_dist": 0.42,
+   "faces": 1646
+  },
+  {
    "name": "SUS_FR_Damper_Rod",
    "type": "MESH",
    "parent": "SUS_FR_AirSpring",
@@ -15096,6 +18354,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 832
+  },
+  {
+   "name": "SUS_FR_Hub_Bearing",
+   "type": "MESH",
+   "parent": "SUSP_FR",
+   "system": "FRONT_SUSPENSION",
+   "label": "Rodamiento de buje delantero de doble hilera de bolas con retenes",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.14,
+   "faces": 2224
   },
   {
    "name": "SUS_FR_Knuckle",
@@ -15440,6 +18716,24 @@
    "faces": 260
   },
   {
+   "name": "SUS_RL_Damper_Internals",
+   "type": "MESH",
+   "parent": "SUS_RL_AirSpring",
+   "system": "REAR_SUSPENSION",
+   "label": "Interior del amortiguador monotubo RL: vástago, pistón con láminas de válvula, guía con retén y pistón flotante de la cámara de gas",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.04802,
+    0.0,
+    0.99885
+   ],
+   "explode_dist": 0.42,
+   "faces": 1646
+  },
+  {
    "name": "SUS_RL_Damper_Rod",
    "type": "MESH",
    "parent": "SUS_RL_AirSpring",
@@ -15474,6 +18768,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 832
+  },
+  {
+   "name": "SUS_RL_Hub_Bearing",
+   "type": "MESH",
+   "parent": "SUSP_RL",
+   "system": "REAR_SUSPENSION",
+   "label": "Rodamiento de buje trasero de doble hilera de bolas con retenes",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.14,
+   "faces": 2224
   },
   {
    "name": "SUS_RL_Knuckle",
@@ -15764,6 +19076,24 @@
    "faces": 260
   },
   {
+   "name": "SUS_RR_Damper_Internals",
+   "type": "MESH",
+   "parent": "SUS_RR_AirSpring",
+   "system": "REAR_SUSPENSION",
+   "label": "Interior del amortiguador monotubo RR: vástago, pistón con láminas de válvula, guía con retén y pistón flotante de la cámara de gas",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)",
+   "explode_dir_blender": [
+    -0.04802,
+    0.0,
+    0.99885
+   ],
+   "explode_dist": 0.42,
+   "faces": 1646
+  },
+  {
    "name": "SUS_RR_Damper_Rod",
    "type": "MESH",
    "parent": "SUS_RR_AirSpring",
@@ -15798,6 +19128,24 @@
    ],
    "explode_dist": 0.2,
    "faces": 832
+  },
+  {
+   "name": "SUS_RR_Hub_Bearing",
+   "type": "MESH",
+   "parent": "SUSP_RR",
+   "system": "REAR_SUSPENSION",
+   "label": "Rodamiento de buje trasero de doble hilera de bolas con retenes",
+   "group": "Suspensión",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Pieza interior necesaria para el funcionamiento; forma, dimensiones y número de dientes/ranuras reconstruidos (no hay planos publicados)",
+   "explode_dir_blender": [
+    0.99504,
+    0.0,
+    0.0995
+   ],
+   "explode_dist": 0.14,
+   "faces": 2224
   },
   {
    "name": "SUS_RR_Knuckle",
@@ -16142,6 +19490,24 @@
    "faces": 32
   },
   {
+   "name": "THM_AC_Compressor_Internals",
+   "type": "MESH",
+   "parent": "THERMAL_FRONT",
+   "system": "UNDERBODY",
+   "label": "Interior del compresor eléctrico de A/C: espirales fija y orbitante, motor y placa del inversor",
+   "group": "Refrigeración",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    -0.5145,
+    0.0,
+    0.85749
+   ],
+   "explode_dist": 0.4,
+   "faces": 3806
+  },
+  {
    "name": "THM_AC_Lines",
    "type": "MESH",
    "parent": "THERMAL_FRONT",
@@ -16284,6 +19650,24 @@
    ],
    "explode_dist": 0.45,
    "faces": 310
+  },
+  {
+   "name": "THM_Coolant_Pump_Internals",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Rodete de 7 álabes y motor de rotor húmedo de la bomba de refrigerante",
+   "group": "Refrigeración",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.72761,
+    -0.48507,
+    0.48507
+   ],
+   "explode_dist": 0.7,
+   "faces": 2670
   },
   {
    "name": "THM_Expansion_Valves",
@@ -16482,6 +19866,24 @@
    ],
    "explode_dist": 0.4,
    "faces": 128
+  },
+  {
+   "name": "THM_Supermanifold_Controller_Sensors_PCB",
+   "type": "MESH",
+   "parent": "CYBERTRUCK_ROOT",
+   "system": "UNDERBODY",
+   "label": "Placa electrónica del controlador del Supermanifold",
+   "group": "Electrónica",
+   "stage": 6,
+   "fidelity": "A",
+   "note": "Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)",
+   "explode_dir_blender": [
+    0.36515,
+    0.18257,
+    0.91287
+   ],
+   "explode_dist": 0.24,
+   "faces": 448
   },
   {
    "name": "TONNEAU_ASSEMBLY",

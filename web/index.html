@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Cybertruck · Vista explosionada</title>
   <meta name="description" content="Reconstrucción 3D documentada del Tesla Cybertruck Cyberbeast con vista explosionada interactiva.">
+  <meta name="theme-color" content="#0b0d10">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="src/style.css">
   <script type="importmap">
   {
@@ -18,55 +19,82 @@
   }
   </script>
 </head>
-<body>
-  <div id="app">
-    <canvas id="viewport" aria-label="Vista 3D del Cybertruck"></canvas>
+<body data-env="studio">
+  <!-- Iconos (símbolos SVG reutilizables) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-sidebar" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 4.5v15" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M4 4.5v4h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.8v12.4a.8.8 0 0 0 1.2.7l9.6-6.2a.8.8 0 0 0 0-1.4L9.2 5.1A.8.8 0 0 0 8 5.8Z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"/><rect x="13.5" y="5" width="4" height="14" rx="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-assemble" viewBox="0 0 24 24"><path d="M4 9.5 12 5l8 4.5-8 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m4 14.5 8 4.5 8-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-scene" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M5.6 18.4l1.6-1.6M16.8 7.2l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m15.5 15.5 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.8 12S6.2 6 12 6s9.2 6 9.2 6-3.4 6-9.2 6-9.2-6-9.2-6Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/></symbol>
+    <symbol id="i-isolate" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2.5" fill="currentColor"/><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2.5 2.5"/></symbol>
+    <symbol id="i-hide" viewBox="0 0 24 24"><path d="M2.8 12S6.2 6 12 6s9.2 6 9.2 6-3.4 6-9.2 6-9.2-6-9.2-6Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4 20 16-16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  </svg>
 
-    <header class="topbar">
-      <div class="brand">
-        <span class="brand-mark">CT</span>
-        <div>
-          <h1>Cybertruck <span class="muted">Cyberbeast</span></h1>
+  <div id="app">
+    <canvas id="viewport" aria-label="Vista 3D del Cybertruck. Arrastra para girar, rueda o pellizco para acercar."></canvas>
+
+    <header class="hud-top">
+      <div class="glass capsule brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div class="brand-text">
+          <h1>Cybertruck <span class="soft">Cyberbeast</span></h1>
           <p class="sub">Reconstrucción 3D documentada · escala 1:1</p>
         </div>
       </div>
-      <nav class="views" aria-label="Vistas de cámara">
-        <button data-view="front34" class="chip">3/4 delantera</button>
-        <button data-view="rear34" class="chip">3/4 trasera</button>
-        <button data-view="side" class="chip">Perfil</button>
-        <button data-view="top" class="chip">Superior</button>
-        <button data-view="interior" class="chip">Interior</button>
-        <button data-view="under" class="chip">Bajos</button>
-        <button id="btn-reset-view" class="chip chip-strong" title="Restablecer la cámara">Restablecer vista</button>
+      <nav class="glass capsule seg views" aria-label="Vistas de cámara">
+        <span class="seg-ind" aria-hidden="true"></span>
+        <button data-view="front34" class="seg-btn">3/4 delantera</button>
+        <button data-view="rear34" class="seg-btn">3/4 trasera</button>
+        <button data-view="side" class="seg-btn">Perfil</button>
+        <button data-view="top" class="seg-btn">Superior</button>
+        <button data-view="interior" class="seg-btn">Interior</button>
+        <button data-view="under" class="seg-btn">Bajos</button>
       </nav>
-      <button id="btn-panel" class="icon-btn" aria-label="Mostrar u ocultar el panel">☰</button>
+      <div class="top-actions">
+        <button id="btn-reset-view" class="glass icon-btn" title="Restablecer la vista (R)" aria-label="Restablecer la vista">
+          <svg><use href="#i-reset"/></svg>
+        </button>
+        <button id="btn-panel" class="glass icon-btn" title="Mostrar u ocultar el panel" aria-label="Mostrar u ocultar el panel" aria-controls="panel" aria-expanded="false">
+          <svg><use href="#i-sidebar"/></svg>
+        </button>
+      </div>
     </header>
 
-    <aside id="panel" class="panel">
-      <section class="block">
-        <div class="block-head">
-          <h2>Sistemas</h2>
-          <button id="btn-show-all" class="link">Mostrar todo</button>
+    <aside id="panel" class="glass panel" aria-label="Sistemas y componentes">
+      <div class="seg tabs" role="tablist" aria-label="Contenido del panel">
+        <span class="seg-ind" aria-hidden="true"></span>
+        <button class="seg-btn active" role="tab" aria-selected="true" data-tab="systems-tab" id="tab-systems">Sistemas</button>
+        <button class="seg-btn" role="tab" aria-selected="false" data-tab="components-tab" id="tab-components">Componentes <span id="count" class="count"></span></button>
+      </div>
+      <section id="systems-tab" class="tab-page" role="tabpanel" aria-labelledby="tab-systems">
+        <div class="page-head">
+          <p class="hint">Pulsa un sistema para mostrarlo u ocultarlo.</p>
+          <button id="btn-show-all" class="text-btn">Mostrar todo</button>
         </div>
         <div id="systems" class="systems"></div>
       </section>
-      <section class="block grow">
-        <div class="block-head">
-          <h2>Componentes</h2>
-          <span id="count" class="mono muted"></span>
-        </div>
-        <input id="search" class="search" type="search" placeholder="Buscar componente…" autocomplete="off">
+      <section id="components-tab" class="tab-page hidden" role="tabpanel" aria-labelledby="tab-components">
+        <label class="search-wrap">
+          <svg aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="search" class="search" type="search" placeholder="Buscar componente" autocomplete="off" aria-label="Buscar componente">
+        </label>
         <div id="tree" class="tree" role="tree"></div>
       </section>
     </aside>
 
-    <section id="info" class="info hidden" aria-live="polite">
+    <section id="info" class="glass card info hidden" aria-live="polite" aria-label="Ficha del componente">
       <div class="info-head">
-        <span id="info-fid" class="badge"></span>
-        <button id="info-close" class="icon-btn small" aria-label="Cerrar">✕</button>
+        <span id="info-fid" class="pill"></span>
+        <button id="info-close" class="icon-btn small plain" aria-label="Cerrar la ficha"><svg><use href="#i-close"/></svg></button>
       </div>
       <h3 id="info-title"></h3>
-      <p id="info-name" class="mono muted"></p>
+      <p id="info-name" class="mono soft"></p>
       <dl class="meta">
         <dt>Sistema</dt><dd id="info-system"></dd>
         <dt>Conjunto</dt><dd id="info-group"></dd>
@@ -74,36 +102,71 @@
       </dl>
       <p id="info-note" class="note"></p>
       <div class="info-actions">
-        <button id="btn-isolate" class="btn">Aislar</button>
-        <button id="btn-hide" class="btn">Ocultar</button>
-        <button id="btn-focus" class="btn">Encuadrar</button>
+        <button id="btn-isolate" class="pill-btn"><svg><use href="#i-isolate"/></svg>Aislar</button>
+        <button id="btn-hide" class="pill-btn"><svg><use href="#i-hide"/></svg>Ocultar</button>
+        <button id="btn-focus" class="pill-btn"><svg><use href="#i-target"/></svg>Encuadrar</button>
       </div>
     </section>
 
-    <footer class="dock">
-      <div class="slider-wrap">
+    <footer class="glass dock" aria-label="Vista explosionada">
+      <div class="dock-main">
         <div class="slider-head">
           <label for="explode">Vista explosionada</label>
-          <output id="explode-out" class="mono">0 %</output>
+          <output id="explode-out" class="value" for="explode">0 %</output>
         </div>
         <input id="explode" type="range" min="0" max="100" step="0.1" value="0" aria-label="Factor de explosión">
-        <div class="stages" id="stages"></div>
+        <div class="stages" id="stages" role="group" aria-label="Etapas de la explosión"></div>
       </div>
       <div class="dock-controls">
-        <label class="mini">Amplitud
-          <input id="amp" type="range" min="0.6" max="2.4" step="0.05" value="1.5">
-        </label>
-        <button id="btn-play" class="btn">▶ Animar</button>
-        <button id="btn-assemble" class="btn btn-primary">Ensamblar</button>
+        <button id="btn-play" class="round-btn" aria-label="Animar la explosión" title="Animar (espacio)">
+          <svg><use href="#i-play"/></svg>
+        </button>
+        <button id="btn-assemble" class="cta" title="Volver a ensamblar"><svg><use href="#i-assemble"/></svg><span>Ensamblar</span></button>
+        <button id="btn-scene" class="round-btn" aria-label="Ajustes de escena" aria-haspopup="dialog" aria-expanded="false" aria-controls="scene-pop" title="Suelo, luz, reflejos y amplitud">
+          <svg><use href="#i-scene"/></svg>
+        </button>
       </div>
-      <div class="status mono" id="status">Cargando modelo…</div>
+      <div class="status mono" id="status" aria-live="off">Cargando modelo…</div>
     </footer>
 
+    <div id="scene-pop" class="glass popover hidden" role="dialog" aria-label="Ajustes de escena">
+      <div class="pop-row">
+        <span class="pop-label">Suelo</span>
+        <div class="seg mini-seg" role="group" aria-label="Suelo">
+          <span class="seg-ind" aria-hidden="true"></span>
+          <button data-floor="glass" class="seg-btn" aria-pressed="true" title="Suelo de cristal semitransparente">Cristal</button>
+          <button data-floor="opaque" class="seg-btn" aria-pressed="false" title="Suelo opaco">Opaco</button>
+          <button data-floor="hidden" class="seg-btn" aria-pressed="false" title="Ocultar el suelo">Oculto</button>
+        </div>
+      </div>
+      <div class="pop-row">
+        <span class="pop-label">Luz</span>
+        <div class="seg mini-seg" role="group" aria-label="Luz">
+          <span class="seg-ind" aria-hidden="true"></span>
+          <button data-env="studio" class="seg-btn" aria-pressed="true">Estudio</button>
+          <button data-env="exterior" class="seg-btn" aria-pressed="false">Exterior</button>
+        </div>
+      </div>
+      <div class="pop-row">
+        <span class="pop-label">Reflejos</span>
+        <div class="seg mini-seg" role="group" aria-label="Reflejos del suelo">
+          <span class="seg-ind" aria-hidden="true"></span>
+          <button data-refl="on" class="seg-btn" aria-pressed="true">Sí</button>
+          <button data-refl="off" class="seg-btn" aria-pressed="false">No</button>
+        </div>
+      </div>
+      <label class="pop-row amp">
+        <span class="pop-label">Amplitud</span>
+        <input id="amp" type="range" min="0.6" max="2.4" step="0.05" value="1.5" aria-label="Amplitud de la explosión">
+        <output id="amp-out" class="value small">1,5×</output>
+      </label>
+    </div>
+
     <div id="loader" class="loader">
-      <div class="loader-box">
+      <div class="glass loader-box">
         <div class="loader-title">Cargando Cybertruck</div>
         <div class="bar"><div id="bar-fill" class="bar-fill"></div></div>
-        <div id="loader-text" class="mono muted">0 %</div>
+        <div id="loader-text" class="mono soft">0 %</div>
       </div>
     </div>
   </div>
