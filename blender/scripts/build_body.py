@@ -716,7 +716,7 @@ def build_tonneau(M):
         slat = mb.build(f"CARGO_Tonneau_Slat_{i + 1:02d}", "CARGO_BED", M["anodized_dark"], parent=root)
         finish_panel(slat, 0.010, 0.0012)
         L.explode(slat, (0, -0.1, 1), 0.06 + 0.014 * i, 6, "Cubierta de la caja",
-                  f"Lama {i + 1} de la cubierta", "A")
+                  f"Lama {i + 1} de la cubierta (el número de lamas no consta en las fuentes)", "A")
         objs.append(slat)
     return objs
 

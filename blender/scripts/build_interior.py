@@ -137,7 +137,7 @@ def build_dashboard(M):
                          label="Guantera"))
     # Pantalla central de 18,5" (16:9 -> 409,6 x 230,4 mm) con carcasa
     scr = L.assembly("DISPLAY_CENTER", "INTERIOR_CONTROLS", (0.0, 0.93, 1.21), parent=asm)
-    L.explode(scr, (0, -0.5, 1), 0.45, 2, "Pantallas", "Pantalla táctil central de 18,5\"", "V")
+    L.explode(scr, (0, -0.5, 1), 0.45, 2, "Pantallas", "Pantalla táctil central de 18,5\" (tamaño según fuentes secundarias)", "R")
     tilt = rot_x(-14)
     mb = L.MeshBuilder()
     L.box(mb, (0.0, 0.935, 1.215), (0.432, 0.030, 0.252), 0, rot=tilt)
@@ -148,7 +148,7 @@ def build_dashboard(M):
     c = Vector((0.0, 0.935, 1.215)) + tilt @ Vector((0, -0.0155, 0))
     L.box(mb, tuple(c), (0.4096, 0.002, 0.2304), 0, rot=tilt)
     glass = mb.build("INT_Display_Center_Screen", "INTERIOR_CONTROLS", M["screen"], parent=scr)
-    L.explode(glass, (0, -1, 0), 0.05, 6, "Pantallas", "Panel de 18,5\" (409,6 x 230,4 mm)", "V")
+    L.explode(glass, (0, -1, 0), 0.05, 6, "Pantallas", "Panel de 18,5\" (409,6 x 230,4 mm; tamaño según fuentes secundarias)", "R")
     mb = L.MeshBuilder()
     L.box(mb, (0.0, 0.975, 1.115), (0.10, 0.06, 0.06), 0)
     stand = mb.build("INT_Display_Center_Mount", "INTERIOR_CONTROLS", M["int_plastic"], parent=scr)
@@ -253,7 +253,7 @@ def build_console(M):
     L.box(mb, (0.0, -0.161, 0.742), (0.208, 0.002, 0.117), 0, rot=rot_x(-12))
     rs = mb.build("INT_Display_Rear_Screen", "INTERIOR_CONTROLS", M["screen"], parent=asm)
     L.explode(rs_h, (0, -1, 0.2), 0.25, 2, "Pantallas", "Carcasa de la pantalla trasera", "R")
-    L.explode(rs, (0, -1, 0.2), 0.30, 2, "Pantallas", "Pantalla trasera de 9,4\"", "V")
+    L.explode(rs, (0, -1, 0.2), 0.30, 2, "Pantallas", "Pantalla trasera de 9,4\" (tamaño según fuentes secundarias)", "R")
     objs += [rs_h, rs]
     return objs
 

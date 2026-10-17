@@ -1406,3 +1406,28 @@ Cada código del texto se resuelve como `base + GUID + .html`. Los GUID que acab
 | OM-Airbags | `GUID-F023E8E7-C077-4C75-B7EB-D1A133E41938` |
 
 *Ficha generada a partir de las notas de investigación del 2026-10-17 y del inventario del modelo; todas las cifras proceden de ellas y no se han añadido datos nuevos.*
+
+---
+
+## 8.4 Estado tras la versión 3 (17-10-2026)
+
+Se añadieron 387 objetos con los módulos `blender/scripts/build_v3_*.py` (ver `docs/research-and-fidelity.md` §9).
+Cobertura del backlog de §8.3:
+
+| Prioridad | Bloque | Estado |
+|---|---|---|
+| P1 | Estructura visible desde fuera | **Hecho**: Super Cowl, Aerobracket, pata y soporte del salpicadero, cabeceras, pared trasera con fundas, montantes del asiento trasero, pasos de rueda traseros y extensiones, soportes de batería, umbral, vela, cantrail, soportes de absorbedor, placas de refuerzo del mast, tapones 1870761-00, remaches por familia |
+| P1 | Cámaras y sensores | **Hecho**: cámara trasera, cámara interior, ventilador de cámara, sensores de altura (4), BLE, antenas, TCU, ECU de remolque, sensores de impacto y de ocupación. Las antenas, BLE y tomas de 48 V quedan «Aproximado» |
+| P1 | Apliques y carenados | **Hecho** (salvo el vidrio fijo delantero de cuarto, que el modelo ya integra en el cristal de la puerta delantera: se añadió su junta) |
+| P2 | Caja y tonneau | **Hecho**: paredes, pared delantera y falsa, travesaños, cierres, bloques de leva, barrera NVH, juntas, soportes de esquina, tapa de las tomas. El número de lamas (22) sigue sin fuente |
+| P2 | Interior detallado | **Hecho** en su mayor parte: motores y soplador de asientos, airbags individuales, conductos, base y raíles de la consola, USB, cabina de 120 V, grapas y espuma de puertas, cortinillas. Falta el detalle de espumas y tapicerías |
+| P2 | Tren motriz y térmica | **Hecho**: Octovalve, bomba, chiller, LCCR, botella, válvulas, mangueras, contactores, DPDT, fusibles, FRL, arneses HV, pernos del pack, cubiertas NVH |
+| P3 | Suspensión: casquillos y topes | **Hecho** (forma aproximada) |
+| P3 | Opciones | **No modelado** (Terrestrial Armor, barra de luz off-road) |
+| P4 | Clips, tapones, grommets y tornillería | **Hecho en parte**: familias de remaches, tapones, grapas de pasarruedas, de puertas y de pilares |
+| P4 | Variantes de fecha | No modelado |
+
+Discrepancias de §8.2 resueltas: tirante de puerta (23 N·m), bisagras (38 N·m), controlador trasero (3 fijaciones),
+bandeja de la batería, número de lamas, persianas y LED declarados sin fuente, escobilla, tensión del pack, tamaño de
+las pantallas y etiqueta de fidelidad. Quedan abiertas la interpretación del reductor trasero (carcasa común frente
+a las páginas LH/RH de Tri Motor) y la de la fundición trasera (dos mitades frente a un componente con «Half Section»).

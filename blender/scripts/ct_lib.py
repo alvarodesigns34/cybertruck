@@ -114,6 +114,80 @@ def _remove_existing(name):
                 bpy.data.meshes.remove(data)
 
 
+def orient_closed_components(verts, faces):
+    """Orienta hacia fuera las componentes cerradas y manifold (cada arista en exactamente dos caras).
+
+    Las piezas de revolución con perfil cerrado (llantas, protectores, portavasos) dependen del sentido en
+    que se recorre el perfil, y algunas cajas o mallas combinadas pueden mezclar sentidos. Para cada
+    componente cerrada se propaga un sentido coherente entre caras vecinas y después se invierte entera si
+    su volumen es negativo. Las componentes con aristas libres (láminas abiertas) no se tocan: se orientan
+    con `MeshBuilder.face(..., want=...)`, no con recalc_normals.
+    """
+    n = len(verts)
+    parent = list(range(n))
+
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+
+    for f in faces:
+        r0 = find(f[0])
+        for v in f[1:]:
+            r = find(v)
+            if r != r0:
+                parent[r] = r0
+    groups = {}
+    for i, f in enumerate(faces):
+        groups.setdefault(find(f[0]), []).append(i)
+    out = [list(f) for f in faces]
+    for idxs in groups.values():
+        edge_faces = {}
+        for i in idxs:
+            f = faces[i]
+            for k in range(len(f)):
+                a, b = f[k], f[(k + 1) % len(f)]
+                edge_faces.setdefault((a, b) if a < b else (b, a), []).append(i)
+        if not all(len(v) == 2 for v in edge_faces.values()):
+            continue
+        # propagación de un sentido coherente
+        done = {idxs[0]}
+        stack = [idxs[0]]
+        while stack:
+            i = stack.pop()
+            f = out[i]
+            for k in range(len(f)):
+                a, b = f[k], f[(k + 1) % len(f)]
+                key = (a, b) if a < b else (b, a)
+                for j in edge_faces[key]:
+                    if j == i or j in done:
+                        continue
+                    g = out[j]
+                    same = any(g[m] == a and g[(m + 1) % len(g)] == b for m in range(len(g)))
+                    if same:
+                        g.reverse()
+                    done.add(j)
+                    stack.append(j)
+        c = Vector((0.0, 0.0, 0.0))
+        cnt = 0
+        for i in idxs:
+            for v in out[i]:
+                c += Vector(verts[v])
+                cnt += 1
+        c /= max(1, cnt)
+        vol = 0.0
+        for i in idxs:
+            f = out[i]
+            p0 = Vector(verts[f[0]]) - c
+            for k in range(1, len(f) - 1):
+                vol += p0.dot((Vector(verts[f[k]]) - c).cross(Vector(verts[f[k + 1]]) - c)) / 6.0
+        if vol < 0:
+            for i in idxs:
+                out[i].reverse()
+    return out
+
+
 def mesh_object(name, verts, faces, system, material=None, parent=None, origin=None,
                 smooth=False, uv="auto"):
     """Crea un objeto de malla a partir de vértices (mundo) y caras.
@@ -129,6 +203,7 @@ def mesh_object(name, verts, faces, system, material=None, parent=None, origin=N
         origin = (mn + mx) * 0.5
     origin = Vector(origin)
     me = bpy.data.meshes.new(name)
+    faces = orient_closed_components(vs, faces)
     me.from_pydata([tuple(v - origin) for v in vs], [], [tuple(f) for f in faces])
     me.validate(clean_customdata=False)
     me.update()
@@ -484,7 +559,8 @@ def box(mb, center, size, mat=0, rot=None):
                 corners.append(tuple(c + p))
     f = [(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)]
     for q in f:
-        mb.face([corners[i] for i in q], mat)
+        # las caras de la tabla anterior quedan hacia dentro: se invierten para que las normales apunten fuera
+        mb.face([corners[i] for i in q], mat, flip=True)
 
 
 def prism(mb, poly2d, plane_origin, u, v, depth, normal=None, mat=0, cap=True):

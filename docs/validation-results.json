@@ -60,12 +60,12 @@
   "perfil_superior": {
    "muestras": 125,
    "media_mm": 2.9,
-   "p95_mm": 6.8,
-   "max_mm": 10.2
+   "p95_mm": 7.2,
+   "max_mm": 13.3
   },
   "perfil_inferior": {
    "muestras": 31,
-   "media_mm": 12.5,
+   "media_mm": 13.3,
    "p95_mm": 40.3,
    "max_mm": 121.1
   },
@@ -77,15 +77,20 @@
   },
   "perfil_trasero": {
    "muestras": 22,
-   "media_mm": 9.8,
-   "p95_mm": 21.9,
+   "media_mm": 9.2,
+   "p95_mm": 21.0,
    "max_mm": 65.1
   },
   "planta_semianchura": {
    "muestras": 49,
-   "media_mm": 6.8,
+   "media_mm": 6.7,
    "p95_mm": 19.2,
    "max_mm": 29.3
   }
+ },
+ "explosion": {
+  "objects": 948,
+  "max_deviation": 0.0,
+  "ok": true
  }
 }

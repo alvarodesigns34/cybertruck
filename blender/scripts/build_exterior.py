@@ -99,7 +99,7 @@ def lightbar_optics(M):
         z = B.face_top_z(abs(h)) - 0.028
         P.rbox(mb, fpt(h, z, 0.0026), (0.010, 0.0012, 0.003), 0.0004, 1, None, 0)
     objs.append(P.make(mb, "LGT_Front_Lightbar_Optics", "LIGHTING", M["led_white"], None, (0, 1, 0.2), 0.38, 6,
-                       "Iluminación", "Fila de 64 LED de la barra de luz delantera", "A"))
+                       "Iluminación", "Fila de LED de la barra de luz delantera (el número de LED no consta en las fuentes)", "A"))
     mb = L.MeshBuilder()
     for h in (-0.55, 0.0, 0.55):
         z = B.face_top_z(abs(h)) - 0.028
@@ -207,7 +207,7 @@ def wiper_and_washer(M):
     P.sweep(mb, [p - up * 0.006 for p in path], P.rect_profile(0.005, 0.010), up=tuple(up), mat=1)
     P.rbox(mb, V(0.03, y, z + 0.008), (0.06, 0.024, 0.016), 0.004, 1, None, 0)
     objs.append(P.make(mb, "EXT_Wiper_Blade", "GLASS_AND_MIRRORS", [M["plastic_black"], M["bushing"]], asm,
-                       (0, 0, 1), 0.10, 6, "Limpiaparabrisas", "Escobilla de ~1,26 m con deflector y goma", "R"))
+                       (0, 0, 1), 0.10, 6, "Limpiaparabrisas", "Escobilla con deflector y goma (longitud en conflicto: 62 in, ~50 in o ~1,22 m según la fuente)", "R"))
     # brazo con resorte y tapa del eje
     mb = L.MeshBuilder()
     a = pivot + V(0, 0, 0.012)
@@ -281,7 +281,7 @@ def door_hardware(M):
                     P.flange_bolt(mb, (xpin - s * 0.03, yf - 0.061, z + dz), (0, -1, 0), 0.010, 1)
             objs.append(P.make(mb, f"EXT_Door_{tag}_Hinges", "DOORS_AND_HATCHES", [M["steel_black"], M["zinc"]], door,
                                (s * 0.3, 0.6, 0), 0.20, 6, "Puertas",
-                               "Bisagras superior e inferior con placas de espárragos (25/38 N·m)", "V"))
+                               "Bisagras superior e inferior con placas de espárragos (2 fijaciones por bisagra a 38 N·m)", "V"))
             # tirante de retención (puertas delanteras) / correa (traseras)
             mb = L.MeshBuilder()
             P.beam(mb, (s * 0.88, yf + 0.06, 0.82), (s * 0.86, yf - 0.16, 0.82), 0.012, 0.03, r=0.003)
@@ -289,7 +289,7 @@ def door_hardware(M):
             P.flange_bolt(mb, (s * 0.88, yf + 0.07, 0.82), (0, 1, 0), 0.013, 1)
             objs.append(P.make(mb, f"EXT_Door_{tag}_CheckStrap", "DOORS_AND_HATCHES", [M["steel_black"], M["zinc"]],
                                door, (s * 0.3, 0.2, 0), 0.26, 6, "Puertas",
-                               "Tirante de retención de la puerta (3 fijaciones; 35 N·m)", "V"))
+                               "Tirante de retención de la puerta (perno T40 a 23 N·m)", "V"))
             # cierre eléctrico y presentador de apertura en el canto trasero
             mb = L.MeshBuilder()
             P.rbox(mb, (s * 0.88, yr + 0.035, 0.90), (0.07, 0.05, 0.11), 0.006, 1, None, 0)

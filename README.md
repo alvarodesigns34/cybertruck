@@ -20,11 +20,20 @@ ortográficas, con **vista explosionada reversible** y un **visor web interactiv
 Los 21 planos de `docs/renders/` se renderizan con Cycles bajo cuatro iluminaciones (estudio, cielo físico de
 día, atardecer y cielo cubierto).
 
-## Qué contiene (versión 2)
+## Qué contiene (versión 3)
 
-- **561 objetos** (522 mallas y 38 conjuntos) en 20 colecciones de sistema, frente a 309 en la versión 1. Muchas
-  mallas agrupan piezas repetidas (1.344 celdas, tornillería, grapas, remaches), por lo que el número de piezas
-  físicas representadas es muy superior.
+- **948 objetos** (909 mallas y 38 conjuntos) en 20 colecciones de sistema, frente a 561 en la versión 2 y 309 en
+  la 1. Muchas mallas agrupan piezas repetidas (1.344 celdas, tornillería, grapas, remaches), por lo que el número
+  de piezas físicas representadas es muy superior.
+- **Versión 3 (+387 objetos, +1,7 MB de GLB):** se han añadido las piezas del backlog de
+  [`docs/ficha-tecnica-piezas.md`](docs/ficha-tecnica-piezas.md) §8.3: soportes y refuerzos de la carrocería en
+  blanco (Super Cowl, Aerobracket, cabeceras, pared trasera, pasos de rueda, placas y tapones, remaches por
+  familia), apliques y juntas exteriores, caja y tonneau (paredes, travesaños, cierres, bloques de leva), casquillos,
+  rótulas, topes, fuelles de semieje, espárragos y sensores de altura, circuito de aire (SCUBA, racores VOSS, haces
+  de líneas), Octovalve, bomba, enfriador, LCCR y botella de refrigerante, contactores y fusibles de la bahía auxiliar,
+  arneses HV, cámaras y antenas, mazos de 48 V, motores y soplador de los asientos, airbags individuales, sensores de
+  impacto y de ocupación, conductos de climatización, grapas y espuma de los paneles de puerta. Se corrigieron
+  además fallos del modelo (normales invertidas, etiquetas y pares que discrepaban de los manuales).
 - **Estructura de carrocería** con las cotas de control del manual de reparación: piezas fundidas delantera y
   trasera (esta por mitades), umbrales de acero UHSS con inserto extruido, refuerzos del suelo, anillos de
   puertas, «mast» y torres del portón fundidos, vigas de impacto, Megabeam, viga del salpicadero y remaches
@@ -54,7 +63,7 @@ día, atardecer y cielo cubierto).
 - **Cotas oficiales intactas**: longitud +2,0 mm, batalla y vía exactas, altura libre −0,4 mm, altura +2,9 mm,
   anchura con espejos exacta (0,0 mm). Detalles en [`docs/research-and-fidelity.md`](docs/research-and-fidelity.md).
 - **Metadatos y vista explosionada** en 6 etapas para cada pieza; desviación 0 tras ciclos repetidos en Blender
-  y en el navegador.
+  (948 objetos) y funcionamiento comprobado en el navegador.
 
 ## Estructura del repositorio
 
@@ -87,7 +96,7 @@ En la consola de Python de Blender:
 ```python
 import sys; sys.path.insert(0, r"<ruta-del-repo>/blender/scripts")
 import build_all
-build_all.run(parts=("body", "wheels", "lights", "details", "interior", "chassis", "explode", "scene"))
+build_all.run(parts=("body", "wheels", "lights", "details", "interior", "chassis", "v3", "explode", "scene"))
 import validate; print(validate.run())            # cotas y siluetas
 import export_web
 export_web.export(r"<ruta-del-repo>/web/models/cybertruck.glb",
@@ -140,7 +149,11 @@ modifique el visor (también se puede lanzar manualmente). Requiere que Pages es
   ATR; las inscripciones usan una tipografía genérica.
 - La anchura «sin espejos» oficial (2.031,6 mm) no es compatible con la anchura de los neumáticos; el modelo
   sigue la planta oficial, con aletas a ±1,04 m (2.081,7 mm).
-- Las texturas son sintéticas (no escaneadas); el GLB pesa 5,3 MB y se carga de una vez.
+- Las texturas son sintéticas (no escaneadas); el GLB pesa 7,0 MB y se carga de una vez.
+- Las piezas de la versión 3 tienen nombre, cantidad y fijaciones verificados en los manuales de Tesla, pero su
+  forma y posición exactas son reconstrucciones (no hay planos); los manuales no publican masas ni cotas por pieza.
+  Quedan fuera las opciones no incluidas de serie (Terrestrial Armor, barra de luz off-road) y las piezas de
+  variantes que no son Cyberbeast.
 
 ## Créditos y derechos
 

@@ -170,7 +170,7 @@ def tire_mesh():
     _sidewall_text(mb, "TUBELESS", 0.008, 0.300, 0.65, relief=0.0005)
 
     me = bpy.data.meshes.new(name)
-    me.from_pydata(mb.verts, [], mb.faces)
+    me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
     for p, mi in zip(me.polygons, mb.mats):
         p.material_index = mi
@@ -219,7 +219,7 @@ def rim_mesh(name):
             j = (i + 1) % 4
             mb.face([top[i], top[j], bot[j], bot[i]], 0)
     me = bpy.data.meshes.new(name)
-    me.from_pydata(mb.verts, [], mb.faces)
+    me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
     for p in me.polygons:
         p.use_smooth = True
@@ -245,7 +245,7 @@ def valve_mesh(name):
     c = Vector(cyl(0.236, t, HALF_RIM - 0.045))
     P.rbox(mb, c, (0.040, 0.024, 0.018), 0.004, 1, P.basis(Vector(cyl(1.0, t, 0.0)), (1, 0, 0)), 2)
     me = bpy.data.meshes.new(name)
-    me.from_pydata(mb.verts, [], mb.faces)
+    me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
     for p, mi in zip(me.polygons, mb.mats):
         p.material_index = mi
@@ -334,7 +334,7 @@ def cover_mesh(name, mirror=False):
         verts = [(x, -y, z) for (x, y, z) in verts]
         faces = [list(reversed(f)) for f in faces]
     me = bpy.data.meshes.new(name)
-    me.from_pydata(verts, [], faces)
+    me.from_pydata(verts, [], L.orient_closed_components(verts, faces))
     me.validate()
     for p, mi in zip(me.polygons, mb.mats):
         p.material_index = mi
@@ -366,7 +366,7 @@ def hub_mesh(name, driven=True):
     # anillo codificador del sensor de velocidad (lado interior)
     P.tube_ring(mb, (a_face - 0.083, 0, 0), (1, 0, 0), 0.050, 0.066, 0.006, 40, 2)
     me = bpy.data.meshes.new(name)
-    me.from_pydata(mb.verts, [], mb.faces)
+    me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
     for p, mi in zip(me.polygons, mb.mats):
         p.material_index = mi
@@ -390,7 +390,7 @@ def lug_mesh(name):
         prof = [(hexr, a0), (hexr, a0 + 0.018), (hexr * 0.7, a0 + 0.024), (0.0, a0 + 0.026)]
         L.lathe(mb, prof, c, (1, 0, 0), 6, 0, phase=math.pi / 6)
     me = bpy.data.meshes.new(name)
-    me.from_pydata(mb.verts, [], mb.faces)
+    me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
     return me
 
@@ -430,7 +430,7 @@ def rotor_mesh(name, diam, thick, vanes=40):
                  (0.084, thick / 2 + 0.006), (ri, thick / 2 - 0.002)], (0, 0, 0), (1, 0, 0), 72, 1,
             closed_profile=True)
     me = bpy.data.meshes.new(name)
-    me.from_pydata(mb.verts, [], mb.faces)
+    me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
     for p, mi in zip(me.polygons, mb.mats):
         p.material_index = mi
@@ -517,7 +517,7 @@ def caliper_mesh(name, diam, thick, front=True):
             P.flange_bolt(mb, cyl(ro - 0.040, tt, -gap - 0.052), (-1, 0, 0), 0.012, 1)
         P.cyl(mb, cyl(ro + 0.010, 0.18, -gap - 0.030), cyl(ro + 0.026, 0.18, -gap - 0.030), 0.004, 8, 1)
     me = bpy.data.meshes.new(name)
-    me.from_pydata(mb.verts, [], mb.faces)
+    me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
     for p, mi in zip(me.polygons, mb.mats):
         p.material_index = mi
@@ -542,7 +542,7 @@ def pads_mesh(name, diam, thick, front=True):
         a_b1 = sg * (abs(a_f1) + 0.005)
         _arc_body(mb, ro - 0.062, ro + 0.002, min(a_f1, a_b1), max(a_f1, a_b1), -span / 2 - 0.02, span / 2 + 0.02, 8, 0)
     me = bpy.data.meshes.new(name)
-    me.from_pydata(mb.verts, [], mb.faces)
+    me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
     for p, mi in zip(me.polygons, mb.mats):
         p.material_index = mi
@@ -558,7 +558,7 @@ def shield_mesh(name, diam):
     L.lathe(mb, [(0.07, -0.030), (ro, -0.030), (ro, -0.045), (ro - 0.006, -0.047), (0.07, -0.044)],
             (0, 0, 0), (1, 0, 0), 64, 0, closed_profile=True)
     me = bpy.data.meshes.new(name)
-    me.from_pydata(mb.verts, [], mb.faces)
+    me.from_pydata(mb.verts, [], L.orient_closed_components(mb.verts, mb.faces))
     me.validate()
     return me
 

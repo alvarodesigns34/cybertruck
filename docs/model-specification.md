@@ -100,7 +100,7 @@ desplazamiento = explode_dir · explode_dist · smoothstep(t0, t1, e)
   intencionada (p. ej., la rueda sale y después el neumático se separa de la llanta) sin multiplicarse ni anularse.
 - Es una función pura del parámetro: no hay estado acumulado. Verificación automática
   (`build_explode.verify_roundtrip` y prueba equivalente en el navegador): tras recorrer
-  0 → 0,33 → 1 → 0,5 → 0 → 1 → 0, la desviación máxima de las matrices de mundo es **0** en los 561 objetos.
+  0 → 0,33 → 1 → 0,5 → 0 → 1 → 0, la desviación máxima de las matrices de mundo es **0** en los 948 objetos (561 en la versión 2).
 
 ## 5. Materiales
 
@@ -150,12 +150,23 @@ describe (`web/src/materials.js`) sin sustituir los mapas exportados.
 | `build_mechanics.py` | Suspensión, dirección por cable, unidades motrices, semiejes, batería, bahía auxiliar, subchasis, gestión térmica, frenos hidráulicos, aire comprimido, baja tensión y bajos |
 | `build_structure.py` | Carrocería en blanco: piezas fundidas, umbrales, refuerzos, anillos de puerta, «mast», torres, vigas de impacto, Megabeam, remaches |
 | `build_chassis.py` | Orquestación de la mecánica, frunk y caja de carga |
+| `ct_v3.py` | Ayudas declarativas de la versión 3: cada pieza es una lista de formas elementales (cajas, cilindros, envolventes, barridos, tornillería, rótulas, fuelles) del lado derecho; `mirror=True` genera la pareja izquierda reflejando las coordenadas de entrada (no la malla) |
+| `build_v3.py` | Orquesta los módulos de la versión 3 (`build_all.run(parts=(…, "v3", …))`, antes de la vista explosionada) |
+| `build_v3_estructura.py` · `build_v3_exterior.py` · `build_v3_chasis.py` · `build_v3_motriz.py` · `build_v3_interior.py` · `build_v3_electronica.py` · `build_v3_complemento.py` | Piezas añadidas a partir de `docs/ficha-tecnica-piezas.md` (identificadores EXT-, EST-, CHS-, TRN-, INT-, ELE-): estructura, exterior y caja, chasis y circuito de aire, tren motriz, térmica y alta tensión, interior, electrónica de 48 V y piezas menores |
 | `build_scene.py` | Estudio, iluminaciones (`studio`, `exterior`, `sunset`, `overcast`) y cámaras |
 | `build_explode.py` | Controladores de la vista explosionada y verificación |
 | `validate.py` | Cotas y comparación de siluetas por trazado de rayos |
 | `export_web.py` | Exportación GLB (Draco + WebP) y manifiesto de componentes |
 | `preview.py` | Renders de control y planos de documentación (`render_shot`) |
 | `build_all.py` | Orquestador (solo regenera la colección CYBERTRUCK) |
+
+### Calidad de malla
+
+- Las mallas cerradas se orientan hacia fuera de forma automática (`ct_lib.orient_closed_components`); las
+  láminas abiertas se orientan con `MeshBuilder.face(..., want=dirección)`. No se usa `recalc_normals`.
+- Cada pieza de la versión 3 declara sus formas en coordenadas de mundo del lado derecho y, si es simétrica, se
+  refleja con `mirror=True` (`ct_v3.part`); el nombre lleva el sufijo `_R`/`_L`.
+- Comprobación de volumen con signo: ninguna malla cerrada de las 909 tiene volumen negativo.
 
 ### Cámaras incluidas (colección STUDIO)
 
@@ -165,12 +176,12 @@ describe (`web/src/materials.js`) sin sustituir los mapas exportados.
 
 ## 7. Cifras del activo
 
-| Métrica | v1 | v2 |
-|---|---|---|
-| Objetos en la colección del vehículo | 309 | **561** (522 mallas, 38 conjuntos, 1 raíz) |
-| Triángulos evaluados (con modificadores) | 174.862 | 498.396 |
-| Materiales | 39 | 61 (10 juegos de texturas) |
-| `blender/Cybertruck.blend` (comprimido, texturas externas) | 1,12 MB | 4,5 MB |
-| `blender/textures/` (WebP) | — | 1,6 MB |
-| `web/models/cybertruck.glb` (Draco + WebP) | 1,07 MB | 5,3 MB |
-| `web/models/cybertruck-manifest.json` | ~0,12 MB | ~0,24 MB |
+| Métrica | v1 | v2 | v3 |
+|---|---|---|---|
+| Objetos en la colección del vehículo | 309 | 561 (522 mallas, 38 conjuntos, 1 raíz) | **948** (909 mallas, 38 conjuntos, 1 raíz) |
+| Triángulos evaluados (con modificadores) | 174.862 | 498.396 | 653.442 |
+| Materiales | 39 | 61 (10 juegos de texturas) | 61 (sin cambios) |
+| `blender/Cybertruck.blend` (comprimido, texturas externas) | 1,12 MB | 4,5 MB | 6,5 MB |
+| `blender/textures/` (WebP) | — | 1,6 MB | 1,6 MB |
+| `web/models/cybertruck.glb` (Draco + WebP) | 1,07 MB | 5,3 MB | 7,0 MB |
+| `web/models/cybertruck-manifest.json` | ~0,12 MB | ~0,24 MB | ~0,41 MB |
