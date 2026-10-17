@@ -65,6 +65,13 @@
 * Criterio de fidelidad: «Verificado» solo si la geometría procede de medidas o planos; las piezas cuya
   existencia y fijaciones constan en el manual pero cuya forma es reconstruida se marcan «Reconstruido»
   (`ct_parts.make` lo aplica automáticamente).
+* Hallazgo pendiente del visor (17-10-2026, aún sin implementar): al explosionar, muchas piezas de la parte baja
+  (suspensión, tren motriz, batería, bajos) descienden por debajo del suelo (`web/src/main.js`: círculo opaco de
+  radio 26 m en y = −0,002 y rejilla en y = 0) y solo se ven si la cámara atraviesa el suelo. Es coherente con la
+  fórmula de explosión (`explode_dir` hacia −Z en los conjuntos bajos), pero dificulta ver el despiece. Propuesta
+  acordada con el usuario: **suelo de cristal semitransparente** (se ve a través de él lo que queda debajo) y una
+  **opción para ocultar el suelo**. Solo toca el visor: no cambia el modelo, las direcciones de explosión ni
+  Blender. Ver `README.md` (Limitaciones principales).
 * Mejoras pendientes más valiosas: forma exacta de faros, retrovisores, paragolpes y piezas fundidas (requiere
   escaneo o fotografías ortogonales); molde real del Scorpion ATR; carga progresiva del GLB por sistemas (ya 7,0 MB);
   verificación de la sección transversal con una vista frontal a escala; leer las figuras del manual de reparación

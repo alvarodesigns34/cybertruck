@@ -150,6 +150,10 @@ modifique el visor (también se puede lanzar manualmente). Requiere que Pages es
 - La anchura «sin espejos» oficial (2.031,6 mm) no es compatible con la anchura de los neumáticos; el modelo
   sigue la planta oficial, con aletas a ±1,04 m (2.081,7 mm).
 - Las texturas son sintéticas (no escaneadas); el GLB pesa 7,0 MB y se carga de una vez.
+- **Visor: piezas bajo el suelo al explosionar.** Con la vista explosionada, muchas piezas de la parte baja
+  (suspensión, tren motriz, batería y bajos) descienden por debajo del suelo del visor y solo se ven moviendo la
+  cámara a través de él. Mejora prevista (aún no implementada): un **suelo de cristal semitransparente**, que
+  permita ver lo que queda debajo, y un control para **ocultar el suelo**. No requiere regenerar el modelo.
 - Las piezas de la versión 3 tienen nombre, cantidad y fijaciones verificados en los manuales de Tesla, pero su
   forma y posición exactas son reconstrucciones (no hay planos); los manuales no publican masas ni cotas por pieza.
   Quedan fuera las opciones no incluidas de serie (Terrestrial Armor, barra de luz off-road) y las piezas de
