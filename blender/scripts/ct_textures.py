@@ -209,15 +209,134 @@ def recipe_rotor(n=512):
     return {"rough": rough, "normal": normal_from_height(h, 0.8)}
 
 
+# ---------------------------------------------------------------------------
+# Versión 4: recetas del hiperrealismo (interior de los conjuntos y acabados)
+# ---------------------------------------------------------------------------
+def _draw_rect(a, x0, y0, x1, y1, val, mode="max"):
+    n = a.shape[0]
+    xs = np.arange(int(x0), int(x1) + 1) % n
+    ys = np.arange(int(y0), int(y1) + 1) % n
+    if mode == "max":
+        a[np.ix_(ys, xs)] = np.maximum(a[np.ix_(ys, xs)], val)
+    else:
+        a[np.ix_(ys, xs)] = val
+
+
+def recipe_pcb(n=1024):
+    """Placa de circuito impreso: máscara de soldadura verde, pistas de cobre bajo la máscara (rectas y a 45°),
+    pads estañados, vías y serigrafía blanca. 1 px ≈ 0,08 mm."""
+    rng = np.random.default_rng(301)
+    trace = np.zeros((n, n))
+    pads = np.zeros((n, n))
+    silk = np.zeros((n, n))
+    vias = np.zeros((n, n))
+    for _ in range(420):
+        x, y = rng.integers(0, n, 2)
+        w = rng.choice((2, 3, 4, 6))
+        for _seg in range(rng.integers(2, 6)):
+            d = rng.choice(4)
+            ln = int(rng.integers(20, 160))
+            if d == 0:
+                _draw_rect(trace, x, y - w // 2, x + ln, y + w // 2, 1.0)
+                x += ln
+            elif d == 1:
+                _draw_rect(trace, x - w // 2, y, x + w // 2, y + ln, 1.0)
+                y += ln
+            else:
+                sg = 1 if d == 2 else -1
+                for k in range(ln // 2):
+                    _draw_rect(trace, x + k - w // 2, y + sg * k - w // 2, x + k + w // 2, y + sg * k + w // 2, 1.0)
+                x += ln // 2
+                y += sg * (ln // 2)
+        if rng.random() < 0.6:
+            _draw_rect(vias, x - 4, y - 4, x + 4, y + 4, 1.0)
+    for _ in range(160):
+        x, y = rng.integers(0, n, 2)
+        cols, rows = rng.integers(1, 9), rng.integers(1, 3)
+        pw, ph = rng.choice(((8, 14), (12, 6), (6, 6), (16, 10)))
+        for i in range(cols):
+            for j in range(rows):
+                _draw_rect(pads, x + i * (pw + 5), y + j * (ph + 30), x + i * (pw + 5) + pw, y + j * (ph + 30) + ph, 1.0)
+    for _ in range(90):
+        x, y = rng.integers(0, n, 2)
+        L_ = int(rng.integers(12, 60))
+        for k in range(0, L_, 7):
+            if rng.random() < 0.8:
+                _draw_rect(silk, x + k, y, x + k + 4, y + 7, 1.0)
+        if rng.random() < 0.3:
+            _draw_rect(silk, x - 4, y - 4, x + L_ + 4, y - 3, 1.0)
+            _draw_rect(silk, x - 4, y + 10, x + L_ + 4, y + 11, 1.0)
+    trace = np.clip(blur(trace, 0.7), 0, 1)
+    h = trace * 0.5 + pads * 0.7 + silk * 0.25 - vias * 0.6 + spectral(n, 120.0, seed=302) * 0.02
+    mask = np.array([0.020, 0.140, 0.055])
+    copper_under = np.array([0.045, 0.200, 0.065])
+    tin = np.array([0.72, 0.72, 0.70])
+    white = np.array([0.80, 0.80, 0.78])
+    col = mask[None, None, :] * (1 - trace[..., None]) + copper_under[None, None, :] * trace[..., None]
+    col = col * (1 - pads[..., None]) + tin[None, None, :] * pads[..., None]
+    col = col * (1 - silk[..., None]) + white[None, None, :] * silk[..., None]
+    col = col * (1 - vias[..., None] * 0.6)
+    rough = 0.30 + 0.06 * norm01(spectral(n, 6.0, seed=303)) + 0.25 * silk - 0.10 * pads
+    metal = np.clip(pads, 0, 1)
+    return {"rough": rough, "normal": normal_from_height(h, 1.4), "color": col, "metal": metal}
+
+
+def recipe_foam(n=512):
+    """Espuma de poliuretano moldeado de celda abierta (superficie de corte con poros)."""
+    f1, f2 = cells(n, 2500, seed=311)
+    wall = norm01(blur(np.tanh((f2 - f1) / 2.0), 0.8))
+    pores = (f1 > np.percentile(f1, 70)).astype(float)
+    h = wall * 0.7 - pores * 0.6 + spectral(n, 30.0, seed=312) * 0.1
+    rough = 0.90 + 0.08 * norm01(h)
+    col = 0.55 + 0.06 * norm01(spectral(n, 4.0, seed=313)) - 0.10 * pores
+    return {"rough": rough, "normal": normal_from_height(h, 2.2),
+            "color": np.stack([col * 1.0, col * 0.80, col * 0.42], -1)}
+
+
+def recipe_felt(n=512):
+    """Fieltro no tejido (aislantes NVH, guarnecidos ocultos): fibras cortas orientadas al azar."""
+    rng = np.random.default_rng(321)
+    h = np.zeros((n, n))
+    for _ in range(5000):
+        x, y = rng.integers(0, n, 2)
+        a = rng.random() * math.pi
+        ln = rng.integers(8, 30)
+        for k in range(ln):
+            h[int(y + k * math.sin(a)) % n, int(x + k * math.cos(a)) % n] += 1.0
+    h = blur(h, 0.6) + spectral(n, 20.0, seed=322) * 0.3
+    rough = 0.92 + 0.06 * norm01(h)
+    return {"rough": rough, "normal": normal_from_height(norm01(h), 1.6)}
+
+
+def recipe_machined(n=512):
+    """Aluminio y acero mecanizados o rectificados: marcas de herramienta paralelas finas y regulares."""
+    yy, xx = np.meshgrid(np.arange(n), np.arange(n), indexing="ij")
+    marks = np.sin(yy * 2 * math.pi * 96 / n + spectral(n, 2.0, seed=331) * 0.6)
+    h = marks * 0.35 + spectral(n, 1.5, 300.0, seed=332) * 0.5 + spectral(n, 80.0, seed=333) * 0.06
+    rough = 0.16 + 0.06 * norm01(spectral(n, 1.0, 40.0, seed=334)) + 0.03 * norm01(marks)
+    return {"rough": rough, "normal": normal_from_height(h, 0.5)}
+
+
+def recipe_zinc(n=512):
+    """Recubrimiento de zinc-níquel de la tornillería: textura fina y velado irregular."""
+    h = spectral(n, 120.0, seed=341) * 0.5 + spectral(n, 12.0, seed=342) * 0.2
+    rough = 0.30 + 0.14 * norm01(spectral(n, 5.0, seed=343)) + 0.05 * norm01(h)
+    col = 0.54 + 0.05 * norm01(spectral(n, 3.0, seed=344))
+    return {"rough": rough, "normal": normal_from_height(h, 0.6), "color": np.stack([col, col * 1.01, col * 1.03], -1)}
+
+
 # Metalicidad codificada en el canal B del mapa de rugosidad (coherente con su uso en ct_materials)
-METAL = {"steel": 1.0, "cast": 1.0, "rotor": 1.0}
+METAL = {"steel": 1.0, "cast": 1.0, "rotor": 1.0, "machined": 1.0, "zinc": 1.0}
 
 RECIPES = {
     "steel": (recipe_steel, 1024), "rubber": (recipe_rubber, 512), "sidewall": (recipe_sidewall, 512),
     "plastic": (recipe_plastic, 512), "leather": (recipe_leather, 1024), "fabric": (recipe_fabric, 512),
     "carpet": (recipe_carpet, 512), "cast": (recipe_cast, 512), "composite": (recipe_composite, 512),
     "rotor": (recipe_rotor, 512),
+    "pcb": (recipe_pcb, 1024), "foam": (recipe_foam, 512), "felt": (recipe_felt, 512),
+    "machined": (recipe_machined, 512), "zinc": (recipe_zinc, 512),
 }
+TILE_M.update({"pcb": 0.08, "foam": 0.03, "felt": 0.03, "machined": 0.03, "zinc": 0.02})
 
 
 # ---------------------------------------------------------------------------
@@ -267,20 +386,24 @@ def _srgb(c):
     return np.where(c <= 0.0031308, c * 12.92, 1.055 * np.power(np.clip(c, 0, None), 1 / 2.4) - 0.055)
 
 
-def build_textures(force=False):
-    """Genera (o reutiliza) todas las texturas. Devuelve {clave: {mapa: imagen}}."""
+def build_textures(force=False, force_keys=()):
+    """Genera (o reutiliza) todas las texturas. Devuelve {clave: {mapa: imagen}}.
+
+    `force_keys`: claves que se regeneran aunque ya existan (tras cambiar su receta).
+    """
     out = {}
     for key, (fn, n) in RECIPES.items():
         names = {m: f"T_{key}_{m}" for m in ("rough", "normal", "color")}
         paths = {m: os.path.join(TEX_DIR, nm + ".webp") for m, nm in names.items()}
-        if not force and os.path.exists(paths["normal"]):
+        if not (force or key in force_keys) and os.path.exists(paths["normal"]):
             out[key] = {m: load_image(names[m], p, "sRGB" if m == "color" else "Non-Color")
                         for m, p in paths.items() if os.path.exists(p)}
             continue
         maps = fn(n)
         # Canales según glTF (metallicRoughnessTexture): G = rugosidad, B = metalicidad
         r = maps["rough"]
-        orm = np.stack([np.ones_like(r), r, np.full_like(r, METAL.get(key, 0.0))], -1)
+        metal = maps.get("metal", np.full_like(r, METAL.get(key, 0.0)))
+        orm = np.stack([np.ones_like(r), r, metal], -1)
         res = {"rough": _to_image(names["rough"], orm),
                "normal": _to_image(names["normal"], maps["normal"])}
         if "color" in maps:

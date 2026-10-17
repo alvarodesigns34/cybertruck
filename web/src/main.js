@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { createLighting, createFloorReflector } from './lighting.js';
 import {
   MODEL_URL, MANIFEST_URL, DRACO_URL, SYSTEM_LABELS, STAGES, STAGE_WINDOWS, FIDELITY, VIEWS,
 } from './config.js';
@@ -13,7 +13,7 @@ const $ = (id) => document.getElementById(id);
 const state = {
   explode: 0, amp: 1.5, stageMask: { 1: true, 2: true, 3: true, 4: true, 5: true, 6: true },
   parts: [], components: new Map(), selected: null, hiddenSystems: new Set(), playing: false,
-  anim: null, tris: 0, meshes: 0,
+  anim: null, tris: 0, meshes: 0, floor: 'glass', env: 'studio', reflections: true,
 };
 
 // ---------------------------------------------------------------------------
@@ -22,19 +22,15 @@ const state = {
 const canvas = $('viewport');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
+// AgX: la misma transformación de vista que usan los renders de Blender (docs/renders)
+renderer.toneMapping = THREE.AgXToneMapping;
 renderer.toneMappingExposure = 1.0;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+// Equipos de sobremesa: sombras y reflejos a mayor resolución; móviles y tabletas: versión ligera
+const HIGH_END = window.matchMedia('(pointer: fine)').matches && window.innerWidth >= 1100;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0d0f12);
-scene.fog = new THREE.Fog(0x0d0f12, 22, 60);
-
-const pmrem = new THREE.PMREMGenerator(renderer);
-const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-scene.environment = envTex;
-scene.environmentIntensity = 0.85;
 
 const camera = new THREE.PerspectiveCamera(38, 1, 0.05, 200);
 const controls = new OrbitControls(camera, canvas);
@@ -45,15 +41,18 @@ controls.maxDistance = 30;
 controls.maxPolarAngle = Math.PI * 0.98;
 controls.screenSpacePanning = true;
 
-const key = new THREE.DirectionalLight(0xffffff, 1.6);
+const key = new THREE.DirectionalLight(0xffffff, 2.2);
 key.position.set(-6, 9, -5);
 key.castShadow = true;
-key.shadow.mapSize.set(2048, 2048);
-Object.assign(key.shadow.camera, { left: -7, right: 7, top: 7, bottom: -7, near: 1, far: 30 });
-key.shadow.bias = -0.0004;
+key.shadow.mapSize.set(HIGH_END ? 4096 : 2048, HIGH_END ? 4096 : 2048);
+Object.assign(key.shadow.camera, { left: -6.5, right: 6.5, top: 6.5, bottom: -6.5, near: 1, far: 30 });
+key.shadow.bias = -0.0003;
 key.shadow.normalBias = 0.02;
+key.shadow.radius = 3;
 scene.add(key);
-scene.add(new THREE.HemisphereLight(0xdfe6ee, 0x1a1c20, 0.35));
+const hemi = new THREE.HemisphereLight(0xdfe6ee, 0x1a1c20, 0.25);
+scene.add(hemi);
+const lighting = createLighting(renderer, scene, key, hemi);
 
 // Suelo: disco con degradado y receptor de sombras
 function groundTexture() {
@@ -82,6 +81,104 @@ grid.material.opacity = 0.35;
 grid.position.y = 0.0;
 scene.add(grid);
 
+// Suelo de cristal: lámina translúcida y ligeramente reflectante que deja ver las piezas que bajan del plano
+// del suelo al explosionar (suspensión, tren motriz, batería, bajos). Se desvanece hacia el borde.
+function glassFadeTexture() {
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const g = c.getContext('2d');
+  const grd = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+  grd.addColorStop(0, '#ffffff');
+  grd.addColorStop(0.45, '#bdbdbd');
+  grd.addColorStop(1, '#000000');
+  g.fillStyle = grd;
+  g.fillRect(0, 0, 256, 256);
+  return new THREE.CanvasTexture(c);
+}
+const glassFloor = new THREE.Mesh(new THREE.CircleGeometry(16, 96), new THREE.MeshPhysicalMaterial({
+  color: 0x8fa3b6, metalness: 0, roughness: 0.12, transparent: true, opacity: 0.24, alphaMap: glassFadeTexture(),
+  clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.4, side: THREE.DoubleSide, depthWrite: false,
+}));
+glassFloor.rotation.x = -Math.PI / 2;
+glassFloor.position.y = -0.002;
+glassFloor.renderOrder = 2;
+scene.add(glassFloor);
+// Sombra de contacto sobre el cristal (receptor de sombras invisible salvo la propia sombra)
+const shadowCatcher = new THREE.Mesh(new THREE.CircleGeometry(10, 64), new THREE.ShadowMaterial({ opacity: 0.32 }));
+shadowCatcher.rotation.x = -Math.PI / 2;
+shadowCatcher.position.y = -0.001;
+shadowCatcher.receiveShadow = true;
+shadowCatcher.renderOrder = 3;
+scene.add(shadowCatcher);
+
+// Reflejo plano real sobre el suelo (vuelve a dibujar la escena reflejada: se puede desactivar)
+const reflector = createFloorReflector(14, HIGH_END ? 0.5 : 0.35);
+scene.add(reflector);
+
+function savePref(k, v) { try { localStorage.setItem(k, v); } catch { /* almacenamiento no disponible */ } }
+function loadPref(k) { try { return localStorage.getItem(k); } catch { return null; } }
+
+const groundMap = ground.material.map;
+function setEnvironment(name) {
+  const e = lighting.apply(name);
+  state.env = name;
+  // suelo opaco: degradado oscuro de estudio o pavimento claro al aire libre
+  ground.material.map = name === 'exterior' ? null : groundMap;
+  ground.material.color.set(name === 'exterior' ? 0x8b9096 : 0xffffff);
+  ground.material.needsUpdate = true;
+  glassFloor.material.color.set(name === 'exterior' ? 0xc7d3de : 0x8fa3b6);
+  document.querySelectorAll('[data-env]').forEach((b) => {
+    const on = b.dataset.env === name;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  // el HUD sigue al ambiente: vidrio oscuro en el estudio y vidrio claro al aire libre
+  document.body.dataset.env = name;
+  const meta = document.querySelector('meta[name=theme-color]');
+  if (meta) meta.setAttribute('content', name === 'exterior' ? '#b9c7d6' : '#0b0d10');
+  savePref('ct-env', name);
+  syncSegs();
+  return e;
+}
+
+function setReflections(on) {
+  state.reflections = !!on;
+  updateReflector();
+  document.querySelectorAll('[data-refl]').forEach((b) => {
+    const act = (b.dataset.refl === 'on') === state.reflections;
+    b.classList.toggle('active', act);
+    b.setAttribute('aria-pressed', String(act));
+  });
+  savePref('ct-refl', state.reflections ? 'on' : 'off');
+  syncSegs();
+}
+
+function updateReflector() {
+  reflector.visible = state.reflections && state.floor !== 'hidden';
+  reflector.setStrength(state.floor === 'glass' ? 0.24 : 0.14);
+}
+
+const FLOOR_MODES = ['glass', 'opaque', 'hidden'];
+function setFloor(mode) {
+  if (!FLOOR_MODES.includes(mode)) mode = 'glass';
+  state.floor = mode;
+  ground.visible = mode === 'opaque';
+  glassFloor.visible = mode === 'glass';
+  shadowCatcher.visible = mode === 'glass';
+  grid.visible = mode !== 'hidden';
+  grid.material.opacity = mode === 'glass' ? 0.22 : 0.35;
+  updateReflector();
+  // Con el suelo transparente u oculto la cámara puede rodear el vehículo también por debajo
+  controls.maxPolarAngle = mode === 'opaque' ? Math.PI * 0.98 : Math.PI;
+  document.querySelectorAll('[data-floor]').forEach((b) => {
+    const on = b.dataset.floor === mode;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  savePref('ct-floor', mode);
+  syncSegs();
+}
+
 // ---------------------------------------------------------------------------
 // Utilidades
 // ---------------------------------------------------------------------------
@@ -106,10 +203,30 @@ function setStatus() {
   $('explode').style.setProperty('--p', `${state.explode * 100}%`);
   document.querySelectorAll('.stage').forEach((el) => {
     const s = el.dataset.stage;
-    el.classList.toggle('on', state.explode > STAGE_WINDOWS[s][0] && state.stageMask[s]);
+    const [a, b] = STAGE_WINDOWS[s];
+    // relleno de cada etapa = su avance dentro de la ventana de explosión
+    el.style.setProperty('--k', state.stageMask[s] ? smoothstep(a, b, state.explode).toFixed(3) : 0);
+    el.classList.toggle('on', state.explode > a && state.stageMask[s]);
     el.classList.toggle('masked', !state.stageMask[s]);
+    el.setAttribute('aria-pressed', String(!!state.stageMask[s]));
   });
 }
+
+// Controles segmentados: el indicador se desliza bajo el botón activo
+function syncSeg(seg) {
+  const ind = seg.querySelector('.seg-ind');
+  const act = seg.querySelector('.seg-btn.active');
+  if (!ind) return;
+  if (!act || !act.offsetWidth) { ind.classList.remove('ready'); return; }
+  // la primera colocación (o tras estar oculto) es inmediata; los cambios posteriores se deslizan
+  const first = !ind.classList.contains('ready');
+  if (first) ind.style.transition = 'none';
+  ind.style.width = `${act.offsetWidth}px`;
+  ind.style.transform = `translateX(${act.offsetLeft}px)`;
+  ind.classList.add('ready');
+  if (first) { void ind.offsetWidth; ind.style.transition = ''; }
+}
+function syncSegs() { document.querySelectorAll('.seg').forEach(syncSeg); }
 
 // ---------------------------------------------------------------------------
 // Vista explosionada: posición = base + dirección · distancia · amplitud · suavizado(etapa)
@@ -164,7 +281,7 @@ function select(obj) {
     const ud = obj.userData;
     const f = FIDELITY[ud.fidelity] || { label: 'Sin clasificar', cls: '' };
     $('info-fid').textContent = f.label;
-    $('info-fid').className = 'badge ' + f.cls;
+    $('info-fid').className = 'pill ' + f.cls;
     $('info-title').textContent = ud.label_es || obj.name;
     $('info-name').textContent = obj.name;
     $('info-system').textContent = SYSTEM_LABELS[ud.system] || ud.system || '—';
@@ -220,7 +337,8 @@ function flyTo(view, ms = 900) {
     camera.updateProjectionMatrix();
     if (k >= 1) state.anim = null;
   };
-  document.querySelectorAll('.views .chip').forEach((b) => b.classList.toggle('active', b.dataset.view === view));
+  document.querySelectorAll('[data-view]').forEach((b) => b.classList.toggle('active', b.dataset.view === view));
+  syncSegs();
 }
 
 function focusOn(obj) {
@@ -248,11 +366,12 @@ function buildUI(manifest) {
   const st = $('stages');
   st.innerHTML = '';
   for (const [k, label] of Object.entries(STAGES)) {
-    const d = document.createElement('div');
+    const d = document.createElement('button');
     d.className = 'stage';
     d.dataset.stage = k;
-    d.title = 'Pulsa para incluir o excluir esta etapa de la explosión';
-    d.textContent = `${k}. ${label}`;
+    d.title = `${label}: pulsa para incluir o excluir esta etapa de la explosión`;
+    d.setAttribute('aria-label', `Etapa ${k}, ${label}`);
+    d.innerHTML = `<b>${k}</b><span>${label}</span>`;
     d.addEventListener('click', () => { state.stageMask[k] = !state.stageMask[k]; applyExplode(); });
     st.appendChild(d);
   }
@@ -269,10 +388,13 @@ function buildUI(manifest) {
   sysBox.innerHTML = '';
   const tree = $('tree');
   tree.innerHTML = '';
-  for (const sys of systems) {
+  for (const [si, sys] of systems.entries()) {
     const chip = document.createElement('button');
     chip.className = 'sys';
-    chip.innerHTML = `<span class="dot"></span>${SYSTEM_LABELS[sys] || sys}`;
+    // un tono por sistema, repartido por el círculo cromático
+    chip.style.setProperty('--c', `hsl(${Math.round((si * 360) / systems.length + 18) % 360} 72% 62%)`);
+    chip.setAttribute('aria-pressed', 'true');
+    chip.innerHTML = `<span class="dot"></span><span>${SYSTEM_LABELS[sys] || sys}</span>`;
     chip.addEventListener('click', () => toggleSystem(sys, chip));
     chip.dataset.sys = sys;
     sysBox.appendChild(chip);
@@ -288,7 +410,8 @@ function buildUI(manifest) {
       const f = FIDELITY[obj.userData.fidelity];
       it.innerHTML = `<span class="label" title="${obj.name}">${obj.userData.label_es || obj.name}</span>` +
         (f ? `<span class="fid ${f.cls}" title="${f.label}">${obj.userData.fidelity}</span>` : '') +
-        `<button class="eye" title="Mostrar u ocultar">◉</button>`;
+        `<button class="eye" title="Mostrar u ocultar" aria-label="Mostrar u ocultar ${obj.userData.label_es || obj.name}">` +
+        '<svg><use href="#i-eye"/></svg></button>';
       it.querySelector('.label').addEventListener('click', () => { select(obj); });
       it.querySelector('.eye').addEventListener('click', (ev) => {
         ev.stopPropagation();
@@ -319,6 +442,7 @@ function toggleSystem(sys, chip) {
   const off = !state.hiddenSystems.has(sys);
   if (off) state.hiddenSystems.add(sys); else state.hiddenSystems.delete(sys);
   chip.classList.toggle('off', off);
+  chip.setAttribute('aria-pressed', String(!off));
   for (const obj of state.components.values()) {
     if (obj.userData.system === sys) obj.visible = !off;
   }
@@ -335,7 +459,7 @@ function syncTreeVisibility() {
 function showAll() {
   for (const o of state.components.values()) o.visible = true;
   state.hiddenSystems.clear();
-  document.querySelectorAll('.sys').forEach((c) => c.classList.remove('off'));
+  document.querySelectorAll('.sys').forEach((c) => { c.classList.remove('off'); c.setAttribute('aria-pressed', 'true'); });
   syncTreeVisibility();
 }
 
@@ -398,7 +522,8 @@ async function load() {
   });
   scene.add(vehicle);
   // Gancho de inspección para pruebas automatizadas (solo lectura del estado y utilidades)
-  window.__ct = { state, applyExplode, select, isolate, showAll, camera, controls, THREE };
+  window.__ct = { state, applyExplode, select, isolate, showAll, setFloor, setEnvironment, setReflections, camera,
+    controls, THREE };
   buildUI(manifest);
   flyTo('front34', 1);
   applyExplode();
@@ -409,21 +534,76 @@ async function load() {
 // ---------------------------------------------------------------------------
 // Controles
 // ---------------------------------------------------------------------------
+function setPlaying(on) {
+  state.playing = on;
+  const b = $('btn-play');
+  b.querySelector('use').setAttribute('href', on ? '#i-pause' : '#i-play');
+  b.setAttribute('aria-label', on ? 'Pausar la animación' : 'Animar la explosión');
+  b.setAttribute('aria-pressed', String(on));
+}
 $('explode').addEventListener('input', (ev) => {
-  state.playing = false; $('btn-play').textContent = '▶ Animar';
+  setPlaying(false);
   state.explode = Number(ev.target.value) / 100;
   applyExplode();
 });
-$('amp').addEventListener('input', (ev) => { state.amp = Number(ev.target.value); applyExplode(); });
+const fmtAmp = (v) => `${v.toFixed(2).replace(/0$/, '').replace('.', ',')}×`;
+$('amp').addEventListener('input', (ev) => {
+  state.amp = Number(ev.target.value);
+  $('amp').style.setProperty('--p', `${((state.amp - 0.6) / 1.8) * 100}%`);
+  $('amp-out').textContent = fmtAmp(state.amp);
+  applyExplode();
+});
+$('amp').style.setProperty('--p', `${((state.amp - 0.6) / 1.8) * 100}%`);
 $('btn-assemble').addEventListener('click', () => {
-  state.playing = false; $('btn-play').textContent = '▶ Animar';
+  setPlaying(false);
   animateExplodeTo(0);
 });
 let playDir = 1;
 $('btn-play').addEventListener('click', () => {
-  state.playing = !state.playing;
-  $('btn-play').textContent = state.playing ? '❚❚ Pausa' : '▶ Animar';
+  setPlaying(!state.playing);
   playDir = state.explode >= 1 ? -1 : 1;
+});
+
+// Panel lateral: abierto en pantallas amplias, recogido en tabletas y móviles
+function setPanel(open) {
+  $('panel').classList.toggle('open', open);
+  $('btn-panel').setAttribute('aria-expanded', String(open));
+  if (open) requestAnimationFrame(syncSegs);
+}
+setPanel(window.innerWidth > 1180);
+document.querySelectorAll('.tabs .seg-btn').forEach((t) => t.addEventListener('click', () => {
+  document.querySelectorAll('.tabs .seg-btn').forEach((o) => {
+    const on = o === t;
+    o.classList.toggle('active', on);
+    o.setAttribute('aria-selected', String(on));
+    $(o.dataset.tab).classList.toggle('hidden', !on);
+  });
+  syncSegs();
+  if (t.dataset.tab === 'components-tab') $('search').focus({ preventScroll: true });
+}));
+
+// Menú emergente de escena (suelo, luz, reflejos y amplitud), anclado al botón que lo abre
+function placePopover() {
+  const pop = $('scene-pop'), btn = $('btn-scene');
+  const r = btn.getBoundingClientRect();
+  const dock = document.querySelector('.dock').getBoundingClientRect();
+  const w = pop.offsetWidth, h = pop.offsetHeight, m = 10;
+  // encima de la base, alineado con el botón que lo abre
+  pop.style.left = `${Math.max(m, Math.min(window.innerWidth - w - m, r.right + 12 - w))}px`;
+  pop.style.top = `${Math.max(m, dock.top - h - 10)}px`;
+}
+function setPopover(open) {
+  $('scene-pop').classList.toggle('hidden', !open);
+  $('btn-scene').setAttribute('aria-expanded', String(open));
+  if (open) { placePopover(); syncSegs(); }
+}
+$('btn-scene').addEventListener('click', (ev) => {
+  ev.stopPropagation();
+  setPopover($('scene-pop').classList.contains('hidden'));
+});
+document.addEventListener('pointerdown', (ev) => {
+  if ($('scene-pop').classList.contains('hidden')) return;
+  if (!$('scene-pop').contains(ev.target) && !$('btn-scene').contains(ev.target)) setPopover(false);
 });
 let tween = null;
 function animateExplodeTo(target, ms = 900) {
@@ -437,9 +617,15 @@ function animateExplodeTo(target, ms = 900) {
   };
 }
 document.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => flyTo(b.dataset.view)));
+document.querySelectorAll('[data-floor]').forEach((b) => b.addEventListener('click', () => setFloor(b.dataset.floor)));
+document.querySelectorAll('[data-env]').forEach((b) => b.addEventListener('click', () => setEnvironment(b.dataset.env)));
+document.querySelectorAll('[data-refl]').forEach((b) => b.addEventListener('click', () => setReflections(b.dataset.refl === 'on')));
+setEnvironment(loadPref('ct-env') || 'studio');
+setFloor(loadPref('ct-floor') || 'glass');
+setReflections((loadPref('ct-refl') || (HIGH_END ? 'on' : 'off')) === 'on');
 $('btn-reset-view').addEventListener('click', () => flyTo(state.explode > 0.3 ? 'exploded' : 'front34'));
 $('btn-show-all').addEventListener('click', showAll);
-$('btn-panel').addEventListener('click', () => $('panel').classList.toggle('open'));
+$('btn-panel').addEventListener('click', () => setPanel(!$('panel').classList.contains('open')));
 $('info-close').addEventListener('click', () => select(null));
 $('btn-isolate').addEventListener('click', () => state.selected && isolate(state.selected));
 $('btn-hide').addEventListener('click', () => {
@@ -451,10 +637,16 @@ $('btn-hide').addEventListener('click', () => {
 });
 $('btn-focus').addEventListener('click', () => state.selected && focusOn(state.selected));
 window.addEventListener('keydown', (ev) => {
-  if (ev.target.tagName === 'INPUT') return;
-  if (ev.key === 'Escape') select(null);
+  if (ev.key === 'Escape') {
+    if (!$('scene-pop').classList.contains('hidden')) { setPopover(false); $('btn-scene').focus(); return; }
+    select(null);
+    return;
+  }
+  if (ev.target.tagName === 'INPUT' || ev.target.tagName === 'BUTTON') return;
   if (ev.key === 'r' || ev.key === 'R') flyTo('front34');
+  if (ev.key === ' ') { ev.preventDefault(); $('btn-play').click(); }
 });
+document.fonts?.ready.then(syncSegs);
 
 // ---------------------------------------------------------------------------
 // Bucle de render
@@ -464,6 +656,9 @@ function resize() {
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
+  reflector.resize(w, h);
+  syncSegs();
+  if (!$('scene-pop').classList.contains('hidden')) placePopover();
 }
 window.addEventListener('resize', resize);
 resize();
@@ -495,8 +690,8 @@ window.addEventListener('pagehide', () => {
       m.dispose();
     }
   });
-  envTex.dispose();
-  pmrem.dispose();
+  lighting.dispose();
+  reflector.dispose();
   renderer.dispose();
 });
 

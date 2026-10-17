@@ -306,3 +306,79 @@ metalicidad en el canal B (convención glTF), de modo que Blender y el visor usa
 
 Pendiente: 7 láminas abiertas (faldillas de aleta, paragolpes delantero, puerta de la toma de carga, piloto
 lateral) conservan 3–16 aristas con caras de sentido discontinuo; no afectan a las cotas ni a la explosión.
+
+## 10. Versión 4 (17-10-2026): «coche completo» por dentro e hiperrealismo
+
+### 10.1 Objetivo y criterio
+
+El objetivo acordado con el usuario es que el modelo contenga **todas las piezas que necesita un vehículo
+para funcionar**, sin simplificar, aunque muchas no puedan copiarse del Cybertruck real. Hasta la versión 3 los
+conjuntos grandes (motores, reductoras, inversores, pinzas, actuadores, climatizador, asientos…) eran
+carcasas cerradas. La versión 4 añade lo que hay dentro y la tornillería que los une.
+
+Criterio de fidelidad aplicado (sin cambios respecto al proyecto):
+
+- **Existencia y función:** [V] cuando la pieza consta en el manual de servicio, el manual del propietario o la
+  hoja de rescate (p. ej. motor de imanes permanentes delante e inducción detrás, 4 pistones delante y 1 detrás,
+  dos motores redundantes en los actuadores de dirección, PCS, ACJB, emblema de Cerbero); [R] cuando procede de
+  los desmontajes de Munro; imprescindible por ingeniería en el resto (rodamientos, juntas homocinéticas,
+  bomba de freno, armazón de los asientos…).
+- **Forma, dimensiones y recuentos interiores** (dientes, ranuras, bolas, celdas de la batería de 48 V,
+  componentes de las placas): reconstrucciones de ingeniería. Las 189 piezas nuevas se etiquetan
+  **«Aproximado»** con la nota correspondiente; ninguna se presenta como dato de Tesla.
+- La relación global 15,02:1 [V] **no** se reproduce con los radios de los engranajes dibujados: están limitados
+  por la carcasa reconstruida de la reductora. El número de celdas de la batería de 48 V (13 en serie) es una
+  estimación a partir de la tensión nominal.
+- La posición de cada tornillo de los juegos de tornillería es reconstruida; la cantidad, la llave y el par
+  proceden del manual de servicio (`docs/ficha-tecnica-piezas.md`).
+
+### 10.2 Qué se añadió (189 objetos, 1.137 en total)
+
+| Sistema | Piezas nuevas |
+|---|---|
+| Unidad motriz delantera | Estátor de chapa magnética de 48 ranuras con devanado de horquillas, barras de fase, rotor de imanes en V con placas de equilibrado, imanes de NdFeB, eje hueco estriado, rodamientos, resolver, piñón de entrada, eje intermedio, bloqueo electromagnético, diferencial abierto (corona, caja, satélites y planetarios), ejes de salida y retenes, tornillos de la tapa; inversor: placa fría, módulos de potencia de SiC, condensador del bus de continua, placas de excitación y de control, sensores de corriente |
+| Unidad motriz trasera (por lado) | Estátor de 60 ranuras con devanado distribuido, rotor de jaula de ardilla de cobre, eje con rodamientos y resolver, reductora independiente de dos etapas sin diferencial, interior del inversor |
+| Semiejes y bujes | Juntas homocinéticas de trípode y Rzeppa de 6 bolas, abrazaderas de los fuelles, tornillo central de 24 mm, rodamientos de buje de doble hilera |
+| Frenos | Interior de las 4 pinzas (pistones, juntas, guardapolvos, pasadores, muelle antirruido, husillo del freno de estacionamiento), láminas antirruido y avisador de desgaste, interior del servofreno electromecánico, bomba de freno tándem con sus pistones, varilla de empuje, interior de la HCU |
+| Suspensión y dirección | Interior de los 4 amortiguadores, cremallera con tuerca de bolas, poleas y correas, motores redundantes y placa de los dos actuadores, interior del compresor de aire |
+| Batería y alta tensión | Placas BMB y circuitos flexibles de los 4 bloques, barras principales, controlador BMS, junta de la tapa, colectores de refrigerante, interior del PCS y de la ACJB |
+| Baja tensión y electrónica | Interior de la batería de 48 V, placas de los controladores de carrocería, del ordenador de a bordo, de la ECU de remolque y de 29 módulos cerrados (cámaras, controladores de puerta, airbags, telemática, radar, sintonizador, sensores de impacto…), mazo principal del salpicadero |
+| Térmica y climatización | Hélices y motores de los ventiladores, compresor de A/C de espiral, rodete de la bomba de refrigerante, interior del climatizador (soplante, evaporador, condensador interior, compuertas, desagüe), interior del motor del limpiaparabrisas |
+| Habitáculo | Armazones, muelles, herrajes de reclinado y esteras de los asientos delanteros, armazón del banco trasero, espumas de los 10 cojines y respaldos, alma de magnesio del volante, radios, muelle de reloj y tornillo central, enrolladores con pretensor, interior de las pantallas, altavoces de puerta, bobinas de carga inalámbrica |
+| Carrocería y exterior | Vigas antiintrusión y guías del cristal de las 4 puertas, interior de los faros, motores de la cubierta, actuador de la toma de carga, tomas de remolque de 7 y 4 polos, emblema Cyberbeast |
+| Tornillería | 21 juegos de tornillos individuales (aletas, faros, retrovisores, lavaparabrisas, limpiaparabrisas, frunk, raíles de la cubierta, suelo de la caja, luces traseras, fascias, difusor, barra de luz, soportes de las unidades motrices) |
+
+Las carcasas de motores, reductoras, inversores y actuadores se apartan ahora más que su contenido en la vista
+explosionada (despiece de taller), y los tapizados de los asientos se separan de sus espumas.
+
+### 10.3 Hiperrealismo
+
+- **Texturas nuevas** (`ct_textures.py`): placa de circuito impreso (máscara, pistas de cobre rectas y a 45°,
+  pads estañados con metalicidad propia, vías y serigrafía), espuma de poliuretano de celda abierta, fieltro no
+  tejido, marcas de mecanizado y rectificado, recubrimiento de zinc de la tornillería.
+- **Materiales nuevos** (78 en total): chapa magnética, cobre esmaltado, imanes niquelados, acero de rodamientos y
+  de engranajes, espuma, fieltro, condensadores de película, sustrato cerámico, interfaz térmica, estañado,
+  nailon, grasa, acero de muelles fosfatado, armazón de asiento y magnesio inyectado.
+- Se probó añadir huellas y velos de manipulación al acero inoxidable y **se descartó**: con una textura que se
+  repite cada 40 cm el patrón se veía en mosaico. Unas huellas creíbles exigen mapas únicos por panel.
+- **Límite honesto:** la forma exacta de faros, retrovisores, paragolpes, fundiciones y del dibujo del Scorpion
+  ATR sigue sin poder mejorarse con rigor: hacen falta escaneos, planos o fotografías ortogonales a escala.
+
+### 10.4 Validación
+
+| Comprobación | Resultado |
+|---|---|
+| Cotas oficiales | Sin cambios respecto a la v3 (longitud +2,0 mm, altura +2,9 mm, altura libre −0,4 mm, batalla, vía y anchura con espejos exactas) |
+| Siluetas por trazado de rayos | Sin cambios (superior 2,9 / 13,3 mm; inferior 13,3 / 121,1; frontal 16,0 / 151,3; trasero 9,2 / 65,1; planta 6,7 / 29,3) |
+| Vista explosionada | Desviación 0 tras ciclos repetidos en los 1.137 objetos |
+| Piezas que asomaban | Detectadas con renders y rayos verticales contra la tapa del frunk (tornillos de la cubeta del frunk, de la fascia trasera, de los raíles y del limpiaparabrisas) y recolocadas |
+| Peso del activo | 1,19 millones de triángulos; GLB 12,0 MB (Draco + WebP); `Cybertruck.blend` 14,7 MB |
+
+### 10.5 Qué sigue faltando
+
+- Piezas internas no modeladas por falta total de referencia o porque no son piezas separables: estructura
+  interna del neumático (talones, lonas, cinturones), interior de las celdas, bobinados reales, placas con
+  componentes reales, mazos completos con cada conector, todos los clips de los guarnecidos.
+- Tornillería: hay juegos individuales en las uniones del manual que no la tenían; muchas uniones siguen con los
+  tornillos integrados en la malla de su pieza.
+- Formas exactas de las piezas visibles (ver §10.3).

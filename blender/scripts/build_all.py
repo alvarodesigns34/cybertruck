@@ -16,7 +16,8 @@ import bpy
 
 MODULES = ["ct_specs", "ct_lib", "ct_parts", "ct_textures", "ct_materials", "build_body", "build_wheels",
            "build_lights", "build_details", "build_exterior", "build_structure", "build_interior",
-           "build_interior_detail", "build_mechanics", "build_chassis", "build_v3", "build_scene", "build_explode"]
+           "build_interior_detail", "build_mechanics", "build_chassis", "build_v3", "build_v4", "build_scene",
+           "build_explode"]
 
 
 def reload_modules():
@@ -123,6 +124,9 @@ def run(parts=("body",), clear=True):
     if "v3" in parts:
         import build_v3
         stats["v3"] = build_v3.build_all(M)
+    if "v4" in parts:
+        import build_v4
+        stats["v4"] = build_v4.build_all(M)
     if "explode" in parts:
         import build_explode
         build_explode.setup_drivers()

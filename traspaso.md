@@ -3,6 +3,11 @@
 Documento de contexto completo (17-10-2026). Léelo entero junto con `CLAUDE.md` antes de tocar nada. Todo lo que
 comuniques al usuario, la documentación y los comentarios de código van **en español** (lo exige `CLAUDE.md`).
 
+> **Actualización (versión 4, 17-10-2026, rama `modelo-v4-coche-completo`).** La hoja de ruta de §3 está
+> completada: 189 piezas nuevas con el interior funcional de los conjuntos y tornillería (1.137 objetos),
+> texturas nuevas, 26 renders renovados, suelo de cristal / opaco / oculto, entornos HDR propios con reflejo plano
+> del suelo y HUD de vidrio líquido. Ver §13 y `CLAUDE.md` (estado). Las cifras de §2 son las de la versión 3.
+
 ---
 
 ## 1. Qué es el proyecto
@@ -276,7 +281,7 @@ Cybertruck.md` y la ficha consolidada en `docs/ficha-tecnica-piezas.md`.
    que `main` está en `cb5854b` o posterior y que no hay cambios pendientes.
 2. Proponer rama (`propose_branch`) antes de la primera edición, salvo que el usuario diga otra cosa.
 3. Si se modela: editar el módulo correspondiente → `build_all.run(parts=("body","wheels","lights","details",
-   "interior","chassis","v3","explode","scene"))` → `validate.run()` + `build_explode.verify_roundtrip()` →
+   "interior","chassis","v3","v4","explode","scene"))` → `validate.run()` + `build_explode.verify_roundtrip()` →
    inspeccionar con renders (Workbench rápido o `render_shot`) → `export_web.export(...)` → guardar el `.blend` →
    `node tools/gen_inventory.mjs` → probar el visor → documentar → commit.
 4. Si se toca el visor (`web/`): probarlo en local (explosión 0→100 %, selección, árbol, cámaras, móvil), mantener los
@@ -286,3 +291,23 @@ Cybertruck.md` y la ficha consolidada en `docs/ficha-tecnica-piezas.md`.
    `docs/research-and-fidelity.md` (validación y novedades) y `docs/ficha-tecnica-piezas.md` (§8.4 estado).
 6. No publicar ni hacer `push` sin que el usuario lo pida; no inventar datos de las fuentes; informar con franqueza de
    lo que no se pudo verificar.
+
+## 13. Versión 4 (17-10-2026): coche completo, suelo, luz y HUD
+
+- **Modelo:** `blender/scripts/ct_v4.py` (formas mecánicas de alto detalle; `part(..., frame=)` y `derived(...)`)
+  y `build_v4_motriz/chasis/energia/habitaculo/carroceria/tornilleria.py`, orquestados por `build_v4.py`
+  (`parts=(…, "v3", "v4", "explode", "scene")`). 189 objetos nuevos, todos «Aproximado» salvo el tornillo central
+  del buje («Reconstruido»). Detalle y criterio en `docs/research-and-fidelity.md` §10 y en la ficha §8.5.
+- **Validación:** cotas y siluetas idénticas a la v3; explosión con desviación 0 en 1.137 objetos; 1,19 M
+  triángulos; GLB 12,0 MB; `.blend` 14,7 MB.
+- **Renders:** 26 planos en `docs/renders/` (los 22–26 enseñan el interior con las carcasas ocultas; `preview.SHOTS`
+  admite nombres exactos terminados en «$» en la lista de ocultos).
+- **Visor:** `web/src/lighting.js` (entornos «Estudio» y «Exterior» por procedimiento, reflejo plano con
+  `Reflector`), suelo de cristal / opaco / oculto en `main.js`, HUD nuevo en `index.html` y `style.css` (vidrio
+  líquido, tema claro con la luz exterior, menú de escena, pestañas, indicadores deslizantes, adaptado a móvil).
+- **Trampas nuevas:** llamar a `bpy.context.view_layer.update()` antes de leer `matrix_world` de objetos recién
+  creados; comprobar que las piezas internas no asoman (renders y rayos contra la tapa del frunk); al escribir
+  archivos con `node -e "…"` desde Bash, las comillas invertidas se interpretan como sustitución de órdenes (usar
+  el editor o un heredoc con comillas simples).
+- **Pendiente:** fusionar y publicar (solo cuando el usuario lo pida), formas exactas con fuentes de geometría,
+  carga progresiva del GLB y el resto de §9.

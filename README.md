@@ -16,14 +16,29 @@ ortográficas, con **vista explosionada reversible** y un **visor web interactiv
 | ![Unidad trasera tri-motor](docs/renders/18_unidad_trasera_trimotor.jpg) | ![Estructura de carrocería](docs/renders/15_estructura_carroceria.jpg) |
 | ![Asientos y costuras](docs/renders/19_asientos_y_costuras.jpg) | ![Caja, tonneau y portón](docs/renders/21_caja_tonneau_y_porton.jpg) |
 | ![Rueda y freno](docs/renders/08_rueda_y_freno.jpg) | ![Faro y barra de luz](docs/renders/20_faro_y_barra_de_luz.jpg) |
+| ![Motor delantero por dentro](docs/renders/22_motor_delantero_por_dentro.jpg) | ![Unidad trasera por dentro](docs/renders/23_unidad_trasera_por_dentro.jpg) |
+| ![Pinza por dentro](docs/renders/24_pinza_por_dentro.jpg) | ![Asiento por dentro](docs/renders/25_asiento_por_dentro.jpg) |
 
-Los 21 planos de `docs/renders/` se renderizan con Cycles bajo cuatro iluminaciones (estudio, cielo físico de
-día, atardecer y cielo cubierto).
+Los 26 planos de `docs/renders/` se renderizan con Cycles bajo cuatro iluminaciones (estudio, cielo físico de
+día, atardecer y cielo cubierto); los cinco últimos muestran el interior funcional de la versión 4 con las
+carcasas ocultas.
 
-## Qué contiene (versión 3)
+## Qué contiene (versión 4)
 
-- **948 objetos** (909 mallas y 38 conjuntos) en 20 colecciones de sistema, frente a 561 en la versión 2 y 309 en
-  la 1. Muchas mallas agrupan piezas repetidas (1.344 celdas, tornillería, grapas, remaches), por lo que el número
+- **1.137 objetos** (1.098 mallas y 38 conjuntos) en 20 colecciones de sistema, frente a 948 en la versión 3, 561
+  en la 2 y 309 en la 1.
+- **Versión 4, «coche completo» (+189 objetos):** el interior funcional de los conjuntos que antes eran carcasas
+  cerradas: estátores con devanado de horquillas o distribuido, rotores de imanes y de jaula de cobre, ejes,
+  rodamientos y resolvers de los tres motores; trenes de engranajes helicoidales, diferencial delantero y
+  reductoras traseras independientes; inversores con módulos de potencia, condensador y placas; juntas
+  homocinéticas, rodamientos de buje, pistones de las pinzas, interior de amortiguadores, actuadores de dirección,
+  servofreno, bomba de freno, HCU y compresor de aire; placas BMB, BMS y barras de la batería, PCS, ACJB, batería
+  de 48 V y placas de 33 módulos electrónicos; climatizador, compresor de espiral y ventiladores por dentro;
+  armazones, muelles y espumas de los asientos, alma del volante, enrolladores, pantallas y altavoces; vigas de
+  puerta, interior de faros, tomas de remolque, emblema Cyberbeast y 21 juegos de tornillería individual. Las
+  piezas internas son reconstrucciones etiquetadas «Aproximado» (ver [§10](docs/research-and-fidelity.md)).
+- **Hiperrealismo:** texturas nuevas de placa de circuito, espuma, fieltro, mecanizado y zincado (78
+  materiales). Muchas mallas agrupan piezas repetidas (1.344 celdas, tornillería, grapas, remaches), por lo que el número
   de piezas físicas representadas es muy superior.
 - **Versión 3 (+387 objetos, +1,7 MB de GLB):** se han añadido las piezas del backlog de
   [`docs/ficha-tecnica-piezas.md`](docs/ficha-tecnica-piezas.md) §8.3: soportes y refuerzos de la carrocería en
@@ -60,10 +75,11 @@ día, atardecer y cielo cubierto).
 - **Materiales con texturas físicas** generadas (acero satinado anisótropo, caucho, granulado, piel, tejido,
   moqueta, fundición) que viajan al GLB (WebP + KHR_texture_transform), por lo que el visor web muestra el
   mismo aspecto que Blender.
-- **Cotas oficiales intactas**: longitud +2,0 mm, batalla y vía exactas, altura libre −0,4 mm, altura +2,9 mm,
-  anchura con espejos exacta (0,0 mm). Detalles en [`docs/research-and-fidelity.md`](docs/research-and-fidelity.md).
+- **Cotas oficiales intactas** también en la versión 4: longitud +2,0 mm, batalla y vía exactas, altura libre
+  −0,4 mm, altura +2,9 mm, anchura con espejos exacta (0,0 mm). Detalles en [`docs/research-and-fidelity.md`](docs/research-and-fidelity.md).
 - **Metadatos y vista explosionada** en 6 etapas para cada pieza; desviación 0 tras ciclos repetidos en Blender
-  (948 objetos) y funcionamiento comprobado en el navegador.
+  (1.137 objetos) y funcionamiento comprobado en el navegador. Las carcasas se apartan más que su contenido,
+  como en un despiece de taller.
 
 ## Estructura del repositorio
 
@@ -96,7 +112,7 @@ En la consola de Python de Blender:
 ```python
 import sys; sys.path.insert(0, r"<ruta-del-repo>/blender/scripts")
 import build_all
-build_all.run(parts=("body", "wheels", "lights", "details", "interior", "chassis", "v3", "explode", "scene"))
+build_all.run(parts=("body", "wheels", "lights", "details", "interior", "chassis", "v3", "v4", "explode", "scene"))
 import validate; print(validate.run())            # cotas y siluetas
 import export_web
 export_web.export(r"<ruta-del-repo>/web/models/cybertruck.glb",
@@ -115,12 +131,21 @@ node tools/serve.mjs web 8080
 
 Abrir `http://localhost:8080/`. Funciones:
 
+- **HUD de vidrio líquido** al estilo de Apple: cápsulas y paneles translúcidos con desenfoque y brillo especular,
+  controles segmentados con indicador deslizante, tema oscuro con la luz de estudio y claro con la exterior,
+  adaptado a tabletas y móviles, accesible con teclado (R restablece la vista, espacio anima, Esc cierra) y con
+  movimiento reducido si el sistema lo pide.
 - Rotación, zoom y desplazamiento con ratón o gestos táctiles; cámaras predefinidas y botón «Restablecer vista».
-- **Barra «Vista explosionada» 0–100 %**, control de amplitud, animación automática y botón «Ensamblar».
-- Pulsar sobre una etapa la excluye o incluye de la explosión (exploración selectiva).
-- Clic en una pieza: resaltado y ficha con sistema, conjunto, etapa y nivel de fidelidad; acciones **Aislar**,
-  **Ocultar** y **Encuadrar**.
-- Panel de sistemas (mostrar/ocultar por sistema) y árbol de componentes con búsqueda y ocultación individual.
+- **Barra «Vista explosionada» 0–100 %**, animación automática y botón «Ensamblar»; cada etapa muestra su avance
+  y al pulsarla se excluye o incluye de la explosión (exploración selectiva).
+- **Ajustes de escena** (botón del sol): suelo **de cristal** semitransparente (por defecto), **opaco** u
+  **oculto**; luz de **estudio** o **exterior** (entornos HDR propios generados por procedimiento, mapeo de tonos
+  AgX como en Blender); **reflejo plano** del suelo (activado en equipos de sobremesa) y amplitud de la explosión.
+  Las preferencias se recuerdan en el navegador.
+- Clic en una pieza: resaltado y ficha con sistema, conjunto, etapa, nivel de fidelidad y nota; acciones
+  **Aislar**, **Ocultar** y **Encuadrar**.
+- Panel con pestañas: sistemas (mostrar u ocultar por sistema) y árbol de componentes con búsqueda y ocultación
+  individual.
 
 Tras modificar el modelo en Blender, regenerar el inventario con `node tools/gen_inventory.mjs`.
 
@@ -141,12 +166,15 @@ modifique el visor (también se puede lanzar manualmente). Requiere que Pages es
 
 ## Próximos pasos
 
-- **Más piezas:** añadir bastantes más piezas, todas las posibles de forma realista (tornillería individual,
-  opciones fuera de serie, espumas, tapicerías, mazos, conectores, soportes…).
-- **Hiperrealismo:** mejorar el modelo en general con el hiperrealismo como objetivo: formas exactas de las piezas
-  críticas, materiales, texturas e iluminación.
-- **HUD del visor:** rediseñar la interfaz con una estética más cercana a Apple (liquid glass, translucidez y
-  desenfoque), además del suelo de cristal semitransparente descrito en las limitaciones.
+La hoja de ruta acordada el 17-10-2026 (más piezas, hiperrealismo, suelo de cristal, iluminación y reflejos, HUD)
+se completó en la versión 4. Lo que queda, por orden de valor:
+
+- **Formas exactas** de faros, retrovisores, paragolpes, fundiciones y del molde del Scorpion ATR: requieren
+  escaneos, planos o fotografías ortogonales a escala.
+- **Carga progresiva** del GLB por sistemas (12,0 MB de una vez).
+- Opciones fuera de serie (Terrestrial Armor, barra de luz off-road) y tornillería individual en las uniones que
+  todavía la llevan integrada en la malla de su pieza.
+- Leer las figuras del manual de reparación y las páginas Tri Motor del manual de servicio.
 
 ## Limitaciones principales
 
@@ -158,13 +186,12 @@ modifique el visor (también se puede lanzar manualmente). Requiere que Pages es
   ATR; las inscripciones usan una tipografía genérica.
 - La anchura «sin espejos» oficial (2.031,6 mm) no es compatible con la anchura de los neumáticos; el modelo
   sigue la planta oficial, con aletas a ±1,04 m (2.081,7 mm).
-- Las texturas son sintéticas (no escaneadas); el GLB pesa 7,0 MB y se carga de una vez.
-- **Visor: piezas bajo el suelo al explosionar.** Con la vista explosionada, muchas piezas de la parte baja
-  (suspensión, tren motriz, batería y bajos) descienden por debajo del suelo del visor y solo se ven moviendo la
-  cámara a través de él. Mejora prevista (aún no implementada): un **suelo de cristal semitransparente**, que
-  permita ver lo que queda debajo, y un control para **ocultar el suelo**. No requiere regenerar el modelo.
+- Las texturas son sintéticas (no escaneadas); el GLB pesa 12,0 MB y se carga de una vez.
 - Las piezas de la versión 3 tienen nombre, cantidad y fijaciones verificados en los manuales de Tesla, pero su
   forma y posición exactas son reconstrucciones (no hay planos); los manuales no publican masas ni cotas por pieza.
+  Las piezas interiores de la versión 4 (engranajes, rodamientos, bobinados, placas, espumas…) son
+  reconstrucciones de ingeniería etiquetadas «Aproximado»: existen y cumplen su función, pero su forma, sus
+  dimensiones y sus recuentos no proceden de Tesla.
   Quedan fuera las opciones no incluidas de serie (Terrestrial Armor, barra de luz off-road) y las piezas de
   variantes que no son Cyberbeast.
 

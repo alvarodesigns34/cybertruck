@@ -111,6 +111,11 @@ EXTERIOR = ["EXTERIOR_PANELS", "DOORS_AND_HATCHES", "GLASS_AND_MIRRORS", "BODY_S
             "CARGO_BED", "INTERIOR_TRIM", "BODY_FASTENERS"]
 
 
+ALL_COLS = ["EXTERIOR_PANELS", "DOORS_AND_HATCHES", "GLASS_AND_MIRRORS", "LIGHTING", "CARGO_BED", "BODY_STRUCTURE",
+            "BODY_FASTENERS", "UNDERBODY", "FRONT_WHEELS_AND_BRAKES", "REAR_WHEELS_AND_BRAKES", "FRONT_SUSPENSION",
+            "REAR_SUSPENSION", "STEERING", "BATTERY_ASSEMBLY", "DRIVE_UNITS", "INTERIOR_DASHBOARD", "INTERIOR_CONTROLS",
+            "INTERIOR_SEATS", "INTERIOR_DOORS", "INTERIOR_TRIM"]
+
 BODY_COLS = ["EXTERIOR_PANELS", "DOORS_AND_HATCHES", "GLASS_AND_MIRRORS", "LIGHTING", "CARGO_BED",
              "INTERIOR_DASHBOARD", "INTERIOR_CONTROLS", "INTERIOR_SEATS", "INTERIOR_DOORS", "INTERIOR_TRIM",
              "BODY_FASTENERS"]
@@ -149,7 +154,38 @@ SHOTS = {
     "19_asientos_y_costuras": ("studio", ((-0.05, 0.95, 1.30), (-0.42, 0.40, 0.85), 24), 1.6, [], [], 0.0),
     "20_faro_y_barra_de_luz": ("studio", ((-1.9, 3.6, 1.45), (-0.55, 2.45, 1.0), 40), 0.0, [], [], 0.0),
     "21_caja_tonneau_y_porton": ("studio", ((2.6, -5.2, 2.7), (0.0, -2.0, 1.1), 35), 0.0, [], [], 0.0),
+    # --- Versión 4: el interior funcional de los conjuntos (carcasas ocultas)
+    "22_motor_delantero_por_dentro": ("studio", ((-0.95, 2.95, 1.05), (-0.02, 1.95, 0.50), 40), 0.6,
+                                      [c for c in ALL_COLS if c != "DRIVE_UNITS"],
+                                      ["DU_F_Motor_Housing", "DU_F_Gearbox$", "DU_F_NVH_Cover", "DU_F_Inverter$",
+                                       "DU_R_", "DU_Halfshaft_R", "DU_Halfshaft_FR", "DU_F_HeatExchanger"], 0.0),
+    "23_unidad_trasera_por_dentro": ("studio", ((1.25, -3.25, 1.30), (0.0, -1.95, 0.48), 34), 0.6,
+                                     [c for c in ALL_COLS if c != "DRIVE_UNITS"],
+                                     ["DU_R_Motor_L", "DU_R_Motor_R", "DU_R_Gearbox", "DU_R_NVH", "DU_R_Inverter_L$",
+                                      "DU_R_Inverter_R$", "DU_F_", "DU_Halfshaft_F", "DU_R_PlateCooler", "DU_R_Mounts"],
+                                     0.0),
+    "24_pinza_por_dentro": ("studio", ((-1.30, 1.22, 0.80), (-0.89, 1.70, 0.50), 50), 0.5,
+                            [c for c in ALL_COLS if c != "FRONT_WHEELS_AND_BRAKES"],
+                            ["WHL_FL", "BRK_FL_Caliper$", "BRK_FL_Shield", "WHEEL_FR", "WHL_FR", "BRK_FR", "WHL_R", "BRK_R"],
+                            0.0),
+    "25_asiento_por_dentro": ("studio", ((1.55, 1.45, 1.35), (0.40, 0.32, 0.92), 34), 0.8,
+                              [c for c in ALL_COLS if c != "INTERIOR_SEATS"],
+                              ["INT_SeatF_R_Cushion$", "INT_SeatF_R_Back$", "INT_SeatF_R_Back_Shell", "INT_SeatF_R_Covers",
+                               "INT_SeatF_R_Side_Shield", "INT_SeatF_L", "INT_SeatF_Frame_L", "INT_SeatF_Heat_Vent_Mats_L",
+                               "INT_SeatR", "INT_Seatbelt", "INT_Airbag_Seat"], 0.0),
+    "26_climatizador_y_electronica": ("studio", ((1.25, 0.05, 1.55), (0.12, 1.05, 0.82), 34), 0.8,
+                                      [c for c in ALL_COLS if c not in ("INTERIOR_DASHBOARD", "INTERIOR_CONTROLS")],
+                                      ["INT_HVAC_Module", "INT_IP_", "INT_Display_Center_Housing", "INT_Display_Center_Screen",
+                                       "INT_Car_Computer$", "INT_Airbag", "INT_Demist", "INT_Floor_Duct", "INT_Footwell",
+                                       "INT_Console", "INT_Display_Rear", "INT_Pedal", "BRK_Pedal", "INT_Restraint",
+                                       "INT_Cabin_Outlets", "INT_Gear", "DISPLAY", "INT_Ethernet", "INT_Puddle",
+                                       "INT_Tweeter", "INT_HVAC_Sensors", "INT_HVAC_Blend"], 0.0),
 }
+
+
+def _hidden_by(name, hide):
+    """Prefijos de ocultación; los que terminan en «$» exigen el nombre exacto."""
+    return any(name == h[:-1] if h.endswith("$") else name.startswith(h) for h in hide)
 
 
 def render_shot(name, folder, samples=128, res=(1600, 900)):
@@ -164,7 +200,7 @@ def render_shot(name, folder, samples=128, res=(1600, 900)):
     set_excluded(excl, True)
     hidden = []
     for o in bpy.data.objects:
-        if hide and o.name.startswith(tuple(hide)) and not o.hide_render:
+        if hide and _hidden_by(o.name, hide) and not o.hide_render:
             o.hide_render = True
             hidden.append(o)
     build_explode.set_explode(explode)

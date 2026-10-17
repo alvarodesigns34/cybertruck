@@ -1431,3 +1431,20 @@ Discrepancias de §8.2 resueltas: tirante de puerta (23 N·m), bisagras (38 N·m
 bandeja de la batería, número de lamas, persianas y LED declarados sin fuente, escobilla, tensión del pack, tamaño de
 las pantallas y etiqueta de fidelidad. Quedan abiertas la interpretación del reductor trasero (carcasa común frente
 a las páginas LH/RH de Tri Motor) y la de la fundición trasera (dos mitades frente a un componente con «Half Section»).
+
+## 8.5 Estado tras la versión 4 (17-10-2026)
+
+La versión 4 (`blender/scripts/build_v4_*.py`, ver `docs/research-and-fidelity.md` §10) añade 189 objetos con el
+interior funcional de los conjuntos y tornillería individual. Relación con esta ficha:
+
+| Bloque | Estado |
+|---|---|
+| Tren motriz (TRN-) | Interior completo de las tres máquinas eléctricas, de las reductoras (diferencial delante, dos reductoras independientes detrás) y de los inversores; semiejes con juntas homocinéticas y tornillo central de 24 mm a 300 N·m |
+| Chasis (CHS-) | Interior de las pinzas (4 pistones delante, 1 con freno de estacionamiento eléctrico detrás), amortiguadores, actuadores de dirección (dos motores redundantes), servofreno y bomba de freno, HCU, compresor de aire, rodamientos de buje |
+| Batería y alta tensión | BMB por bloque, barras principales, BMS, junta de la tapa, colectores de refrigerante, interior del PCS y de la ACJB |
+| Electrónica (ELE-) | Placa interior de 29 módulos cerrados y de los controladores de carrocería, ordenador, ECU de remolque y batería de 48 V |
+| Interior (INT-) | Armazones, espumas y esteras de los asientos, alma del volante, enrolladores con pretensor, pantallas, altavoces, carga inalámbrica, mazo del salpicadero, climatizador por dentro |
+| Exterior (EXT-) | Vigas antiintrusión de las puertas, interior de los faros, motores de la cubierta, actuador de la toma de carga, tomas de remolque, emblema Cyberbeast (hoja de rescate) |
+| Tornillería | Juegos individuales con la cantidad, la llave y el par de esta ficha: EXT-001, 013, 017, 054, 066, 073, 092, 105, 107, 110, 111, 112, 113 y soportes de las unidades motrices |
+
+Siguen sin modelar las opciones fuera de serie (Terrestrial Armor, barra de luz off-road) y las variantes de fecha.
