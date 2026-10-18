@@ -78,7 +78,7 @@
   (`ct_parts.make` lo aplica automáticamente).
 * Hoja de ruta del 17-10-2026: **completada** en la versión 4 (más piezas, hiperrealismo, suelo de cristal,
   iluminación y reflejos, HUD tipo Apple).
-* **Versión 4.2 (18-10-2026, sin publicar todavía): interferencias de ensamblaje a cero.** 0 parejas de más de 3 mm
+* **Versión 4.2 (18-10-2026, publicada en `main`, commit 2d590ae): interferencias de ensamblaje a cero.** 0 parejas de más de 3 mm
   (de 280), 320 penetraciones intencionadas declaradas con su motivo (uniones reales) y 240 cruces de 1–3 mm por debajo
   del umbral. Cotas, siluetas y explosión validadas (perfil trasero mejor: 7,8 mm de media); GLB de 12,5 MB,
   `Cybertruck.blend` de 16,2 MB. Detalle, método y lecciones en `docs/research-and-fidelity.md` §12 y `traspaso.md`

@@ -395,7 +395,7 @@ Orden de trabajo, sin saltarse fases:
 
 ## 16. Versión 4.2 (18-10-2026): fase 1 del encargo de §15 (interferencias a cero)
 
-**Hecho (sin commit ni push; el usuario los pide expresamente):**
+**Hecho (publicado en `main`, commit 2d590ae):**
 - 0 parejas que se atraviesan más de 3 mm (de 280). Hay 320 penetraciones intencionadas, todas uniones reales con su
   motivo en `interferencias.INTENDED`, y 240 contactos de 1–3 mm por debajo del umbral. Cotas, siluetas y explosión
   validadas: perfil trasero mejor (7,8 mm de media) y el resto igual.
