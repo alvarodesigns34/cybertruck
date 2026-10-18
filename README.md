@@ -169,9 +169,9 @@ modifique el visor (también se puede lanzar manualmente). Requiere que Pages es
 
 ## Próximos pasos
 
-- **Siguiente sesión (18-10-2026):** terminar las interferencias pendientes, pulir el modelo y llevarlo a la
-  simulación [`alvarodesigns34/spacex`](https://github.com/alvarodesigns34/spacex) junto al Tesla Model Y, con una
-  vista explosionada en un espacio de despiece aparte. Ver `traspaso.md` §15.
+- **Sesión del 18-10-2026:** interferencias de ensamblaje a cero (versión 4.2, hecho); siguen el pulido general del
+  modelo y su integración en la simulación [`alvarodesigns34/spacex`](https://github.com/alvarodesigns34/spacex)
+  junto al Tesla Model Y, con una vista explosionada en un espacio de despiece aparte. Ver `traspaso.md` §15 y §16.
 
 La hoja de ruta acordada el 17-10-2026 (más piezas, hiperrealismo, suelo de cristal, iluminación y reflejos, HUD)
 se completó en la versión 4. Lo que queda, por orden de valor:
@@ -185,9 +185,10 @@ se completó en la versión 4. Lo que queda, por orden de valor:
 
 ## Limitaciones principales
 
-- **Interferencias de ensamblaje:** la versión 4.1 redujo las piezas que se atraviesan más de 3 mm de unas 1.110
-  parejas a 279 (53 de más de 10 mm), que lista `docs/interferencias-pendientes.md` (sobre todo cruces de 3–10 mm entre mazos, mangueras, módulos
-  ocultos e interiores de la v4). Ver `docs/research-and-fidelity.md` §11.
+- **Interferencias de ensamblaje:** desde la versión 4.2 no queda ninguna pareja de piezas que se atraviese más de
+  3 mm (eran unas 1.110 en la v4 y 279 en la v4.1). Quedan 320 penetraciones intencionadas, todas uniones reales
+  (tornillos, casquillos prensados, pasamuros, juntas comprimidas…), y 240 contactos de 1–3 mm por debajo del
+  umbral. Ver `docs/interferencias-pendientes.md` y `docs/research-and-fidelity.md` §11–§12.
 
 - La carrocería exterior está reconstruida con gran precisión dimensional, pero la sección transversal depende de
   dos inclinaciones deducidas (6° y 19°) que no se han podido medir en una vista frontal a escala.

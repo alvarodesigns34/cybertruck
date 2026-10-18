@@ -188,9 +188,9 @@ def front_unit(M):
         parent=par, edir=(1, 0, 0.05), dist=0.75, stage=6, group=grp, fid="A", note=NOTE_INT))
 
     # --- inversor integrado -----------------------------------------------------------------------------
-    xi0, yi0, zi0 = 0.10, yf + 0.10, 0.625
+    xi0, yi0, zi0 = 0.1135, yf + 0.10, 0.625      # centro de la carcasa del inversor (x 0,002…0,225)
     A(V4.part(M, "DU_F_Inverter_ColdPlate", sysn, ["alu_cast", "zinc", "hose"], [
-        box((xi0, yi0, 0.597), (0.225, 0.31, 0.008), 0.002, 0),
+        box((xi0, yi0, 0.597), (0.205, 0.31, 0.008), 0.002, 0),
         fins((xi0, yi0, 0.591), Y, Z, (0.28, 0.20, 0.004), 22, 0.0015, 0),
         [cyl((xi0 + sx * 0.08, yi0 - 0.16, 0.600), (xi0 + sx * 0.08, yi0 - 0.20, 0.600), 0.008, seg=12, m=0) for sx in (-1, 1)],
     ], "Placa fría del inversor con aletas de aceite/refrigerante y racores",
@@ -208,10 +208,12 @@ def front_unit(M):
     A(V4.part(M, "DU_F_Inverter_Power_Modules", sysn, ["ceramic", "plastic_black", "alu_machined", "copper"], mods,
               "Módulos de potencia (3 semipuentes de SiC sobre sustrato cerámico con hilos de conexión)",
               parent=par, edir=(0, 0, 1), dist=0.20, stage=6, group=grp, fid="A", note=NOTE_INT))
+    # sobre la placa fría (z 0,601) y al lado de los módulos (sus bornes llegan a x = xi0 + 0,036); las barras
+    # unen los bornes de cada semipuente con el condensador
     A(V4.part(M, "DU_F_Inverter_DC_Capacitor", sysn, ["capacitor", "copper", "plastic_black"], [
-        box((xi0 + 0.06, yi0, 0.618), (0.08, 0.27, 0.036), 0.003, 0),
-        [box((xi0 + 0.02, yi0 - 0.10 + 0.075 * k, 0.612), (0.030, 0.024, 0.003), 0.0005, 1) for k in range(3)],
-        box((xi0 + 0.06, yi0 + 0.15, 0.630), (0.05, 0.03, 0.012), 0.002, 2),
+        box((xi0 + 0.0695, yi0, 0.623), (0.062, 0.27, 0.028), 0.003, 0),
+        [box((xi0 + 0.033, yi0 - 0.10 + 0.075 * k, 0.6135), (0.013, 0.024, 0.003), 0.0005, 1) for k in range(3)],
+        box((xi0 + 0.0695, yi0 + 0.15, 0.630), (0.05, 0.03, 0.012), 0.002, 2),
     ], "Condensador del bus de continua (película, encapsulado) con barras de conexión",
         parent=par, edir=(0, 0, 1), dist=0.27, stage=6, group=grp, fid="A", note=NOTE_INT))
     A(V4.part(M, "DU_F_Inverter_Gate_Driver_PCB", sysn, ["pcb_green", "plastic_black", "capacitor", "connector_grey",
@@ -299,7 +301,8 @@ def rear_unit(M):
         bearing((0.018, yd, zd), X, 0.0175, 0.036, 0.016, 11, m=1),
         bearing((0.110, yd, zd), X, 0.030, 0.050, 0.018, 12, m=1),
         ring((0.130, yd, zd), X, 0.031, 0.040, 0.008, 28, 2),
-        ring((0.165, yd, zd), X, 0.0178, 0.034, 0.008, 28, 2),
+        # retén del eje de salida, por dentro de la pared lateral de la carcasa (x 0,165)
+        ring((0.1605, yd, zd), X, 0.0178, 0.034, 0.008, 28, 2),
     ], "Reductora independiente {lado}: piñón de entrada, eje intermedio, rueda de salida, ejes y rodamientos "
        "(sin diferencial: vectorización de par)", edir=(0.4, 0.3, -1), dist=0.34, **kw))
     A(V4.part(M, "DU_R_Output_Shaft", sysn, ["gear_steel", "rubber_seal"], [

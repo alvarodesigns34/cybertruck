@@ -5,7 +5,7 @@
 - Vehículo: Tesla Cybertruck Cyberbeast (EE. UU., gama 2026)
 - Componentes (nodos con metadatos): **1138**
 - Mallas: **1100** · Conjuntos (vacíos con pivote): **38**
-- Caras de malla base (antes de modificadores): 641.686
+- Caras de malla base (antes de modificadores): 634.315
 - Fidelidad: Verificado 20 · Reconstruido 881 · Aproximado 237
 
 Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjuntos interiores · 3. Estructura de carrocería y bajos · 4. Suspensión, ruedas y frenos · 5. Batería y tren motriz · 6. Componentes pequeños y herrajes
@@ -556,7 +556,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `SUS_FL_ArmBushings` | Casquillos de los brazos superior e inferior delantera izquierda | Malla | 4 | Reconstruido |
 | `SUS_FL_BallJoints` | Rótulas superior e inferior de la mangueta delantera izquierda (tuercas 18 mm a 80 N·m y 24 mm a 190 N·m) | Malla | 4 | Reconstruido |
 | `SUS_FL_BrakeHose` | Latiguillo de freno con tornillo hueco (42 N·m) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
-| `SUS_FL_BumpStop_SpringSeat` | Tope de rebote y asiento del muelle neumático delantera izquierda | Malla | 4 | Reconstruido |
+| `SUS_FL_BumpStop_SpringSeat` | Tope de compresión (dentro del fuelle, bajo la copela) y asiento inferior del muelle neumático delantera izquierda | Malla | 4 | Reconstruido |
 | `SUS_FL_Damper` | Amortiguador adaptativo (CDC) monotubo | Malla | 6 | Reconstruido |
 | `SUS_FL_Damper_Internals` | Interior del amortiguador monotubo FL: vástago, pistón con láminas de válvula, guía con retén y pistón flotante de la cámara de gas — _Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `SUS_FL_Damper_Rod` | Vástago del amortiguador | Malla | 6 | Reconstruido |
@@ -576,7 +576,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `SUS_FR_ArmBushings` | Casquillos de los brazos superior e inferior delantera derecha | Malla | 4 | Reconstruido |
 | `SUS_FR_BallJoints` | Rótulas superior e inferior de la mangueta delantera derecha (tuercas 18 mm a 80 N·m y 24 mm a 190 N·m) | Malla | 4 | Reconstruido |
 | `SUS_FR_BrakeHose` | Latiguillo de freno con tornillo hueco (42 N·m) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
-| `SUS_FR_BumpStop_SpringSeat` | Tope de rebote y asiento del muelle neumático delantera derecha | Malla | 4 | Reconstruido |
+| `SUS_FR_BumpStop_SpringSeat` | Tope de compresión (dentro del fuelle, bajo la copela) y asiento inferior del muelle neumático delantera derecha | Malla | 4 | Reconstruido |
 | `SUS_FR_Damper` | Amortiguador adaptativo (CDC) monotubo | Malla | 6 | Reconstruido |
 | `SUS_FR_Damper_Internals` | Interior del amortiguador monotubo FR: vástago, pistón con láminas de válvula, guía con retén y pistón flotante de la cámara de gas — _Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `SUS_FR_Damper_Rod` | Vástago del amortiguador | Malla | 6 | Reconstruido |
@@ -624,7 +624,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `SUS_RL_ArmBushings` | Casquillos de los brazos superior e inferior trasera izquierda | Malla | 4 | Reconstruido |
 | `SUS_RL_BallJoints` | Rótulas superior e inferior de la mangueta trasera izquierda (tuercas 18 mm a 80 N·m y 24 mm a 190 N·m) | Malla | 4 | Reconstruido |
 | `SUS_RL_BrakeHose` | Latiguillo de freno con tornillo hueco (42 N·m) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
-| `SUS_RL_BumpStop_SpringSeat` | Tope de rebote y asiento del muelle neumático trasera izquierda | Malla | 4 | Reconstruido |
+| `SUS_RL_BumpStop_SpringSeat` | Tope de compresión (dentro del fuelle, bajo la copela) y asiento inferior del muelle neumático trasera izquierda | Malla | 4 | Reconstruido |
 | `SUS_RL_Damper` | Amortiguador adaptativo (CDC) monotubo | Malla | 6 | Reconstruido |
 | `SUS_RL_Damper_Internals` | Interior del amortiguador monotubo RL: vástago, pistón con láminas de válvula, guía con retén y pistón flotante de la cámara de gas — _Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `SUS_RL_Damper_Rod` | Vástago del amortiguador | Malla | 6 | Reconstruido |
@@ -644,7 +644,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `SUS_RR_ArmBushings` | Casquillos de los brazos superior e inferior trasera derecha | Malla | 4 | Reconstruido |
 | `SUS_RR_BallJoints` | Rótulas superior e inferior de la mangueta trasera derecha (tuercas 18 mm a 80 N·m y 24 mm a 190 N·m) | Malla | 4 | Reconstruido |
 | `SUS_RR_BrakeHose` | Latiguillo de freno con tornillo hueco (42 N·m) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
-| `SUS_RR_BumpStop_SpringSeat` | Tope de rebote y asiento del muelle neumático trasera derecha | Malla | 4 | Reconstruido |
+| `SUS_RR_BumpStop_SpringSeat` | Tope de compresión (dentro del fuelle, bajo la copela) y asiento inferior del muelle neumático trasera derecha | Malla | 4 | Reconstruido |
 | `SUS_RR_Damper` | Amortiguador adaptativo (CDC) monotubo | Malla | 6 | Reconstruido |
 | `SUS_RR_Damper_Internals` | Interior del amortiguador monotubo RR: vástago, pistón con láminas de válvula, guía con retén y pistón flotante de la cámara de gas — _Pieza interior necesaria para el funcionamiento; forma y dimensiones reconstruidas (no hay planos publicados)_ | Malla | 6 | Aproximado |
 | `SUS_RR_Damper_Rod` | Vástago del amortiguador | Malla | 6 | Reconstruido |
@@ -751,7 +751,7 @@ Etapas de explosión: 1. Paneles exteriores y elementos de apertura · 2. Conjun
 | `HV_ACJB_Internals` | Interior de la caja de conexiones de alterna (ACJB): barras, soportes aislantes y placa de medida — _Componente necesario para el funcionamiento; su interior no se publica y se ha reconstruido (forma, dimensiones y número de elementos aproximados)_ | Malla | 6 | Aproximado |
 | `HV_Ancillary_Cover` | Cubierta de la bahía auxiliar — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |
 | `HV_Ancillary_Fuses` | Fusibles Eaton EVK22-60-T (60 A / 1000 VDC) y Littelfuse 828-30 de la bahía auxiliar (2 × 8 mm a 6 N·m) | Malla | 5 | Reconstruido |
-| `HV_Cables` | Cables de alta tensión (unidad delantera, compresor, inversores traseros) | Malla | 5 | Reconstruido |
+| `HV_Cables` | Cable de alta tensión del compresor de A/C | Malla | 5 | Reconstruido |
 | `HV_Charge_Port_Busbar` | Barra colectora de la toma de carga NACS al cabezal HV (2 pernos 9 N·m; resistencia 0,050–0,195 mΩ) | Malla | 5 | Reconstruido |
 | `HV_Contactors` | Contactores del pack en la caja de CA (ACJB; prueba de gripado de contactor) | Malla | 5 | Reconstruido |
 | `HV_Device_Cluster` | Clúster de dispositivos (contactores y fusibles) — _Existencia, denominación y fijaciones verificadas en el manual de servicio; forma reconstruida_ | Malla | 6 | Reconstruido |

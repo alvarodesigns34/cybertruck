@@ -35,6 +35,21 @@ def V(*a):
     return Vector(a)
 
 
+# Puntos de los soportes elásticos de las unidades motrices (casquillo con su eje a lo largo de Y y placa debajo);
+# build_v4_tornilleria coloca sus tornillos soporte a soporte. El primero delantero va 130 mm por delante del eje
+# del motor: ahí la carcasa y sus aletas quedan por encima del casquillo (en el eje, el estátor baja a z 0,353).
+DU_MOUNTS = {
+    "F": [(-0.25, S.Y_FRONT_AXLE + 0.33, 0.33), (0.18, S.Y_FRONT_AXLE - 0.02, 0.33), (0.08, S.Y_FRONT_AXLE + 0.30, 0.38)],
+    "R": [(-0.475, S.Y_REAR_AXLE - 0.24, 0.36), (0.475, S.Y_REAR_AXLE - 0.24, 0.36), (0.0, S.Y_REAR_AXLE + 0.12, 0.40)],
+}
+
+
+# Distancia del eje del actuador de dirección al eje de las ruedas (hacia el centro del vehículo). El trasero va
+# 30 mm más lejos de su eje que el delantero para dejar libres el soporte delantero y el filtro de aceite de la
+# unidad motriz trasera (posición reconstruida).
+RACK_DY = {"F": 0.17, "R": 0.20}
+
+
 # ---------------------------------------------------------------------------
 # Geometría de cada esquina (puntos duros)
 # ---------------------------------------------------------------------------
@@ -48,7 +63,7 @@ def hardpoints(axle, s):
         "lbj": V(s * 0.795, y, 0.262),
         "ubj": V(s * 0.770, y - f * 0.02, 0.665),
         "tie_out": V(s * 0.790, y - f * 0.165, 0.420),
-        "tie_in": V(s * 0.335, y - f * 0.17, 0.425),
+        "tie_in": V(s * 0.335, y - f * RACK_DY[axle], 0.425),
         "lca_f": V(s * 0.360, y + f * 0.32, 0.315),
         "lca_r": V(s * 0.360, y - f * 0.18, 0.315),
         "uca_f": V(s * 0.500, y + f * 0.38, 0.705),
@@ -315,7 +330,7 @@ def steering_actuator(M, axle):
     electrónica con 4 conectores, fuelles y rótulas axiales."""
     y = S.Y_FRONT_AXLE if axle == "F" else S.Y_REAR_AXLE
     f = 1 if axle == "F" else -1
-    yr, zr = y - f * 0.17, 0.425
+    yr, zr = y - f * RACK_DY[axle], 0.425
     mb = L.MeshBuilder()
     half = 0.27 if axle == "F" else 0.22
     P.cyl(mb, (-half, yr, zr), (half, yr, zr), 0.033, 28, 0)
@@ -410,9 +425,10 @@ def drive_unit_front(M):
                        "Unidades motrices",
                        "Reductora de una velocidad (15,02:1) con diferencial y bloqueo electromagnético", "R"))
     mb = L.MeshBuilder()
-    P.rbox(mb, (0.10, yf + 0.10, 0.625), (0.25, 0.34, 0.075), 0.012, 2, None, 0)
+    # x 0,002…0,225: por fuera de la carcasa del motor (x <= 0) y de su cubierta acústica (x <= -0,02)
+    P.rbox(mb, (0.1135, yf + 0.10, 0.625), (0.223, 0.34, 0.075), 0.012, 2, None, 0)
     for i in range(9):
-        P.rbox(mb, (0.10, yf - 0.04 + i * 0.035, 0.666), (0.22, 0.006, 0.010), 0.002, 1, None, 0)
+        P.rbox(mb, (0.1135, yf - 0.04 + i * 0.035, 0.666), (0.20, 0.006, 0.010), 0.002, 1, None, 0)
     P.rbox(mb, (0.20, yf + 0.25, 0.64), (0.07, 0.06, 0.05), 0.006, 1, None, 1)
     P.rbox(mb, (0.02, yf + 0.26, 0.62), (0.06, 0.05, 0.04), 0.005, 1, None, 2)
     for x in (0.0, 0.05):
@@ -431,8 +447,10 @@ def drive_unit_front(M):
     mb = L.MeshBuilder()
     P.cyl(mb, (0.15, yf - 0.05, 0.335), (0.15, yf - 0.115, 0.335), 0.030, 24, 0)
     P.rbox(mb, (0.15, yf - 0.08, 0.305), (0.07, 0.05, 0.03), 0.005, 1, None, 1)
-    P.cyl(mb, (0.03, yf + 0.04, 0.33), (0.03, yf + 0.04, 0.29), 0.035, 24, 0)
-    P.cyl(mb, (0.05, yf + 0.02, 0.58), (0.05, yf + 0.02, 0.64), 0.008, 10, 0)
+    # filtro bajo la rueda del eje intermedio (z >= 0,317)
+    P.cyl(mb, (0.03, yf + 0.04, 0.312), (0.03, yf + 0.04, 0.29), 0.035, 24, 0)
+    # conducto de aceite de la reductora a la placa fría del inversor (termina en sus aletas, z 0,589)
+    P.cyl(mb, (0.05, yf + 0.02, 0.58), (0.05, yf + 0.02, 0.590), 0.008, 10, 0)
     objs.append(P.make(mb, "DU_F_OilPump_Filter", "DRIVE_UNITS", [M["alu_cast"], M["connector_grey"]], asm,
                        (0.3, -0.3, -1), 0.30, 6, "Unidades motrices",
                        "Bomba de aceite eléctrica, filtro de aceite y respiradero", "V"))
@@ -441,7 +459,7 @@ def drive_unit_front(M):
     objs.append(P.make(mb, "DU_F_NVH_Cover", "DRIVE_UNITS", M["harness"], asm, (-1, 0.6, 0.6), 0.45, 6,
                        "Unidades motrices", "Cubierta acústica (NVH) del motor delantero", "V"))
     mb = L.MeshBuilder()
-    for p in ((-0.25, ym + 0.02, 0.33), (0.18, yf - 0.02, 0.33), (0.08, yf + 0.30, 0.38)):
+    for p in DU_MOUNTS["F"]:
         P.tube_ring(mb, p, (0, 1, 0), 0.012, 0.035, 0.045, 18, 0)
         P.rbox(mb, V(*p) + V(0, 0, -0.035), (0.08, 0.06, 0.02), 0.004, 1, None, 1)
     P.hose(mb, [(-0.30, ym, 0.36), (-0.36, ym - 0.05, 0.32), (-0.40, ym - 0.10, 0.31)], 0.006, 6, 4, 2)
@@ -496,7 +514,7 @@ def drive_unit_rear(M):
                        (0, 0.3, -1), 0.30, 6, "Unidades motrices", "Bomba de aceite (LH, tri-motor) y filtro", "V"))
     mb = L.MeshBuilder()
     # soportes laterales por fuera de las tapas de los motores (|x| > 0,447)
-    for p in ((-0.475, ym - 0.05, 0.36), (0.475, ym - 0.05, 0.36), (0.0, yr + 0.12, 0.40)):
+    for p in DU_MOUNTS["R"]:
         P.tube_ring(mb, p, (0, 1, 0), 0.012, 0.035, 0.045, 18, 0)
         P.rbox(mb, V(*p) + V(0, 0, -0.035), (0.08, 0.06, 0.02), 0.004, 1, None, 1)
     P.hose(mb, [(0.40, ym, 0.40), (0.46, ym + 0.05, 0.37), (0.50, ym + 0.12, 0.36)], 0.006, 6, 4, 2)
@@ -561,7 +579,10 @@ def build_battery(M):
                        "Batería", "Bandeja estructural con brida perimetral (unos 22 pernos exteriores + 14 interiores + 4 al fundido trasero; el recuento varía según la página del manual)", "R"))
     # --- tapa estructural (suelo del habitáculo): los asientos delanteros se atornillan a ella
     mb = L.MeshBuilder()
-    P.rbox(mb, (0, yc, BAT_ZT - 0.006), (2 * BAT_HW - 0.03, ln - 0.03, 0.012), 0.003, 1, None, 0)
+    # esquinas traseras exteriores achaflanadas: el neumático trasero llega a y = -1,378 a esa altura
+    hx, y_f, y_r = BAT_HW - 0.015, yc + (ln - 0.03) / 2, yc - (ln - 0.03) / 2
+    P.hull(mb, [V(sx * x, y, z) for sx in (1, -1) for z in (BAT_ZT - 0.012, BAT_ZT)
+                for (x, y) in ((hx, y_f), (hx, y_r + 0.025), (hx - 0.08, y_r))], 0)
     for i in range(12):
         y = BAT_Y1 + 0.12 + i * (ln - 0.24) / 11
         P.rbox(mb, (0, y, BAT_ZT + 0.002), (2 * BAT_HW - 0.12, 0.010, 0.004), 0.001, 1, None, 0)
@@ -634,16 +655,18 @@ def build_battery(M):
     # --- extremo delantero: cabecera de conectores de AT, pirofusibles, correa delantera, refrigerante
     mb = L.MeshBuilder()
     yf = BAT_Y0 - 0.06
-    P.rbox(mb, (0.0, yf, BAT_ZT + 0.03), (0.50, 0.09, 0.06), 0.008, 2, None, 0)
+    # entera bajo la moqueta (z 0,505): así el BMS que va dentro no asoma tras el recorte de montaje
+    P.rbox(mb, (0.0, yf, BAT_ZT + 0.0235), (0.50, 0.09, 0.047), 0.008, 2, None, 0)
     for x in (-0.12, 0.12):
-        P.rbox(mb, (x, yf + 0.055, BAT_ZT + 0.03), (0.07, 0.04, 0.05), 0.006, 1, None, 1)
+        P.rbox(mb, (x, yf + 0.055, BAT_ZT + 0.0235), (0.07, 0.04, 0.047), 0.006, 1, None, 1)
     objs.append(P.make(mb, "BAT_HV_Header", "BATTERY_ASSEMBLY", [M["battery"], M["hv_orange"]], asm, (0, 0.4, 1), 0.45, 6,
                        "Alta tensión", "Cabecera de conectores de alta tensión (unidad delantera, carga rápida)", "V"))
     mb = L.MeshBuilder()
+    # bajo la moqueta (z 0,505)
     for x in (0.30, 0.42):
-        P.rbox(mb, (x, yf, BAT_ZT + 0.025), (0.06, 0.05, 0.05), 0.006, 1, None, 0)
+        P.rbox(mb, (x, yf, BAT_ZT + 0.020), (0.06, 0.05, 0.04), 0.006, 1, None, 0)
         for dx in (-0.02, 0.02):
-            P.flange_bolt(mb, (x + dx, yf, BAT_ZT + 0.05), (0, 0, 1), 0.008, 1)
+            P.flange_bolt(mb, (x + dx, yf, BAT_ZT + 0.040), (0, 0, 1), 0.008, 1)
     objs.append(P.make(mb, "BAT_Pyro_Fuses", "BATTERY_ASSEMBLY", [M["hv_orange"], M["zinc"]], asm, (1, 0.3, 1), 0.40, 6,
                        "Alta tensión", "Pirofusibles primario y secundario (2 tornillos cada uno)", "V"))
     mb = L.MeshBuilder()
@@ -775,22 +798,28 @@ def build_thermal(M):
     mb = L.MeshBuilder()
     yc, zc = 2.43, 0.565
     # entre los soportes de la viga del paragolpes (|x| >= 0,46)
+    # depósitos dentro de la boca de la fundición delantera (|x| <= 0,43) y por fuera de la tobera de los
+    # ventiladores (|x| <= 0,39), por donde entran las mangueras
     P.rbox(mb, (0, yc, zc), (0.79, 0.032, 0.27), 0.004, 1, None, 0)
     for sg in (1, -1):
-        P.rbox(mb, (sg * 0.42, yc, zc), (0.05, 0.05, 0.29), 0.008, 1, None, 1)
+        P.rbox(mb, (sg * 0.414, yc, zc), (0.028, 0.05, 0.29), 0.006, 1, None, 1)
     objs.append(P.make(mb, "CHS_Radiator", "UNDERBODY", [M["radiator"], M["plastic_black"]], asm, (0, 1, 0), 0.6, 6,
                        "Refrigeración", "Radiador de baja temperatura con depósitos laterales", "R"))
     mb = L.MeshBuilder()
     # carcasa del módulo; los rotores (hélices, cubos y motores) son CHS_Cooling_Fans (build_v4_energia), detrás
-    P.rbox(mb, (0, yc - 0.045, zc), (0.82, 0.05, 0.30), 0.01, 1, None, 0)
+    # tobera más estrecha que el radiador (|x| <= 0,39) para dejar paso a las mangueras de sus depósitos
+    P.rbox(mb, (0, yc - 0.045, zc), (0.78, 0.05, 0.30), 0.01, 1, None, 0)
     objs.append(P.make(mb, "CHS_Cooling_Fan_Module", "UNDERBODY", [M["plastic_black"], M["connector_grey"]], asm,
                        (0, -0.2, 1), 0.45, 6, "Refrigeración",
                        "Carcasa del módulo de ventiladores (CFM, 6 tornillos de 10 Nm)", "V"))
     mb = L.MeshBuilder()
-    P.rbox(mb, (0, yc + 0.07, zc - 0.02), (0.90, 0.02, 0.22), 0.004, 1, None, 0)
-    for i in range(7):
-        z = zc - 0.115 + i * 0.032
-        P.beam(mb, (-0.43, yc + 0.085, z), (0.43, yc + 0.085, z), 0.028, 0.003, up=(0, 0.5, 1))
+    # dos mitades (|x| 0,16…0,42): el soporte central de la viga del paragolpes hace de parteluz y los ganchos de
+    # remolque quedan por fuera (|x| >= 0,45)
+    for sg in (1, -1):
+        P.rbox(mb, (sg * 0.29, yc + 0.07, zc - 0.02), (0.26, 0.02, 0.22), 0.004, 1, None, 0)
+        for i in range(7):
+            z = zc - 0.115 + i * 0.032
+            P.beam(mb, (sg * 0.17, yc + 0.085, z), (sg * 0.41, yc + 0.085, z), 0.028, 0.003, up=(0, 0.5, 1))
     objs.append(P.make(mb, "CHS_Active_Grille_Shutter", "UNDERBODY", M["plastic_black"], asm, (0, 1, -0.2), 0.75, 6,
                        "Refrigeración", "Persianas activas de la rejilla (número de lamas no publicado; 12 pestañas de bloqueo + 2 clips)", "R"))
     # Supermanifold con Octovalve, bombas, enfriador, condensador refrigerado por líquido y botella
@@ -801,7 +830,8 @@ def build_thermal(M):
     P.disc(mb, c + V(-0.05, 0.0, 0.205), (0, 0, 1), 0.030, 0.02, 20, 2, 0.003)
     for dx in (0.06, 0.13):
         # bombas: no pasan de la pared trasera del frunk (y = 1,976)
-        P.cyl(mb, c + V(dx, 0.10, -0.03), c + V(dx, 0.135, -0.03), 0.030, 20, 0)
+        # (y 1,918…1,953: el codo de las mangueras del radiador, en y 1,97 con r 16 mm, queda justo detrás)
+        P.cyl(mb, c + V(dx, 0.088, -0.03), c + V(dx, 0.123, -0.03), 0.030, 20, 0)
     P.cyl(mb, c + V(0.0, -0.10, 0.0), c + V(0.15, -0.10, 0.0), 0.040, 20, 0)          # enfriador
     P.rbox(mb, c + V(-0.12, -0.02, -0.05), (0.08, 0.16, 0.10), 0.006, 1, None, 0)    # condensador LCC
     P.rbox(mb, c + V(0.0, 0.0, 0.075), (0.12, 0.12, 0.02), 0.004, 1, None, 3)        # Octovalve
@@ -822,8 +852,10 @@ def build_thermal(M):
                        "Refrigeración", "Cubierta acústica del compresor", "V"))
     # Tuberías de refrigerante (aspiración y descarga) y mangueras del Supermanifold al radiador
     mb = L.MeshBuilder()
-    P.hose(mb, [(-0.10, 1.82, 0.84), (0.0, 1.76, 0.88), (0.06, 1.74, 0.84)], 0.009, 10, 4, 0)
-    P.hose(mb, [(-0.12, 1.84, 0.73), (-0.02, 1.90, 0.74), (0.06, 1.86, 0.76)], 0.007, 10, 4, 0)
+    # nacen en las bocas de la tapa trasera del compresor (x -0,10) y entran por la cara izquierda del
+    # Supermanifold (x 0,03)
+    P.hose(mb, [(-0.098, 1.82, 0.835), (-0.07, 1.82, 0.84), (-0.02, 1.78, 0.86), (0.026, 1.76, 0.84)], 0.009, 10, 4, 0)
+    P.hose(mb, [(-0.098, 1.84, 0.73), (-0.07, 1.845, 0.73), (-0.02, 1.90, 0.745), (0.026, 1.86, 0.76)], 0.007, 10, 4, 0)
     objs.append(P.make(mb, "THM_AC_Lines", "UNDERBODY", M["alu_machined"], asm, (0, 0.3, 1), 0.45, 6,
                        "Refrigeración", "Tuberías de aspiración y descarga del refrigerante R1234yf", "V"))
     mb = L.MeshBuilder()
@@ -831,23 +863,30 @@ def build_thermal(M):
     # los depósitos laterales del radiador: la derecha por el pasillo entre la HCU y el larguero de la fundición, la
     # izquierda por delante de la unidad motriz
     P.hose(mb, [(0.33, 1.97, 0.77), (0.33, 1.972, 0.715), (0.405, 2.02, 0.70), (0.418, 2.12, 0.68),
-                (0.43, 2.25, 0.63), (0.442, 2.395, 0.58)], 0.016, 14, 6, 0)
+                (0.42, 2.25, 0.63), (0.414, 2.400, 0.58)], 0.016, 14, 6, 0)
     P.hose(mb, [(0.26, 1.97, 0.77), (0.26, 1.972, 0.715), (0.235, 2.06, 0.70), (0.10, 2.24, 0.66),
-                (-0.32, 2.27, 0.62), (-0.43, 2.32, 0.60), (-0.442, 2.395, 0.58)], 0.016, 14, 6, 0)
+                (-0.32, 2.27, 0.62), (-0.42, 2.32, 0.60), (-0.414, 2.400, 0.58)], 0.016, 14, 6, 0)
     objs.append(P.make(mb, "THM_Radiator_Hoses", "UNDERBODY", M["hose"], asm, (0, 0.6, 0.6), 0.5, 6,
                        "Refrigeración", "Mangueras radiador ↔ Supermanifold", "V"))
     # Haz de mangueras del tren motriz a lo largo del lateral izquierdo (bajo el faldón)
     mb = L.MeshBuilder()
-    for i, dx in enumerate((0.0, -0.034)):
-        # bajo el umbral izquierdo; sube por delante del guardabarros trasero y por detrás del faldón delantero
-        P.hose(mb, [(0.10 + dx, 1.72, 0.74), (-0.55 + dx, 1.45, 0.50), (-0.78 + dx, 1.15, 0.30),
-                    (-0.85 + dx, 1.00, 0.282), (-0.85 + dx, -0.95, 0.282), (-0.75 + dx, -1.30, 0.30),
-                    (-0.55 + dx, -1.45, 0.45), (-0.32 + dx, -1.62, 0.56)], 0.014, 12, 6, 0)
+    for i, dx in enumerate((0.0, -0.024)):
+        # Canal izquierdo: dentro de la cavidad del faldón, entre su piel inferior (z 0,265) y el fondo del umbral
+        # (z 0,29), y, al girar hacia la rueda trasera, bajo la bandeja de la batería (z 0,285). Carriles de dentro
+        # a fuera: estas dos mangueras (x -0,812 y -0,836, 22 mm de diámetro, aproximado), la línea de aire de la
+        # suspensión (-0,856) y el haz de aire (-0,872). Por delante de la rueda trasera los cuatro giran hacia
+        # dentro en paralelo (sin cruzarse) y las mangueras suben ya por detrás de la batería.
+        P.hose(mb, [(0.10 + dx, 1.72, 0.74), (-0.55 + dx, 1.45, 0.50), (-0.72 + dx, 1.34, 0.37),
+                    (-0.81 + dx, 1.27, 0.30), (-0.812 + dx, 1.13, 0.2775), (-0.812 + dx, 1.00, 0.2775),
+                    (-0.812 + dx, -0.85, 0.2775), (-0.812 + dx, -1.00, 0.2775), (-0.80 + dx, -1.03, 0.274),
+                    (-0.642 + dx, -1.38, 0.273), (-0.642 + dx, -1.42, 0.274), (-0.61 + dx, -1.48, 0.40),
+                    (-0.50 + dx, -1.52, 0.48), (-0.32 + dx, -1.62, 0.56)], 0.011, 12, 6, 0)
     objs.append(P.make(mb, "THM_Powertrain_Hose_Bundle", "UNDERBODY", M["hose"], None, (-1, 0, -0.3), 0.6, 5,
                        "Refrigeración", "Haz de mangueras del tren motriz (impulsión y retorno)", "V"))
     mb = L.MeshBuilder()
     for dx in (0.0, 0.05):
-        P.hose(mb, [(-0.36 + dx, BAT_Y0 + 0.14, 0.52), (-0.30 + dx, 1.50, 0.62), (0.05 + dx, 1.72, 0.76)],
+        # entran en el Supermanifold por encima de las mangueras del tren motriz (z 0,74)
+        P.hose(mb, [(-0.36 + dx, BAT_Y0 + 0.14, 0.52), (-0.30 + dx, 1.50, 0.62), (0.05 + dx, 1.72, 0.785)],
                0.013, 12, 5, 0)
     objs.append(P.make(mb, "THM_Battery_Coolant_Hoses", "UNDERBODY", M["hose"], None, (0, 0.3, 0.6), 0.45, 5,
                        "Refrigeración", "Mangueras de impulsión y retorno de la batería", "V"))
@@ -884,7 +923,8 @@ def build_brake_hydraulics(M):
                        "Unidad hidráulica ABS/ESC (HCU, 3 tuercas al soporte)", "V"))
     mb = L.MeshBuilder()
     paths = [
-        [h + V(-0.05, 0, 0.06), (0.10, 2.0, 0.70), c + V(0.06, 0.17, 0.0)],
+        # por encima de la manguera izquierda del radiador
+        [h + V(-0.05, 0, 0.06), (0.12, 1.98, 0.76), c + V(0.06, 0.17, 0.0)],
         [h + V(0.06, 0, 0.0), (0.62, 2.0, 0.66), hardpoints("F", 1)["uca_f"] + V(-0.08, -0.28, 0.06)],
         [h + V(-0.06, 0, -0.02), (-0.20, 2.10, 0.58), hardpoints("F", -1)["uca_f"] + V(0.08, -0.28, 0.06)],
         [h + V(-0.02, 0, -0.06), (0.30, 1.90, 0.40), (0.86, 1.20, 0.282), (0.86, -1.00, 0.282),
@@ -905,11 +945,12 @@ def build_air_supply(M):
     L.explode(asm, (-0.3, -0.6, -1), 0.8, 4, "Suspensión", "Suministro de aire de la suspensión", "R")
     objs.append(asm)
     mb = L.MeshBuilder()
-    c = V(-0.42, -2.28, 0.48)
+    # por detrás del subchasis trasero (y <= -2,2875) y por dentro de la fundición trasera izquierda
+    c = V(-0.42, -2.34, 0.48)
     P.cyl(mb, c, c + V(0.20, 0, 0), 0.050, 24, 0)
     P.rbox(mb, c + V(0.24, 0, 0), (0.08, 0.10, 0.10), 0.008, 1, None, 0)
-    P.cyl(mb, c + V(-0.01, 0, 0.0), c + V(-0.06, 0, 0.0), 0.030, 16, 1)
-    P.rbox(mb, c + V(0.10, 0, -0.07), (0.30, 0.12, 0.012), 0.003, 1, None, 2)
+    P.cyl(mb, c + V(-0.01, 0, 0.0), c + V(-0.04, 0, 0.0), 0.030, 16, 1)
+    P.rbox(mb, c + V(0.12, 0, -0.07), (0.28, 0.12, 0.012), 0.003, 1, None, 2)
     objs.append(P.make(mb, "CHS_AirSuspension_Compressor", "REAR_SUSPENSION", [M["alu_cast"], M["plastic_black"],
                        M["steel_black"]], asm, (-1, -0.3, 0), 0.4, 6, "Suspensión",
                        "Compresor de la suspensión neumática con soporte (3 tuercas)", "V"))
@@ -931,11 +972,26 @@ def build_air_supply(M):
         for s in (1, -1):
             top = hardpoints(axle, s)["spr_top"] + V(s * 0.065, 0, -0.01)
             st = V(fit_x[(axle, s)], c3.y, 0.583)
-            if axle == "R":
+            if axle == "R" and s < 0:
+                # el izquierdo cruza por detrás de los inversores traseros (y < -2,2125) y por debajo del cofre
+                # inferior (z < 0,70)
+                pth = [st, st + V(-0.02, 0.02, 0.03), V(0.10, -2.25, 0.65), V(-0.30, -2.24, 0.66), V(-0.45, -2.20, 0.72),
+                       top + V(-s * 0.15, -0.2, 0.0), top]
+            elif axle == "R":
                 pth = [st, st + V(s * 0.02, 0.03, 0.03), st + V(s * 0.1, 0.1, 0.05), top + V(-s * 0.15, -0.2, 0.0), top]
             else:
-                pth = [st, V(st.x, c3.y + 0.04, 0.60), (0.5 * s, -1.9, 0.40), (0.84 * s, -1.0, 0.282),
-                       (0.84 * s, 1.2, 0.282), top + V(-s * 0.05, -0.25, -0.1), top]
+                # bajo el umbral y la bandeja de la batería, con puntos de control densos para que la curva no se
+                # desvíe: a la derecha por dentro de los tubos de freno (x 0,812); a la izquierda, entre las mangueras
+                # del tren motriz y el haz de aire (x -0,866), girando en paralelo con ellos ante la rueda trasera
+                xl = 0.812 if s > 0 else 0.856
+                xr = 0.70 if s > 0 else 0.686
+                # (el izquierdo cruza por detrás de los inversores traseros, y < -2,2125)
+                lead = ([V(st.x, c3.y + 0.04, 0.60), (0.0, -2.26, 0.62), (-0.45, -2.20, 0.55), (-0.55, -1.95, 0.42)]
+                        if s < 0 else [V(st.x, c3.y + 0.04, 0.60)])
+                pth = [st] + lead + [(0.5 * s, -1.9, 0.40) if s > 0 else (-0.57, -1.85, 0.40), (0.60 * s, -1.70, 0.36),
+                       ((0.68 if s > 0 else 0.675) * s, -1.50, 0.30), (xr * s, -1.38, 0.281), (xl * s, -1.0, 0.281), (xl * s, -0.85, 0.281),
+                       (xl * s, 1.05, 0.281), (xl * s, 1.20, 0.282), ((xl - 0.016) * s, 1.35, 0.40),
+                       top + V(-s * 0.05, -0.25, -0.1), top]
             P.hose(mb, pth, 0.003, 6, 6, 0)
     # compresor (salida en la cara +X de su caja) -> extremo del depósito -> cara trasera del bloque
     P.hose(mb, [c + V(0.285, 0, 0), c + V(0.30, -0.04, 0.01), c2 + V(-0.205, 0, 0)], 0.004, 6, 4, 0)
@@ -974,32 +1030,26 @@ def build_electrical(M):
     mb = L.MeshBuilder()
     # junto al umbral izquierdo sobre el suelo (bajo la moqueta) y, detrás, por encima del travesaño de la pared
     # trasera hasta la cara lateral del controlador trasero
-    P.corrugated(mb, [(-0.585, 1.30, 0.714), (-0.66, 1.20, 0.60), (-0.775, 1.05, 0.53), (-0.79, 0.80, 0.497),
-                      (-0.79, -0.80, 0.497), (-0.80, -0.90, 0.68), (-0.70, -0.985, 0.72), (-0.30, -0.99, 0.74),
-                      (-0.122, -0.99, 0.755)], 0.011, 10, 0.010, 0)
-    P.corrugated(mb, [(0.585, 1.355, 0.714), (0.30, 1.40, 0.80), (0.0, 1.45, 0.86), (-0.30, 1.40, 0.82),
-                      (-0.585, 1.30, 0.714)], 0.010, 10, 0.010, 0)
+    # los extremos delanteros entran por la cara inferior de cada controlador (z 0,725) y el tramo transversal
+    # pasa por detrás de ellos; en el pilar C sube por dentro de su placa de tuercas y del soporte de la rampa
+    P.corrugated(mb, [(-0.585, 1.30, 0.700), (-0.66, 1.20, 0.60), (-0.775, 1.05, 0.53), (-0.765, 0.80, 0.497),
+                      (-0.765, -0.70, 0.497), (-0.762, -0.78, 0.50), (-0.762, -0.86, 0.58), (-0.76, -0.93, 0.70),
+                      (-0.70, -0.985, 0.72),
+                      (-0.30, -0.99, 0.74), (-0.122, -0.99, 0.755)], 0.011, 10, 0.010, 0)
+    P.corrugated(mb, [(0.585, 1.355, 0.700), (0.585, 1.405, 0.700), (0.30, 1.42, 0.80), (0.0, 1.45, 0.86),
+                      (-0.30, 1.40, 0.82), (-0.50, 1.42, 0.75), (-0.62, 1.36, 0.70), (-0.585, 1.30, 0.700)], 0.010, 10,
+                     0.010, 0)
     objs.append(P.make(mb, "LV_Harness_MV_Backbone", "BATTERY_ASSEMBLY", M["harness"], None, (-1, 0, 0.4), 0.5, 5,
                        "Baja tensión", "Mazo principal de 48 V con anillo Ethernet redundante", "R"))
-    # Cables de alta tensión: batería → unidad delantera, compresor de A/C; bahía auxiliar → inversores traseros
+    # Cable de alta tensión de la batería al compresor de A/C (termina en su cara trasera), por debajo de las
+    # mangueras de refrigerante de la batería. Los cables de las unidades motrices son los arneses HV_Harness_FDU y
+    # HV_Harness_RDU_L/R (build_v3_motriz, con sus fijaciones del manual); hasta la versión 4.1 se modelaban
+    # también aquí, duplicados.
     mb = L.MeshBuilder()
-    for dx in (-0.12, 0.12):
-        # terminan en la cara trasera del inversor delantero (y = 1,697 m), no dentro de él
-        P.hose(mb, [(dx, BAT_Y0 - 0.005, BAT_ZT + 0.03), (dx * 1.2, BAT_Y0 + 0.12, 0.50),
-                    (0.10 + dx * 0.5, 1.55, 0.60), (0.10 + dx * 0.5, 1.683, 0.63)], 0.012, 12, 5, 0)
-    # al compresor de A/C: termina en su cara trasera
-    P.hose(mb, [(0.0, BAT_Y0 - 0.005, BAT_ZT + 0.05), (-0.10, 1.50, 0.62), (-0.16, 1.70, 0.72),
+    P.hose(mb, [(-0.08, BAT_Y0 - 0.005, BAT_ZT + 0.03), (-0.10, 1.45, 0.56), (-0.16, 1.62, 0.62),
                 (-0.17, 1.743, 0.74)], 0.007, 10, 5, 0)
-    # de la cara trasera de la ACJB a la cara delantera de cada inversor trasero, entre el refrigerador de placa
-    # y la cubierta acústica del motor
-    for s in (1, -1):
-        xs = -0.30 if s > 0 else -0.40
-        for dz in (0.0, 0.026):
-            P.hose(mb, [(xs, -1.373, 0.615 + dz), (xs, -1.45, 0.62 + dz), (s * 0.22, -1.62, 0.64 + dz),
-                        (s * 0.235, -1.90, 0.645 + dz), (s * 0.24, S.Y_REAR_AXLE - 0.307, 0.645 + dz)],
-                   0.011, 12, 5, 0)
     objs.append(P.make(mb, "HV_Cables", "BATTERY_ASSEMBLY", M["hv_orange"], None, (0, 0, -1), 1.0, 5, "Alta tensión",
-                       "Cables de alta tensión (unidad delantera, compresor, inversores traseros)", "R"))
+                       "Cable de alta tensión del compresor de A/C", "R"))
     return objs
 
 
@@ -1022,9 +1072,14 @@ def harness_branches(M):
         "LV_Harness_Bed_R": ([(0.05, -1.044, 0.805), (0.40, -1.06, 0.80), (0.48, -1.30, 0.83), (0.48, -2.40, 0.83),
                               (0.80, -2.60, 0.85)],
                              "Mazo derecho de la caja"),
-        "LV_Harness_Tailgate": ([(0.80, -2.60, 0.85), (0.84, -2.80, 0.80), (0.70, -2.86, 0.80), (-0.70, -2.86, 0.80)],
+        # por dentro de la placa de la torre del portón (x >= 0,789) y por encima de la barra de torsión (z <= 0,81);
+        # su conector, enfrentado al del mazo de la caja
+        "LV_Harness_Tailgate": ([(0.80, -2.63, 0.845), (0.765, -2.69, 0.84), (0.765, -2.79, 0.84), (0.70, -2.88, 0.84),
+                                 (-0.70, -2.88, 0.84)],
                                 "Mazo del portón (luz, cámara, cierres)"),
-        "LV_Harness_Windshield": ([(-0.62, 1.30, 0.886), (-0.72, 1.20, 1.20), (-0.70, 0.95, 1.55), (0.0, 0.70, 1.67)],
+        # termina en el conector del costado izquierdo del módulo de cámaras (x -0,10, z 1,651)
+        "LV_Harness_Windshield": ([(-0.62, 1.30, 0.886), (-0.72, 1.20, 1.20), (-0.70, 0.95, 1.55), (-0.40, 0.78, 1.63),
+                                   (-0.117, 0.70, 1.651)],
                                   "Mazo del parabrisas y del módulo de cámaras (por el pilar A)"),
     }
     for name, (pts, lbl) in routes.items():

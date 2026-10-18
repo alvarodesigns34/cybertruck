@@ -57,6 +57,17 @@ CARVE = [
     (r"^EXT_Windshield_Glare_Shield$", "todo", "parasol del parabrisas sobre antenas y retrovisor"),
     (r"^INT_IP_Quarter_Panel_[LR]$", "todo", "tapas laterales del salpicadero sobre el extremo de la viga y los pasacables"),
     (r"^CARGO_Tonneau_Rail_[LR]$", "todo", "canal del raíl por el que corren las lamas y los carros"),
+    (r"^INT_SteeringWheel_Hub$", "todo", "buje del volante con los alojamientos de los rodillos y botones"),
+    (r"^EXT_Fender_Baffle_Front_[LR]$", "todo", "deflector del guardabarros con los huecos de las bisagras y del tirante"),
+    (r"^BODY_CPillar_Inner_[LR]$", "todo", "pilar C interior con los alojamientos de la cerradura, del presentador y de "
+     "las placas de espárragos de la puerta trasera"),
+    (r"^EXT_Grille_Foam_Seals$", "comprimir", "juntas de espuma de la rejilla comprimidas contra la fascia"),
+    (r"^BAT_Lid_Seal$", "comprimir", "junta de la tapa de la batería comprimida bajo el travesaño de los asientos"),
+    (r"^EXT_Tailgate_Seal(_Side_[LR])?$", "comprimir", "juntas del portón comprimidas contra las torres y las bisagras"),
+    (r"^CARGO_Tonneau_Closeout_Foam$", "comprimir", "espuma de cierre de la persiana comprimida por la última lama"),
+    (r"^INT_IP_Gap_Hiders$", "comprimir", "cubrejuntas de goma del salpicadero comprimidos entre los paneles"),
+    (r"^INT_Door_NVH_Foam_(FL|FR|RL|RR)$", "todo", "espuma acústica de la puerta con los huecos del altavoz y del "
+     "tirador de apertura manual"),
     (r"^EXT_Door_Primary_Seals_[LR]$", "comprimir", "juntas primarias comprimidas por la puerta"),
     (r"^EXT_Header_Seal_[LR]$", "comprimir", "junta del larguero comprimida"),
     (r"^EXT_Door_(FL|FR|RL|RR)_Seals$", "comprimir", "juntas de la puerta comprimidas"),
@@ -107,8 +118,9 @@ class Scene:
         mx = Vector((max(v.x for v in vs), max(v.y for v in vs), max(v.z for v in vs)))
         self.d[name] = (BVHTree.FromPolygons(vs, tris, epsilon=0.0), vs, tris, mn, mx)
 
-    def partners(self, name, pad=0.0):
-        """Objetos cuya superficie corta la de `name`, sin las penetraciones intencionadas."""
+    def partners(self, name, pad=0.0, include_intended=False):
+        """Objetos cuya superficie corta la de `name`, sin las penetraciones intencionadas (salvo que se pidan: las
+        piezas blandas se comprimen contra todas sus vecinas)."""
         import interferencias as I
         t, _, _, mn, mx = self.d[name]
         out = []
@@ -118,7 +130,7 @@ class Scene:
             if a.x > mx.x + pad or b.x < mn.x - pad or a.y > mx.y + pad or b.y < mn.y - pad or \
                a.z > mx.z + pad or b.z < mn.z - pad:
                 continue
-            if t.overlap(tk) and not I.intended(name, k, 0.0):
+            if t.overlap(tk) and (include_intended or not I.intended(name, k, 0.0)):
                 out.append(k)
         return out
 
@@ -446,7 +458,12 @@ def carve(target, cutters, grow=GAP):
     if closed_t:
         _union_islands(o)
     done = 0
-    for c in cutters:
+    failed = []
+    # primera vuelta solo con MANIFOLD; los que fallan se reintentan al final con el solver exacto (si las mallas
+    # son pequeñas), porque su resultado puede dejar de ser «manifold» y entonces MANIFOLD ya no recorta nada más
+    queue = [(c, 0) for c in cutters]
+    while queue:
+        c, rnd = queue.pop(0)
         oc = bpy.data.objects.get(c)
         if oc is None:
             continue
@@ -471,7 +488,7 @@ def carve(target, cutters, grow=GAP):
         # MANIFOLD primero; el exacto (autointersección) solo con mallas pequeñas y cerradas: con mallas grandes o
         # abiertas puede cerrar Blender
         small = len(cut.data.polygons) <= EXACT_MAX_FACES and len(o.data.polygons) <= EXACT_MAX_FACES
-        for solver in (("MANIFOLD", "EXACT") if small else ("MANIFOLD",)):
+        for solver in (("MANIFOLD",) if rnd == 0 else (("MANIFOLD", "EXACT") if small else ("MANIFOLD",))):
             _log(f"      {solver}")
             mod = o.modifiers.new("_carve", "BOOLEAN")
             mod.operation = "DIFFERENCE"
@@ -484,6 +501,7 @@ def carve(target, cutters, grow=GAP):
             new = bpy.data.meshes.new_from_object(o.evaluated_get(dg), preserve_all_data_layers=True, depsgraph=dg)
             o.modifiers.remove(mod)
             if len(new.polygons) < 0.3 * max(1, len(o.data.polygons)):
+                _log(f"      degenerado ({len(new.polygons)} caras)")
                 bpy.data.meshes.remove(new)
                 continue
             old = o.data
@@ -492,6 +510,7 @@ def carve(target, cutters, grow=GAP):
             t1 = _tree(o)
             after = len(t1.overlap(tc)) if t1 else before
             if after >= before:
+                _log(f"      no mejora ({before} -> {after})")
                 o.data = old
                 bpy.data.meshes.remove(new)
                 continue
@@ -505,6 +524,13 @@ def carve(target, cutters, grow=GAP):
         bpy.data.meshes.remove(me)
         if ok:
             done += 1
+            _log("      aceptado")
+        elif rnd == 0:
+            queue.append((c, 1))
+        else:
+            failed.append(c)
+    if failed:
+        _log(f"  sin recortar: {failed}")
     return done
 
 
@@ -598,7 +624,7 @@ def carve_all(sc=None, only=None):
             if only and not re.search(only, name):
                 continue
             _log(f"objetivo {name}")
-            parts = sc.partners(name)
+            parts = sc.partners(name, include_intended=(mode == "comprimir"))
             if not parts:
                 continue
             cutters, below = parts, []
@@ -842,9 +868,51 @@ def placer(min_depth_mm=1.5, radius=0.05, step=0.01, write=True):
     return done
 
 
+# Alojamientos por caja: piezas que en la realidad son carcasas huecas modeladas como sólidos (la consola central),
+# a las que se quita un volumen prismático por donde no se ven, para alojar lo que va dentro. (objeto, mínimo,
+# máximo, motivo); coordenadas de mundo.
+POCKETS = [
+    ("INT_Console_Body", (-0.108, -0.105, 0.47), (0.108, 0.905, 0.562),
+     "hueco inferior de la consola (carcasa hueca) para la base y los raíles del suelo"),
+]
+
+
+def pockets():
+    out = {}
+    for name, mn, mx, _why in POCKETS:
+        o = bpy.data.objects.get(name)
+        if o is None:
+            continue
+        _bake(o)
+        box = _box_object(Vector(mn), Vector(mx))
+        mod = o.modifiers.new("_pocket", "BOOLEAN")
+        mod.operation = "DIFFERENCE"
+        mod.solver = "MANIFOLD"
+        mod.object = box
+        bpy.context.view_layer.update()
+        dg = bpy.context.evaluated_depsgraph_get()
+        new = bpy.data.meshes.new_from_object(o.evaluated_get(dg), preserve_all_data_layers=True, depsgraph=dg)
+        o.modifiers.remove(mod)
+        me = box.data
+        bpy.data.objects.remove(box, do_unlink=True)
+        bpy.data.meshes.remove(me)
+        if len(new.polygons) < 0.3 * max(1, len(o.data.polygons)):
+            bpy.data.meshes.remove(new)
+            out[name] = "descartado"
+            continue
+        old = o.data
+        new.name = old.name
+        o.data = new
+        if old.users == 0:
+            bpy.data.meshes.remove(old)
+        out[name] = len(new.polygons)
+    return out
+
+
 def build_all(M=None):
     bpy.context.view_layer.update()
     out = {}
+    out["huecos"] = pockets()
     out["recortes"] = carve_all()
     out["desplazados"] = apply_moves()
     return out

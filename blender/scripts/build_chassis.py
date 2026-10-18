@@ -111,8 +111,17 @@ def build_cargo_bed(M):
     asm = L.assembly("CARGO_BED_TUB", "CARGO_BED", (0.0, (y0 + y1) / 2, zf))
     L.explode(asm, (0, -0.2, 1), 1.55, 3, "Caja de carga", "Caja de carga compuesta (6' x 4')", "R")
     mb = L.MeshBuilder()
-    mb.face([(-hw_in, y0, zf), (hw_in, y0, zf), (hw_in, y1, zf), (-hw_in, y1, zf)], 0, want=(0, 0, 1))
-    for i in range(1, 12):
+    # suelo: franja central entre los pasos de rueda y, por fuera de ellos, solo por delante y por detrás (el paso de
+    # rueda es una carcasa abierta por debajo; el neumático asoma por encima del plano del suelo)
+    xw0 = S.BED_FLOOR_WIDTH / 2
+    wy0, wy1 = S.Y_REAR_AXLE + 0.48, S.Y_REAR_AXLE - 0.48
+    mb.face([(-xw0, y0, zf), (xw0, y0, zf), (xw0, y1, zf), (-xw0, y1, zf)], 0, want=(0, 0, 1))
+    for sgn in (1, -1):
+        for ya, yb in ((y0, wy0), (wy1, y1)):
+            mb.face([(sgn * xw0, ya, zf), (sgn * hw_in, ya, zf), (sgn * hw_in, yb, zf), (sgn * xw0, yb, zf)], 0,
+                    want=(0, 0, 1))
+    # nervios del suelo, solo en la franja central
+    for i in range(2, 11):
         x = -hw_in + i * 2 * hw_in / 12
         L.box(mb, (x, (y0 + y1) / 2, zf + 0.006), (0.03, abs(y1 - y0) - 0.06, 0.012), 0)
     for sgn in (1, -1):
@@ -128,6 +137,12 @@ def build_cargo_bed(M):
         top = [(xw, wy1 - 0.03, zf + 0.26), (xw, wy0 + 0.03, zf + 0.26),
                (sgn * hw_in, wy0 + 0.03, zf + 0.26), (sgn * hw_in, wy1 - 0.03, zf + 0.26)]
         mb.face(top, 0, want=(0, 0, 1))
+        # caras delantera y trasera del paso de rueda, hasta la pared lateral
+        for prof, wd in (([(wy0, zf), (wy0 + 0.06, zf + 0.10), (wy0 + 0.03, zf + 0.26)], (0, 1, 0)),
+                         ([(wy1, zf), (wy1 - 0.06, zf + 0.10), (wy1 - 0.03, zf + 0.26)], (0, -1, 0))):
+            for (ya, za), (yb, zb) in zip(prof, prof[1:]):
+                mb.face([(xw, ya, za), (xw, yb, zb), (sgn * hw_in, yb, zb), (sgn * hw_in, ya, za)], 0,
+                        want=Vector(wd) + Vector((0, 0, 0.3)))
     mb.face([(-hw_in, y0, zf), (hw_in, y0, zf), (hw_in, y0, 1.60), (-hw_in, y0, 1.60)], 0, want=(0, -1, 0))
     o = mb.build("CARGO_Bed_Tub", "CARGO_BED", M["composite"], parent=asm)
     L.solidify(o, 0.006)
@@ -135,8 +150,11 @@ def build_cargo_bed(M):
     objs.append(o)
     # Compartimento inferior (Gear Locker) bajo el suelo de la caja
     mb = L.MeshBuilder()
-    # bajo la tapa (z ≥ 0,794) y por encima del paragolpes trasero
-    L.box(mb, (0.0, -2.52, 0.745), (0.86, 0.60, 0.09), 0)
+    # bajo la tapa (z ≥ 0,794): cuerpo principal por delante del labio superior del paragolpes trasero (y -2,775…
+    # -2,805, hasta z 0,715) y remate trasero por encima de él hasta y = -2,82, que se ve por la ranura entre el
+    # portón y el paragolpes (forma parte de la silueta trasera)
+    L.box(mb, (0.0, -2.495, 0.745), (0.86, 0.55, 0.09), 0)
+    L.box(mb, (0.0, -2.795, 0.75325), (0.86, 0.05, 0.0735), 0)
     o = mb.build("CARGO_Gear_Locker", "CARGO_BED", M["composite"], parent=asm)
     L.bevel(o, 0.01, 2, 40)
     L.explode(o, (0, 0, -1), 0.45, 6, "Caja de carga", "Compartimento inferior Gear Locker (97 l)", "R")

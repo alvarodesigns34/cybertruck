@@ -52,15 +52,18 @@ def build(M):
         ], f"Soportes {side}s de las aletas de paso de rueda (Fore/Aft delanteros y traseros; 2 y 6 pernos a 7 N·m)",
             edir=(s, 0, 0.3), dist=0.4))
         A(V3.part(M, f"EXT_Fender_Baffle_Front_{sd}", "EXTERIOR_PANELS", ["rubber"], [
-            box((s * 0.905, 1.30, 0.74), (0.035, 0.22, 0.30), 0.004),
+            # por detrás de las bisagras (y <= 1,274) y del tirante de la puerta
+            box((s * 0.905, 1.345, 0.74), (0.035, 0.13, 0.30), 0.004),
         ], f"Deflector de la aleta delantera {side}", edir=(s, 0.3, 0), dist=0.35))
         A(V3.part(M, f"EXT_Underhood_Apron_{sd}", "EXTERIOR_PANELS", ["plastic_black", "zinc"], [
             box((s * 0.68, 2.14, 0.985), (0.32, 0.42, 0.010), 0.002),
             line(clip, (s * 0.54, 1.98, 0.99), (s * 0.54, 2.30, 0.99), 4, axis=Z),
         ], f"Faldón {side} bajo el capó (Underhood Apron)", edir=(s * 0.4, 0, 1), dist=0.4))
         A(V3.part(M, f"EXT_Rocker_Rear_Fairing_{sd}", "EXTERIOR_PANELS", ["plastic_black"], [
-            hull([(s * 0.80, -1.10, 0.27), (s * 0.95, -1.10, 0.27), (s * 0.80, -1.20, 0.30), (s * 0.95, -1.20, 0.30),
-                  (s * 0.80, -1.10, 0.40), (s * 0.95, -1.10, 0.40), (s * 0.80, -1.20, 0.40), (s * 0.95, -1.20, 0.40)]),
+            # detrás del extremo del faldón (y -1,13), por encima de las líneas de aire y las mangueras que pasan del
+            # umbral a la rueda trasera (z <= 0,30) y por debajo de la aleta (z >= 0,367)
+            hull([(s * 0.80, -1.13, 0.318), (s * 0.95, -1.13, 0.318), (s * 0.80, -1.20, 0.325), (s * 0.95, -1.20, 0.325),
+                  (s * 0.80, -1.13, 0.365), (s * 0.95, -1.13, 0.365), (s * 0.80, -1.20, 0.365), (s * 0.95, -1.20, 0.365)]),
         ], f"Carenado trasero del faldón {side}", edir=(s, -0.3, -0.3), dist=0.4))
         A(V3.part(M, f"EXT_Rocker_Step_Reinforcement_{sd}", "EXTERIOR_PANELS", ["steel_black", "zinc"], [
             # alojados dentro del inserto extruido del umbral, entre sus nervios
@@ -99,13 +102,17 @@ def build(M):
         ], f"Aplique del pilar B {side} (1 perno 10 mm a 6 N·m, 2 conectores, 3 clips)",
             edir=(s, 0, 0.2), dist=0.45))
         A(V3.part(M, f"EXT_Applique_Sail_{sd}", "EXTERIOR_PANELS", ["plastic_black", "zinc"], [
-            box((s * 0.855, -1.05, 1.43), (0.030, 0.24, 0.30), 0.004),
-            line(clip, (s * 0.84, -1.16, 1.30), (s * 0.84, -0.94, 1.30), 6, axis=(-s, 0, 0)),
-            line(clip, (s * 0.84, -1.16, 1.56), (s * 0.84, -0.94, 1.56), 6, axis=(-s, 0, 0)),
+            # placa inclinada a 6 mm por dentro de la piel exterior de la vela (x 0,913 a z 1,28 y 0,884 a z 1,55),
+            # por fuera del «mast», de la caja y de la pared trasera de la cabina (|x| <= 0,86)
+            hull([(s * x, y, z) for y in (-1.17, -0.93) for (x, z) in ((0.9066, 1.28), (0.8986, 1.28), (0.8805, 1.53),
+                                                                       (0.8725, 1.53))]),
+            line(clip, (s * 0.894, -1.16, 1.31), (s * 0.894, -0.94, 1.31), 6, axis=(-s, 0, 0)),
+            line(clip, (s * 0.871, -1.16, 1.53), (s * 0.871, -0.94, 1.53), 6, axis=(-s, 0, 0)),
         ], f"Aplique de la vela {side} (17 clips + 1 datum + 1 clip de arnés + 1 conector)",
             edir=(s, -0.3, 0.3), dist=0.5))
         A(V3.part(M, f"EXT_Sail_Baffle_{sd}", "EXTERIOR_PANELS", ["rubber"], [
-            box((s * 0.82, -0.98, 1.45), (0.02, 0.05, 0.22), 0.003),
+            # entre la pared trasera de la cabina (y -0,953) y el extremo delantero del «mast» (y -0,994)
+            box((s * 0.82, -0.9725, 1.45), (0.02, 0.025, 0.22), 0.003),
         ], f"Deflector (baffle) de la vela {side}", edir=(s, -0.3, 0.3), dist=0.35))
         A(V3.part(M, f"EXT_Applique_CPillar_{sd}", "EXTERIOR_PANELS", ["plastic_black"], [
             box((s * 0.945, -0.915, 1.02), (0.020, 0.030, 0.58), 0.003),
@@ -167,8 +174,9 @@ def build(M):
     ], "Tapas de los 6 pernos del frunk (2 visibles) y topes de goma del capó", edir=(0, 0, 1), dist=0.3,
         stage=6))
     A(V3.part(M, "EXT_Frunk_Underhood_Apron_Rear", "EXTERIOR_PANELS", ["plastic_black", "zinc"], [
-        box((0, 1.985, 1.10), (1.50, 0.07, 0.020), 0.003),
-        line(clip, (-0.66, 1.985, 1.112), (0.66, 1.985, 1.112), 9, axis=Z),
+        # por delante del Super Cowl (y <= 1,957)
+        box((0, 1.993, 1.10), (1.50, 0.07, 0.020), 0.003),
+        line(clip, (-0.66, 1.993, 1.112), (0.66, 1.993, 1.112), 9, axis=Z),
     ], "Faldón trasero bajo el capó (9 clips)", edir=(0, 0.3, 1), dist=0.4))
     A(V3.part(M, "EXT_Tailgate_Inner_Cover", "DOORS_AND_HATCHES", ["plastic_black", "zinc"], [
         box((0, -2.812, 1.05), (1.56, 0.008, 0.55), 0.002),
@@ -233,7 +241,8 @@ def build(M):
     ], "Tapa (puerta) del módulo de tomas de la caja (2 tornillos T25R a 1,5 N·m + 1 perno a 10 N·m)",
         edir=(-1, 0, 0.2), dist=0.4))
     A(V3.part(M, "CARGO_Tonneau_Cam_Block", "CARGO_BED", ["steel_black", "zinc"], [
-        box((0.775, -1.05, 1.365), (0.040, 0.050, 0.040), 0.003), box((0.775, -2.78, 1.345), (0.040, 0.050, 0.040), 0.003),
+        # bajo el aplique del pivote y el soporte de la vela (z >= 1,375) y bajo las dos últimas lamas
+        box((0.775, -1.05, 1.353), (0.040, 0.050, 0.040), 0.003), box((0.775, -2.78, 1.331), (0.040, 0.050, 0.040), 0.003),
     ], "Bloques de leva {lado}s de la cubierta (Cam Block)", mirror=True, edir=(0.6, 0, 0.4), dist=0.35))
     A(V3.part(M, "CARGO_Tonneau_Hinge_Pivot_Applique", "CARGO_BED", ["plastic_black"], [
         box((0.80, -1.02, 1.40), (0.030, 0.060, 0.050), 0.003),
@@ -246,7 +255,8 @@ def build(M):
         line(bolt, (-0.66, -1.087, 1.27), (0.66, -1.087, 1.27), 10, axis=(0, -1, 0), d=0.008),
     ], "Barrera NVH del casete (10 pernos de 8 mm a 5 N·m)", edir=(0, 1, 0.2), dist=0.4))
     A(V3.part(M, "CARGO_Tonneau_Water_Seal_Center", "CARGO_BED", ["rubber_seal", "plastic_black"], [
-        sweep([(0.70, -1.15, 1.36), (0.70, -1.80, 1.34), (0.70, -2.45, 1.32)], 0.012, 0.010, 0.002, 4),
+        # empieza detrás de la caja del motor de la cubierta (y >= -1,18)
+        sweep([(0.70, -1.185, 1.36), (0.70, -1.80, 1.34), (0.70, -2.45, 1.32)], 0.012, 0.010, 0.002, 4),
         clip((0.70, -1.80, 1.345), Z, 0.010, 1),
     ], "Junta {lado} de gestión de agua del tonneau (1 clip)", mirror=True, edir=(0.4, 0, 0.6), dist=0.3))
     A(V3.part(M, "CARGO_Tonneau_Closeout_Foam", "CARGO_BED", ["rubber"], [

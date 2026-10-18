@@ -32,7 +32,11 @@ md += `penetración mayor de ${dmin} mm y que no están en la lista de penetraci
 md += `de la zona de cruce; la extensión es la diagonal de la caja que envuelve esa zona.\n\n`;
 md += `## Resumen\n\n| Penetración | Parejas |\n|---|---|\n`;
 md += `| 3–5 mm | ${hist[0]} |\n| 5–10 mm | ${hist[1]} |\n| 10–30 mm | ${hist[2]} |\n| > 30 mm | ${hist[3]} |\n`;
-md += `| **Total pendiente** | **${pend.length}** |\n| Penetraciones intencionadas (no se cuentan) | ${intenc.length} |\n\n`;
+md += `| **Total pendiente** | **${pend.length}** |\n| Penetraciones intencionadas (no se cuentan) | ${intenc.length} |\n`;
+// cruces por debajo del umbral (holguras de contacto de 1–3 mm): solo informativos
+const low = (lo, hi) => r.filter(x => !x.intencionado && x.profundidad_mm > lo && x.profundidad_mm <= hi).length;
+md += `| Cruces por debajo del umbral, 1–2 mm (informativo) | ${low(1, 2)} |\n`;
+md += `| Cruces por debajo del umbral, 2–${dmin} mm (informativo) | ${low(2, dmin)} |\n\n`;
 md += `| Zona | Parejas |\n|---|---|\n`;
 for (const [k, v] of Object.entries(groups).sort((a, b) => b[1].length - a[1].length)) md += `| ${k} | ${v.length} |\n`;
 md += `\n## Detalle por zona\n\n`;

@@ -176,16 +176,15 @@ def build(M):
                                                            (mx.x - 0.10, mn.y - 0.002, (mn.z + mx.z) / 2), 4), (0, -1, 0),
                     "Fijaciones de la barra de luz (2 tuercas a 3 N·m y 2 pernos a 4 N·m, 10 mm)", 10))
     # Unidades motrices: tornillos de los soportes elásticos al subchasis (A: cantidad no publicada)
-    for du in ("DU_F_Mounts", "DU_R_Mounts"):
+    import build_mechanics as BMx
+    for du, key in (("DU_F_Mounts", "F"), ("DU_R_Mounts", "R")):
         o = bpy.data.objects.get(du)
         if o is None:
             continue
-        bb = bbox(du)
-        mn, mx = bb
+        # dos tornillos bajo la placa de cada soporte (placa: 35 mm por debajo del eje del casquillo, 20 mm de grueso)
         pts = []
-        for p in ((mn.x + 0.04, (mn.y + mx.y) / 2, mn.z + 0.004), (mx.x - 0.04, (mn.y + mx.y) / 2, mn.z + 0.004),
-                  ((mn.x + mx.x) / 2, mx.y - 0.04, mn.z + 0.004)):
-            pts += [(p[0] - 0.025, p[1], p[2]), (p[0] + 0.025, p[1], p[2])]
+        for p in BMx.DU_MOUNTS[key]:
+            pts += [(p[0] - 0.025, p[1], p[2] - 0.041), (p[0] + 0.025, p[1], p[2] - 0.041)]
         A(fasteners(M, du, pts, (0, 0, -1), "Tornillos de los soportes de la unidad motriz al subchasis (18 mm)", 18,
                     length=0.040))
     return out

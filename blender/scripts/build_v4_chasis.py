@@ -171,7 +171,8 @@ def steering(M):
     for axle in ("F", "R"):
         y = S.Y_FRONT_AXLE if axle == "F" else S.Y_REAR_AXLE
         f = 1 if axle == "F" else -1
-        yr, zr = y - f * 0.17, 0.425
+        import build_mechanics as BMx
+        yr, zr = y - f * BMx.RACK_DY[axle], 0.425
         half = 0.27 if axle == "F" else 0.22
         V4.set_explode(f"STR_{axle}_Actuator", (0, -f, -0.5), 1.05, 4)
         es = "delantero" if axle == "F" else "trasero"
@@ -237,7 +238,8 @@ def brake_actuation(M):
     ], "Interior del servofreno electromecánico: motor sin escobillas, engranajes, husillo de bolas, muelle de "
        "retorno y varilla de empuje del pedal", edir=(-0.5, 0.6, 0.5), dist=0.55, stage=6, group="Frenos",
         fid="A", note=NOTE)
-    m0 = c + Vector((0, 0.195, 0))
+    # la brida (10 mm) se apoya en la cara delantera del servofreno (y = c.y + 0,195)
+    m0 = c + Vector((0, 0.200, 0))
     out += V4.part(M, "BRK_Master_Cylinder", "UNDERBODY", ["alu_machined", "zinc", "plastic_black"], [
         disc(tuple(m0), Y, 0.040, 0.010, 28, 0),
         cyl(tuple(m0), tuple(m0 + Vector((0, 0.12, 0))), 0.026, seg=24, m=0),
@@ -245,7 +247,7 @@ def brake_actuation(M):
              seg=12, m=2) for k in range(2)],
         [cyl(tuple(m0 + Vector((0.020, 0.04 + 0.05 * k, 0))), tuple(m0 + Vector((0.038, 0.04 + 0.05 * k, 0))), 0.007,
              seg=6, m=1) for k in range(2)],
-        [nut(tuple(m0 + Vector((sx * 0.032, -0.011, 0))), (0, 1, 0), 0.010, 1, 0.0) for sx in (-1, 1)],
+        [nut(tuple(m0 + Vector((sx * 0.032, 0.005, 0))), (0, 1, 0), 0.010, 1, 0.0) for sx in (-1, 1)],
     ], "Bomba de freno tándem (2 circuitos, 2 tuercas al servofreno, conexiones al depósito y a la HCU)",
         edir=(-0.3, 1, 0.4), dist=0.70, stage=4, group="Frenos", fid="R",
         note="La bomba de freno es necesaria con servofreno electromecánico; forma reconstruida")

@@ -392,3 +392,33 @@ Orden de trabajo, sin saltarse fases:
   - cómo aligerar el GLB para la escena general (por ejemplo, un nivel de detalle exterior para la exposición y el
     GLB completo solo en el espacio de despiece);
   - respetar el presupuesto de `tools/check.mjs`.
+
+## 16. Versión 4.2 (18-10-2026): fase 1 del encargo de §15 (interferencias a cero)
+
+**Hecho (sin commit ni push; el usuario los pide expresamente):**
+- 0 parejas que se atraviesan más de 3 mm (de 280). Hay 320 penetraciones intencionadas, todas uniones reales con su
+  motivo en `interferencias.INTENDED`, y 240 contactos de 1–3 mm por debajo del umbral. Cotas, siluetas y explosión
+  validadas: perfil trasero mejor (7,8 mm de media) y el resto igual.
+- GLB y manifiesto exportados (12,5 MB, 1.138 componentes), `Cybertruck.blend` guardado (16,2 MB), inventario e
+  informe `docs/interferencias-pendientes.md` regenerados.
+- Detalle por grupos, penetraciones declaradas y lecciones: `docs/research-and-fidelity.md` §12.
+
+**Herramientas de la sesión** (no están en el repositorio; se recrean en minutos):
+- un lanzador que ejecuta `build_all.run(...)`, `interferencias.run()`, `validate.run()` y
+  `build_explode.verify_roundtrip()` dentro de `bpy.app.timers.register` y escribe un JSON con el resultado;
+- ayudas de diagnóstico con las cajas de las piezas, los triángulos que se cruzan (`cross_faces`), los vértices de
+  un interior que quedan fuera de su carcasa y rayos verticales u horizontales para medir huecos;
+- `diff` de dos JSON del detector (parejas resueltas y nuevas), que es lo que permite ver los efectos colaterales de
+  cada lote.
+
+**Trampas nuevas** (además de §14):
+- `y - f·d` con f = −1 en el eje trasero: reducir d acerca la pieza al eje.
+- La tornillería de `build_v4_tornilleria` se coloca a partir de la caja de otras piezas: si la pieza se mueve, la
+  tornillería la sigue (y puede caer donde no debe).
+- `ct_v3.hose(zmin=...)` fija la altura mínima del centro.
+- Patrones de `INTENDED` con grupos: deben coincidir entre las dos expresiones; usar `(?:…)` cuando no.
+- Una pareja intencionada no se recorta en la pasada de montaje (las piezas blandas sí se comprimen).
+- La altura libre la marca la pieza más baja fuera de las ruedas y la suspensión: cualquier tornillo bajo un
+  soporte la cambia.
+
+**Siguiente (fases 2 y 3 del encargo de §15):** pulido general con renders y la integración en `alvarodesigns34/spacex`.

@@ -181,12 +181,13 @@ describe (`web/src/materials.js`) sin sustituir los mapas exportados.
 
 ## 7. Cifras del activo
 
-| Métrica | v1 | v2 | v3 | v4 |
-|---|---|---|---|---|
-| Objetos en la colección del vehículo | 309 | 561 (522 mallas, 38 conjuntos, 1 raíz) | 948 (909 mallas, 38 conjuntos, 1 raíz) | **1.137** (1.098 mallas, 38 conjuntos, 1 raíz) |
-| Triángulos evaluados (con modificadores) | 174.862 | 498.396 | 653.442 | 1.189.792 |
-| Materiales | 39 | 61 (10 juegos de texturas) | 61 (sin cambios) | 78 (15 juegos de texturas) |
-| `blender/Cybertruck.blend` (comprimido, texturas externas) | 1,12 MB | 4,5 MB | 6,5 MB | 14,7 MB |
-| `blender/textures/` (WebP) | — | 1,6 MB | 1,6 MB | 2,8 MB |
-| `web/models/cybertruck.glb` (Draco + WebP) | 1,07 MB | 5,3 MB | 7,0 MB | 12,0 MB |
-| `web/models/cybertruck-manifest.json` | ~0,12 MB | ~0,24 MB | ~0,41 MB | ~0,50 MB |
+| Métrica | v1 | v2 | v3 | v4 | v4.2 |
+|---|---|---|---|---|---|
+| Objetos en la colección del vehículo | 309 | 561 (522 mallas, 38 conjuntos, 1 raíz) | 948 (909 mallas, 38 conjuntos, 1 raíz) | 1.137 (1.098 mallas, 38 conjuntos, 1 raíz) | **1.139** (1.100 mallas, 38 conjuntos, 1 raíz) |
+| Triángulos evaluados (con modificadores) | 174.862 | 498.396 | 653.442 | 1.189.792 | 1.267.500 |
+| Materiales | 39 | 61 (10 juegos de texturas) | 61 (sin cambios) | 78 (15 juegos de texturas) | 78 |
+| `blender/Cybertruck.blend` (comprimido, texturas externas) | 1,12 MB | 4,5 MB | 6,5 MB | 14,7 MB | 16,2 MB |
+| `blender/textures/` (WebP) | — | 1,6 MB | 1,6 MB | 2,8 MB | 2,8 MB |
+| `web/models/cybertruck.glb` (Draco + WebP) | 1,07 MB | 5,3 MB | 7,0 MB | 12,0 MB | 12,5 MB |
+| `web/models/cybertruck-manifest.json` | ~0,12 MB | ~0,24 MB | ~0,41 MB | ~0,50 MB | ~0,51 MB |
+| Parejas que se atraviesan más de 3 mm | — | — | — | ~1.110 (279 en la v4.1) | **0** |

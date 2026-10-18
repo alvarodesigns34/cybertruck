@@ -100,8 +100,9 @@ def front_seats(M):
         # herrajes de reclinado en el hueco entre el cojín y el respaldo, con barra de sincronización
         disc((0.675, 0.235, 0.72), X, 0.036, 0.014, 32, 0),
         gear((0.675, 0.235, 0.72), X, 0.026, 0.029, 0.016, 30, 0.0, 0.0, 0),
-        disc((0.145, 0.235, 0.72), X, 0.030, 0.010, 28, 0),
-        tube([(0.145, 0.235, 0.72), (0.675, 0.235, 0.72)], 0.007, 10, 1, 0),
+        # el interior, por fuera del panel lateral de la consola (|x| <= 0,146)
+        disc((0.160, 0.235, 0.72), X, 0.030, 0.010, 28, 0),
+        tube([(0.160, 0.235, 0.72), (0.675, 0.235, 0.72)], 0.007, 10, 1, 0),
         # respaldo: tubos laterales y superior, chapa inferior y malla lumbar, en el plano del armazón
         [tube([to_w(sg * x, d_fr, h) for x, h in side], 0.011, 14, 4, 0) for sg in (1, -1)],
         tube([to_w(-0.10, d_fr, 0.74), to_w(0.0, d_fr, 0.755), to_w(0.10, d_fr, 0.74)], 0.011, 14, 4, 0),
@@ -186,20 +187,24 @@ def steering_wheel(M):
                       "Alma de magnesio inyectado del aro del volante (bajo la espuma y el tapizado)",
                       core=(tuple(ax), 0.38), parent="STEERING_WHEEL", edir=tuple(ax), dist=0.20, stage=6,
                       group="Volante", fid="A", note=NOTE)
-    c = Vector((-0.395, 0.7365, 1.02))
+    # mismos ejes que el buje de build_interior_detail (columna inclinada (0, 1, -0,42)): el interior va dentro del
+    # cojín central (0–50 mm a lo largo de la columna desde el centro del volante) y de sus radios
+    c = Vector((-0.395, 0.735, 1.02))
+    ax = -Vector((0, 1, -0.42)).normalized()
     u = Vector((1, 0, 0))
     v = ax.cross(u).normalized()
     out += V4.part(M, "INT_SteeringWheel_Hub_Internals", "STEERING", ["magnesium", "plastic_black", "copper",
                                                                        "zinc", "steel_black"], [
-        # radios centrados en el espesor de los radios del buje y sin llegar al aro; muelle de reloj dentro del buje
-        # y del tubo de la cubierta de la columna (radio interior 45 mm)
-        [beam(tuple(c + u * sg * 0.035 - ax * 0.018), tuple(c + u * sg * 0.160 + v * -0.01 - ax * 0.018), 0.030, 0.010,
-              up=tuple(ax), r=0.003) for sg in (-1, 1)],
-        disc(tuple(c + ax * -0.040), tuple(ax), 0.040, 0.020, 36, 1),
-        ring(tuple(c + ax * -0.040), tuple(ax), 0.026, 0.038, 0.008, 36, 2),
-        taper(tuple(c + ax * -0.070), tuple(ax), [(0.0, 0.0), (0.030, 0.0), (0.034, 0.018), (0.020, 0.030), (0.0, 0.030)],
+        # radios centrados en el espesor de los radios del buje, por fuera del módulo del airbag (±55 mm) y sin llegar
+        # al aro; muelle de reloj con el paso del tornillo central detrás del airbag; adaptador estriado dentro del
+        # tubo de la cubierta de la columna (radio interior 45 mm)
+        [beam(tuple(c + u * sg * 0.060 - v * 0.012 - ax * 0.018), tuple(c + u * sg * 0.160 - v * 0.012 - ax * 0.018),
+              0.024, 0.010, up=tuple(ax), r=0.003) for sg in (-1, 1)],
+        ring(tuple(c + ax * -0.039), tuple(ax), 0.018, 0.034, 0.014, 36, 1),
+        ring(tuple(c + ax * -0.039), tuple(ax), 0.026, 0.033, 0.016, 36, 2),
+        taper(tuple(c + ax * -0.084), tuple(ax), [(0.0, 0.0), (0.030, 0.0), (0.034, 0.018), (0.020, 0.030), (0.0, 0.030)],
               28, 4),
-        screw(tuple(c + ax * -0.032), tuple(ax), 0.014, 0.045, 3, "allen"),
+        screw(tuple(c + ax * -0.048), tuple(ax), 0.014, 0.045, 3, "allen"),
     ], "Radios de magnesio, muelle de reloj (clock spring), adaptador estriado del buje y tornillo central del volante",
         parent="STEERING_WHEEL", edir=tuple(ax), dist=0.30, stage=6, group="Volante", fid="A", note=NOTE)
     return out

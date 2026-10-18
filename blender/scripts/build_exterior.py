@@ -245,7 +245,9 @@ def wiper_and_washer(M):
                        M["connector_grey"]], None, (1, 0.5, 0), 0.5, 6, "Limpiaparabrisas",
                        "Depósito del lavaparabrisas con bomba, sensor de nivel y boca (3 tornillos)", "V"))
     mb = L.MeshBuilder()
-    P.hose(mb, [t + V(0.10, -0.08, -0.08), t + V(0.0, -0.25, 0.20), V(0.30, 2.00, 1.05), pivot + V(0.05, 0.02, -0.07)],
+    # bajo el faldón derecho y por su borde interior, por el pasamuros del faldón trasero y hasta el costado del motor
+    # del limpiaparabrisas (x >= 0,188), siempre por debajo de la línea del capó
+    P.hose(mb, [t + V(0.10, -0.08, -0.08), t + V(-0.12, -0.27, 0.17), V(0.30, 2.00, 1.05), V(0.20, 1.945, 1.25)],
            0.0035, 6, 6, 0)
     objs.append(P.make(mb, "EXT_Washer_Hose", "GLASS_AND_MIRRORS", M["hose"], None, (0.5, 0.5, 0.5), 0.35, 6,
                        "Limpiaparabrisas", "Tubo del lavaparabrisas hasta los surtidores del brazo", "V"))
@@ -312,7 +314,8 @@ def door_hardware(M):
                                "Elevalunas con motor Q de 48 V", "V"))
             # controlador de la puerta
             mb = L.MeshBuilder()
-            P.rbox(mb, (s * 0.83, yc - 0.25, 0.70), (0.03, 0.14, 0.10), 0.005, 1, None, 0)
+            # por debajo y por detrás del altavoz de la puerta (centro a z 0,744, radio 54 mm)
+            P.rbox(mb, (s * 0.83, yc - 0.30, 0.62), (0.03, 0.14, 0.10), 0.005, 1, None, 0)
             objs.append(P.make(mb, f"EXT_Door_{tag}_Controller", "DOORS_AND_HATCHES", M["alu_cast"], door,
                                (s * 0.6, 0, 0.2), 0.36, 6, "Puertas", "Controlador electrónico de la puerta", "V"))
             # burlete secundario (en la puerta, 26 grapas) y juntas de cintura interior y exterior
@@ -569,8 +572,9 @@ def charge_port(M):
                        None, (s, 0, 0.1), 0.2, 6, "Toma de carga",
                        "Receptáculo NACS con 5 contactos y anillo de luz", "R"))
     mb = L.MeshBuilder()
-    P.rbox(mb, base + V(-s * 0.08, 0.0, 0.0), (0.10, 0.10, 0.08), 0.008, 1, None, 0)
-    P.rbox(mb, base + V(-s * 0.08, 0.06, 0.0), (0.04, 0.02, 0.03), 0.003, 1, None, 1)
+    # por detrás del receptáculo (que llega a 45 mm de su cara) y por encima de sus barras de alta tensión
+    P.rbox(mb, base + V(-s * 0.097, 0.0, 0.064), (0.10, 0.10, 0.08), 0.008, 1, None, 0)
+    P.rbox(mb, base + V(-s * 0.097, 0.06, 0.064), (0.04, 0.02, 0.03), 0.003, 1, None, 1)
     objs.append(P.make(mb, "EXT_ChargePort_ECU", "DOORS_AND_HATCHES", [M["alu_cast"], M["connector_grey"]], None,
                        (s, 0.2, 0.3), 0.35, 6, "Toma de carga",
                        "Controlador de la toma de carga (Gen 4, 1 tornillo y 3 conectores)", "V"))
@@ -624,13 +628,14 @@ def mud_flaps_diffuser_carrier(M):
                        (0, 1, 0.2), 0.60, 1, "Frontal",
                        "Soporte frontal de plástico (6 tornillos de 10 mm a 5 N·m y 2 de 13 mm)", "V"))
     mb = L.MeshBuilder()
-    c = V(-0.62, 2.48, 0.60)
+    # por encima de la viga del paragolpes (z <= 0,62)
+    c = V(-0.62, 2.45, 0.678)
     L.lathe(mb, [(0.0, 0.0), (0.045, 0.0), (0.050, 0.03), (0.0, 0.035)], tuple(c), (0, 1, 0), 24, 0)
     for k in range(3):
         a = 2 * math.pi * k / 3
         P.torx_screw(mb, c + V(math.cos(a) * 0.05, 0.0, math.sin(a) * 0.05), (0, -1, 0), 0.004, 1)
     for s in (1,):
-        c2 = V(0.62, 2.47, 0.62)
+        c2 = V(0.62, 2.435, 0.685)
         L.lathe(mb, [(0.0, 0.0), (0.04, 0.0), (0.045, 0.03), (0.02, 0.06), (0.0, 0.06)], tuple(c2), (0, 1, 0), 20, 0)
     objs.append(P.make(mb, "EXT_Pedestrian_Speaker_Horn", "EXTERIOR_PANELS", [M["plastic_black"], M["zinc"]], None,
                        (0, 1, -0.2), 0.40, 6, "Frontal",

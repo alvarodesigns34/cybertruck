@@ -60,8 +60,9 @@ def battery(M):
     ], "Barras colectoras principales del pack (serie entre bloques y polos + / − hasta la cabecera de alta tensión)",
         parent="BATTERY_PACK", edir=(0, 0.3, 1), dist=0.95, stage=6, group="Batería", fid="A", note=NOTE))
     A(V4.part(M, "BAT_BMS_Controller", "BATTERY_ASSEMBLY", PCB_MATS + ["alu_cast"], [
-        pcb((0.0, 1.205, 0.492), (0.20, 0.085, 0.0016), Z, X, 45, 61),
-        box((0.0, 1.205, 0.486), (0.21, 0.095, 0.004), 0.001, 5),
+        # centrado en la caja principal de la cabecera (y 1,145…1,235, z 0,455…0,5015)
+        pcb((0.0, 1.19, 0.490), (0.20, 0.075, 0.0016), Z, X, 45, 61),
+        box((0.0, 1.19, 0.485), (0.21, 0.080, 0.004), 0.001, 5),
     ], "Controlador del sistema de gestión de la batería (BMS) dentro de la cabecera de alta tensión",
         parent="BATTERY_PACK", edir=(0, 0.3, 1), dist=0.70, stage=6, group="Batería", fid="A", note=NOTE))
     # junta perimetral de la tapa (cordón de elastómero sobre la brida)
@@ -76,12 +77,13 @@ def battery(M):
               parent="BATTERY_PACK", edir=(0, 0, 1), dist=1.05, stage=6, group="Batería", fid="A", note=NOTE))
     A(V4.part(M, "BAT_Coolant_Manifolds", "BATTERY_ASSEMBLY", ["alu_machined", "rubber_seal", "steel_bare"], [
         tube([(-0.73, 1.085, 0.338), (0.0, 1.085, 0.338), (0.73, 1.085, 0.338)], 0.009, 14, 1, 0),
-        tube([(-0.73, 1.118, 0.360), (0.0, 1.118, 0.360), (0.73, 1.118, 0.360)], 0.009, 14, 1, 0),
+        # el de salida, por debajo de las placas BMB (z >= 0,3625)
+        tube([(-0.73, 1.118, 0.345), (0.0, 1.118, 0.345), (0.73, 1.118, 0.345)], 0.009, 14, 1, 0),
         [cyl((bx + dx, 1.075, 0.338), (bx + dx, 1.075, 0.326), 0.006, seg=10, m=0) for bx in BLOCK_X
          for dx in (-0.12, 0.12)],
-        [cyl((x, 1.118, 0.360), (x, 1.27, 0.360), 0.010, seg=14, m=0) for x in (-0.32, 0.32)],
-        [ring((x, 1.255, 0.360), Y, 0.010, 0.016, 0.010, 16, 1) for x in (-0.32, 0.32)],
-        [V4.hose_clamp((x, 1.262, 0.360), Y, 0.0165, 0.006, 2) for x in (-0.32, 0.32)],
+        [cyl((x, 1.118, 0.345), (x, 1.27, 0.345), 0.010, seg=14, m=0) for x in (-0.32, 0.32)],
+        [ring((x, 1.255, 0.345), Y, 0.010, 0.016, 0.010, 16, 1) for x in (-0.32, 0.32)],
+        [V4.hose_clamp((x, 1.262, 0.345), Y, 0.0165, 0.006, 2) for x in (-0.32, 0.32)],
     ], "Colectores de refrigerante de los serpentines (entrada y salida, conexiones al frontal de la bandeja)",
         parent="BATTERY_PACK", edir=(0, 1, 0.3), dist=0.60, stage=6, group="Batería", fid="A", note=NOTE))
     return out
@@ -187,8 +189,9 @@ def thermal(M):
     ] + [CH._small_motor((sx * 0.225, 2.315, 0.565), Y, 0.040, 0.035, 2, 3, 2, 9) for sx in (-1, 1)],
         "Hélices de 7 palas, cubos y motores sin escobillas de los dos ventiladores del módulo de refrigeración",
         parent="THERMAL_FRONT", edir=(0, -1, 0.3), dist=0.30, stage=6, group="Refrigeración", fid="A", note=NOTE))
-    # Compresor de A/C eléctrico de espiral (eje X)
-    c = Vector((-0.225, 1.82, 0.795))
+    # Compresor de A/C eléctrico de espiral (eje X), coaxial con la carcasa de build_mechanics (cilindro r 68 mm en
+    # y 1,82, z 0,78; caja del inversor x -0,23…-0,11, z 0,82…0,88)
+    c = Vector((-0.225, 1.82, 0.78))
     scrolls = []
     for k, ph in ((0, 0.0), (1, math.pi)):
         xs = -0.165 - 0.018 * k
@@ -206,7 +209,8 @@ def thermal(M):
                                                              "gear_steel"] + PCB_MATS, scrolls + [
         CH._small_motor((-0.27, c.y, c.z), X, 0.062, 0.10, 1, 2, 3, 12),
         cyl((-0.33, c.y, c.z), (-0.15, c.y, c.z), 0.008, seg=12, m=3),
-        pcb((-0.245, c.y, 0.875), (0.18, 0.10, 0.0016), Z, X, 40, 93, 4, 5, 6, 7, 8),
+        # entre la boca vertical de x -0,20 (r 12 mm) y la pared de la caja del inversor (x -0,11)
+        pcb((-0.15, c.y, 0.857), (0.07, 0.08, 0.0016), Z, X, 30, 93, 4, 5, 6, 7, 8),
     ], "Interior del compresor eléctrico de A/C: espirales fija y orbitante, motor y placa del inversor",
         parent="THERMAL_FRONT", edir=(-0.6, 0, 1), dist=0.40, stage=6, group="Refrigeración", fid="A", note=NOTE))
     A(V4.part(M, "THM_Coolant_Pump_Internals", "UNDERBODY", ["plastic_black", "elec_steel", "copper_enamel",

@@ -147,9 +147,9 @@ def sills_and_floor(M):
     for s, sd in ((1, "R"), (-1, "L")):
         side = "derecho" if s > 0 else "izquierdo"
         mb = L.MeshBuilder()
-        # termina en y = 1,15, detrás de la aleta del paso de rueda delantero
-        P.rbox(mb, (s * 0.870, 0.065, 0.345), (0.13, 2.17, 0.11), 0.010, 1, None, 0)
-        P.rbox(mb, (s * 0.870, 0.065, 0.404), (0.15, 2.17, 0.010), 0.002, 1, None, 0)      # pestaña superior
+        # termina en y = 1,14, detrás de la aleta del paso de rueda delantero y del extremo del faldón (y 1,15)
+        P.rbox(mb, (s * 0.870, 0.06, 0.345), (0.13, 2.16, 0.11), 0.010, 1, None, 0)
+        P.rbox(mb, (s * 0.870, 0.06, 0.404), (0.15, 2.16, 0.010), 0.002, 1, None, 0)      # pestaña superior
         objs.append(P.make(mb, f"BODY_Sill_{sd}", SYS, M["ecoat"], None, (s, 0, -0.3), 0.75, 3,
                            "Estructura de la carrocería", f"Umbral {side} de acero de ultra alta resistencia", "R"))
         mb = L.MeshBuilder()
@@ -238,8 +238,9 @@ def bed_structure(M):
         objs.append(P.make(mb, f"BODY_Mast_{sd}", SYS, M["alu_cast"], None, (s, 0, 0.6), 0.65, 3,
                            "Estructura de la carrocería", f"«Mast» fundido {side}: larguero superior de la caja", "R"))
         mb = L.MeshBuilder()
-        P.rbox(mb, (s * 0.855, -2.75, 0.98), (0.04, 0.09, 0.52), 0.006, 1, None, 0)
-        rib_grid(mb, (s * 0.835, -2.79, 0.74), (0, 1, 0), (0, 0, 1), 0.08, 0.48, 1, 6, rib_h=0.010, normal=(-s, 0, 0))
+        # termina bajo el «mast» y bajo el lateral superior de la caja (z 1,19)
+        P.rbox(mb, (s * 0.855, -2.75, 0.955), (0.04, 0.09, 0.47), 0.006, 1, None, 0)
+        rib_grid(mb, (s * 0.835, -2.79, 0.74), (0, 1, 0), (0, 0, 1), 0.08, 0.44, 1, 6, rib_h=0.010, normal=(-s, 0, 0))
         objs.append(P.make(mb, f"BODY_Tailgate_Tower_{sd}", SYS, M["alu_cast"], None, (s, -0.5, 0), 0.55, 3,
                            "Estructura de la carrocería", f"Torre fundida del portón {side} (bisagra y cierre)", "R"))
     # viga de impacto delantera con absorbedores
@@ -277,10 +278,14 @@ def bed_structure(M):
     for sg in (1, -1):
         P.hose(mb, [(sg * 0.64, 1.07, 0.985), (sg * 0.69, 1.10, 0.985), (sg * 0.72, 1.16, 0.985),
                     (sg * 0.74, 1.20, 0.985)], 0.032, 24, 4, 0, True, None)
+    # patas al túnel (x ±0,12), por dentro de los conductos de los pies del climatizador
     for x in (-0.15, 0.15):
-        P.beam(mb, (x, 1.07, 0.955), (x * 1.3, 1.02, 0.52), 0.05, 0.025, r=0.004)
-    # abrazadera de la columna entre el tubo y el actuador de realimentación
-    P.rbox(mb, (-0.39, 1.03, 0.942), (0.14, 0.10, 0.020), 0.004, 1, None, 0)
+        P.beam(mb, (x, 1.07, 0.955), (x * 0.8, 1.02, 0.52), 0.05, 0.025, r=0.004)
+    # abrazadera de la columna entre el tubo y el actuador de realimentación: cuña cuya base sigue la generatriz
+    # superior del actuador (columna inclinada (0, 1, -0,42), r 48 mm; build_interior_detail) y cuya cara superior
+    # se une al tubo
+    P.hull(mb, [V(x, y, z) for x in (-0.46, -0.32) for (y, z) in ((1.032, 0.951), (1.08, 0.928), (1.032, 0.966),
+                                                                     (1.08, 0.966))], 0)
     for x in (-0.745, 0.745):
         P.disc(mb, (x, 1.20, 0.985), (1, 0, 0), 0.06, 0.006, 20, 0, 0.002)
     objs.append(P.make(mb, "BODY_IP_CrossCar_Beam", SYS, M["steel_black"], None, (0, -0.4, 0.6), 0.55, 3,

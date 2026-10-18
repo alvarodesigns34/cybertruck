@@ -49,20 +49,25 @@ def build(M):
     ], "Soportes {lado}s del aplique de la esquina de la caja y del escalón del piloto", mirror=True,
         edir=(0.6, -0.4, 0.2), dist=0.4, stage=6))
     A(V3.part(M, "EXT_Dash_Absorber", "EXTERIOR_PANELS", ["rubber"], [
-        box((0.50, 1.80, 1.12), (0.30, 0.060, 0.060), 0.004),
+        # por detrás de la cara trasera del Super Cowl (y 1,819)
+        # en el hueco entre el refuerzo del puente delantero (y <= 1,77) y el Super Cowl (y >= 1,819)
+        box((0.50, 1.7945, 1.12), (0.30, 0.042, 0.060), 0.004),
     ], "Absorbedor {lado} del salpicadero (Dash Absorber)", mirror=True, edir=(0.3, 0.5, 0.6), dist=0.4, stage=6))
     A(V3.part(M, "CARGO_Tonneau_Corner_Bracket", "CARGO_BED", ["steel_black", "zinc"], [
-        box((0.78, -2.84, 1.335), (0.050, 0.050, 0.040), 0.003), bolt((0.78, -2.84, 1.357), Z, 0.010, 1),
+        # bajo la última lama de la cubierta cerrada
+        box((0.78, -2.84, 1.326), (0.050, 0.050, 0.040), 0.003), bolt((0.78, -2.84, 1.348), Z, 0.010, 1),
     ], "Soporte de esquina {lado} de la cubierta (1 perno a 9 N·m)", mirror=True, edir=(0.5, -0.5, 0.5), dist=0.35,
         stage=6))
     # --- Puertas: placas de espárragos de las bisagras y junta guía de la luna ------------------------------------
     for s, sd in ((1, "R"), (-1, "L")):
         side = "derecho" if s > 0 else "izquierdo"
         A(V3.part(M, f"EXT_Door_Hinge_Stud_Plates_{sd}", "DOORS_AND_HATCHES", ["steel_black", "zinc"], [
-            [box((s * 0.84, y, z), (0.020, 0.14, 0.070), 0.003) for (y, z) in
-             ((1.195, 0.62), (1.195, 1.02), (-0.885, 0.62), (-0.885, 1.02))],
-            [cyl((s * 0.85, y + dy, z), (s * 0.868, y + dy, z), 0.005, seg=8, m=1) for (y, z) in
-             ((1.195, 0.62), (1.195, 1.02), (-0.885, 0.62), (-0.885, 1.02)) for dy in (-0.04, 0.04)],
+            # en el pilar A (puerta delantera) y en el pilar B (puerta trasera, que se articula por delante)
+            # (las traseras, por detrás de la junta del pilar B y del presentador de la puerta delantera, y >= 0,14)
+            [box((s * 0.84, y, z), (0.020, l, 0.070), 0.003) for (y, z, l) in
+             ((1.195, 0.62, 0.14), (1.195, 1.02, 0.14), (0.045, 0.62, 0.07), (0.045, 1.02, 0.07))],
+            [cyl((s * 0.85, y + dy, z), (s * 0.868, y + dy, z), 0.005, seg=8, m=1) for (y, z, d) in
+             ((1.195, 0.62, 0.04), (1.195, 1.02, 0.04), (0.045, 0.62, 0.022), (0.045, 1.02, 0.022)) for dy in (-d, d)],
         ], f"Placas de espárragos de las bisagras de puerta, lado {side} (4 por lado)", edir=(s, 0, 0), dist=0.4,
             stage=6))
         A(V3.part(M, f"EXT_Glass_Run_Seal_APillar_{sd}", "DOORS_AND_HATCHES", ["rubber_seal"], [
@@ -81,8 +86,10 @@ def build(M):
         hose([(0.62, 2.43, 0.72), (0.62, 2.42, 0.92), (0.55, 2.20, 0.95), (0.10, 1.84, 1.06), (0.0, 1.90, 1.22)],
              0.0035, 6, 5, 1),
         hose([(0.62, 2.43, 0.69), (0.40, 2.52, 0.685), (0.20, 2.58, 0.68)], 0.0030, 6, 5, 1),
-        hose([(0.61, 2.43, 0.74), (0.60, 2.41, 0.93), (0.58, 2.10, 0.97), (0.30, 1.84, 1.10), (0.22, 1.92, 1.30)],
-             0.0030, 6, 5, 1),
+        # salen de debajo del faldón derecho (z >= 0,98, x >= 0,52) por su borde interior, por debajo del pie del
+        # amortiguador del capó (x 0,50, y 2,02, z 0,96)
+        hose([(0.61, 2.43, 0.74), (0.60, 2.41, 0.93), (0.58, 2.10, 0.96), (0.45, 2.04, 0.965), (0.30, 1.84, 1.10),
+              (0.22, 1.92, 1.30)], 0.0030, 6, 5, 1),
         clip((0.55, 2.20, 0.97), Z, 0.010, 2),
     ], "Bomba del lavaparabrisas y mangueras (Megabeam, limpiaparabrisas y boquilla de la cámara; 2 clips)",
         edir=(0.4, 0.5, 0.4), dist=0.4, stage=6))
@@ -107,8 +114,9 @@ def build(M):
     # --- Tren motriz / térmica / alta tensión -----------------------------------------------------------------
     A(V3.part(M, "THM_Pack_Pressurization_Line", "UNDERBODY", ["hose", "valve_brass"], [
         # por detrás del compresor de la suspensión y por debajo de él
-        hose([(-0.30, -2.355, 0.50), (-0.30, -2.37, 0.38), (-0.34, -1.95, 0.36), (-0.30, -1.50, 0.38)], 0.006, 8, 5, 0),
-        [cyl(p, (p[0], p[1], p[2] + 0.02), 0.009, seg=10, m=1) for p in ((-0.30, -2.355, 0.50), (-0.30, -1.50, 0.38))],
+        # a 40 mm del escape del compresor, que baja por x = -0,30
+        hose([(-0.34, -2.405, 0.50), (-0.34, -2.42, 0.38), (-0.36, -1.95, 0.36), (-0.30, -1.50, 0.38)], 0.006, 8, 5, 0),
+        [cyl(p, (p[0], p[1], p[2] + 0.02), 0.009, seg=10, m=1) for p in ((-0.34, -2.405, 0.50), (-0.30, -1.50, 0.38))],
     ], "Línea de presurización del pack (Wade/Scuba; 2 racores VOSS 12 mm a 8 N·m)", edir=(0, -0.3, -0.8),
         dist=0.4, stage=6))
     A(V3.part(M, "HV_ACJB_Harnesses", "BATTERY_ASSEMBLY", ["hv_orange", "connector_grey"], [
@@ -121,7 +129,8 @@ def build(M):
     A(V3.part(M, "THM_Supermanifold_Controller_Sensors", "UNDERBODY", ["plastic_black", "valve_brass", "connector_grey"], [
         box((0.42, 1.82, 1.045), (0.060, 0.040, 0.030), 0.003),
         box((0.455, 1.82, 1.045), (0.012, 0.020, 0.016), 0.002, 2),
-        cyl((0.30, 1.74, 1.02), (0.30, 1.74, 1.05), 0.008, seg=10, m=1), cyl((0.35, 1.74, 1.02), (0.35, 1.74, 1.05), 0.008, seg=10, m=1),
+        # válvulas en el hueco entre el refuerzo del puente delantero (y <= 1,77) y el Super Cowl (y >= 1,819)
+        cyl((0.30, 1.785, 1.02), (0.30, 1.785, 1.05), 0.008, seg=10, m=1), cyl((0.35, 1.785, 1.02), (0.35, 1.785, 1.05), 0.008, seg=10, m=1),
         cyl((0.50, 1.80, 0.86), (0.50, 1.80, 0.94), 0.020, seg=14, m=0),
     ], "Controlador y sensores de presión del Supermanifold, válvulas antirretorno y botella desecante",
         edir=(0.4, 0.2, 1), dist=0.4, stage=6))
@@ -140,6 +149,7 @@ def build(M):
         box((0.22, -0.80, 0.680), (0.040, 0.012, 0.014), 0.002, 1), box((-0.22, -0.80, 0.680), (0.040, 0.012, 0.014), 0.002, 1),
     ], "Correas de liberación de las hebillas del asiento trasero", edir=(0, -0.3, 0.6), dist=0.3, stage=6))
     A(V3.part(M, "INT_Windshield_Shades", "INTERIOR_TRIM", ["headliner"], [
-        box((0.38, -0.15, 1.655), (0.74, 1.30, 0.004), 0.001), box((-0.38, -0.15, 1.655), (0.74, 1.30, 0.004), 0.001),
+        # por detrás de la cabecera delantera inferior (y >= 0,49)
+        box((0.38, -0.16, 1.655), (0.74, 1.28, 0.004), 0.001), box((-0.38, -0.16, 1.655), (0.74, 1.28, 0.004), 0.001),
     ], "Cortinillas del techo de cristal fijo (par)", edir=(0, 0, 1), dist=0.45, stage=2))
     return [o for o in out if o is not None]

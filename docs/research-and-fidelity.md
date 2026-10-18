@@ -522,3 +522,112 @@ La lista completa, pareja por pareja y con su posición, está en `docs/interfer
   - restos de espuma frente al tapizado.
 
 La forma de abordarlas está en `traspaso.md` §14.
+
+> **Actualización (versión 4.2, 18-10-2026):** la lista de §11.6 está resuelta. Ver §12.
+
+## 12. Versión 4.2 (18-10-2026): interferencias de ensamblaje a cero
+
+### 12.1 Resultado
+
+| Comprobación | v4.1 | v4.2 |
+|---|---|---|
+| Parejas que se atraviesan > 3 mm (sin las intencionadas) | 279 (280 con la medida corregida, §12.2) | **0** |
+| Parejas > 10 mm | 53 | **0** |
+| Penetraciones intencionadas reconocidas | 230 | 320 (39 motivos, todos uniones reales) |
+| Cruces por debajo del umbral (informativos) | — | 157 de 1–2 mm y 83 de 2–3 mm |
+| Cotas oficiales | longitud +2,0 mm, altura +2,9, altura libre −0,4, batalla, vía y anchura con espejos exactas | sin cambios |
+| Siluetas (media / máx., mm) | superior 2,9 / 13,3; inferior 13,3 / 121,1; frontal 16,0 / 151,3; trasero 8,7 / 65,1; planta 6,7 / 29,3 | iguales salvo el perfil trasero, que mejora a 7,8 / 65,1 |
+| Vista explosionada | desviación 0 en 1.139 objetos | desviación 0 en 1.139 objetos |
+| Activo web | GLB 12,5 MB, 1.138 componentes | GLB 12,5 MB, 1.138 componentes; `Cybertruck.blend` 16,2 MB |
+
+Se trabajó en diez lotes de reconstrucción completa (unos 5 minutos cada uno, lanzados en un temporizador de Blender):
+280 → 262 → 194 → 161 → 128 → 95 → 70 → 44 → 20 → 2 → 0. Tras cada lote se pasaron el detector, `validate.run()` y
+`build_explode.verify_roundtrip()`; dos lotes empeoraron una validación y se corrigieron antes de seguir (§12.5).
+
+### 12.2 Mejora del detector
+
+En las piezas formadas por varios sólidos solapados (engranaje y casquillo, carcasa y nervios), la paridad de un rayo
+contra la malla entera no indica si un punto está dentro: dos paredes solapadas suman un número par de cortes. La
+profundidad salía inflada (el tren de la reductora trasera daba 15 mm cuando solo se cruzaba su retén con la pared)
+o escondida (las tuberías del A/C en el Supermanifold daban 18,6 mm y eran 31,6). Ahora `interferencias._inside_obj`
+prueba el punto sólido a sólido (`_island_trees`) y la profundidad se mide contra la superficie visible. La línea base
+pasó de 279 a 280 parejas con la medida corregida.
+
+### 12.3 Qué se corrigió (por grupos)
+
+Siempre en el constructor de cada pieza, con un comentario que explica la holgura que se respeta:
+
+- **Interiores de la v4 mal encajados:**
+  - el interior del compresor de A/C estaba centrado 15 mm por encima de su carcasa y su placa medía más que la caja
+    del inversor;
+  - el interior del volante usaba una inclinación de columna (16,7°) distinta de la del buje (22,8°);
+  - el condensador del inversor delantero estaba montado encima de los módulos de potencia;
+  - el BMS no cabía en la cabecera HV;
+  - la bomba de freno arrancaba dentro de la brida del servofreno.
+- **Piezas de la v3 con cotas incompatibles con las de la v2:**
+  - el tope y el asiento del muelle neumático no estaban en el eje del muelle;
+  - las placas de espárragos de las bisagras traseras estaban en el pilar C (las puertas traseras se articulan en el
+    pilar B);
+  - la cubierta inferior de la columna tenía otro eje que la columna;
+  - el panel medio del salpicadero entraba 15 cm en la guantera;
+  - el conector de la canaleta salpicadero–fundición cruzaba la unidad motriz delantera;
+  - el aplique de la vela estaba dentro del «mast».
+- **Duplicados:** los cables de alta tensión de las unidades motrices se modelaban dos veces (`HV_Cables` de la v2 y
+  los arneses `HV_Harness_FDU` / `HV_Harness_RDU_L/R` de la v3, que son los del manual). `HV_Cables` conserva solo el
+  cable del compresor de A/C.
+- **Conducciones retrazadas punto a punto:**
+  - canal bajo el umbral izquierdo: mangueras del tren motriz, línea de aire de la suspensión y haz de aire van en
+    carriles paralelos dentro de la cavidad del faldón, que solo tiene 25 mm de alto entre su piel inferior y el
+    umbral, y giran bajo la bandeja de la batería por delante de la rueda trasera;
+  - mazo troncal de 48 V, mazos de los asientos, mazo puente de las direcciones y mazo del portón;
+  - mangueras del enfriador, tubos del lavaparabrisas y coaxial de la cámara frontal;
+  - líneas de aire alrededor de la unidad trasera.
+- **Formas corregidas:**
+  - el suelo de la caja era un único plano que cerraba los pasos de rueda (el neumático asomaba 3 mm por encima);
+    ahora el paso de rueda es una carcasa abierta por abajo;
+  - la persiana activa se divide en dos mitades con el soporte central de la viga como parteluz;
+  - la tapa de la batería se achaflana junto a las ruedas traseras;
+  - el carenado trasero del faldón deja paso a las conducciones.
+- **Pasada de montaje (`build_montaje.py`):**
+  - alojamientos por caja (`POCKETS`) para piezas huecas modeladas como sólidos (la consola central, sobre su base);
+  - recortes nuevos: buje del volante, espumas de las puertas, deflector del guardabarros y pilar C interior;
+  - compresión de juntas nuevas: espumas de la rejilla, junta de la tapa de la batería, juntas del portón, espuma de
+    cierre de la persiana y cubrejuntas del salpicadero; las piezas blandas se comprimen contra todas sus vecinas;
+  - orden de los solvers: primero todos los recortes con `MANIFOLD` y, solo al final, el exacto para los que fallan.
+    El resultado del exacto puede dejar la malla no «manifold», y entonces `MANIFOLD` ya no recorta nada más (así
+    fallaban 16 de los 43 recortes del anillo de puerta derecho). El registro (`CT_MONTAJE_LOG`) indica ahora si cada
+    recorte se acepta y por qué se rechaza.
+
+### 12.4 Penetraciones intencionadas añadidas
+
+Se declararon en `interferencias.INTENDED` solo las que son uniones reales, siempre con un límite de profundidad:
+
+- dientes en toma, eje prensado en el rotor, talones del neumático en la llanta;
+- casquillos en los ojos de los brazos y en el subchasis;
+- fuelle neumático engastado en el pistón y rótula de la bieleta en la barra estabilizadora;
+- cerradero en la cerradura y en la junta primaria, junta de la puerta en el marco del cristal;
+- escobilla en su brazo, lamas en la cadena de arrastre, anclajes de amarre en su placa;
+- cinta del cinturón trasero por la ranura del guarnecido;
+- racores roscados (bloque de válvulas de aire, HCU), pasamuros (boca del lavaparabrisas, tubo del lavaparabrisas,
+  mazo de la puerta), base del retrovisor en su cubierta;
+- correas del actuador en sus poleas, pistón de la pinza trasera hacia la ranura del disco;
+- juntas y espumas comprimidas: la compresión de montaje mueve vértices, pero en las caras grandes queda un resto de
+  pocos milímetros.
+
+Un caso dudoso, declarado con su motivo: el pie de las hebillas delanteras se hunde hasta 11 mm en el costado del
+cojín. Entre el panel lateral de la consola y el cojín solo quedan 7 mm a esa altura; la espuma real se deforma.
+
+### 12.5 Lecciones
+
+- El signo de las cotas relativas al eje (`y - f·d`, con f = −1 detrás) invierte el sentido de «adelantar»: un cambio
+  que debía alejar el actuador trasero de la unidad motriz lo metió dentro.
+- Mover una pieza arrastra lo que se coloca a partir de su caja. `build_v4_tornilleria` ponía los tornillos de los
+  soportes a partir de la caja conjunta y uno cayó en el intercambiador; ahora va soporte a soporte (`DU_MOUNTS`).
+- Las piezas pequeñas cerca de la carrocería pueden asomar sobre la silueta (un soporte de moldura subió el perfil
+  superior a 26 mm) o bajar de la altura libre (la tornillería de un soporte bajado la dejó en −5 mm). Hay que
+  validar tras cada lote.
+- `ct_v3.hose(..., zmin=...)` fija la altura mínima del centro de la manguera; un `zmin` de 0,282 subía el haz de aire
+  por encima de la bandeja de la batería. Para la altura libre basta 0,262.
+- En `INTENDED`, si las dos expresiones tienen grupos, el detector exige que coincidan: en los patrones que no deben
+  compararse hay que usar grupos sin captura `(?:…)`. Una pareja declarada intencionada deja de recortarse en la pasada
+  de montaje (salvo las piezas blandas, que se comprimen igualmente); por eso no se declaran los anillos de puerta.

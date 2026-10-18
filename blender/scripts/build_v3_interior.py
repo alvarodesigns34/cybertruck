@@ -30,8 +30,9 @@ def build(M):
 
     # --- Salpicadero ---------------------------------------------------------------------------------------------
     A(V3.part(M, "INT_IP_Mid_Panel", D, ["int_plastic", "zinc"], [
-        box((0, 0.975, 0.905), (0.58, 0.030, 0.17), 0.004),
-        line(clip, (-0.22, 0.958, 0.86), (0.22, 0.958, 0.86), 4, axis=(0, -1, 0)),
+        # entre el panel inferior del conductor (x <= -0,24) y la guantera (x >= 0,14)
+        box((-0.05, 0.975, 0.905), (0.372, 0.030, 0.17), 0.004),
+        line(clip, (-0.20, 0.958, 0.86), (0.10, 0.958, 0.86), 4, axis=(0, -1, 0)),
     ], "Panel medio del salpicadero (Mid Panel Assembly)", edir=(0, -1, 0.1), dist=0.45))
     A(V3.part(M, "INT_IP_Center_Shroud_Service_Panel", D, ["int_plastic"], [
         box((0, 0.965, 1.025), (0.30, 0.020, 0.070), 0.003),
@@ -46,7 +47,9 @@ def build(M):
     ], "Cubierta de la zona de pies del conductor (1 perno a 3 N·m, se retira al sacar el pack)", edir=(0, 0, 1),
         dist=0.35, stage=6))
     A(V3.part(M, "INT_IP_Gap_Hiders", D, ["rubber"], [
-        box((0, 0.957, 0.995), (1.30, 0.012, 0.012), 0.002), box((0, 0.957, 0.80), (1.30, 0.012, 0.012), 0.002),
+        # el superior, interrumpido en la columna de dirección (x -0,395 ± 0,075) y hasta la guantera (x 0,14)
+        box((-0.545, 0.957, 0.982), (0.21, 0.012, 0.012), 0.002), box((-0.095, 0.957, 0.982), (0.45, 0.012, 0.012), 0.002),
+        box((0, 0.957, 0.80), (1.30, 0.012, 0.012), 0.002),
     ], "Cubrejuntas del salpicadero (superior e inferior)", edir=(0, -1, 0), dist=0.3, stage=6))
     A(V3.part(M, "INT_Puddle_Lamps", D, ["lamp_housing", "led_white"], [
         box((0.44, 1.00, 0.795), (0.05, 0.010, 0.012), 0.001, 1),
@@ -58,16 +61,19 @@ def build(M):
     for s, sd in ((1, "R"), (-1, "L")):
         side = "derecho" if s > 0 else "izquierdo"
         A(V3.part(M, f"INT_IP_Airwave_Module_{sd}", D, ["int_plastic", "zinc"], [
-            box((s * 0.58, 1.03, 1.05), (0.20, 0.08, 0.05), 0.004),
-            beam((s * 0.62, 1.07, 1.05), (s * 0.62, 1.50, 1.00), 0.06, 0.04, 0.003),
-            line(torx, (s * 0.50, 0.99, 1.05), (s * 0.66, 0.99, 1.05), 3, axis=(0, -1, 0), d=0.005),
+            # por encima del tronco del mazo del salpicadero (z <= 1,043 sobre la viga transversal)
+            box((s * 0.58, 1.03, 1.077), (0.20, 0.08, 0.05), 0.004),
+            beam((s * 0.62, 1.07, 1.077), (s * 0.62, 1.50, 1.02), 0.06, 0.04, 0.003),
+            line(torx, (s * 0.50, 0.99, 1.077), (s * 0.66, 0.99, 1.077), 3, axis=(0, -1, 0), d=0.005),
         ], f"Módulo y conducto del «Airwave» {side}", edir=(0, -0.5, 0.5), dist=0.4))
         A(V3.part(M, f"INT_Demist_Duct_Side_{sd}", D, ["int_plastic"], [
             beam((s * 0.76, 1.50, 1.18), (s * 0.78, 1.75, 1.22), 0.04, 0.035, 0.003),
         ], f"Conducto de desempañado de la ventanilla lateral {side}", edir=(s, 0.3, 0.5), dist=0.35))
         A(V3.part(M, f"INT_Floor_Duct_{sd}", D, ["int_plastic"], [
-            beam((s * 0.68, 1.20, 0.525), (s * 0.68, 0.60, 0.525), 0.07, 0.025, 0.003),
-            beam((s * 0.165, 1.00, 0.525), (s * 0.165, 0.20, 0.525), 0.04, 0.025, 0.003),
+            # sobre el guarnecido central del suelo (z 0,5175); el exterior acaba antes del reposapiés (y 1,11) y el
+            # interior va junto al panel lateral de la consola (|x| <= 0,146)
+            beam((s * 0.68, 0.98, 0.530), (s * 0.68, 0.60, 0.530), 0.07, 0.025, 0.003),
+            beam((s * 0.168, 1.00, 0.530), (s * 0.168, 0.20, 0.530), 0.04, 0.025, 0.003),
         ], f"Conductos de suelo {side}s (exterior e interior)", edir=(s, 0, -0.6), dist=0.35))
         A(V3.part(M, f"INT_Tweeter_{sd}", D, ["speaker_mesh", "plastic_black"], [
             cyl((s * 0.72, 1.52, 1.255), (s * 0.72, 1.52, 1.268), 0.022, seg=16, m=0),
@@ -77,8 +83,9 @@ def build(M):
             disc((s * 0.40, 0.62, 1.69), Z, 0.009, 0.004, 12, 0),
         ], f"Micrófono de telefonía {side}", edir=(0, 0, -1), dist=0.3, stage=6))
     A(V3.part(M, "INT_Demist_Ducts_Center", D, ["int_plastic"], [
-        beam((-0.35, 1.80, 1.215), (-0.15, 1.80, 1.225), 0.14, 0.03, 0.003),
-        beam((0.35, 1.80, 1.215), (0.15, 1.80, 1.225), 0.14, 0.03, 0.003),
+        # por detrás del Super Cowl (y < 1,819), bajo la boca del tablero
+        beam((-0.35, 1.745, 1.215), (-0.15, 1.745, 1.225), 0.14, 0.03, 0.003),
+        beam((0.35, 1.745, 1.215), (0.15, 1.745, 1.225), 0.14, 0.03, 0.003),
     ], "Conductos de desempañado del parabrisas (conductor y acompañante)", edir=(0, 0.4, 1), dist=0.35))
     A(V3.part(M, "INT_Super_Horn", "UNDERBODY", ["plastic_black", "zinc"], [
         cyl((0.35, 2.26, 0.56), (0.35, 2.26, 0.62), 0.040, seg=18, m=0),
@@ -108,9 +115,11 @@ def build(M):
 
     # --- Consola central -----------------------------------------------------------------------------------------
     A(V3.part(M, "INT_Console_Riser_Rails", C, ["steel_black", "int_plastic", "zinc"], [
-        box((0, 0.40, 0.505), (0.24, 0.90, 0.020), 0.003, 1),
-        beam((-0.10, -0.10, 0.52), (-0.10, 0.90, 0.52), 0.030, 0.020, 0.002), beam((0.10, -0.10, 0.52), (0.10, 0.90, 0.52), 0.030, 0.020, 0.002),
-        line(bolt, (-0.10, -0.05, 0.532), (0.10, 0.85, 0.532), 6, axis=Z, d=0.008, m=2),
+        # dentro del hueco inferior de la consola (build_montaje.POCKETS: x ±0,108, y -0,105…0,905, hasta z 0,562),
+        # apoyada sobre el guarnecido central del suelo (z 0,52)
+        box((0, 0.40, 0.527), (0.21, 0.90, 0.012), 0.003, 1),
+        beam((-0.085, -0.095, 0.541), (-0.085, 0.895, 0.541), 0.030, 0.016, 0.002), beam((0.085, -0.095, 0.541), (0.085, 0.895, 0.541), 0.030, 0.016, 0.002),
+        line(bolt, (-0.085, -0.05, 0.549), (0.085, 0.85, 0.549), 6, axis=Z, d=0.008, m=2),
     ], "Base (riser) y raíles del suelo central de la consola (2 pernos traseros + 4 delanteros a 5 N·m)",
         edir=(0, 0, -1), dist=0.45, stage=2))
     A(V3.part(M, "INT_Console_USB_Controller_Hub", C, ["plastic_black", "connector_grey"], [
@@ -118,7 +127,8 @@ def build(M):
         [box((x, 0.808, 0.67), (0.014, 0.006, 0.008), 0.001, 1) for x in (-0.03, 0.0, 0.03)],
     ], "Controlador y concentrador USB de la consola (USB-C de 65 W)", edir=(0, 0.3, 0.5), dist=0.35, stage=6))
     A(V3.part(M, "INT_Console_Harness_Lamp", C, ["harness", "led_white", "connector_grey"], [
-        hose([(0.0, 0.85, 0.62), (0.0, 0.40, 0.57), (0.0, -0.05, 0.62)], 0.006, 8, 5, 0),
+        # por encima del módulo de airbags (RCM, z <= 0,575)
+        hose([(0.0, 0.85, 0.62), (0.0, 0.40, 0.60), (0.0, -0.05, 0.62)], 0.006, 8, 5, 0),
         box((0.0, 0.02, 0.775), (0.040, 0.020, 0.008), 0.001, 1),
     ], "Mazo de la consola y luz de cortesía de la consola", edir=(0, 0, -1), dist=0.35, stage=6))
     A(V3.part(M, "INT_Cabin_Outlets_120V", C, ["plastic_black", "connector_grey"], [
@@ -192,9 +202,13 @@ def build(M):
         box((0.40, 0.50, 0.668), (0.34, 0.34, 0.004), 0.001), box((0.52, 0.36, 0.636), (0.040, 0.030, 0.016), 0.002, 1),
     ], "Sensor de clasificación de ocupación del acompañante (umbrales ≈20 lb y 51–103 lb)", edir=(0.3, 0, 1),
         dist=0.3, stage=6, group="Seguridad"))
+    # dentro del cojín central del buje (ejes de la columna inclinada (0, 1, -0,42)), delante del muelle de reloj
+    wc, wd = Vector((-0.395, 0.735, 1.02)), Vector((0, 1, -0.42)).normalized()
+    wv = Vector((0, -wd.z, wd.y))
     A(V3.part(M, "INT_Airbag_Driver", CT, ["int_plastic", "zinc", "stitch"], [
-        box((-0.395, 0.738, 1.01), (0.13, 0.030, 0.10), 0.008),
-        [clip((-0.395 + dx, 0.754, 1.01), Y, 0.010, 1) for dx in (-0.05, 0.05)],
+        hull([tuple(wc + wd * t + wv * b + Vector((a, 0, 0))) for a in (-0.055, 0.055) for b in (-0.036, 0.036)
+              for t in (0.007, 0.028)]),
+        [clip(tuple(wc + wd * 0.030 + Vector((dx, 0, 0))), tuple(wd), 0.008, 1) for dx in (-0.045, 0.045)],
     ], "Airbag del conductor en el centro del volante (2 clips de resorte + 1 conector)", edir=(0, -1, 0.3),
         dist=0.4, group="Seguridad"))
 
@@ -266,9 +280,13 @@ def build(M):
     ], "Molduras del suelo central, de la pared trasera inferior y lateral de los pedales", edir=(0, 0, -1),
         dist=0.3, stage=2))
     # Carcasas de la columna de dirección y embellecedores de conductos
+    # coaxial con la columna (eje (0, 1, -0,42) desde el centro del volante) y por fuera de su cubierta principal
+    # (r <= 60 mm); el módulo de control de la columna (SCCM) queda dentro
+    wc, wd = Vector((-0.395, 0.735, 1.02)), Vector((0, 1, -0.42)).normalized()
+    wv = Vector((0, -wd.z, wd.y))
     A(V3.part(M, "INT_Steering_Column_Shroud_Lower", CT, ["int_plastic", "zinc"], [
-        cyl((-0.39, 0.84, 0.92), (-0.39, 0.93, 0.94), 0.050, 0.044, 20, 0),
-        clip((-0.39, 0.85, 0.874), (0, 0, -1), 0.010, 1),
+        cyl(tuple(wc + wd * 0.11), tuple(wc + wd * 0.215), 0.064, 0.066, 24, 0, caps=False),
+        clip(tuple(wc + wd * 0.12 - wv * 0.064), tuple(-wv), 0.010, 1),
     ], "Carcasa inferior de la columna (Lower Column Shroud) y su clip", edir=(0, -0.5, -0.5), dist=0.35,
         stage=2))
     A(V3.part(M, "INT_Duct_Bezel_Carpet_Rear", TR, ["carpet", "plastic_black"], [

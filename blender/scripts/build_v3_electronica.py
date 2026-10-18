@@ -27,9 +27,10 @@ def build(M):
     # --- Controladores y 48 V -------------------------------------------------------------------------------------
     A(V3.part(M, "LV_MV_Locking_Covers", B, ["plastic_black", "zinc", "connector_blue"], [
         box((-0.62, 1.30, 0.895), (0.10, 0.060, 0.016), 0.003), box((0.62, 1.30, 0.895), (0.10, 0.060, 0.016), 0.003),
-        box((0.0, -1.025, 1.035), (0.10, 0.060, 0.016), 0.003),
-        [bolt((x, y, z), Z, 0.008, 1) for (x, y, z) in ((-0.65, 1.30, 0.905), (0.65, 1.30, 0.905), (0.03, -1.025, 1.045))],
-        [box((x, y, z), (0.020, 0.008, 0.012), 0.001, 2) for (x, y, z) in ((-0.58, 1.34, 0.88), (0.58, 1.34, 0.88), (-0.04, -1.06, 1.03))],
+        # la trasera, sobre el controlador trasero (cara superior z 0,83)
+        box((0.0, -0.994, 0.842), (0.10, 0.060, 0.016), 0.003),
+        [bolt((x, y, z), Z, 0.008, 1) for (x, y, z) in ((-0.65, 1.30, 0.905), (0.65, 1.30, 0.905), (0.03, -0.994, 0.852))],
+        [box((x, y, z), (0.020, 0.008, 0.012), 0.001, 2) for (x, y, z) in ((-0.58, 1.34, 0.88), (0.58, 1.34, 0.88), (-0.04, -1.036, 0.82))],
     ], "Cubiertas cautivas de bloqueo MV de los controladores de carrocería (8 mm a 6 N·m) y conectores azules de 48 V",
         edir=(0, 0, 1), dist=0.35, stage=6))
     A(V3.part(M, "LV_Trailer_ECU", B, ["plastic_black", "zinc", "connector_grey"], [
@@ -54,9 +55,18 @@ def build(M):
     ], "Clips y cintas de abrasión del mazo troncal de 48 V (6 traseros + 3 delanteros; PN 1879451-99-A, 1908543-99-A)",
         edir=(0, 0, -1), dist=0.3, stage=6))
     for nm, es, pts, r, m in (
-            ("Fascia", "de la fascia delantera", [(0.30, 2.60, 0.62), (0.48, 2.52, 0.70), (0.49, 2.30, 0.72), (0.50, 1.95, 0.95)], 0.007, "harness"),
-            ("Seat_L", "del asiento izquierdo", [(-0.40, 0.50, 0.54), (-0.30, 0.90, 0.52), (-0.58, 1.26, 0.74)], 0.006, "harness"),
-            ("Seat_R", "del asiento derecho", [(0.40, 0.50, 0.54), (0.28, 0.90, 0.525), (0.30, 1.10, 0.55), (0.58, 1.25, 0.68), (0.58, 1.318, 0.72)], 0.006, "harness"),
+            # por encima de las espumas de la rejilla (z <= 0,639) y por fuera de la botella de refrigerante
+            ("Fascia", "de la fascia delantera", [(0.30, 2.56, 0.665), (0.48, 2.52, 0.70), (0.49, 2.30, 0.72),
+                                                  (0.60, 2.14, 0.82), (0.52, 1.95, 0.95)], 0.007, "harness"),
+            # por encima del travesaño delantero de los carriles (y 0,75…0,79, z <= 0,54), por delante de la
+            # alfombrilla (y < 0,82), por su borde interior (|x| 0,21) y por detrás
+            # del panel inferior del salpicadero hasta el controlador de carrocería
+            ("Seat_L", "del asiento izquierdo", [(-0.40, 0.50, 0.54), (-0.30, 0.60, 0.55), (-0.30, 0.77, 0.549), (-0.30, 0.81, 0.53), (-0.21, 0.812, 0.524),
+                                                 (-0.21, 1.04, 0.526), (-0.24, 1.12, 0.56), (-0.40, 1.20, 0.66),
+                                                 (-0.58, 1.26, 0.74)], 0.006, "harness"),
+            ("Seat_R", "del asiento derecho", [(0.40, 0.50, 0.54), (0.30, 0.60, 0.55), (0.30, 0.77, 0.549), (0.30, 0.81, 0.53), (0.21, 0.812, 0.524),
+                                               (0.21, 1.04, 0.526), (0.24, 1.12, 0.56), (0.58, 1.25, 0.68),
+                                               (0.58, 1.318, 0.72)], 0.006, "harness"),
             ("Rear_Subframe", "del subchasis trasero (Tri Motor)", [(-0.38, -1.50, 0.40), (-0.15, -1.60, 0.33), (0.15, -1.60, 0.33), (0.38, -1.55, 0.40)], 0.008, "harness"),
             ("Cowl_Speaker", "del altavoz del cowl", [(-0.50, 1.90, 1.22), (0.0, 1.88, 1.20), (0.50, 1.90, 1.22)], 0.004, "harness"),
             ("Ancillary", "de la bahía auxiliar", [(-0.37, -1.072, 0.64), (0.0, -1.065, 0.72), (0.40, -1.060, 0.66)], 0.007, "harness"),
@@ -67,7 +77,10 @@ def build(M):
             note="Recorrido reconstruido: los manuales no publican longitudes ni trazado"))
     A(V3.part(M, "LV_Ferrite_Core_Coax", B, ["plastic_black", "hose", "connector_blue"], [
         cyl((0.0, -1.36, 0.72), (0.0, -1.30, 0.72), 0.018, seg=14, m=0),
-        hose([(0.0, 2.60, 0.58), (0.10, 2.10, 0.80), (0.30, 1.50, 1.00)], 0.0025, 6, 5, 1),
+        # por el parteluz de la persiana activa, por encima del módulo de ventiladores (z 0,715) y de la Octovalve
+        # (bajo el suelo del frunk, z < 0,79, y entre la botella del Supermanifold y la Octovalve, x 0,215…0,25)
+        hose([(0.0, 2.60, 0.58), (0.0, 2.55, 0.68), (0.0, 2.40, 0.745), (0.10, 2.10, 0.76), (0.232, 1.86, 0.93),
+              (0.30, 1.50, 1.00)], 0.0025, 6, 5, 1),
         hose([(0.0, 0.62, 1.70), (0.20, 0.90, 1.30), (0.40, 1.30, 1.00)], 0.0025, 6, 5, 1),
     ], "Núcleo de ferrita del clúster de dispositivos y cables coaxiales (cámara de fascia, antena GPS)",
         edir=(0, 0, 1), dist=0.3, stage=6))
@@ -92,7 +105,8 @@ def build(M):
     ], "Visera antideslumbrante del parabrisas (2 clips) y tira separadora de goma", edir=(0, 0, -1), dist=0.3,
         stage=6))
     A(V3.part(M, "ELE_Antennas", FA, ["plastic_black", "zinc"], [
-        box((0.0, 0.625, 1.680), (0.050, 0.030, 0.012), 0.002), torx((0.0, 0.625, 1.687), Z, 0.004, 1),
+        # GPS dentro de la visera antideslumbrante, al lado del retrovisor y del sensor del parabrisas
+        box((0.135, 0.635, 1.690), (0.050, 0.030, 0.010), 0.002), torx((0.135, 0.635, 1.696), Z, 0.004, 1),
         box((0.55, 0.60, 1.695), (0.040, 0.012, 0.004), 0.001), box((0.30, -0.82, 1.645), (0.060, 0.040, 0.012), 0.003),
         box((-0.30, -0.82, 1.645), (0.060, 0.040, 0.012), 0.003),
     ], "Antenas: GPS (en el glare shield, 1 tornillo T10 a 0,8 N·m), AM/FM/HD, Wi-Fi y radio por satélite",

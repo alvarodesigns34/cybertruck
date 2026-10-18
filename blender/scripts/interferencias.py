@@ -40,8 +40,50 @@ def _data(objs):
         full = BVHTree.FromPolygons(vs, tris, epsilon=0.0)
         vis = _visible(vs, tris)
         surf = full if len(vis) == len(tris) else BVHTree.FromPolygons(vs, [tris[i] for i in vis], epsilon=0.0)
-        out[o.name] = (surf, vs, tris, mn, mx, full, [tris[i] for i in vis])
+        out[o.name] = (surf, vs, tris, mn, mx, full, [tris[i] for i in vis], _island_trees(vs, tris))
     return out
+
+
+def _island_trees(vs, tris, max_islands=800):
+    """Árboles BVH de cada sólido (parte suelta) de un objeto. Con varios sólidos solapados la paridad de un rayo
+    contra la malla entera no indica si un punto está dentro (dos paredes solapadas suman un corte par), así que la
+    prueba se hace sólido a sólido. Devuelve None si el objeto tiene una sola parte o demasiadas."""
+    parent = list(range(len(vs)))
+
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+    for t in tris:
+        ra = find(t[0])
+        for v in t[1:]:
+            rb = find(v)
+            if rb != ra:
+                parent[rb] = ra
+    isl = {}
+    for t in tris:
+        isl.setdefault(find(t[0]), []).append(t)
+    if len(isl) < 2 or len(isl) > max_islands:
+        return None
+    out = []
+    for sub in isl.values():
+        pts = [vs[j] for t in sub for j in t]
+        mn = Vector((min(p.x for p in pts), min(p.y for p in pts), min(p.z for p in pts)))
+        mx = Vector((max(p.x for p in pts), max(p.y for p in pts), max(p.z for p in pts)))
+        out.append((BVHTree.FromPolygons(vs, sub, epsilon=0.0), mn, mx))
+    return out
+
+
+def _inside_obj(other, p):
+    """¿Está `p` dentro del objeto cerrado `other`? (en alguno de sus sólidos, si tiene varios)."""
+    isl = other[7]
+    if isl is None:
+        return _inside(other[5], p)
+    for tree, mn, mx in isl:
+        if mn.x <= p.x <= mx.x and mn.y <= p.y <= mx.y and mn.z <= p.z <= mx.z and _inside(tree, p):
+            return True
+    return False
 
 
 # Penetraciones intencionadas: en el modelo las piezas son sólidos sin taladros, así que un tornillo, un eje o una
@@ -67,6 +109,56 @@ INTENDED = [
     (r"DU_R_Rotor_Shaft_([LR])", r"DU_R_Gear_Train_([LR])", None, "eje del rotor estriado en el piñón de entrada"),
     (r"^SUS_(\w\w)_Hub$", r"^(?:BRK|WHL)_(\w\w)_(?:Rotor|Rim)$", None,
      "espárragos y centrador del buje por los taladros de la campana del disco y de la llanta"),
+    # (versión 4.2)
+    (r"^DU_F_(?:Input_Gear|Intermediate_Shaft)$", r"^DU_F_(?:Intermediate_Shaft|Differential)$", 12.0,
+     "dientes en toma entre piñón y rueda (dentado simplificado, sin fase entre los dientes)"),
+    (r"_Rotor_Shaft(_[LR])?$", r"^DU_\w_Rotor(_[LR])?$", None,
+     "eje prensado en el taladro del paquete de chapas del rotor"),
+    (r"^WHL_(\w\w)_Tire$", r"^WHL_(\w\w)_Rim$", 5.0, "talones del neumático asentados en los asientos de la llanta"),
+    (r"^SUS_(\w\w)_ArmBushings$", r"^SUS_(\w\w)_(?:Lower|Upper)Arm$", 10.0,
+     "casquillos prensados en los ojos de los brazos"),
+    (r"^SUS_[FR](\w)_ArmBushings$", r"^CHS_Subframe_[FR]$", 4.0,
+     "casquillos de los brazos apretados entre las orejetas del subchasis"),
+    (r"^SUS_(\w\w)_AirBag$", r"^SUS_(\w\w)_Piston$", 7.0, "extremo del fuelle neumático engastado en el pistón de rodadura"),
+    (r"^SUS_(\w)\w_StabLink$", r"^SUS_(\w)_StabilizerBar$", 8.0,
+     "rótula inferior de la bieleta atornillada en el ojo de la barra estabilizadora"),
+    (r"^EXT_Door_(\w\w)_Latch$", r"^EXT_Door_(\w\w)_Striker$", 6.0,
+     "el cerradero entra en la horquilla de la cerradura (puerta cerrada)"),
+    (r"^EXT_Door_Primary_Seals_[LR]$", r"^EXT_Door_\w\w_Striker$", 6.0,
+     "el cerradero atraviesa la junta primaria por su escotadura"),
+    (r"^EXT_Door_Primary_Seals_[LR]$", r"^LV_Harness_Door_\w\w$", 5.0,
+     "mazo de la puerta por el fuelle pasamuros junto a la junta primaria"),
+    (r"^EXT_Grille_Foam_Seals$", r"^(?:EXT_Front_Bumper|BODY_Front_Bumper_Beam)$", 8.0,
+     "espuma de la rejilla comprimida entre la fascia y la viga del paragolpes"),
+    (r"^BRK_(R\w)_Caliper_Internals$", r"^BRK_(R\w)_Caliper$", 8.0,
+     "pistón y pasadores de la pinza trasera asomando a la ranura del disco, donde empujan las pastillas"),
+    (r"^EXT_Door_(\w\w)_Seals$", r"^EXT_Door_(\w\w)_GlassFrame$", 4.0,
+     "junta de la puerta abrazada a la pestaña del marco del cristal"),
+    (r"^EXT_Wiper_Blade$", r"^EXT_Wiper_Arm$", 6.0, "escobilla enganchada en el gancho del brazo"),
+    (r"^CARGO_Tonneau_Slat_\d+$", r"^CARGO_Tonneau_Chain_[LR]$", 5.0,
+     "lamas enganchadas a los eslabones de la cadena de arrastre"),
+    (r"^CARGO_Tiedowns$", r"^BODY_TieDown_Nut_Plate_[LR]$|^CARGO_Bed_Tub$", 6.0,
+     "anclajes de amarre encastrados en el suelo de la caja y atornillados a sus placas de tuercas"),
+    (r"^INT_Seatbelt_R([LR])$", r"^INT_Trim_CPillar_Lower_([LR])$", 15.0,
+     "cinta del cinturón trasero por la ranura del guarnecido del pilar C"),
+    (r"^CHS_Air_Line_Bundle_", r"^CHS_AirSuspension_ValveBlock$", 10.0,
+     "racores de las líneas de aire roscados en la cara del bloque de válvulas"),
+    (r"^BRK_Pipes$", r"^BRK_Hydraulic_Control_Unit$", 8.0, "tubos de freno roscados en las bocas de la HCU"),
+    (r"^INT_Seatbelt_Buckles$", r"^INT_SeatF_[LR]_Cushion$", 12.0,
+     "pie de la hebilla delantera hundido en el costado blando del cojín, entre este y la consola"),
+    (r"^INT_Rearview_Mirror$", r"^INT_Rearview_Beauty_Cover$", 8.0,
+     "brazo y base del retrovisor por la abertura de su cubierta decorativa"),
+    (r"^EXT_Washer_Tank$", r"^EXT_Underhood_Apron_R$", 8.0,
+     "boca de llenado del depósito del lavaparabrisas por su abertura del faldón bajo el capó"),
+    (r"^EXT_Washer_Hose$", r"^EXT_Frunk_Underhood_Apron_Rear$", 8.0,
+     "tubo del lavaparabrisas por el pasamuros del faldón trasero bajo el capó"),
+    (r"^STR_[FR]_Drive_Belts$", r"^STR_[FR]_(Motors_Internals|Rack_BallNut)$", 6.0,
+     "correas abrazadas a las poleas de los motores y de la tuerca de bolas del actuador"),
+    (r"^EXT_(?:Door_Primary_Seals_[LR]|Door_\w\w_Seals|Tailgate_Seal_Side_[LR]|Grille_Foam_Seals)$",
+     r"^(?:EXT_Door_\w\w_Hinges|EXT_Tailgate_Hinges|EXT_Mirror_[LR]_Arm|BODY_Header_Front_Lower|DOOR_\w\w_InnerStructure|"
+     r"BODY_CPillar_Inner_[LR])$", 6.0,
+     "junta de goma o espuma comprimida contra la pieza que la aprieta (la compresión de montaje mueve sus vértices "
+     "hasta la superficie de la vecina; queda el resto de las caras grandes)"),
 ]
 
 
@@ -119,9 +211,9 @@ def run(min_ext_mm=0.0, names=None, ignore_pairs=None):
     # barrido por X para no comparar todas las parejas
     order = sorted(keys, key=lambda k: D[k][3].x)
     for i, a in enumerate(order):
-        ta, va, _fa, mna, mxa, _ta, fa = D[a]
+        ta, va, _fa, mna, mxa, _ta, fa, _ia = D[a]
         for b in order[i + 1:]:
-            tb, vb, _fb, mnb, mxb, _tb, fb = D[b]
+            tb, vb, _fb, mnb, mxb, _tb, fb, _ib = D[b]
             if mnb.x > mxa.x:
                 break
             if mnb.y > mxa.y or mxb.y < mna.y or mnb.z > mxa.z or mxb.z < mna.z:
@@ -174,8 +266,9 @@ def _inside(tree, p):
 
 
 def _depth(vs, other, mn, mx, cap=500):
-    """Profundidad máxima a la que vértices de un objeto quedan dentro de otro objeto cerrado."""
-    tree = other[5]
+    """Profundidad máxima a la que vértices de un objeto quedan dentro de otro objeto cerrado: distancia a la
+    superficie visible del otro de los vértices que están dentro de alguno de sus sólidos."""
+    tree = other[0]
     cand = [p for p in vs if mn.x <= p.x <= mx.x and mn.y <= p.y <= mx.y and mn.z <= p.z <= mx.z]
     if len(cand) > cap:
         st = len(cand) // cap + 1
@@ -185,7 +278,7 @@ def _depth(vs, other, mn, mx, cap=500):
         loc, nor, _, d = tree.find_nearest(p)
         if loc is None or d <= best or d < 0.0005:
             continue
-        if _inside(tree, p):
+        if _inside_obj(other, p):
             best = d
     return best
 

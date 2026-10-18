@@ -66,11 +66,20 @@ def build(M):
             nut((s * 0.50, cy - f * 0.04, 0.765), Z, 0.008, 1, 0.5),
         ], f"Sensor de altura {es} con varilla articulada al brazo superior (1 tuerca 15 mm a 50 N·m)",
             edir=(s, 0, 0.3), dist=0.4))
-        # Tope de rebote y asiento del muelle neumático
+        # Tope de compresión y asiento del muelle neumático, en el eje del módulo (build_mechanics.air_spring): el
+        # tope cuelga de la copela dentro del fuelle, por encima del vástago; el asiento abraza el cuerpo del
+        # amortiguador bajo el pistón de rodadura
+        import build_mechanics as BMx
+        hp = BMx.hardpoints(ax, s)
+        sb, stp = hp["spr_bot"], hp["spr_top"]
+        sd_ = (stp - sb).normalized()
+        sl = (stp - sb).length
+        a0 = sl * (0.48 if f > 0 else 0.44)
         A(V3.part(M, f"SUS_{tag}_BumpStop_SpringSeat", sus, ["rubber", "steel_black"], [
-            cyl((s * 0.61, cy + f * 0.02, 0.56), (s * 0.61, cy + f * 0.02, 0.64), 0.032, 0.022, 16, 0),
-            ring((s * 0.61, cy, 0.385), Z, 0.040, 0.062, 0.016, 24, 1),
-        ], f"Tope de rebote y asiento del muelle neumático {es}", edir=(s, 0, 0.2), dist=0.35))
+            cyl(tuple(sb + sd_ * sl * 0.93), tuple(sb + sd_ * sl * 0.82), 0.030, 0.022, 16, 0),
+            ring(tuple(sb + sd_ * (a0 - 0.058)), tuple(sd_), 0.0305, 0.050, 0.008, 24, 1),
+        ], f"Tope de compresión (dentro del fuelle, bajo la copela) y asiento inferior del muelle neumático {es}",
+            edir=(s, 0, 0.2), dist=0.35))
         # Rótulas (superior e inferior) del portamanguetas
         A(V3.part(M, f"SUS_{tag}_BallJoints", sus, ["steel_black", "bushing"], [
             ball((s * 0.80, cy, 0.665), (0, 0, 1), 0.022, 0, 1),
@@ -133,8 +142,9 @@ def build(M):
             # el motor EPB forma parte de la malla de la pinza trasera; aquí, su conector y su mazo, por debajo
             # del brazo superior (z >= 0,618) y por dentro de él (x < 0,439) hasta el bastidor
             A(V3.part(M, f"BRK_{tag}_EPB_Motor", whl, ["steel_black", "plastic_black"], [
-                box((s * 0.725, cy + 0.14, 0.57), (0.030, 0.030, 0.020), 0.003, 1),
-                hose([(s * 0.725, cy + 0.14, 0.57), (s * 0.60, cy + 0.16, 0.585), (s * 0.45, cy + 0.15, 0.60),
+                # por delante del purgador de la pinza (y <= cy + 0,14)
+                box((s * 0.725, cy + 0.16, 0.57), (0.030, 0.030, 0.020), 0.003, 1),
+                hose([(s * 0.725, cy + 0.16, 0.57), (s * 0.60, cy + 0.17, 0.585), (s * 0.45, cy + 0.15, 0.60),
                       (s * 0.40, cy + 0.15, 0.78)], 0.0035, 6, 4, 0),
             ], f"Conector y mazo del motor del freno de estacionamiento eléctrico (EPB) de la pinza {es}",
                 edir=(s, 0, 0.5), dist=0.45))
@@ -160,8 +170,9 @@ def build(M):
                   f"Pernos del subchasis {'delantero' if f > 0 else 'trasero'} (8 principales; 24 mm 215–355 N·m)",
                   edir=(0, 0, 1), dist=0.35, stage=6))
         A(V3.part(M, f"CHS_Subframe_{ax}_Ground_Strap", sus, ["copper", "zinc"], [
-            hose([(0.30, f * 1.45, 0.44), (0.25, f * 1.52, 0.50), (0.18, f * 1.58, 0.46)], 0.004, 8, 4, 0),
-            bolt((0.30, f * 1.45, 0.44), Z, 0.010, 1), bolt((0.18, f * 1.58, 0.46), Z, 0.010, 1),
+            # por fuera de los motores y la electrónica del actuador de dirección (x <= 0,31)
+            hose([(0.52, f * 1.45, 0.44), (0.47, f * 1.52, 0.50), (0.40, f * 1.58, 0.46)], 0.004, 8, 4, 0),
+            bolt((0.52, f * 1.45, 0.44), Z, 0.010, 1), bolt((0.40, f * 1.58, 0.46), Z, 0.010, 1),
         ], f"Cinta de masa del subchasis {'delantero' if f > 0 else 'trasero'} (1 perno 10 mm a 10 N·m)",
             edir=(0, f * 0.3, -0.5), dist=0.3, stage=6))
     A(V3.part(M, "CHS_Subframe_R_Locating_Pins", "REAR_SUSPENSION", ["steel_bare"], [
@@ -178,8 +189,9 @@ def build(M):
     ], "Soporte del compresor de aire (3 tuercas 13 mm a 12 N·m) y conducto de escape", edir=(0, -0.3, -1),
         dist=0.4))
     A(V3.part(M, "CHS_Air_Compressor_Exhaust", "REAR_SUSPENSION", ["rubber", "plastic_black"], [
-        hose([(-0.30, -2.34, 0.47), (-0.30, -2.47, 0.40), (-0.12, -2.55, 0.34)], 0.010, 10, 4, 0),
-        cyl((-0.12, -2.55, 0.34), (-0.02, -2.55, 0.34), 0.026, seg=14, m=1),
+        # desde la cara trasera del compresor; el silenciador, por encima del difusor trasero
+        hose([(-0.30, -2.40, 0.47), (-0.30, -2.49, 0.41), (-0.12, -2.555, 0.365)], 0.010, 10, 4, 0),
+        cyl((-0.12, -2.555, 0.365), (-0.02, -2.555, 0.365), 0.026, seg=14, m=1),
     ], "Escape y silenciador del compresor de aire (collar a presión)", edir=(0, -1, -0.3), dist=0.4, stage=6))
     A(V3.part(M, "CHS_SCUBA_Valve_Block", "REAR_SUSPENSION", ["alu_machined", "valve_brass", "zinc"], [
         box((0.52, -2.30, 0.50), (0.09, 0.07, 0.07), 0.004),
@@ -200,13 +212,16 @@ def build(M):
                               (0.66, -1.30, 0.296), (0.78, -1.15, 0.289), (0.895, -1.00, 0.2855),
                               (0.895, -0.50, 0.2855), (0.895, 0.0, 0.2855), (0.895, 0.60, 0.2855),
                               (0.89, 1.10, 0.288), (0.88, 1.30, 0.30), (0.78, 1.55, 0.42), (0.66, 1.80, 0.62)]),
+            # el izquierdo, carril exterior del canal bajo el umbral (ver THM_Powertrain_Hose_Bundle en
+            # build_mechanics): gira hacia dentro en paralelo con las mangueras y la línea de aire
             ("L", "izquierdo", [(0.345, -2.267, 0.50), (0.10, -2.22, 0.45), (-0.20, -2.20, 0.45), (-0.50, -2.12, 0.42),
-                                (-0.58, -1.70, 0.33), (-0.62, -1.50, 0.31), (-0.66, -1.30, 0.296),
-                                (-0.78, -1.15, 0.289), (-0.895, -1.00, 0.2855), (-0.895, -0.50, 0.2855),
-                                (-0.895, 0.0, 0.2855), (-0.895, 0.60, 0.2855), (-0.89, 1.10, 0.288),
-                                (-0.88, 1.30, 0.30), (-0.78, 1.55, 0.42), (-0.66, 1.80, 0.62)])):
+                                (-0.62, -1.75, 0.34), (-0.71, -1.50, 0.30), (-0.702, -1.38, 0.280),
+                                (-0.86, -1.03, 0.282), (-0.872, -1.00, 0.284), (-0.872, -0.50, 0.284),
+                                (-0.872, 0.0, 0.284), (-0.872, 0.60, 0.284), (-0.872, 1.10, 0.286), (-0.86, 1.30, 0.30),
+                                (-0.78, 1.55, 0.42), (-0.66, 1.80, 0.62)])):
         A(V3.part(M, f"CHS_Air_Line_Bundle_{nm}", "REAR_SUSPENSION", ["hose", "zinc"], [
-            hose(pts, 0.0045, 8, 5, 0, zmin=0.282),
+            # (zmin = altura libre oficial: el centro no baja de 0,262 + radio)
+            hose(pts, 0.0045, 8, 5, 0, zmin=0.262),
             [nut(p, Z, 0.012, 1, 0.0) for p in (pts[0], pts[-1])],
         ], f"Haz de líneas de aire {es} (racores VOSS codificados por color)", edir=(0, 0, -1), dist=0.3,
             stage=6))
@@ -214,15 +229,23 @@ def build(M):
         box((0.38, -2.40, 0.50), (0.07, 0.05, 0.05), 0.004),
         cyl((0.38, -2.40, 0.525), (0.38, -2.40, 0.560), 0.010, seg=12, m=1),
     ], "Bloque de válvula de admisión de aire (racor VOSS a 4 N·m)", edir=(0.3, -0.5, -0.3), dist=0.35, stage=6))
+    # en el racor de la copela de cada muelle neumático, en la unión en línea de cada conducto de esquina
+    # (build_mechanics.build_air_supply), sobre la generatriz superior del depósito (r = 66 mm) y en la tapa del
+    # bloque de válvulas
+    import build_mechanics as BMx
+    v_top, v_mid = [], []
+    for axq, fq in (("F", 1), ("R", -1)):
+        for sq in (1, -1):
+            tq = BMx.hardpoints(axq, sq)["spr_top"] + Vector((sq * 0.065, 0, -0.01))
+            v_top.append((tq, sq))
+            v_mid.append(tq + (Vector((-sq * 0.05, -0.25, -0.1)) if axq == "F" else Vector((-sq * 0.15, -0.2, 0.0))))
     A(V3.part(M, "CHS_VOSS_Fittings", "REAR_SUSPENSION", ["valve_brass", "zinc"], [
+        [cyl(tuple(tq), tuple(tq + Vector((sq * 0.022, 0, 0))), 0.007, seg=10, m=0) for tq, sq in v_top],
+        [cyl(tuple(mq - Vector((0, 0, 0.011))), tuple(mq + Vector((0, 0, 0.011))), 0.007, seg=10, m=0) for mq in v_mid],
         [cyl((x, y, z), (x, y, z + 0.022), 0.007, seg=10, m=0) for (x, y, z) in
-         ((0.61, 1.92, 0.945), (-0.61, 1.92, 0.945), (0.62, -1.92, 0.865), (-0.62, -1.92, 0.865),
-          (0.60, 1.88, 0.60), (-0.60, 1.88, 0.60), (0.60, -1.88, 0.53), (-0.60, -1.88, 0.53),
-          # sobre la generatriz superior del depósito (r = 66 mm) y en la tapa del bloque de válvulas
-          (-0.05, -2.36, 0.567), (0.05, -2.36, 0.567), (0.15, -2.36, 0.567), (0.25, -2.36, 0.567),
+         ((-0.05, -2.36, 0.567), (0.05, -2.36, 0.567), (0.15, -2.36, 0.567), (0.25, -2.36, 0.567),
           (0.345, -2.30, 0.561), (0.37, -2.30, 0.561), (0.395, -2.30, 0.561), (0.42, -2.30, 0.561))],
-        [nut((x, y, z), Z, 0.014, 1, 0.0) for (x, y, z) in
-         ((0.61, 1.92, 0.945), (-0.61, 1.92, 0.945), (0.62, -1.92, 0.865), (-0.62, -1.92, 0.865))],
+        [nut(tuple(tq + Vector((sq * 0.022, 0, 0))), (sq, 0, 0), 0.014, 1, 0.0) for tq, sq in v_top],
     ], "Racores VOSS del sistema de aire (≥ 16 uds., 2–8 N·m)", edir=(0, 0, 1), dist=0.3, stage=6))
 
     # --- Dirección y frenos: soportes, sensores y mazos ------------------------------------------------------------
@@ -235,11 +258,15 @@ def build(M):
         ], f"Controladores y sensores de posición triple redundantes del actuador de dirección "
            f"{'delantero' if f > 0 else 'trasero'} (4 conectores con bloqueo)", edir=(0, f * 0.2, 1), dist=0.45))
     A(V3.part(M, "STR_Steering_Jumper_Harness", "STEERING", ["harness", "connector_grey"], [
-        hose([(-0.39, 0.98, 0.88), (-0.42, 1.20, 0.70), (-0.38, 1.40, 0.56), (-0.20, 1.50, 0.52)], 0.007, 8, 5, 0),
+        # por fuera y por debajo de las mangueras de refrigerante de la batería hasta la cara delantera del
+        # controlador del actuador delantero
+        hose([(-0.39, 0.98, 0.88), (-0.42, 1.20, 0.70), (-0.40, 1.40, 0.60), (-0.33, 1.49, 0.565),
+              (-0.20, 1.515, 0.545)], 0.007, 8, 5, 0),
         box((-0.39, 0.98, 0.88), (0.025, 0.020, 0.020), 0.002, 1),
     ], "Mazo puente de la dirección (Harness - Steering Jumper)", edir=(0, 0, 1), dist=0.3, stage=6))
     A(V3.part(M, "STR_Rear_Steer_Jumper_Harness", "STEERING", ["harness", "connector_grey"], [
-        hose([(0.46, -0.98, 0.46), (0.30, -1.30, 0.34), (0.10, -1.50, 0.40), (0.20, -1.55, 0.52)], 0.006, 8, 5, 0),
+        # por detrás de la batería (y < -1,40) hasta el primer conector de la electrónica del actuador trasero
+        hose([(0.46, -1.425, 0.50), (0.25, -1.43, 0.53), (0.10, -1.45, 0.55), (0.12, -1.495, 0.535)], 0.006, 8, 5, 0),
     ], "Mazo puente de la dirección trasera (Harness - Jumper - Rear Steer)", edir=(0, 0, -1), dist=0.3, stage=6))
     A(V3.part(M, "BRK_HCU_Bracket", "UNDERBODY", ["steel_black", "zinc"], [
         box((0.46, 2.205, 0.585), (0.14, 0.22, 0.015), 0.003),

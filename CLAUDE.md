@@ -78,8 +78,15 @@
   (`ct_parts.make` lo aplica automáticamente).
 * Hoja de ruta del 17-10-2026: **completada** en la versión 4 (más piezas, hiperrealismo, suelo de cristal,
   iluminación y reflejos, HUD tipo Apple).
-* **Hoja de ruta del 18-10-2026 (siguiente sesión, en este orden):** (1) terminar las 279 interferencias de
-  `docs/interferencias-pendientes.md`; (2) pulido general del modelo (fallos visibles, formas, materiales); (3)
+* **Versión 4.2 (18-10-2026, sin publicar todavía): interferencias de ensamblaje a cero.** 0 parejas de más de 3 mm
+  (de 280), 320 penetraciones intencionadas declaradas con su motivo (uniones reales) y 240 cruces de 1–3 mm por debajo
+  del umbral. Cotas, siluetas y explosión validadas (perfil trasero mejor: 7,8 mm de media); GLB de 12,5 MB,
+  `Cybertruck.blend` de 16,2 MB. Detalle, método y lecciones en `docs/research-and-fidelity.md` §12 y `traspaso.md`
+  §16. Novedades técnicas: profundidad medida sólido a sólido en `interferencias.py`, alojamientos por caja
+  (`build_montaje.POCKETS`), recortes con `MANIFOLD` primero y el solver exacto solo al final, puntos de los soportes
+  de las unidades motrices en `build_mechanics.DU_MOUNTS`.
+* **Hoja de ruta del 18-10-2026 (siguiente sesión, en este orden):** (1) ~~terminar las 279 interferencias de
+  `docs/interferencias-pendientes.md`~~ (hecho en la v4.2); (2) pulido general del modelo (fallos visibles, formas, materiales); (3)
   integrar el Cybertruck en la simulación `alvarodesigns34/spacex` junto al Tesla Model Y, con una opción de
   «vista explosionada» que lleve a un espacio de despiece aparte. Detalle en `traspaso.md` §15.
 * Versión 4.1 (17-10-2026, interferencias de ensamblaje): detector `interferencias.py` (superficie visible,

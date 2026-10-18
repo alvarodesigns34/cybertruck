@@ -46,13 +46,15 @@ def doors(M):
         mn, mx = bb
         s = 1 if mx.x > 0 else -1
         xo = (mx.x - 0.045) if s > 0 else (mn.x + 0.045)
-        y0, y1 = mn.y + 0.07, mx.y - 0.07
+        # soportes en los extremos de la viga, a 120 mm de los bordes de la puerta: más cerca caerían sobre la
+        # pestaña del anillo de la puerta de la carrocería
+        y0, y1 = mn.y + 0.12, mx.y - 0.12
         za, zb = mn.z + 0.30, mn.z + 0.22
         shp = [
             tube([(xo, y1, za), (xo, y0, zb)], 0.0175, 18, 1, 0),
-            [box((xo - s * 0.010, y, z), (0.012, 0.070, 0.090), 0.003, 1) for y, z in ((y1 + 0.02, za), (y0 - 0.02, zb))],
+            [box((xo - s * 0.010, y, z), (0.012, 0.070, 0.090), 0.003, 1) for y, z in ((y1, za), (y0, zb))],
             [screw((xo - s * 0.018, y + dy, z + dz), (-s, 0, 0), 0.008, 0.02, 2, "flange")
-             for y, z in ((y1 + 0.02, za), (y0 - 0.02, zb)) for dy, dz in ((0.0, 0.03), (0.0, -0.03))],
+             for y, z in ((y1, za), (y0, zb)) for dy, dz in ((0.0, 0.03), (0.0, -0.03))],
             # guías del cristal (canales delantero y trasero)
             [beam((xo - s * 0.035, y, mn.z + 0.12), (xo - s * 0.035, y, mx.z - 0.06), 0.022, 0.016, up=(1, 0, 0), r=0.002,
                   m=3) for y in (mn.y + 0.10, mx.y - 0.10)],

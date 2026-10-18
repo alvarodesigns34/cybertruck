@@ -44,9 +44,11 @@ def build(M):
         bolt((0.19, 1.04, 1.085), Z, 0.007, 1), torx((0.19, 1.09, 1.25), Y, 0.005, 1),
     ], "Soporte {lado} de la pantalla central", mirror=True, edir=(0, -0.4, 1), dist=0.45, stage=3))
     A(V3.part(M, "BODY_IP_Downleg_Bracket", SYS, ["steel_black", "zinc"], [
-        beam((0.45, 1.10, 0.93), (0.46, 1.13, 0.50), 0.05, 0.03, 0.003),
-        box((0.46, 1.13, 0.50), (0.10, 0.09, 0.012), 0.002),
-        bolt((0.43, 1.13, 0.512), Z, 0.008, 1), bolt((0.49, 1.13, 0.512), Z, 0.008, 1),
+        # el pie apoya sobre la moqueta (cara superior z 0,517)
+        # (entre el filtro HEPA, y <= 1,09, y la tapa de acceso a los pirofusibles, y >= 1,165)
+        beam((0.45, 1.10, 0.93), (0.46, 1.1275, 0.523), 0.05, 0.03, 0.003),
+        box((0.46, 1.1275, 0.523), (0.10, 0.07, 0.012), 0.002),
+        bolt((0.43, 1.1275, 0.535), Z, 0.008, 1), bolt((0.49, 1.1275, 0.535), Z, 0.008, 1),
     ], "Pata {lado} del salpicadero (Downleg Bracket)", mirror=True, edir=(0, -0.3, -1), dist=0.4, stage=3))
     A(V3.part(M, "BODY_IP_Beam_Bracket", SYS, ["steel_black", "zinc"], [
         # por delante del larguero del guardabarros (y >= 1,248) y por dentro de la fundición
@@ -77,8 +79,9 @@ def build(M):
     ], "Refuerzo del mamparo (Dash Reinforcement): 61 remaches HS + 4 flow-form S18", edir=(0, -0.6, 0.4),
         dist=0.55, stage=3))
     A(V3.part(M, "BODY_Dash_FUB_Gutter_Connector", SYS, ["ecoat", "zinc"], [
-        box((0.43, 1.785, 0.52), (0.60, 0.05, 0.04), 0.003),
-        line(rivet, (0.15, 1.785, 0.542), (0.71, 1.785, 0.542), 8, axis=Z, d=0.0048),
+        # solo en el tramo exterior, junto al larguero: por fuera de la unidad motriz delantera y de sus mangueras
+        box((0.615, 1.785, 0.52), (0.21, 0.05, 0.04), 0.003),
+        line(rivet, (0.525, 1.785, 0.542), (0.705, 1.785, 0.542), 8, axis=Z, d=0.0048),
     ], "Conector {lado} de canaleta salpicadero–fundición (8 remaches de 4,8 mm + adhesivo)", mirror=True,
         edir=(0.4, 0.3, 0.5), dist=0.4, stage=3))
     A(V3.part(M, "BODY_CFM_Bracket", SYS, ["alu_cast", "zinc"], [
@@ -114,9 +117,10 @@ def build(M):
         ], f"Pilar C interior {'derecho' if s > 0 else 'izquierdo'} (33 remaches HS + 2 tornillos M10×33 a 90 N·m)",
             edir=(s, -0.3, 0.3), dist=0.5, stage=3))
     A(V3.part(M, "BODY_HV_Battery_Support_Bracket", SYS, ["steel_black", "zinc"], [
-        box((0.835, 0.0, 0.44), (0.04, 2.20, 0.03), 0.002),
-        box((0.805, 0.0, 0.425), (0.022, 2.20, 0.06), 0.002),
-        line(rivet, (0.85, -1.0, 0.456), (0.85, 1.0, 0.456), 11, axis=Z),
+        # repisa soldada sobre la pestaña superior del umbral (z 0,409), bajo la pestaña de la bandeja de la batería
+        # (z ~0,435, hasta x 0,837) y por fuera de su pared (x 0,80); por delante de la fundición trasera (y > -0,965)
+        box((0.826, 0.075, 0.4155), (0.048, 2.05, 0.013), 0.002),
+        line(rivet, (0.83, -0.90, 0.423), (0.83, 1.05, 0.423), 11, axis=Z),
     ], "Soporte {lado} de la batería HV (22 remaches HS + soldadura por puntos)", mirror=True,
         edir=(1, 0, -0.2), dist=0.5, stage=3))
     A(V3.part(M, "BODY_Rocker_Support_Bracket", SYS, ["steel_black", "zinc"], [
@@ -127,7 +131,8 @@ def build(M):
     ], "Soportes {lado} del umbral (2 por lado; 12 remaches de 4,8 mm cada uno)", mirror=True,
         edir=(1, 0, -0.5), dist=0.45, stage=3))
     A(V3.part(M, "BODY_XM_Bash_Plate", SYS, ["steel_black", "zinc"], [
-        box((0.82, 0.0, 0.34), (0.012, 0.95, 0.08), 0.002),
+        # dentro del umbral, entre su pared interior (x 0,805) y el inserto extruido (x >= 0,82)
+        box((0.813, 0.0, 0.34), (0.012, 0.95, 0.08), 0.002),
         line(rivet, (0.812, -0.42, 0.34), (0.812, 0.42, 0.34), 8, axis=(-1, 0, 0), d=0.0048),
     ], "Placa de protección XM {lado} del umbral (remachada 4,8 mm o soldada)", mirror=True, edir=(1, 0, -1),
         dist=0.4, stage=3))
@@ -148,17 +153,19 @@ def build(M):
     ], "Placas {lado}s de espárragos del larguero de techo (1 avellanado estructural de 6,5 mm)", mirror=True,
         edir=(0.4, 0, 1), dist=0.45, stage=6))
     A(V3.part(M, "BODY_Cantrail_Trim_Bracket", SYS, ["steel_black"], [
-        box((0.745, 0.80, 1.60), (0.04, 0.05, 0.04), 0.002), box((0.745, 0.05, 1.60), (0.04, 0.05, 0.04), 0.002),
-        box((0.745, -0.70, 1.60), (0.04, 0.05, 0.04), 0.002),
+        # en el larguero del techo, por fuera de los guarnecidos de los pilares y por debajo de la silueta del techo
+        box((0.80, 0.80, 1.63), (0.03, 0.05, 0.04), 0.002), box((0.80, 0.05, 1.63), (0.03, 0.05, 0.04), 0.002),
+        box((0.80, -0.70, 1.63), (0.03, 0.05, 0.04), 0.002),
     ], "Soportes {lado}s de la moldura del cantrail (soldadura por puntos + adhesivo)", mirror=True,
         edir=(0.4, 0, 1), dist=0.4, stage=6))
     A(V3.part(M, "BODY_CPillar_Lower_Nut_Plate", SYS, ["zinc"], [
-        box((0.80, -0.84, 0.56), (0.05, 0.10, 0.10), 0.003),
-        rivet((0.775, -0.84, 0.56), (-1, 0, 0), 0.0048),
+        # contra el pilar C interior, por fuera del paso del mazo troncal de 48 V (x <= 0,786)
+        box((0.802, -0.84, 0.56), (0.03, 0.10, 0.10), 0.003),
+        rivet((0.787, -0.84, 0.56), (-1, 0, 0), 0.0048),
     ], "Placa {lado} de tuercas inferior del pilar C", mirror=True, edir=(1, -0.3, 0), dist=0.35, stage=6))
     A(V3.part(M, "BODY_Ramp_Bracket_CPillar", SYS, ["steel_black"], [
-        hull([(0.77, -0.82, 0.62), (0.83, -0.82, 0.62), (0.77, -0.90, 0.62), (0.83, -0.90, 0.62),
-              (0.77, -0.90, 0.78), (0.83, -0.90, 0.78)]),
+        hull([(0.786, -0.82, 0.62), (0.846, -0.82, 0.62), (0.786, -0.90, 0.62), (0.846, -0.90, 0.62),
+              (0.786, -0.90, 0.78), (0.846, -0.90, 0.78)]),
     ], "Soporte de rampa {lado} del pilar C", mirror=True, edir=(1, -0.3, 0), dist=0.35, stage=6))
     A(V3.part(M, "BODY_Front_Quarter_Window_Frame", SYS, ["ecoat", "zinc"], [
         hull([(0.80, 1.40, 1.22), (0.84, 1.40, 1.22), (0.80, 1.62, 1.30), (0.84, 1.62, 1.30),
@@ -177,8 +184,9 @@ def build(M):
         beam((-0.72, 0.52, 1.665), (0.72, 0.52, 1.665), 0.06, 0.03, 0.003),
     ], "Cabecera delantera inferior (soldadura por puntos y adhesivo)", edir=(0, 0.3, 0.6), dist=0.35, stage=3))
     A(V3.part(M, "BODY_Header_Front_Gusset", SYS, ["ecoat", "zinc"], [
-        hull([(0.70, 0.50, 1.665), (0.76, 0.50, 1.665), (0.70, 0.56, 1.665), (0.76, 0.56, 1.665),
-              (0.76, 0.50, 1.60), (0.76, 0.56, 1.60)]),
+        # bajo el extremo de la cabecera (z >= 1,65), a la que se remacha
+        hull([(0.70, 0.50, 1.647), (0.76, 0.50, 1.647), (0.70, 0.56, 1.647), (0.76, 0.56, 1.647),
+              (0.76, 0.50, 1.585), (0.76, 0.56, 1.585)]),
         line(rivet, (0.705, 0.52, 1.68), (0.745, 0.54, 1.68), 3, axis=Z, d=0.0048),
     ], "Cartela {lado} de la cabecera delantera", mirror=True, edir=(0.6, 0, 0.6), dist=0.35, stage=3))
     A(V3.part(M, "BODY_Header_Rear_Lower", SYS, ["ecoat", "zinc"], [
@@ -211,9 +219,11 @@ def build(M):
     ], "Montante {lado} del asiento trasero y riostra (7 remaches HS + 1 de 4,8 mm; riostra 6 + 2)",
         mirror=True, edir=(0.4, -1, 0.3), dist=0.5, stage=3))
     A(V3.part(M, "BODY_Tonneau_Attachment_Bracket", SYS, ["steel_black", "zinc"], [
-        box((0.72, -1.00, 1.30), (0.06, 0.05, 0.10), 0.003),
-        box((0.72, -1.00, 1.43), (0.06, 0.05, 0.07), 0.003),
-        rivet((0.72, -1.025, 1.30), (0, -1, 0)), rivet((0.72, -1.025, 1.43), (0, -1, 0)),
+        # entre la pared delantera de la caja (y -0,997) y la pared trasera de la cabina (y -0,957), remachados a la
+        # primera
+        box((0.72, -0.977, 1.30), (0.06, 0.038, 0.10), 0.003),
+        box((0.72, -0.977, 1.43), (0.06, 0.038, 0.07), 0.003),
+        rivet((0.72, -0.997, 1.30), (0, -1, 0)), rivet((0.72, -0.997, 1.43), (0, -1, 0)),
     ], "Soportes {lado}s de fijación de la cubierta (inferior: 1 HS + 2 avellanados; superior: 3 HS + 1)",
         mirror=True, edir=(0.5, -0.5, 0.6), dist=0.4, stage=3))
     A(V3.part(M, "BODY_Bed_Bridge_Bracket", SYS, ["steel_black", "zinc"], [
@@ -221,8 +231,9 @@ def build(M):
         line(rivet, (-0.14, -1.10, 1.006), (0.14, -1.10, 1.006), 3, axis=Z),
     ], "Soporte del puente trasero de la caja (3 remaches HS)", edir=(0, -0.3, 1), dist=0.4, stage=3))
     A(V3.part(M, "BODY_Rear_Fascia_Bracket", SYS, ["steel_black", "zinc"], [
-        box((0.70, -2.88, 0.60), (0.10, 0.06, 0.10), 0.003),
-        line(rivet, (0.67, -2.915, 0.60), (0.73, -2.915, 0.60), 3, axis=(0, -1, 0)),
+        # por fuera del extremo de los absorbedores traseros (|x| <= 0,662)
+        box((0.72, -2.88, 0.60), (0.10, 0.06, 0.10), 0.003),
+        line(rivet, (0.69, -2.915, 0.60), (0.75, -2.915, 0.60), 3, axis=(0, -1, 0)),
     ], "Soporte {lado} de la fascia trasera (3 remaches HS)", mirror=True, edir=(0.5, -1, 0), dist=0.4,
         stage=3))
     A(V3.part(M, "BODY_TieDown_Nut_Plate", SYS, ["zinc"], [

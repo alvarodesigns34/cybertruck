@@ -199,8 +199,10 @@ def dashboard_detail(M):
     # caja central entre la guantera (delante), la viga transversal (encima) y el mamparo (detrás)
     P.rbox(mb, (0.06, 1.25, 0.78), (0.56, 0.24, 0.27), 0.02, 2, None, 0)
     P.cyl(mb, (0.42, 1.24, 0.76), (0.42, 1.24, 0.90), 0.085, 28, 0)
+    # conductos a las salidas de los pies: por fuera de las patas de la viga del salpicadero (|x| <= 0,15), por
+    # delante del panel inferior del conductor y por encima de las alfombrillas
     for sg in (1, -1):
-        P.hose(mb, [(sg * 0.17, 1.15, 0.67), (sg * 0.20, 1.00, 0.56), (sg * 0.22, 0.80, 0.53)], 0.03, 12, 5, 1)
+        P.hose(mb, [(sg * 0.17, 1.15, 0.67), (sg * 0.20, 1.02, 0.59), (sg * 0.21, 0.95, 0.58)], 0.03, 12, 5, 1)
     objs.append(P.make(mb, "INT_HVAC_Module", "INTERIOR_DASHBOARD", [M["plastic_black"], M["plastic_liner"]], asm,
                        (0, 1, 0.3), 0.45, 2, "Climatización",
                        "Módulo de climatización (ventilador, filtro HEPA, compuertas) y conductos al suelo", "V"))
@@ -216,14 +218,16 @@ def dashboard_detail(M):
     # airbag del acompañante en la parte alta del salpicadero, bajo el parabrisas
     P.rbox(mb, (0.40, 1.45, 1.085), (0.26, 0.12, 0.05), 0.008, 1, None, 0)
     # rodilleras: la del conductor dentro del panel inferior; la del acompañante bajo la guantera
-    P.rbox(mb, (-0.48, 1.04, 0.69), (0.26, 0.04, 0.05), 0.008, 1, None, 0)
+    # (detrás de la cara posterior del panel, que va de y 1,032 a z 0,715 a y 1,068 a z 0,665)
+    P.rbox(mb, (-0.48, 1.095, 0.69), (0.26, 0.04, 0.05), 0.008, 1, None, 0)
     P.rbox(mb, (0.42, 1.03, 0.755), (0.26, 0.05, 0.05), 0.008, 1, None, 0)
     objs.append(P.make(mb, "INT_Airbag_Modules", "INTERIOR_DASHBOARD", M["plastic_black"], asm, (0, 0.5, 0.5), 0.35, 2,
                        "Seguridad", "Módulos de airbag del acompañante y de rodillas", "V"))
     mb = L.MeshBuilder()
-    P.rbox(mb, (0.0, 0.35, FLOOR_Z + 0.03), (0.12, 0.14, 0.04), 0.004, 1, None, 0)
+    # sobre la base de la consola (su chapa llega a z 0,533), dentro del hueco inferior de la consola
+    P.rbox(mb, (0.0, 0.35, FLOOR_Z + 0.049), (0.12, 0.14, 0.04), 0.004, 1, None, 0)
     for k in range(3):
-        P.hex_nut(mb, (-0.05 + k * 0.05, 0.42, FLOOR_Z + 0.05), (0, 0, 1), 0.006, 1)
+        P.hex_nut(mb, (-0.05 + k * 0.05, 0.42, FLOOR_Z + 0.069), (0, 0, 1), 0.006, 1)
     objs.append(P.make(mb, "INT_Restraint_Control_Module", "INTERIOR_CONTROLS", [M["alu_cast"], M["zinc"]], None,
                        (0, 0, 1), 0.65, 2, "Seguridad", "Módulo de control de airbags (RCM, 3 tuercas a 10 N·m)", "V"))
     # pedales: acelerador articulado en el suelo y pedal de freno colgante
@@ -358,8 +362,9 @@ def roof_details(M):
     objs.append(P.make(mb, "INT_Cabin_Radar", "INTERIOR_TRIM", M["int_plastic"], None, (0, 0, 1), 0.30, 6,
                        "Electrónica", "Radar de habitáculo (detección de ocupantes)", "V"))
     mb = L.MeshBuilder()
+    # por delante de la cabecera trasera inferior (y -0,925…-0,875)
     for x in (-0.45, 0.45):
-        c2 = V(x, -0.90, S.z_top(-0.90) - 0.07)
+        c2 = V(x, -0.845, S.z_top(-0.845) - 0.07)
         P.rbox(mb, c2, (0.16, 0.05, 0.035), 0.008, 1, None, 0)
         P.rbox(mb, c2 + V(0, 0.026, -0.005), (0.13, 0.003, 0.025), 0.004, 1, None, 1)
     objs.append(P.make(mb, "INT_Speakers_Rear_Header", "INTERIOR_TRIM", [M["headliner"], M["speaker_mesh"]], None,
@@ -620,10 +625,15 @@ def seatbelts(M):
                                "Cinturón de tres puntos: cinta, guía, lengüeta, enrollador con pretensor y anclaje", "V"))
     # hebillas: delanteras en el lado interior del asiento, traseras sobre el cojín
     mb = L.MeshBuilder()
+    # delanteras: pie desde el armazón del asiento y cabeza en el hueco entre el reposabrazos de la consola
+    # (|x| <= 0,125) y el costado del cojín (|x| >= 0,146)
+    # (a z 0,76 solo quedan 7 mm entre el panel lateral de la consola, |x| 0,146, y el cojín, |x| 0,153: el pie es
+    # una pletina de 6 mm que sube por ese hueco hasta por encima del panel, z 0,795)
     for s in (1, -1):
-        b = V(s * (SEAT_X - 0.27), H_FRONT[0] + 0.02, H_FRONT[1] - 0.02)
-        P.beam(mb, b + V(0, 0.02, -0.18), b, 0.03, 0.012, up=(1, 0, 0), r=0.003)
-        P.rbox(mb, b + V(0, -0.005, 0.03), (0.022, 0.04, 0.07), 0.006, 2, None, 0)
+        b = V(s * 0.1495, H_FRONT[0] + 0.01, 0.76)
+        P.beam(mb, V(s * 0.165, H_FRONT[0] + 0.04, 0.62), b, 0.03, 0.006, up=(1, 0, 0), r=0.002)
+        P.beam(mb, b, V(s * 0.1495, H_FRONT[0] + 0.005, 0.80), 0.03, 0.006, up=(1, 0, 0), r=0.002)
+        P.rbox(mb, V(s * 0.1365, H_FRONT[0] + 0.0, 0.833), (0.018, 0.04, 0.07), 0.006, 2, None, 0)
     for x in (-0.62, -0.30, -0.15, 0.15, 0.30, 0.62):
         b = V(x, H_REAR[0] + 0.02, H_REAR[1] - 0.04)
         P.rbox(mb, b, (0.020, 0.035, 0.06), 0.006, 2, None, 0)
@@ -642,8 +652,10 @@ def floor_mats(M):
     con escotadura para el final de la consola y por delante del bajo de la banqueta."""
     objs = []
     # (nombre, piezas rectangulares (x, y, ancho, largo))
-    mats = (("FL", [(-0.42, 0.925, 0.52, 0.21)]),
-            ("FR", [(0.42, 0.985, 0.52, 0.33)]),
+    # las delanteras, entre el conducto exterior del suelo (|x| >= 0,645) y las patas de la viga del salpicadero
+    # (|x| <= 0,22)
+    mats = (("FL", [(-0.435, 0.925, 0.41, 0.21)]),
+            ("FR", [(0.435, 0.985, 0.41, 0.33)]),
             ("R", [(0.43, -0.025, 0.54, 0.31), (-0.43, -0.025, 0.54, 0.31), (0.0, -0.165, 0.32, 0.03)]))
     for nm, pieces in mats:
         o = obj(f"INT_FloorMat_{nm}")
