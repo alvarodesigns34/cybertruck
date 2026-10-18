@@ -345,3 +345,50 @@ hecho y **documentar todo lo que falta**.
 - La reconstrucción completa tarda ~5 min. Se lanza en un temporizador (`bpy.app.timers`) y se lee el resultado de
   un fichero, porque el MCP corta a los ~100 s.
 - Tras un cierre de Blender hay que volver a añadir `blender/scripts` a `sys.path`.
+
+## 15. Siguiente sesión (encargo del 18-10-2026)
+
+Orden de trabajo, sin saltarse fases:
+
+### 15.1 Terminar las interferencias de ensamblaje
+
+- Partir de `docs/interferencias-pendientes.md` (279 parejas > 3 mm al publicar la v4.1). El objetivo es dejarlas a
+  cero o, si alguna es una unión real (pasamuros, guía, pieza roscada), declararla en `interferencias.INTENDED` con
+  su motivo.
+- Método: ver §14 y `docs/research-and-fidelity.md` §11. Primero corregir en el constructor; recortar
+  (`build_montaje.CARVE`) solo lo que en la realidad lleva el alojamiento de otra pieza.
+- Tras cada lote: reconstruir con la parte `"montaje"`, pasar `interferencias.run()`, validar (`validate.run()`
+  y `build_explode.verify_roundtrip()`) y regenerar el informe con `node tools/gen_interferencias.mjs`.
+
+### 15.2 Pulido general del modelo
+
+- Revisión visual a fondo con renders Workbench, con color aleatorio por objeto para ver cruces, y con renders
+  finales: piezas flotando, huecos, normales, materiales y escalas raras, recortes mal resueltos (moqueta, juntas).
+- Mejoras pendientes de CLAUDE.md: formas de faros, retrovisores, paragolpes y fundiciones; molde del neumático;
+  tornillería integrada en la malla.
+- Sin empeorar cotas ni siluetas.
+
+### 15.3 Integración en la simulación `alvarodesigns34/spacex`
+
+- **Repositorio:** https://github.com/alvarodesigns34/spacex, rama por defecto
+  `claude/spacex-vehicle-center-3d-48zlkm`. Es un «SpaceX Vehicle Center» en Three.js a escala 1:1.
+  - Interfaz en inglés y documentación en español.
+  - Tiene su propio `CLAUDE.md`, `TRASPASO.md` y README: leerlos antes de tocar nada.
+- **Model Y existente:** es un expositor estático junto al Porsche, cargado de `assets/modely/modely.glb`.
+  - Código en `src/vehicles/modelyAsset.js`; colocación en `src/core/layout.js`.
+  - Fuentes de Blender en `blender/modely/`.
+- **Presupuesto de escena:** `tools/check.mjs` impone techos de triángulos, mallas, materiales y texturas, y CI no
+  despliega si se superan (pasó con el Model Y). Hay que pasarlo antes de empujar; los techos se pueden subir de
+  forma deliberada.
+- **Qué se pide:**
+  1. Colocar el Cybertruck (GLB de este proyecto) **al lado del Model Y**, como expositor de la simulación.
+  2. Entre sus opciones, una **«vista explosionada»**. No se despieza en medio del entorno: la opción lleva a un
+     **espacio aparte de despiece**, una escena de estudio dedicada, al estilo del visor de este repositorio. Ahí se
+     usa la explosión por etapas (`explode_*` del manifiesto `web/models/cybertruck-manifest.json`), con
+     selección de piezas y ficha, y una forma clara de volver a la simulación.
+- **A decidir en la sesión, documentándolo:**
+  - si se reutiliza el código del visor (`web/src/main.js`, `lighting.js`) o se adapta a la arquitectura de la
+    simulación;
+  - cómo aligerar el GLB para la escena general (por ejemplo, un nivel de detalle exterior para la exposición y el
+    GLB completo solo en el espacio de despiece);
+  - respetar el presupuesto de `tools/check.mjs`.

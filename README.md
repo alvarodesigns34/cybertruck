@@ -169,6 +169,10 @@ modifique el visor (también se puede lanzar manualmente). Requiere que Pages es
 
 ## Próximos pasos
 
+- **Siguiente sesión (18-10-2026):** terminar las interferencias pendientes, pulir el modelo y llevarlo a la
+  simulación [`alvarodesigns34/spacex`](https://github.com/alvarodesigns34/spacex) junto al Tesla Model Y, con una
+  vista explosionada en un espacio de despiece aparte. Ver `traspaso.md` §15.
+
 La hoja de ruta acordada el 17-10-2026 (más piezas, hiperrealismo, suelo de cristal, iluminación y reflejos, HUD)
 se completó en la versión 4. Lo que queda, por orden de valor:
 

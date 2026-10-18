@@ -54,12 +54,10 @@
 
 ## Estado y puntos de continuación
 
-* Estado al 17-10-2026 (versión 4, publicada en `main`; la 4.1 de interferencias, más abajo): 1.137 objetos
-  (1.098 mallas), ~1,19 millones de triángulos, 78 materiales con texturas físicas generadas (`ct_textures.py`,
-  WebP en `blender/textures/`), GLB de 12,0 MB, `Cybertruck.blend` de 14,7 MB; validado (cotas y siluetas
-  idénticas a la v3, explosión con desviación 0 en los 1.137 objetos), exportado al visor y probado en local.
-  El visor publicado en https://alvarodesigns34.github.io/cybertruck/ es el de la versión 3; la 4 se publica al
-  fusionar la rama en `main` (el despliegue se dispara con los cambios en `web/`).
+* Estado al 18-10-2026: publicada la **versión 4.1** en `main` (commit c9b1ea6) y en
+  https://alvarodesigns34.github.io/cybertruck/ : 1.139 objetos, GLB de 12,5 MB (1.138 componentes), 78 materiales con
+  texturas físicas generadas (`ct_textures.py`, WebP en `blender/textures/`), `Cybertruck.blend` de 16,5 MB;
+  cotas, siluetas y explosión validadas (altura libre −0,4 mm; desviación 0 en los 1.139 objetos).
   Módulos: `ct_parts.py`, `build_structure.py`, `build_mechanics.py`, `build_exterior.py`,
   `build_interior_detail.py` (v2); `ct_v3.py`, `build_v3_*.py` (v3, 387 piezas del backlog de
   `docs/ficha-tecnica-piezas.md`); `ct_v4.py`, `build_v4.py`, `build_v4_motriz/chasis/energia/habitaculo/
@@ -80,6 +78,10 @@
   (`ct_parts.make` lo aplica automáticamente).
 * Hoja de ruta del 17-10-2026: **completada** en la versión 4 (más piezas, hiperrealismo, suelo de cristal,
   iluminación y reflejos, HUD tipo Apple).
+* **Hoja de ruta del 18-10-2026 (siguiente sesión, en este orden):** (1) terminar las 279 interferencias de
+  `docs/interferencias-pendientes.md`; (2) pulido general del modelo (fallos visibles, formas, materiales); (3)
+  integrar el Cybertruck en la simulación `alvarodesigns34/spacex` junto al Tesla Model Y, con una opción de
+  «vista explosionada» que lleve a un espacio de despiece aparte. Detalle en `traspaso.md` §15.
 * Versión 4.1 (17-10-2026, interferencias de ensamblaje): detector `interferencias.py` (superficie visible,
   profundidad cerca del cruce, penetraciones intencionadas), pasada de montaje `build_montaje.py` (parte
   `"montaje"`: recortes y juntas comprimidas), interiores ajustados o recortados en su carcasa
