@@ -15,6 +15,14 @@ comuniques al usuario, la documentación y los comentarios de código van **en e
 >    (§15.3 queda superado).
 >
 > La auditoría conjunta de los dos repositorios está en `docs/auditoria-2026-10-20-spacex-cybertruck.md`.
+>
+> **Actualización (23-10-2026, segunda sesión).** Hechas en `spacex` las fases 1 y 2 de la integración (auditoría
+> §4.10): Draco y `Reflector` de three r170 en su `vendor/`, una copia sincronizada del GLB de este repositorio
+> (`spacex/tools/cybertruck-sync.mjs`, con su prueba de contrato) y un «Cybertruck Lab» mínimo, fuera del entorno
+> principal, con su botón y la tecla **U**. Decisiones del usuario: interfaz del Lab en inglés y nombres de piezas
+> en español (los `label_es` de aquí), terminar la secuencia en marcha al abrirlo y conservar el modelo al cerrarlo.
+> **Si se vuelve a exportar `web/models/cybertruck.glb`, hay que sincronizar la copia de `spacex`.** El visor de
+> este repositorio no se ha tocado.
 
 ---
 

@@ -67,6 +67,12 @@
      lo que dicen la hoja de ruta del 18-10 y `traspaso.md` §15.3.
   2. **Blender sin MCP** (ver «Entorno de trabajo» y `traspaso.md` §17).
 
+  **Fases 1 y 2 de la integración, hechas en `spacex` (23-10-2026):** `spacex` lleva una copia de
+  `web/models/cybertruck.glb` en `assets/cybertruck/`, hecha con su `tools/cybertruck-sync.mjs` (anota tamaño, SHA-256
+  y el commit de aquí que lo cambió) y un «Cybertruck Lab» mínimo con su botón y la tecla **U**. **Si se vuelve a
+  exportar el GLB aquí, hay que sincronizarlo en `spacex`** (`node tools/cybertruck-sync.mjs ../cybertruck`) y pasar
+  allí sus pruebas. Estado y siguiente fase: `spacex/TRASPASO.md`, «Estado actual (23-10-2026)».
+
   Hallazgos de la auditoría que tocan a este repositorio: §5 (C1–C24) y mejoras en §8.2. Los más urgentes:
   - el GLB tiene 17 errores del validador de Khronos: ruedas y frenos sin UV (C21);
   - la barra de carga pasa del 100 % con gzip (C1);
