@@ -177,6 +177,9 @@ sincronizarla allí (`node tools/cybertruck-sync.mjs ../cybertruck`).
 - **C4:** `pagehide` solo libera los recursos si la página no se queda en la caché de ida y vuelta.
 - **C7:** el servidor local comprueba la contención con una ruta relativa (una carpeta hermana `web2/` ya no pasa).
 - **C8:** las etiquetas del modelo se escriben con `textContent`, no con `innerHTML`.
+- **C9, accesibilidad:** las pestañas siguen el patrón WAI-ARIA (una sola en el orden de tabulación, flechas, Inicio y
+  Fin) y la lista de componentes ya no se declara `role="tree"` sin elementos `treeitem`: es un grupo de
+  `details`, accesibles por sí mismos.
 - **C10, el CI valida:** `tools/check.mjs` y el validador de Khronos corren en cada *push* (también en las ramas
   `claude/**` y en las peticiones de cambios), y el despliegue desde `main` espera a que pasen.
 - **C11 y C12:** aislar una pieza vuelve a encender los chips de sistema; el resaltado usa una copia compartida por

@@ -638,16 +638,30 @@ function setPanel(open) {
   if (open) requestAnimationFrame(syncSegs);
 }
 setPanel(window.innerWidth > 1180);
-document.querySelectorAll('.tabs .seg-btn').forEach((t) => t.addEventListener('click', () => {
-  document.querySelectorAll('.tabs .seg-btn').forEach((o) => {
+const tabs = [...document.querySelectorAll('.tabs .seg-btn')];
+function selectTab(t, focusSearch = true) {
+  tabs.forEach((o) => {
     const on = o === t;
     o.classList.toggle('active', on);
     o.setAttribute('aria-selected', String(on));
+    // Una sola pestaña en el orden de tabulación; las flechas pasan de una a otra (patrón de pestañas WAI-ARIA, C9).
+    o.tabIndex = on ? 0 : -1;
     $(o.dataset.tab).classList.toggle('hidden', !on);
   });
   syncSegs();
-  if (t.dataset.tab === 'components-tab') $('search').focus({ preventScroll: true });
-}));
+  if (focusSearch && t.dataset.tab === 'components-tab') $('search').focus({ preventScroll: true });
+}
+tabs.forEach((t, i) => {
+  t.addEventListener('click', () => selectTab(t));
+  t.addEventListener('keydown', (ev) => {
+    const step = { ArrowRight: 1, ArrowLeft: -1, Home: -i, End: tabs.length - 1 - i }[ev.key];
+    if (step === undefined) return;
+    ev.preventDefault();
+    const next = tabs[(i + step + tabs.length) % tabs.length];
+    selectTab(next, false);
+    next.focus();
+  });
+});
 
 // Menú emergente de escena (suelo, luz, reflejos y amplitud), anclado al botón que lo abre
 function placePopover() {

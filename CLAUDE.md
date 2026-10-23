@@ -77,10 +77,9 @@
   allí sus pruebas. Estado y siguiente fase: `spacex/TRASPASO.md`, «Estado actual (23-10-2026)».
 
   Hallazgos de la auditoría que tocan a este repositorio: §5 (C1–C24) y mejoras en §8.2. **Corregidos el
-  23-10-2026:** C1, C2, C3, C4, C5, C7, C8, C10, C11, C12, C13, C20, C21 y C24 (detalle en el README, «Correcciones
-  de la auditoría»). El GLB pasa el validador de Khronos con 0 errores y tiene 78 materiales. Pendientes: C9
-  (accesibilidad del árbol y las pestañas), C14 (etapas desequilibradas), C19 (Git LFS, decide el usuario), C22
-  (aperturas con los pivotes del GLB) y la oclusión ambiental (M-CT1).
+  23-10-2026:** C1, C2, C3, C4, C5, C7, C8, C9, C10, C11, C12, C13, C20, C21 y C24, más M-CT4 (aperturas) y M-CT9 (dibujo bajo demanda) (detalle en el README, «Correcciones
+  de la auditoría»). El GLB pasa el validador de Khronos con 0 errores y tiene 78 materiales. Pendientes: C14 (etapas desequilibradas), C19 (Git LFS, decide el usuario), las alturas de la
+  suspensión (M-CT4.2) y la oclusión ambiental (M-CT1). C22 (aperturas) quedó hecho con M-CT4.
 
 * Estado al 18-10-2026: publicada la **versión 4.1** en `main` (commit c9b1ea6) y en
   https://alvarodesigns34.github.io/cybertruck/ : 1.139 objetos, GLB de 12,5 MB (1.138 componentes), 78 materiales con

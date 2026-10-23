@@ -520,4 +520,7 @@ materiales) y C24 (nombres de malla).
 - La copia de `spacex` se sincronizó después con su `tools/cybertruck-sync.mjs`.
 - Se trabaja en la rama de la sesión (`claude/cybertruck-spacex-integration-h7sx0c`); Pages solo publica desde
   `main`, así que estos cambios no salen en la web hasta que el usuario los fusione.
-- Pendientes: C9, C14, C19 (Git LFS, decisión del usuario), C22 (aperturas) y la oclusión ambiental (M-CT1).
+- Después, en la misma sesión: C9 (accesibilidad), M-CT9 (dibujo bajo demanda), M-CT4 (aperturas, que resuelve C22)
+  y la prueba de humo `tools/smoke.mjs` en el CI.
+- Pendientes: C14, C19 (Git LFS, decisión del usuario), las alturas de la suspensión (M-CT4.2) y la oclusión
+  ambiental (M-CT1).

@@ -68,8 +68,8 @@
     <aside id="panel" class="glass panel" aria-label="Sistemas y componentes">
       <div class="seg tabs" role="tablist" aria-label="Contenido del panel">
         <span class="seg-ind" aria-hidden="true"></span>
-        <button class="seg-btn active" role="tab" aria-selected="true" data-tab="systems-tab" id="tab-systems">Sistemas</button>
-        <button class="seg-btn" role="tab" aria-selected="false" data-tab="components-tab" id="tab-components">Componentes <span id="count" class="count"></span></button>
+        <button class="seg-btn active" role="tab" aria-selected="true" aria-controls="systems-tab" tabindex="0" data-tab="systems-tab" id="tab-systems">Sistemas</button>
+        <button class="seg-btn" role="tab" aria-selected="false" aria-controls="components-tab" tabindex="-1" data-tab="components-tab" id="tab-components">Componentes <span id="count" class="count"></span></button>
       </div>
       <section id="systems-tab" class="tab-page" role="tabpanel" aria-labelledby="tab-systems">
         <div class="page-head">
@@ -83,7 +83,7 @@
           <svg aria-hidden="true"><use href="#i-search"/></svg>
           <input id="search" class="search" type="search" placeholder="Buscar componente" autocomplete="off" aria-label="Buscar componente">
         </label>
-        <div id="tree" class="tree" role="tree"></div>
+        <div id="tree" class="tree" role="group" aria-label="Componentes por sistema"></div>
       </section>
     </aside>
 
