@@ -58,7 +58,8 @@ key.shadow.mapSize.set(HIGH_END ? 4096 : 2048, HIGH_END ? 4096 : 2048);
 Object.assign(key.shadow.camera, { left: -6.5, right: 6.5, top: 6.5, bottom: -6.5, near: 1, far: 30 });
 key.shadow.bias = -0.0003;
 key.shadow.normalBias = 0.02;
-key.shadow.radius = 3;
+// Sin shadow.radius: con PCFSoftShadowMap, three r170 usa un núcleo fijo en las luces direccionales y lo ignora
+// (solo actúa con PCFShadowMap y VSM). El 3 que había aquí no cambiaba nada (auditoría C23).
 scene.add(key);
 const hemi = new THREE.HemisphereLight(0xdfe6ee, 0x1a1c20, 0.25);
 scene.add(hemi);

@@ -202,6 +202,7 @@ sincronizarla allí (`node tools/cybertruck-sync.mjs ../cybertruck`).
   neumática quedan pendientes: hacen falta los brazos articulados en Blender para no inventar cómo se mueve.
 - **Prueba de humo** (`tools/smoke.mjs`, en el CI): sirve el GLB con gzip como Pages y comprueba la barra, que no
   haya peticiones externas, las 1.138 piezas, la explosión reversible, cero fotogramas en reposo y las aperturas.
+- **C23:** fuera el `key.shadow.radius = 3`, que con `PCFSoftShadowMap` no hacía nada en r170.
 - **C24:** las 24 mallas con el nombre temporal `_tmp_isl.NNN` de `build_montaje.py` toman al exportar el nombre de
   su objeto.
 
