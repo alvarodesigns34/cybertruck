@@ -91,7 +91,7 @@ blender/reference_data/         Perfiles medidos sobre la vista oficial (datos d
 blender/textures/               Texturas físicas generadas por script (WebP)
 web/                            Visor web estático (GitHub Pages)
 web/models/                     cybertruck.glb (Draco) y manifiesto de componentes
-docs/                           Investigación, especificación, inventario, validación y renders
+docs/                           Investigación, especificación, inventario, validación, renders y auditorías
 tools/                          Servidor estático local y generador del inventario
 .github/workflows/pages.yml     Despliegue automático del visor
 ```
@@ -107,7 +107,13 @@ tools/                          Servidor estático local y generador del inventa
 
 ### Regenerar el modelo desde los scripts
 
-En la consola de Python de Blender:
+**Desde el 23-10-2026, Claude trabaja con su propio Blender sin interfaz, no con el del usuario por Blender MCP**
+(preferencia del usuario). Es Blender 5.2.2 LTS para Linux, en el entorno del agente:
+`blender -b blender/Cybertruck.blend --python script.py`. La instalación, un script de ejemplo y lo que cambia frente al
+MCP están en `traspaso.md` §17. Se comprobó el 23-10: la reconstrucción completa tarda 331 s en 4 núcleos sin GPU y
+la validación sale idéntica.
+
+En la consola de Python de Blender (o en un script con `blender -b`):
 
 ```python
 import sys; sys.path.insert(0, r"<ruta-del-repo>/blender/scripts")
@@ -169,9 +175,14 @@ modifique el visor (también se puede lanzar manualmente). Requiere que Pages es
 
 ## Próximos pasos
 
+- **Auditoría del 20-10-2026 (revisada el 23-10):** `docs/auditoria-2026-10-20-spacex-cybertruck.md`, conjunta con la
+  simulación `spacex`. Contiene la integración del Cybertruck en un espacio aparte con su botón (ya no «junto al
+  Model Y»), los hallazgos de este repositorio (C1–C24), las mejoras propuestas (§8.2) y el trabajo con Blender sin
+  MCP (§11).
 - **Sesión del 18-10-2026:** interferencias de ensamblaje a cero (versión 4.2, hecho); siguen el pulido general del
   modelo y su integración en la simulación [`alvarodesigns34/spacex`](https://github.com/alvarodesigns34/spacex)
-  junto al Tesla Model Y, con una vista explosionada en un espacio de despiece aparte. Ver `traspaso.md` §15 y §16.
+  (desde el 20-10, sin aparecer en su entorno principal: un botón lleva a un espacio de despiece aparte). Ver
+  `traspaso.md` §15–§17 y la auditoría.
 
 La hoja de ruta acordada el 17-10-2026 (más piezas, hiperrealismo, suelo de cristal, iluminación y reflejos, HUD)
 se completó en la versión 4. Lo que queda, por orden de valor:

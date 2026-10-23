@@ -8,6 +8,14 @@ comuniques al usuario, la documentación y los comentarios de código van **en e
 > texturas nuevas, 26 renders renovados, suelo de cristal / opaco / oculto, entornos HDR propios con reflejo plano
 > del suelo y HUD de vidrio líquido. Ver §13 y `CLAUDE.md` (estado). Las cifras de §2 son las de la versión 3.
 
+> **Actualización (23-10-2026).** Dos cambios de criterio del usuario, que prevalecen sobre lo que dice este documento
+> más abajo:
+> 1. **Blender sin MCP:** ver §17. Las notas sobre el MCP de §5, §14 y §15 quedan como historia.
+> 2. **El Cybertruck no va «junto al Model Y»** en la simulación `spacex`: va en un espacio aparte, con su botón
+>    (§15.3 queda superado).
+>
+> La auditoría conjunta de los dos repositorios está en `docs/auditoria-2026-10-20-spacex-cybertruck.md`.
+
 ---
 
 ## 1. Qué es el proyecto
@@ -422,3 +430,70 @@ Orden de trabajo, sin saltarse fases:
   soporte la cambia.
 
 **Siguiente (fases 2 y 3 del encargo de §15):** pulido general con renders y la integración en `alvarodesigns34/spacex`.
+
+## 17. Blender sin MCP (orden del usuario del 23-10-2026)
+
+**La preferencia:** no se usa el Blender de escritorio del usuario por Blender MCP. Claude trabaja con **su propio
+Blender, sin interfaz, en el entorno del agente**: es el mismo programa, la misma versión (5.2.2 LTS) y la misma API
+`bpy`, pero sin ventana y sin conexión con el equipo del usuario. Los scripts de `blender/scripts/` no cambian.
+
+**Instalación** (comprobada el 23-10 en el contenedor en la nube; conviene ponerla en el script de configuración del
+entorno para que cada sesión arranque con ella):
+
+```bash
+cd /tmp && curl -sSO https://download.blender.org/release/Blender5.2/blender-5.2.2-linux-x64.tar.xz
+curl -sS https://download.blender.org/release/Blender5.2/blender-5.2.2.sha256 | grep linux-x64 | sha256sum -c -
+tar xJf blender-5.2.2-linux-x64.tar.xz && export BLENDER=/tmp/blender-5.2.2-linux-x64/blender
+# EEVEE y Workbench sin pantalla necesitan EGL de Mesa (sin ellas Blender se cierra al usar EEVEE):
+apt-get install -y libegl1 libegl-mesa0 libgl1-mesa-dri libxkbcommon0 libsm6 libxi6 libxrender1 libxxf86vm1 libxfixes3
+```
+
+**Uso:** un script de Python que añade `blender/scripts` a `sys.path` y llama a lo de siempre:
+
+```bash
+$BLENDER -b blender/Cybertruck.blend --python mi_script.py -- "$PWD"
+```
+
+```python
+import sys, os, json
+REPO = sys.argv[sys.argv.index('--') + 1]
+sys.path.insert(0, os.path.join(REPO, 'blender', 'scripts'))
+import bpy, build_all, validate, build_explode, export_web
+build_all.run(parts=("body", "wheels", "lights", "details", "interior", "chassis", "v3", "v4", "montaje", "explode", "scene"))
+bpy.context.view_layer.update()
+print(json.dumps({"validate": validate.run(), "roundtrip": build_explode.verify_roundtrip()}, default=str))
+export_web.export(os.path.join(REPO, 'web/models/cybertruck.glb'), os.path.join(REPO, 'web/models/cybertruck-manifest.json'))
+bpy.ops.wm.save_as_mainfile(filepath=os.path.join(REPO, 'blender/Cybertruck.blend'), compress=True)
+```
+
+**Prueba real (23-10, 4 núcleos, sin GPU):**
+
+- Reconstrucción completa: **331 s**, 1.139 objetos.
+- `validate.run()`: **idéntico** a `docs/validation-results.json`.
+- Explosión: desviación 0.
+- `interferencias.run()`: 22 s.
+- Exportación: GLB de 12,48 MB; manifiesto, nodos, materiales e imágenes idénticos.
+
+Unas 30 mallas que pasan por recortes booleanos difieren en 0–3 vértices de la versión exportada en Windows: es la
+variación normal entre plataformas. **No subas un GLB regenerado si el modelo no ha cambiado.**
+
+**Qué cambia frente al MCP:**
+
+- **Se pierde** la RTX 3070 del usuario: en la nube solo hay CPU. Cycles va en CPU, EEVEE va por software (lento) y
+  Workbench es rápido. Los horneados y los renders de 128 muestras tardan bastante más: lánzalos en segundo plano.
+- **Se pierde** ver la escena en vivo en el Blender del usuario: revisa con renders a archivo, que Claude puede ver,
+  y sube el `.blend` para que el usuario lo abra.
+- **Se gana:**
+  - no hay corte de ≈100 s por llamada: ya no hacen falta `bpy.app.timers` ni ficheros de resultado (§5, §14);
+  - no hay riesgo de cerrar el Blender del usuario (`EXACT` lo cerraba);
+  - el resultado es reproducible, con `--factory-startup` y la versión fija;
+  - se pueden encadenar las pruebas.
+
+Detalle completo en la auditoría, §11.
+
+**Trampas:**
+
+- Sin `libEGL.so.1`, Blender se cierra al entrar en EEVEE.
+- Mantén la versión 5.2.2 igual que en el escritorio del usuario.
+- El contenedor se borra al terminar la sesión: sube siempre lo que haya que conservar.
+

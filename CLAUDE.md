@@ -15,7 +15,12 @@
 
 ## Entorno de trabajo
 
-* Blender 5.2 (5.2.2 LTS) conectado mediante Blender MCP. El modelado se hace sobre la escena real de Blender; los scripts de `blender/scripts/` complementan ese trabajo y permiten regenerar la escena.
+* **Blender sin MCP (preferencia del usuario desde el 23-10-2026):** no se usa el Blender de escritorio del usuario
+  por Blender MCP. Claude usa **su propio Blender 5.2.2 LTS sin interfaz** en el entorno del agente
+  (`blender -b blender/Cybertruck.blend --python script.py`), con los mismos scripts de `blender/scripts/`, que
+  regeneran la escena entera. Instalación, prueba completa (reconstrucción en 331 s con validación idéntica) y qué se
+  pierde o se gana frente al MCP: `traspaso.md` §17 y `docs/auditoria-2026-10-20-spacex-cybertruck.md` §11.
+  Sin GPU en la nube: Cycles en CPU, Workbench para revisiones rápidas, EEVEE solo con Mesa EGL (lento).
 * Repositorio: `https://github.com/alvarodesigns34/cybertruck` (rama `main`).
 * Archivo maestro de Blender: `blender/Cybertruck.blend`. Nunca se elimina tras exportar.
 
@@ -42,7 +47,7 @@
 ## Flujo de trabajo
 
 1. Editar la ficha (`ct_specs.py`) o el constructor correspondiente en `blender/scripts/`.
-2. En Blender (MCP): `build_all.run(parts=("body","wheels","lights","details","interior","chassis","v3","v4","montaje","explode","scene"))`.
+2. En Blender sin interfaz (ver «Entorno de trabajo»): `build_all.run(parts=("body","wheels","lights","details","interior","chassis","v3","v4","montaje","explode","scene"))`.
    Las piezas de la versión 3 se escriben con `ct_v3.part` (formas en coordenadas de mundo del lado derecho,
    `mirror=True` para la pareja izquierda) en los módulos `build_v3_*.py`. Las de la versión 4 (interior
    funcional y tornillería) se escriben con `ct_v4.part` (formas mecánicas de alto detalle; `frame=` para usar las
@@ -53,6 +58,20 @@
 5. Probar el visor con `node tools/serve.mjs web 8080` y publicar con *push* a `main` (GitHub Actions → Pages).
 
 ## Estado y puntos de continuación
+
+* **23-10-2026: auditoría conjunta con `spacex` y cambio de criterio.** La auditoría completa está en
+  `docs/auditoria-2026-10-20-spacex-cybertruck.md` (con el mismo texto en `alvarodesigns34/spacex`). Dos órdenes
+  del usuario que cambian lo escrito más abajo:
+  1. **Integración en `spacex`:** el Cybertruck **no** va junto al Model Y ni en el entorno principal de la
+     simulación. Tiene un botón propio que lleva a un espacio aparte, como este visor (auditoría §4). Sustituye a
+     lo que dicen la hoja de ruta del 18-10 y `traspaso.md` §15.3.
+  2. **Blender sin MCP** (ver «Entorno de trabajo» y `traspaso.md` §17).
+
+  Hallazgos de la auditoría que tocan a este repositorio: §5 (C1–C24) y mejoras en §8.2. Los más urgentes:
+  - el GLB tiene 17 errores del validador de Khronos: ruedas y frenos sin UV (C21);
+  - la barra de carga pasa del 100 % con gzip (C1);
+  - el CI no valida nada (C10);
+  - no hay oclusión ambiental ni horneada ni en el visor (M-CT1).
 
 * Estado al 18-10-2026: publicada la **versión 4.1** en `main` (commit c9b1ea6) y en
   https://alvarodesigns34.github.io/cybertruck/ : 1.139 objetos, GLB de 12,5 MB (1.138 componentes), 78 materiales con
