@@ -313,6 +313,8 @@ input[type=range]::-moz-range-thumb { width: 24px; height: 24px; border: none; b
 .pop-label { font-size: 12.5px; font-weight: 560; color: var(--text-2); }
 .mini-seg { display: flex; }
 .mini-seg .seg-btn { flex: 1; padding: 6px 10px; font-size: 12.5px; }
+/* Interruptores independientes (aperturas): cada botón pulsado lleva su propio fondo, sin indicador deslizante. */
+.toggles .seg-btn[aria-pressed="true"] { color: var(--text); background: var(--sel); box-shadow: var(--sel-shadow); }
 
 /* ---------------------------------------------------------------- cargador */
 .loader { position: absolute; inset: 0; display: grid; place-items: center; background: var(--bg); transition: opacity 0.5s var(--ease-out); z-index: 50; }

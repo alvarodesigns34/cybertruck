@@ -156,12 +156,14 @@ Abrir `http://localhost:8080/`. Funciones:
   Las preferencias se recuerdan en el navegador.
 - Clic en una pieza: resaltado y ficha con sistema, conjunto, etapa, nivel de fidelidad y nota; acciones
   **Aislar**, **Ocultar** y **Encuadrar**.
+- **Aperturas** (menú de escena): puertas, frunk y portón sobre sus bisagras (ángulos de puertas y frunk ≈).
 - Panel con pestañas: sistemas (mostrar u ocultar por sistema) y árbol de componentes con búsqueda y ocultación
   individual.
 
 Tras modificar el modelo en Blender, regenerar el inventario con `node tools/gen_inventory.mjs` y comprobar con
 `node tools/check.mjs` (contrato del GLB, coherencia con el manifiesto, visor sin CDN y sintaxis) y
 `node tools/validate_glb.mjs` (validador oficial de Khronos; necesita `npm i --no-save gltf-validator@2.0.0-dev.3.10`).
+La prueba de humo con navegador es `node tools/smoke.mjs` (necesita `npm i --no-save playwright@1.56.1`).
 El GLB también va a la simulación `alvarodesigns34/spacex`, que guarda una copia: después de exportarlo, hay que
 sincronizarla allí (`node tools/cybertruck-sync.mjs ../cybertruck`).
 
@@ -188,6 +190,15 @@ sincronizarla allí (`node tools/cybertruck-sync.mjs ../cybertruck`).
   de 83 a 78 materiales, los de `ct_materials.py` (el exportador duplicaba cinco). Pesa 12,62 MB (+0,14 MB de UV).
   Se exportó desde el `.blend` tal cual, sin reconstruir, así que la geometría no cambia (el manifiesto sale
   idéntico byte a byte).
+- **M-CT9, dibujo bajo demanda:** el visor solo dibuja cuando algo cambia (cámara, explosión, selección,
+  visibilidad, aperturas, suelo, luz o tamaño) y rehace el mapa de sombras solo si cambió algo que proyecta o recibe
+  sombra. En reposo, cero fotogramas. Antes dibujaba ≈2.090 mallas, sus sombras y el reflejo en cada fotograma.
+- **M-CT4, aperturas:** el menú de escena tiene *Puertas*, *Frunk* y *Portón*, que giran sobre los pivotes que trae
+  el GLB (el origen de cada nodo es su bisagra). Tesla no publica los ángulos de apertura: las puertas (65°) y el
+  frunk (55°) son **aproximados**; el portón baja hasta quedar horizontal (90°). Las alturas de la suspensión
+  neumática quedan pendientes: hacen falta los brazos articulados en Blender para no inventar cómo se mueve.
+- **Prueba de humo** (`tools/smoke.mjs`, en el CI): sirve el GLB con gzip como Pages y comprueba la barra, que no
+  haya peticiones externas, las 1.138 piezas, la explosión reversible, cero fotogramas en reposo y las aperturas.
 - **C24:** las 24 mallas con el nombre temporal `_tmp_isl.NNN` de `build_montaje.py` toman al exportar el nombre de
   su objeto.
 

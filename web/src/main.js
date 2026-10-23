@@ -27,6 +27,15 @@ renderer.toneMapping = THREE.AgXToneMapping;
 renderer.toneMappingExposure = 1.0;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+// Dibujo bajo demanda (auditoría M-CT9): solo cuando algo cambia (cámara, explosión, selección, visibilidad,
+// aperturas, suelo, luz o tamaño). Antes se dibujaban ≈2.090 mallas, sus sombras y el reflejo en cada fotograma
+// aunque nada se moviera. El mapa de sombras se rehace solo si cambió algo que proyecta o recibe sombra.
+renderer.shadowMap.autoUpdate = false;
+let dirty = true, shadowDirty = true;
+function invalidate(shadows = false) {
+  dirty = true;
+  if (shadows) shadowDirty = true;
+}
 // Equipos de sobremesa: sombras y reflejos a mayor resolución; móviles y tabletas: versión ligera
 const HIGH_END = window.matchMedia('(pointer: fine)').matches && window.innerWidth >= 1100;
 
@@ -34,6 +43,7 @@ const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(38, 1, 0.05, 200);
 const controls = new OrbitControls(camera, canvas);
+controls.addEventListener('change', () => invalidate());
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
 controls.minDistance = 0.4;
@@ -120,6 +130,7 @@ function loadPref(k) { try { return localStorage.getItem(k); } catch { return nu
 
 const groundMap = ground.material.map;
 function setEnvironment(name) {
+  invalidate(true);
   const e = lighting.apply(name);
   state.env = name;
   // suelo opaco: degradado oscuro de estudio o pavimento claro al aire libre
@@ -142,6 +153,7 @@ function setEnvironment(name) {
 }
 
 function setReflections(on) {
+  invalidate();
   state.reflections = !!on;
   updateReflector();
   document.querySelectorAll('[data-refl]').forEach((b) => {
@@ -177,6 +189,7 @@ function setFloor(mode) {
   });
   savePref('ct-floor', mode);
   syncSegs();
+  invalidate(true);
 }
 
 // ---------------------------------------------------------------------------
@@ -235,6 +248,7 @@ function syncSegs() { document.querySelectorAll('.seg').forEach(syncSeg); }
 // Es una función pura del parámetro: no acumula error al mover el control repetidamente.
 // ---------------------------------------------------------------------------
 function applyExplode() {
+  invalidate(true);
   const e = state.explode;
   for (const p of state.parts) {
     const [a, b] = STAGE_WINDOWS[p.stage] || [0, 1];
@@ -284,6 +298,7 @@ function componentOf(o) {
 }
 
 function select(obj) {
+  invalidate();
   if (state.selected) highlight(state.selected, false);
   state.selected = obj || null;
   document.querySelectorAll('.item.sel').forEach((el) => el.classList.remove('sel'));
@@ -434,6 +449,7 @@ function buildUI() {
         ev.stopPropagation();
         obj.visible = !obj.visible;
         it.classList.toggle('hiddenpart', !obj.visible);
+        invalidate(true);
       });
       det.appendChild(it);
     }
@@ -467,6 +483,7 @@ function toggleSystem(sys, chip) {
 }
 
 function syncTreeVisibility() {
+  invalidate(true);
   document.querySelectorAll('.item').forEach((it) => {
     const o = state.components.get(it.dataset.name);
     it.classList.toggle('hiddenpart', o && !o.visible);
@@ -571,8 +588,9 @@ async function load() {
   });
   scene.add(vehicle);
   // Gancho de inspección para pruebas automatizadas (solo lectura del estado y utilidades)
+  bindOpenings();
   window.__ct = { state, applyExplode, select, isolate, showAll, setFloor, setEnvironment, setReflections, camera,
-    controls, THREE };
+    controls, THREE, setOpening, OPENINGS, invalidate, get frames() { return frames; } };
   buildUI();
   flyTo('front34', 1);
   applyExplode();
@@ -698,6 +716,51 @@ window.addEventListener('keydown', (ev) => {
 document.fonts?.ready.then(syncSegs);
 
 // ---------------------------------------------------------------------------
+// Aperturas (auditoría M-CT4): puertas, frunk y portón giran sobre los pivotes que trae el GLB (el origen de cada
+// nodo es su línea de bisagra, `pivot_es`). Ejes en glTF: puertas sobre Y (vertical), frunk y portón sobre X.
+// Tesla no publica los ángulos de apertura: los de las puertas y el frunk son aproximados (≈); el portón baja
+// hasta quedar horizontal (90°).
+// ---------------------------------------------------------------------------
+const OPENINGS = {
+  doors: { nodes: ['DOOR_FL', 'DOOR_RL', 'DOOR_FR', 'DOOR_RR'], axis: [0, 1, 0], deg: 65 },  // ≈
+  frunk: { nodes: ['EXT_Frunk_Lid'], axis: [1, 0, 0], deg: 55 },                               // ≈
+  tailgate: { nodes: ['EXT_Tailgate'], axis: [1, 0, 0], deg: 90 },
+};
+for (const o of Object.values(OPENINGS)) { o.k = 0; o.target = 0; o.items = []; }
+const _q = new THREE.Quaternion();
+function bindOpenings() {
+  for (const o of Object.values(OPENINGS)) {
+    o.items = o.nodes.map((n) => vehicle.getObjectByName(n)).filter(Boolean).map((node) => {
+      // Las puertas izquierdas (x < 0) giran al revés que las derechas para abrir hacia fuera.
+      const sign = o.axis[1] ? (node.position.x < 0 ? -1 : 1) : 1;
+      return { node, q0: node.quaternion.clone(), axis: new THREE.Vector3(...o.axis), sign };
+    });
+  }
+}
+function applyOpening(o) {
+  for (const it of o.items) {
+    _q.setFromAxisAngle(it.axis, THREE.MathUtils.degToRad(o.deg) * it.sign * smoothstep(0, 1, o.k));
+    it.node.quaternion.copy(it.q0).multiply(_q);
+  }
+}
+function setOpening(name, open) {
+  const o = OPENINGS[name];
+  if (!o) return;
+  o.target = open ? 1 : 0;
+  document.querySelectorAll(`[data-open="${name}"]`).forEach((b) => b.setAttribute('aria-pressed', String(!!open)));
+  invalidate(true);
+}
+function stepOpenings(dt) {
+  for (const o of Object.values(OPENINGS)) {
+    if (o.k === o.target) continue;
+    o.k = o.target > o.k ? Math.min(o.target, o.k + dt / 0.9) : Math.max(o.target, o.k - dt / 0.9);
+    applyOpening(o);
+    invalidate(true);
+  }
+}
+document.querySelectorAll('[data-open]').forEach((b) => b.addEventListener('click', () => setOpening(b.dataset.open, OPENINGS[b.dataset.open].target === 0)));
+
+// ---------------------------------------------------------------------------
 // Bucle de render
 // ---------------------------------------------------------------------------
 function resize() {
@@ -706,13 +769,14 @@ function resize() {
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
   reflector.resize(w, h);
+  invalidate();
   syncSegs();
   if (!$('scene-pop').classList.contains('hidden')) placePopover();
 }
 window.addEventListener('resize', resize);
 resize();
 
-let last = performance.now();
+let last = performance.now(), frames = 0;
 renderer.setAnimationLoop((now) => {
   const dt = Math.min(0.05, (now - last) / 1000);
   last = now;
@@ -724,8 +788,14 @@ renderer.setAnimationLoop((now) => {
     $('explode').value = state.explode * 100;
     applyExplode();
   }
+  if (state.anim) invalidate();
+  stepOpenings(dt);
   controls.update();
+  if (!dirty) return;
+  if (shadowDirty) { renderer.shadowMap.needsUpdate = true; shadowDirty = false; }
   renderer.render(scene, camera);
+  frames++;
+  dirty = false;
 });
 
 // Liberación de recursos al abandonar la página

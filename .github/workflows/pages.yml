@@ -36,8 +36,17 @@ jobs:
       # Validador oficial de Khronos: el GLB no puede tener errores.
       - name: Validar el GLB (Khronos)
         run: |
-          npm i --no-save --no-audit --no-fund gltf-validator@2.0.0-dev.3.10
+          npm i --no-save --no-audit --no-fund gltf-validator@2.0.0-dev.3.10 playwright@1.56.1
           node tools/validate_glb.mjs
+      # Prueba de humo en Chromium: carga con gzip, sin CDN, explosión reversible, dibujo bajo demanda y aperturas.
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.56.1-${{ runner.os }}
+      - name: Prueba de humo del visor
+        run: |
+          npx playwright install --with-deps chromium
+          node tools/smoke.mjs
 
   deploy:
     # Solo desde main y solo si la validación pasa.
