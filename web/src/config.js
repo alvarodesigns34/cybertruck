@@ -1,8 +1,10 @@
 // Etiquetas en español y parámetros del visor.
 
 export const MODEL_URL = 'models/cybertruck.glb';
-export const MANIFEST_URL = 'models/cybertruck-manifest.json';
-export const DRACO_URL = 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/libs/draco/gltf/';
+// El manifiesto (models/cybertruck-manifest.json) sigue exportándose para el inventario y las
+// herramientas; el visor no lo necesita: los extras del GLB llevan lo que muestra (auditoría C3).
+// Decodificador Draco de three r170, copiado en web/vendor/ (antes, de jsDelivr: auditoría C2).
+export const DRACO_URL = new URL('../vendor/three/examples/jsm/libs/draco/gltf/', import.meta.url).href;
 
 export const SYSTEM_LABELS = {
   EXTERIOR_PANELS: 'Paneles exteriores',

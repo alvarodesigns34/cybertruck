@@ -25,7 +25,7 @@ carcasas ocultas.
 
 ## Qué contiene (versión 4)
 
-- **1.137 objetos** (1.098 mallas y 38 conjuntos) en 20 colecciones de sistema, frente a 948 en la versión 3, 561
+- **1.139 objetos** (versión 4.2; 1.137 en la 4.0) en 20 colecciones de sistema, frente a 948 en la versión 3, 561
   en la 2 y 309 en la 1.
 - **Versión 4, «coche completo» (+189 objetos):** el interior funcional de los conjuntos que antes eran carcasas
   cerradas: estátores con devanado de horquillas o distribuido, rotores de imanes y de jaula de cobre, ejes,
@@ -78,7 +78,7 @@ carcasas ocultas.
 - **Cotas oficiales intactas** también en la versión 4: longitud +2,0 mm, batalla y vía exactas, altura libre
   −0,4 mm, altura +2,9 mm, anchura con espejos exacta (0,0 mm). Detalles en [`docs/research-and-fidelity.md`](docs/research-and-fidelity.md).
 - **Metadatos y vista explosionada** en 6 etapas para cada pieza; desviación 0 tras ciclos repetidos en Blender
-  (1.137 objetos) y funcionamiento comprobado en el navegador. Las carcasas se apartan más que su contenido,
+  (1.139 objetos) y funcionamiento comprobado en el navegador. Las carcasas se apartan más que su contenido,
   como en un despiece de taller.
 
 ## Estructura del repositorio
@@ -92,8 +92,9 @@ blender/textures/               Texturas físicas generadas por script (WebP)
 web/                            Visor web estático (GitHub Pages)
 web/models/                     cybertruck.glb (Draco) y manifiesto de componentes
 docs/                           Investigación, especificación, inventario, validación, renders y auditorías
-tools/                          Servidor estático local y generador del inventario
-.github/workflows/pages.yml     Despliegue automático del visor
+web/vendor/                     Three.js r170, el decodificador Draco y las tipografías (sin CDN)
+tools/                          Servidor local, inventario, comprobación (check.mjs) y validador de Khronos (validate_glb.mjs)
+.github/workflows/pages.yml     Validación y despliegue automático del visor
 ```
 
 ## Abrir la escena de Blender
@@ -132,7 +133,9 @@ atravesando (informe en `docs/interferencias-pendientes.md`, generado con `node 
 
 ## Visor web
 
-No requiere compilación: es HTML + módulos ES con Three.js 0.170 cargado desde jsDelivr.
+No requiere compilación: es HTML + módulos ES con Three.js 0.170. Desde el 23-10-2026 todo se sirve desde el
+repositorio (`web/vendor/`: Three.js, `DRACOLoader`, el decodificador Draco, `Reflector` y las tipografías Inter y
+JetBrains Mono, con sus licencias); antes dependía de jsDelivr y de Google Fonts, y si fallaban el visor no arrancaba.
 
 ```bash
 node tools/serve.mjs web 8080
@@ -156,12 +159,43 @@ Abrir `http://localhost:8080/`. Funciones:
 - Panel con pestañas: sistemas (mostrar u ocultar por sistema) y árbol de componentes con búsqueda y ocultación
   individual.
 
-Tras modificar el modelo en Blender, regenerar el inventario con `node tools/gen_inventory.mjs`.
+Tras modificar el modelo en Blender, regenerar el inventario con `node tools/gen_inventory.mjs` y comprobar con
+`node tools/check.mjs` (contrato del GLB, coherencia con el manifiesto, visor sin CDN y sintaxis) y
+`node tools/validate_glb.mjs` (validador oficial de Khronos; necesita `npm i --no-save gltf-validator@2.0.0-dev.3.10`).
+El GLB también va a la simulación `alvarodesigns34/spacex`, que guarda una copia: después de exportarlo, hay que
+sincronizarla allí (`node tools/cybertruck-sync.mjs ../cybertruck`).
+
+### Correcciones de la auditoría del 20-10-2026 (hechas el 23-10-2026)
+
+- **C1, barra de carga:** pasaba del 100 % (hasta el 136 %) porque Pages sirve el GLB con gzip y `Content-Length`
+  es entonces el tamaño comprimido. Ahora la descarga se lee como flujo y, si hay codificación de transferencia,
+  la barra es indeterminada y el texto da los megabytes recibidos. Nunca se pide el archivo dos veces.
+- **C2, sin CDN:** Three.js, Draco, `Reflector` y las tipografías están en `web/vendor/`.
+- **C3:** el manifiesto ya no se descarga en el visor, que no lo usaba: todo sale de los extras del GLB.
+- **C4:** `pagehide` solo libera los recursos si la página no se queda en la caché de ida y vuelta.
+- **C7:** el servidor local comprueba la contención con una ruta relativa (una carpeta hermana `web2/` ya no pasa).
+- **C8:** las etiquetas del modelo se escriben con `textContent`, no con `innerHTML`.
+- **C10, el CI valida:** `tools/check.mjs` y el validador de Khronos corren en cada *push* (también en las ramas
+  `claude/**` y en las peticiones de cambios), y el despliegue desde `main` espera a que pasen.
+- **C11 y C12:** aislar una pieza vuelve a encender los chips de sistema; el resaltado usa una copia compartida por
+  material en vez de clonar uno por malla en cada selección.
+- **C13:** el rayado de respaldo del acero usa un generador de semilla fija.
+- **C20:** las etiquetas de sistemas y de fidelidad del inventario salen de `web/src/config.js` (antes, copiadas).
+- **C21, UV de ruedas y frenos:** 17 mallas compartidas (neumático, discos, pinzas, pastillas, bujes, protectores,
+  tapacubos, tuercas y válvula) se creaban sin UV y salían con `texCoord −1`. Eran los 17 errores del validador de
+  Khronos, y en la web esas piezas perdían sus texturas. `export_web.prepare_meshes` les da al exportar la proyección
+  por caja del proyecto (1 unidad UV = 1 m). Resultado: **0 errores**, el neumático muestra su dibujo y el GLB pasa
+  de 83 a 78 materiales, los de `ct_materials.py` (el exportador duplicaba cinco). Pesa 12,62 MB (+0,14 MB de UV).
+  Se exportó desde el `.blend` tal cual, sin reconstruir, así que la geometría no cambia (el manifiesto sale
+  idéntico byte a byte).
+- **C24:** las 24 mallas con el nombre temporal `_tmp_isl.NNN` de `build_montaje.py` toman al exportar el nombre de
+  su objeto.
 
 ## Despliegue
 
-El flujo `.github/workflows/pages.yml` publica la carpeta `web/` en GitHub Pages en cada *push* a `main` que
-modifique el visor (también se puede lanzar manualmente). Requiere que Pages esté configurado con
+El flujo `.github/workflows/pages.yml` valida el modelo y el visor (`tools/check.mjs` y el validador de Khronos) y,
+si pasan, publica la carpeta `web/` en GitHub Pages en cada *push* a `main` que modifique el visor o las herramientas
+(también se puede lanzar manualmente). En las ramas `claude/**` y en las peticiones de cambios solo valida. Requiere que Pages esté configurado con
 «Source: GitHub Actions» en los ajustes del repositorio.
 
 ## Documentación
@@ -189,7 +223,7 @@ se completó en la versión 4. Lo que queda, por orden de valor:
 
 - **Formas exactas** de faros, retrovisores, paragolpes, fundiciones y del molde del Scorpion ATR: requieren
   escaneos, planos o fotografías ortogonales a escala.
-- **Carga progresiva** del GLB por sistemas (12,0 MB de una vez).
+- **Carga progresiva** del GLB por sistemas (12,6 MB de una vez).
 - Opciones fuera de serie (Terrestrial Armor, barra de luz off-road) y tornillería individual en las uniones que
   todavía la llevan integrada en la malla de su pieza.
 - Leer las figuras del manual de reparación y las páginas Tri Motor del manual de servicio.
@@ -209,7 +243,7 @@ se completó en la versión 4. Lo que queda, por orden de valor:
   ATR; las inscripciones usan una tipografía genérica.
 - La anchura «sin espejos» oficial (2.031,6 mm) no es compatible con la anchura de los neumáticos; el modelo
   sigue la planta oficial, con aletas a ±1,04 m (2.081,7 mm).
-- Las texturas son sintéticas (no escaneadas); el GLB pesa 12,0 MB y se carga de una vez.
+- Las texturas son sintéticas (no escaneadas); el GLB pesa 12,6 MB y se carga de una vez.
 - Las piezas de la versión 3 tienen nombre, cantidad y fijaciones verificados en los manuales de Tesla, pero su
   forma y posición exactas son reconstrucciones (no hay planos); los manuales no publican masas ni cotas por pieza.
   Las piezas interiores de la versión 4 (engranajes, rodamientos, bobinados, placas, espumas…) son

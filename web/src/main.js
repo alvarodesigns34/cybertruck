@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { createLighting, createFloorReflector } from './lighting.js';
 import {
-  MODEL_URL, MANIFEST_URL, DRACO_URL, SYSTEM_LABELS, STAGES, STAGE_WINDOWS, FIDELITY, VIEWS,
+  MODEL_URL, DRACO_URL, SYSTEM_LABELS, STAGES, STAGE_WINDOWS, FIDELITY, VIEWS,
 } from './config.js';
 import { enhanceMaterial } from './materials.js';
 
@@ -194,11 +194,13 @@ function setStatus() {
   const active = Object.entries(STAGE_WINDOWS)
     .filter(([s, [a]]) => state.explode > a && state.stageMask[s]).map(([s]) => s);
   const sel = state.selected ? state.selected.userData.label_es || state.selected.name : '—';
-  $('status').innerHTML =
-    `<span>${pct === 0 ? 'Ensamblado' : pct === 100 ? 'Totalmente explosionado' : 'Explosión ' + pct + ' %'}</span>` +
-    `<span>Etapas activas: ${active.length ? active.join(', ') : 'ninguna'}</span>` +
-    `<span>Seleccionado: ${sel}</span>` +
-    `<span>${state.meshes} mallas · ${(state.tris / 1000).toFixed(0)} k triángulos</span>`;
+  // Con textContent: la etiqueta de una pieza es texto del modelo, no HTML (auditoría C8).
+  $('status').replaceChildren(...[
+    pct === 0 ? 'Ensamblado' : pct === 100 ? 'Totalmente explosionado' : `Explosión ${pct} %`,
+    `Etapas activas: ${active.length ? active.join(', ') : 'ninguna'}`,
+    `Seleccionado: ${sel}`,
+    `${state.meshes} mallas · ${(state.tris / 1000).toFixed(0)} k triángulos`,
+  ].map((t) => Object.assign(document.createElement('span'), { textContent: t })));
   $('explode-out').textContent = `${pct} %`;
   $('explode').style.setProperty('--p', `${state.explode * 100}%`);
   document.querySelectorAll('.stage').forEach((el) => {
@@ -248,18 +250,27 @@ function applyExplode() {
 const HL = new THREE.Color(0xff8a3d);
 function forEachMesh(obj, fn) { obj.traverse((o) => { if (o.isMesh) fn(o); }); }
 
+// Una copia resaltada por material de origen, compartida y reutilizada: clonar uno por malla en cada
+// selección recompilaba sombreadores y daba un tirón al elegir conjuntos grandes (auditoría C12).
+const highlights = new Map();
+function highlighted(src) {
+  let h = highlights.get(src);
+  if (!h) {
+    h = src.clone();
+    h.emissive = HL.clone();
+    h.emissiveIntensity = 0.35;
+    highlights.set(src, h);
+  }
+  return h;
+}
 function highlight(obj, on) {
   forEachMesh(obj, (m) => {
     if (on) {
       if (!m.userData.__orig) {
         m.userData.__orig = m.material;
-        const h = m.material.clone();
-        h.emissive = HL.clone();
-        h.emissiveIntensity = 0.35;
-        m.material = h;
+        m.material = Array.isArray(m.material) ? m.material.map(highlighted) : highlighted(m.material);
       }
     } else if (m.userData.__orig) {
-      m.material.dispose();
       m.material = m.userData.__orig;
       delete m.userData.__orig;
     }
@@ -361,7 +372,7 @@ function focusOn(obj) {
 // ---------------------------------------------------------------------------
 // Interfaz: sistemas, árbol, ficha
 // ---------------------------------------------------------------------------
-function buildUI(manifest) {
+function buildUI() {
   // Etapas
   const st = $('stages');
   st.innerHTML = '';
@@ -394,24 +405,30 @@ function buildUI(manifest) {
     // un tono por sistema, repartido por el círculo cromático
     chip.style.setProperty('--c', `hsl(${Math.round((si * 360) / systems.length + 18) % 360} 72% 62%)`);
     chip.setAttribute('aria-pressed', 'true');
-    chip.innerHTML = `<span class="dot"></span><span>${SYSTEM_LABELS[sys] || sys}</span>`;
+    chip.append(Object.assign(document.createElement('span'), { className: 'dot' }), Object.assign(document.createElement('span'), { textContent: SYSTEM_LABELS[sys] || sys }));
     chip.addEventListener('click', () => toggleSystem(sys, chip));
     chip.dataset.sys = sys;
     sysBox.appendChild(chip);
 
     const det = document.createElement('details');
     const items = bySystem.get(sys).sort((a, b) => (a.userData.label_es || a.name).localeCompare(b.userData.label_es || b.name, 'es'));
-    det.innerHTML = `<summary><span>${SYSTEM_LABELS[sys] || sys}</span><span class="n">${items.length}</span></summary>`;
+    const sum = document.createElement('summary');
+    sum.append(Object.assign(document.createElement('span'), { textContent: SYSTEM_LABELS[sys] || sys }), Object.assign(document.createElement('span'), { className: 'n', textContent: String(items.length) }));
+    det.appendChild(sum);
     for (const obj of items) {
       const it = document.createElement('div');
       it.className = 'item';
       it.dataset.name = obj.name;
       it.dataset.search = `${obj.name} ${obj.userData.label_es || ''}`.toLowerCase();
       const f = FIDELITY[obj.userData.fidelity];
-      it.innerHTML = `<span class="label" title="${obj.name}">${obj.userData.label_es || obj.name}</span>` +
-        (f ? `<span class="fid ${f.cls}" title="${f.label}">${obj.userData.fidelity}</span>` : '') +
-        `<button class="eye" title="Mostrar u ocultar" aria-label="Mostrar u ocultar ${obj.userData.label_es || obj.name}">` +
-        '<svg><use href="#i-eye"/></svg></button>';
+      // Nodos creados uno a uno y textos con textContent: una comilla en una etiqueta ya no rompe el HTML (C8).
+      const label = Object.assign(document.createElement('span'), { className: 'label', title: obj.name, textContent: obj.userData.label_es || obj.name });
+      it.appendChild(label);
+      if (f) it.appendChild(Object.assign(document.createElement('span'), { className: `fid ${f.cls}`, title: f.label, textContent: obj.userData.fidelity }));
+      const eye = Object.assign(document.createElement('button'), { className: 'eye', title: 'Mostrar u ocultar' });
+      eye.setAttribute('aria-label', `Mostrar u ocultar ${obj.userData.label_es || obj.name}`);
+      eye.innerHTML = '<svg><use href="#i-eye"/></svg>';
+      it.appendChild(eye);
       it.querySelector('.label').addEventListener('click', () => { select(obj); });
       it.querySelector('.eye').addEventListener('click', (ev) => {
         ev.stopPropagation();
@@ -464,6 +481,9 @@ function showAll() {
 }
 
 function isolate(obj) {
+  // Aislar sustituye a lo que se hubiera ocultado por sistema: los chips lo reflejan (auditoría C11).
+  state.hiddenSystems.clear();
+  document.querySelectorAll('.sys').forEach((c) => { c.classList.remove('off'); c.setAttribute('aria-pressed', 'true'); });
   for (const o of state.components.values()) o.visible = false;
   // el objeto, sus antepasados y sus descendientes permanecen visibles
   let p = obj;
@@ -477,20 +497,49 @@ function isolate(obj) {
 // Carga del modelo
 // ---------------------------------------------------------------------------
 let vehicle = null;
+
+/**
+ * Descarga el GLB en una sola petición, leída como flujo. GitHub Pages lo sirve comprimido con gzip,
+ * y entonces Content-Length es el tamaño comprimido (9,2 de 12,5 MB) mientras el flujo entrega los
+ * bytes ya descomprimidos: la barra llegaba al 136 % (auditoría C1). Con una codificación de
+ * transferencia no hay total fiable, así que la barra pasa a indeterminada y el texto da los MB.
+ */
+async function fetchModel() {
+  const res = await fetch(MODEL_URL);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const length = Number(res.headers.get('content-length')) || 0;
+  const encoded = !!res.headers.get('content-encoding');
+  const total = encoded ? 0 : length;
+  $('loader').classList.toggle('indeterminate', !total);
+  if (!res.body) return res.arrayBuffer();
+  const reader = res.body.getReader(), chunks = [];
+  let got = 0;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    chunks.push(value);
+    got += value.length;
+    const mb = `${(got / 1e6).toFixed(2)} MB`;
+    if (total) {
+      const p = Math.min(100, Math.round((got / total) * 100));
+      $('bar-fill').style.width = `${p}%`;
+      $('loader-text').textContent = `${p} % · ${mb}`;
+    } else $('loader-text').textContent = `${mb} recibidos`;
+  }
+  const data = new Uint8Array(got);
+  let o = 0;
+  for (const c of chunks) { data.set(c, o); o += c.length; }
+  $('loader').classList.remove('indeterminate');
+  $('bar-fill').style.width = '100%';
+  $('loader-text').textContent = 'Descomprimiendo la geometría…';
+  return data.buffer;
+}
+
 async function load() {
   const draco = new DRACOLoader().setDecoderPath(DRACO_URL);
   const loader = new GLTFLoader().setDRACOLoader(draco);
-  let manifest = null;
-  try {
-    manifest = await fetch(MANIFEST_URL).then((r) => (r.ok ? r.json() : null));
-  } catch { manifest = null; }
-  const gltf = await loader.loadAsync(MODEL_URL, (ev) => {
-    if (ev.lengthComputable) {
-      const p = Math.round((ev.loaded / ev.total) * 100);
-      $('bar-fill').style.width = `${p}%`;
-      $('loader-text').textContent = `${p} % · ${(ev.loaded / 1e6).toFixed(2)} MB`;
-    }
-  });
+  // El manifiesto ya no se descarga: la interfaz lee todo de los extras del GLB (auditoría C3).
+  const gltf = await loader.parseAsync(await fetchModel(), '');
   draco.dispose();
   vehicle = gltf.scene;
   const matCache = new Map();
@@ -524,7 +573,7 @@ async function load() {
   // Gancho de inspección para pruebas automatizadas (solo lectura del estado y utilidades)
   window.__ct = { state, applyExplode, select, isolate, showAll, setFloor, setEnvironment, setReflections, camera,
     controls, THREE };
-  buildUI(manifest);
+  buildUI();
   flyTo('front34', 1);
   applyExplode();
   $('loader').classList.add('done');
@@ -680,7 +729,10 @@ renderer.setAnimationLoop((now) => {
 });
 
 // Liberación de recursos al abandonar la página
-window.addEventListener('pagehide', () => {
+// Solo si la página no queda en la caché de ida y vuelta: si vuelve con «Atrás» (persisted), debe
+// seguir con su bucle y sus recursos, no con un lienzo negro (auditoría C4).
+window.addEventListener('pagehide', (ev) => {
+  if (ev.persisted) return;
   renderer.setAnimationLoop(null);
   scene.traverse((o) => {
     if (o.geometry) o.geometry.dispose();

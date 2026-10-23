@@ -2,17 +2,11 @@
 // Uso: node tools/gen_inventory.mjs
 import { readFile, writeFile } from 'node:fs/promises';
 
-const SYSTEMS = {
-  EXTERIOR_PANELS: 'Paneles exteriores', DOORS_AND_HATCHES: 'Puertas y portones',
-  GLASS_AND_MIRRORS: 'Cristales y retrovisores', LIGHTING: 'Iluminación', BODY_STRUCTURE: 'Estructura de carrocería',
-  CARGO_BED: 'Caja de carga', FRONT_WHEELS_AND_BRAKES: 'Ruedas y frenos delanteros',
-  REAR_WHEELS_AND_BRAKES: 'Ruedas y frenos traseros', FRONT_SUSPENSION: 'Suspensión delantera',
-  REAR_SUSPENSION: 'Suspensión trasera', STEERING: 'Dirección', BATTERY_ASSEMBLY: 'Batería y alta tensión',
-  DRIVE_UNITS: 'Unidades motrices', UNDERBODY: 'Bajos y subchasis', INTERIOR_DASHBOARD: 'Salpicadero',
-  INTERIOR_CONTROLS: 'Mandos y pantallas', INTERIOR_SEATS: 'Asientos y cinturones', INTERIOR_DOORS: 'Paneles de puerta',
-  INTERIOR_TRIM: 'Guarnecidos interiores', BODY_FASTENERS: 'Cámaras, sensores y herrajes',
-};
-const FID = { V: 'Verificado', R: 'Reconstruido', A: 'Aproximado' };
+// Las etiquetas de los sistemas y de la fidelidad salen del visor (web/src/config.js): una sola fuente,
+// antes estaban copiadas aquí y podían divergir (auditoría C20).
+import { SYSTEM_LABELS as SYSTEMS, FIDELITY } from '../web/src/config.js';
+
+const FID = Object.fromEntries(Object.entries(FIDELITY).map(([k, v]) => [k, v.label]));
 
 const m = JSON.parse(await readFile('web/models/cybertruck-manifest.json', 'utf8'));
 const by = new Map();

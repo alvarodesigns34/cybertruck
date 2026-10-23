@@ -505,3 +505,19 @@ Detalle completo en la auditoría, §11.
 - Mantén la versión 5.2.2 igual que en el escritorio del usuario.
 - El contenedor se borra al terminar la sesión: sube siempre lo que haya que conservar.
 
+
+## 18. Correcciones de la auditoría (23-10-2026, segunda sesión)
+
+El usuario pidió trabajar sin parar en todo lo de la auditoría. Hecho en este repositorio (detalle en el README,
+«Correcciones de la auditoría del 20-10-2026»): C1 (barra de carga honesta con gzip), C2 (Three.js r170, Draco,
+`Reflector` y tipografías en `web/vendor/`), C3, C4, C5, C7, C8, C10 (CI con `tools/check.mjs` y el validador de
+Khronos, `tools/validate_glb.mjs`), C11, C12, C13, C20, C21 (UV por caja al exportar: 0 errores de Khronos, 78
+materiales) y C24 (nombres de malla).
+
+- El GLB se volvió a exportar **desde el `.blend` tal cual, sin reconstruir** (10 s): la geometría no cambia y el
+  manifiesto sale idéntico; solo se añaden las UV de 17 mallas y cambian 24 nombres de malla. No se guardó el
+  `.blend` (las UV se añaden en cada exportación), para no sumar 16 MB al historial.
+- La copia de `spacex` se sincronizó después con su `tools/cybertruck-sync.mjs`.
+- Se trabaja en la rama de la sesión (`claude/cybertruck-spacex-integration-h7sx0c`); Pages solo publica desde
+  `main`, así que estos cambios no salen en la web hasta que el usuario los fusione.
+- Pendientes: C9, C14, C19 (Git LFS, decisión del usuario), C22 (aperturas) y la oclusión ambiental (M-CT1).

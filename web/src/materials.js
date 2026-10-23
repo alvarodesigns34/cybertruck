@@ -8,6 +8,14 @@ import * as THREE from 'three';
 
 function brushedTexture() {
   // Respaldo: rayado longitudinal fino si el GLB no trae mapa de rugosidad (modelos antiguos).
+  // Con un generador de semilla fija (mulberry32), no Math.random: la misma textura en cada carga (auditoría C13).
+  let seed = 0x5eed1234;
+  const random = () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
   const w = 64, h = 1024;
   const c = document.createElement('canvas');
   c.width = w; c.height = h;
@@ -15,11 +23,11 @@ function brushedTexture() {
   const img = g.createImageData(w, h);
   let v = 0.5;
   for (let y = 0; y < h; y++) {
-    v = 0.85 * v + 0.15 * Math.random();
-    const base = 150 + (v - 0.5) * 70 + (Math.random() - 0.5) * 20;
+    v = 0.85 * v + 0.15 * random();
+    const base = 150 + (v - 0.5) * 70 + (random() - 0.5) * 20;
     for (let x = 0; x < w; x++) {
       const i = (y * w + x) * 4;
-      const n = base + (Math.random() - 0.5) * 6;
+      const n = base + (random() - 0.5) * 6;
       img.data[i] = img.data[i + 1] = img.data[i + 2] = Math.max(0, Math.min(255, n));
       img.data[i + 3] = 255;
     }

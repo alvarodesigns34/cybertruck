@@ -1,12 +1,15 @@
-# Publica el visor web (carpeta web/) en GitHub Pages.
-name: Publicar visor en GitHub Pages
+# Valida el visor y el modelo y, si todo pasa, publica el visor web (carpeta web/) en GitHub Pages.
+# Hasta el 23-10-2026 este flujo solo desplegaba, sin validar nada (auditoría C10).
+name: Validar y publicar el visor
 
 on:
   push:
-    branches: [main]
+    branches: [main, "claude/**"]
     paths:
       - "web/**"
+      - "tools/**"
       - ".github/workflows/pages.yml"
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -15,12 +18,32 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  validar:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # Contrato del GLB, coherencia con el manifiesto, visor sin CDN, dependencias en web/vendor/ y sintaxis.
+      - name: Comprobar el modelo y el visor
+        run: node tools/check.mjs
+      # Validador oficial de Khronos: el GLB no puede tener errores.
+      - name: Validar el GLB (Khronos)
+        run: |
+          npm i --no-save --no-audit --no-fund gltf-validator@2.0.0-dev.3.10
+          node tools/validate_glb.mjs
+
   deploy:
-    runs-on: ubuntu-latest
+    # Solo desde main y solo si la validación pasa.
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: validar
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

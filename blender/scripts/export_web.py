@@ -15,9 +15,61 @@ import build_explode as E
 import ct_specs as S
 
 
+def _textured(me):
+    """¿Alguno de sus materiales lee una imagen? (sin UV, glTF le pone texCoord −1)."""
+    for m in me.materials:
+        if m and m.use_nodes and any(n.type == "TEX_IMAGE" and n.image for n in m.node_tree.nodes):
+            return True
+    return False
+
+
+def _box_uv(me):
+    """La proyección por caja de ct_lib.auto_uv (1 unidad UV = 1 m, U longitudinal), en las coordenadas
+    de la propia malla: sirve para las mallas compartidas por varios objetos (ruedas, frenos)."""
+    uvl = me.uv_layers.new(name="UVMap").data
+    for p in me.polygons:
+        n = p.normal
+        ax = max(range(3), key=lambda i: abs(n[i]))
+        for li in p.loop_indices:
+            co = me.vertices[me.loops[li].vertex_index].co
+            if ax == 0:
+                u, v = co.y, co.z
+            elif ax == 2:
+                u, v = co.y, co.x
+            else:
+                u, v = co.x, co.z
+            uvl[li].uv = (u, v)
+
+
+def prepare_meshes(objs):
+    """Antes de exportar (auditoría del 20-10-2026):
+
+    * C21: las mallas texturadas sin UV (neumático, discos, pinzas, pastillas, bujes, protectores,
+      tapacubos, tuercas y válvula, que son mallas compartidas creadas sin ct_lib.auto_uv) salían con
+      texCoord −1: 17 errores del validador de Khronos, y sin sus texturas en la web. Reciben la
+      proyección por caja del proyecto.
+    * C24: las mallas que conservan el nombre temporal de build_montaje (``_tmp_isl.NNN``) toman el de
+      su objeto, para que quien busque por nombre de malla las encuentre.
+    """
+    done, uv, renamed = set(), [], []
+    for o in objs:
+        if o.type != "MESH" or o.data in done:
+            continue
+        me = o.data
+        done.add(me)
+        if not me.uv_layers and me.polygons and _textured(me):
+            _box_uv(me)
+            uv.append(me.name)
+        if me.name.startswith("_tmp") and me.users == 1:
+            me.name = o.name
+            renamed.append(o.name)
+    return {"uv": uv, "renamed": renamed}
+
+
 def export(glb_path, manifest_path, draco=True):
     E.set_explode(0.0)
     objs = E.vehicle_objects()
+    prepared = prepare_meshes(objs)
     for o in bpy.context.selected_objects:
         o.select_set(False)
     # Asegura visibilidad para la exportación
@@ -74,4 +126,4 @@ def export(glb_path, manifest_path, draco=True):
     }
     with open(manifest_path, "w", encoding="utf-8") as f:
         json.dump(manifest, f, ensure_ascii=False, indent=1)
-    return {"glb_mb": round(os.path.getsize(glb_path) / 1e6, 2), "components": len(comps)}
+    return {"glb_mb": round(os.path.getsize(glb_path) / 1e6, 2), "components": len(comps), "prepared": prepared}

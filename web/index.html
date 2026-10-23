@@ -6,15 +6,14 @@
   <title>Cybertruck · Vista explosionada</title>
   <meta name="description" content="Reconstrucción 3D documentada del Tesla Cybertruck Cyberbeast con vista explosionada interactiva.">
   <meta name="theme-color" content="#0b0d10">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Todo se sirve desde el repositorio: sin CDN ni Google Fonts (auditoría del 20-10-2026, C2). -->
+  <link rel="stylesheet" href="vendor/fonts/fonts.css">
   <link rel="stylesheet" href="src/style.css">
   <script type="importmap">
   {
     "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      "three": "./vendor/three/build/three.module.js",
+      "three/addons/": "./vendor/three/examples/jsm/"
     }
   }
   </script>

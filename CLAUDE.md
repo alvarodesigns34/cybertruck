@@ -54,7 +54,10 @@
    coordenadas locales de otro objeto y `derived(...)` para espumas o almas a partir de otra malla) en
    `build_v4_*.py`.
 3. Validar: `validate.run()` y `build_explode.verify_roundtrip()`; inspeccionar con `preview.py` o las cámaras `CAM_*`.
-4. Exportar con `export_web.export(...)`, guardar `blender/Cybertruck.blend` y ejecutar `node tools/gen_inventory.mjs`.
+4. Exportar con `export_web.export(...)` (da UV por caja a las mallas texturadas que no las tengan y quita los
+   nombres temporales de malla), guardar `blender/Cybertruck.blend` y ejecutar `node tools/gen_inventory.mjs`,
+   `node tools/check.mjs` y `node tools/validate_glb.mjs` (0 errores de Khronos). Después, sincronizar la copia de
+   `spacex` (`node tools/cybertruck-sync.mjs ../cybertruck` en ese repositorio).
 5. Probar el visor con `node tools/serve.mjs web 8080` y publicar con *push* a `main` (GitHub Actions → Pages).
 
 ## Estado y puntos de continuación
@@ -73,15 +76,15 @@
   exportar el GLB aquí, hay que sincronizarlo en `spacex`** (`node tools/cybertruck-sync.mjs ../cybertruck`) y pasar
   allí sus pruebas. Estado y siguiente fase: `spacex/TRASPASO.md`, «Estado actual (23-10-2026)».
 
-  Hallazgos de la auditoría que tocan a este repositorio: §5 (C1–C24) y mejoras en §8.2. Los más urgentes:
-  - el GLB tiene 17 errores del validador de Khronos: ruedas y frenos sin UV (C21);
-  - la barra de carga pasa del 100 % con gzip (C1);
-  - el CI no valida nada (C10);
-  - no hay oclusión ambiental ni horneada ni en el visor (M-CT1).
+  Hallazgos de la auditoría que tocan a este repositorio: §5 (C1–C24) y mejoras en §8.2. **Corregidos el
+  23-10-2026:** C1, C2, C3, C4, C5, C7, C8, C10, C11, C12, C13, C20, C21 y C24 (detalle en el README, «Correcciones
+  de la auditoría»). El GLB pasa el validador de Khronos con 0 errores y tiene 78 materiales. Pendientes: C9
+  (accesibilidad del árbol y las pestañas), C14 (etapas desequilibradas), C19 (Git LFS, decide el usuario), C22
+  (aperturas con los pivotes del GLB) y la oclusión ambiental (M-CT1).
 
 * Estado al 18-10-2026: publicada la **versión 4.1** en `main` (commit c9b1ea6) y en
   https://alvarodesigns34.github.io/cybertruck/ : 1.139 objetos, GLB de 12,5 MB (1.138 componentes), 78 materiales con
-  texturas físicas generadas (`ct_textures.py`, WebP en `blender/textures/`), `Cybertruck.blend` de 16,5 MB;
+  texturas físicas generadas (`ct_textures.py`, WebP en `blender/textures/`), `Cybertruck.blend` de 16,2 MB;
   cotas, siluetas y explosión validadas (altura libre −0,4 mm; desviación 0 en los 1.139 objetos).
   Módulos: `ct_parts.py`, `build_structure.py`, `build_mechanics.py`, `build_exterior.py`,
   `build_interior_detail.py` (v2); `ct_v3.py`, `build_v3_*.py` (v3, 387 piezas del backlog de
@@ -127,7 +130,7 @@
   la carrocería: comprobarlo con renders y con rayos verticales contra la tapa del frunk; (3) las texturas se
   repiten cada pocos centímetros, así que no sirven para huellas o suciedad localizada (se probó y se descartó).
 * Mejoras pendientes más valiosas: forma exacta de faros, retrovisores, paragolpes y piezas fundidas (requiere
-  escaneo o fotografías ortogonales); molde real del Scorpion ATR; carga progresiva del GLB por sistemas (12,0 MB);
+  escaneo o fotografías ortogonales); molde real del Scorpion ATR; carga progresiva del GLB por sistemas (12,6 MB);
   verificación de la sección transversal con una vista frontal a escala; leer las figuras del manual de reparación
   (cotas de control y mapa de materiales por pieza) y las páginas Tri Motor del manual de servicio; opciones fuera
   de serie (Terrestrial Armor, barra de luz off-road); tornillería individual en las uniones que aún la llevan

@@ -104,7 +104,8 @@ desplazamiento = explode_dir · explode_dist · smoothstep(t0, t1, e)
 
 ## 5. Materiales
 
-Biblioteca en `ct_materials.py` (78 materiales; 61 hasta la versión 3). Desde la versión 2 los detalles de superficie
+Biblioteca en `ct_materials.py` (78 materiales; 61 hasta la versión 3). Desde la exportación del 23-10-2026 el GLB lleva
+los mismos 78: antes tenía 83, porque el exportador duplicaba cinco para las piezas sin UV (auditoría C21). Desde la versión 2 los detalles de superficie
 proceden de **texturas físicas generadas** por `ct_textures.py` (ruido filtrado en frecuencia, periódico,
 guardado en WebP en `blender/textures/`), conectadas con nodos que el exportador glTF reconoce, de modo que
 Blender y el visor web muestran el mismo material:
